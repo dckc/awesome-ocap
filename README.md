@@ -54,7 +54,7 @@ patterns of cooperation without vulnerability.
     operating systems -- by applying a strict organizational structure
     to all software components including device drivers, system
     services, and applications.
-    - [Genode OS Framework release 16.08][1608] Aug 31, 2016
+    - [Genode OS Framework release 16.08][1608] Aug 31, 2016  
       > Genode 16.08 makes the entirety of the framework's drivers,
       > protocol stacks, and libraries available on the seL4 kernel,
       > brings VirtualBox 4 to the Muen separation kernel, and hosts
