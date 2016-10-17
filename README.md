@@ -108,7 +108,7 @@ patterns of cooperation without vulnerability.
 _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/items/collectionKey/FZ8P5G54/itemKey/2ZPIX23N) bibliography._
 
   - D. Devriese, Birkedal, and Piessens  
-    [Reasoning about Object Capabilities with Logical Relations and Effect Parametricity](http://ieeexplore.ieee.org/document/7467352/)  
+    [Reasoning about Object Capabilities with Logical Relations and Effect Parametricity](https://lirias.kuleuven.be/handle/123456789/529252)  
     1st IEEE European Symposium on Security and Privacy, Congress Center Saar, Saarbrücken, GERMANY, 2016.
 
   - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
