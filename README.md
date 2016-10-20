@@ -105,6 +105,15 @@ patterns of cooperation without vulnerability.
      [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
      ACM Transactions on Computer Systems, Volume 32, Number 1, pp. 2:1-2:70, February, 2014
 
+  - [Barrelfish](http://www.barrelfish.org/) is a research operating
+    system motivated by two closely related trends in hardware design:
+    the rapidly growing number of cores and the increasing diversity
+    in computer hardware. Barrelfish uses a single model of
+    capabilities to control access to all physical memory, kernel
+    objects, communication end-points, and other miscellaneous access
+    rights.
+    - [release2016-07-20](http://git.barrelfish.org/?p=barrelfish;a=shortlog;h=refs/tags/release2016-07-20)
+     
 [AEMSKH_14]: http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml
 
 
