@@ -48,6 +48,21 @@ patterns of cooperation without vulnerability.
 
 ## Operating Systems
 
+  - [Capsicum](https://www.cl.cam.ac.uk/research/security/capsicum/)
+    Capsicum is a lightweight OS capability and sandbox framework that
+    extends the POSIX API, providing several new OS primitives to
+    support object-capability security on UNIX-like operating systems
+    - [Capsicum for FreeBSD](https://www.cl.cam.ac.uk/research/security/capsicum/freebsd.html)
+    - [Capsicum for Linux](https://www.cl.cam.ac.uk/research/security/capsicum/linux.html)
+    - Watson,
+      R. N. M. [2013 Capsicum year in review](https://www.lightbluetouchpaper.org/2013/12/20/2013-capsicum-year-in-review/). Light
+      Blue Touchpaper, 20 December, 2013. Robert Watson reviews
+      Capsicum events from 2013: work funded by the FreeBSD Foundation
+      and Google on FreeBSD 10.0, Casper in FreeBSD 11, David
+      Drysdale's port of Capsicum to Linux at Google, Summer of Code
+      students, joint work with the University of Wisconsin on
+      Capsicum, and future funded Capsicum work.
+
   - [genode](https://genode.org/) is a novel OS architecture that is
     able to master the complexity of code and policy -- the most
     fundamental security problem shared by modern general-purpose
