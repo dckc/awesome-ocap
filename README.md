@@ -51,6 +51,15 @@ patterns of cooperation without vulnerability.
       USENIX Symposium on Operating Systems Design and Implementation
       (OSDI), October 2014.
 
+  - [CloudABI](https://nuxi.nl/) is a runtime environment for
+    Unix-like systems that introduces dependency injection to full
+    Unix applications. Instead of allowing applications to open
+    arbitrary files on disk and connect to arbitrary systems on the
+    network, you as a user exactly inject those resources that the
+    application should access.
+    - [Welcoming all Python enthusiasts: CPython 3.6 for CloudABI!](https://nuxi.nl/blog/2016/08/01/cloudabi-python.html)
+      August 1, 2016 by Ed Schouten
+
 [1412]: https://sandstorm.io/news/2014-12-15-capnproto-0.5
 [shill-osdi]: http://shill.seas.harvard.edu/shill-osdi-2014.pdf
 
@@ -118,6 +127,11 @@ patterns of cooperation without vulnerability.
 
 ## Presentations, Talks, Slides, and Videos
 
+  - [CloudABI - Pure capability-based security for UNIX](https://www.youtube.com/watch?v=62cYMmSY2Dc)  
+    Ed Schouten, 32nd Chaos Communication Congress (32C3), Dec 2015
+    
+    
+    
   - [Secure Distributed Programming with Object-capabilities in JavaScript](http://soft.vub.ac.be/events/mobicrant_talks/talk1_ocaps_js.pdf)
     - [Oct 2011 video](https://www.youtube.com/watch?v=w9hHHvhZ_HY) 
   - [Bringing Object-orientation to Security Programming](http://soft.vub.ac.be/events/mobicrant_talks/talk2_OO_security.pdf)
