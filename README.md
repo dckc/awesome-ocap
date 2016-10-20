@@ -43,8 +43,16 @@ patterns of cooperation without vulnerability.
     application server with built-in object capability security built
     on Node.js/Express
 
-[1412]: https://sandstorm.io/news/2014-12-15-capnproto-0.5
+  - [Shill](http://shill-lang.org): Shill is a shell scripting
+    language designed to make it easy to follow the Principle of Least
+    Privilege. It runs on FreeBSD and is developed in Racket.
+    - [Shill: A Secure Shell Scripting Language][shill-osdi]. Scott
+      Moore, Christos Dimoulas, Dan King, and Stephen Chong. 11th
+      USENIX Symposium on Operating Systems Design and Implementation
+      (OSDI), October 2014.
 
+[1412]: https://sandstorm.io/news/2014-12-15-capnproto-0.5
+[shill-osdi]: http://shill.seas.harvard.edu/shill-osdi-2014.pdf
 
 ## Operating Systems
 
