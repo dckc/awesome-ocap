@@ -43,6 +43,9 @@ patterns of cooperation without vulnerability.
     application server with built-in object capability security built
     on Node.js/Express
 
+  - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
+    object capability discipline by letting the caller handle network access.
+
   - [Shill](http://shill-lang.org): Shill is a shell scripting
     language designed to make it easy to follow the Principle of Least
     Privilege. It runs on FreeBSD and is developed in Racket.
