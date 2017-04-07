@@ -26,6 +26,10 @@ patterns of cooperation without vulnerability.
 
 ## Libraries and Frameworks
 
+  - [Caja](https://developers.google.com/caja/) is a compiler for making
+    third-party HTML, CSS and JavaScript safe for embedding.
+    Caja safely supports mashups and extends JSON with code.
+
   - [Cap’n Proto](https://capnproto.org/) is an open source
     serialization and RPC protocol with distributed and persistent
     capabilities and promise pipelining.
