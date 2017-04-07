@@ -17,7 +17,6 @@ patterns of cooperation without vulnerability.
       By Asheesh Laroia - 06 Feb 2015
     - [Open Source Web Apps Aren't Viable; Let's Fix That][1407]  
       By Kenton Varda - 21 Jul 2014  
-      $50K crowdfunding campaign
 
 [scap]: https://sandstorm.io/how-it-works#capabilities
 [1407]: https://sandstorm.io/news/2014-07-21-open-source-web-apps-require-federated-hosting
