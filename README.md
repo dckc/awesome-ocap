@@ -140,6 +140,11 @@ patterns of cooperation without vulnerability.
     objects.
 
 
+## CPUs
+
+  - [CHERI](https://www.cl.cam.ac.uk/research/security/ctsrd/) is an open source capability CPU design.
+
+
 ## Presentations, Talks, Slides, and Videos
 
   - [CloudABI - Pure capability-based security for UNIX](https://www.youtube.com/watch?v=62cYMmSY2Dc)  
