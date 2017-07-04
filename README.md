@@ -144,6 +144,10 @@ patterns of cooperation without vulnerability.
 
   - [CHERI](https://www.cl.cam.ac.uk/research/security/ctsrd/) is an open source capability CPU design.
 
+    - June 2016: _CHERI ISAv5 specification_: improves the maturity of 128-bit capabilities, code efficiency, and description of the protection model.
+    - June 2016: _CHERI-JNI: Sinking the Java security model into the C_, explores how CHERI capabilities can be used to support sandboxing with safe and efficient memory sharing between Java Native Interface (JNI) code and the Java Virtual Machine.  ASPLOS 2017
+    - May 2016: slides from the first CHERI microkernel workshop, Cambridge, UK in April 2016.
+
 
 ## Presentations, Talks, Slides, and Videos
 
