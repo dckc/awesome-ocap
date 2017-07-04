@@ -13,6 +13,8 @@ patterns of cooperation without vulnerability.
     your data against application bugs. You can host it yourself, pay
     a few dollars to use Sandstorm Oasis, or deploy it on-premise with
     Sandstorm for Work.
+    - [Sandstorm gets a security review](https://sandstorm.io/news/2017-03-02-security-review)  
+      Mar 2017
     - [One click to try an open source web application][1502]  
       By Asheesh Laroia - 06 Feb 2015
     - [Open Source Web Apps Aren't Viable; Let's Fix That][1407]  
