@@ -45,10 +45,12 @@ patterns of cooperation without vulnerability.
     abstractions -- object abstractions that can defend their
     integrity while being exposed to untrusted but confined objects.
 
+    - [Distributed Resilient Secure ECMAScript (Dr. SES)](http://soft.vub.ac.be/~tvcutsem/invokedynamic/drses) ESOP 2013
+    
   - [Capper](https://github.com/marcsAtSkyhunter/Capper) is web
     application server with built-in object capability security built
     on Node.js/Express
-
+    
   - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
     object capability discipline by letting the caller handle network access.
 
@@ -182,6 +184,8 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
   - S. Clebsch and S. Drossopoulou  
     [Fully concurrent garbage collection of actors on many-core machines][237]  
     OOPSLA 2013
+
+  - Close, T.: [Web-key: Mashing with permission](http://waterken.sourceforge.net/web-key/). In: W2SP’08. (2008)
 
   - Mark S. Miller, Tom Van Cutsem, Bill Tulloh  
     [Distributed Electronic Rights in JavaScript][40673]  
