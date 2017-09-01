@@ -102,6 +102,12 @@ patterns of cooperation without vulnerability.
     operating systems -- by applying a strict organizational structure
     to all software components including device drivers, system
     services, and applications.
+    - [Genode OS Framework release 17.08][1708] Aug 30, 2017  
+      > Version 17.08 enables hardware-accelerated graphics on
+      > Intel-Gen8 GPUs and expands Genode's seL4-kernel support to
+      > the ARM and 64-bit x86 architectures. Further topics are UEFI
+      > boot, VFS enhancements such as a new FatFS plugin, and the use
+      > of Genode as Xen DomU.
     - [Genode OS Framework release 16.08][1608] Aug 31, 2016  
       > Genode 16.08 makes the entirety of the framework's drivers,
       > protocol stacks, and libraries available on the seL4 kernel,
@@ -111,6 +117,7 @@ patterns of cooperation without vulnerability.
       > tools for statistical profiling.
 
 [1608]: https://genode.org/news/genode-os-framework-release-16.08
+[1708]: https://genode.org/documentation/release-notes/17.08
 
   - [seL4](https://sel4.systems/) is the world's first
     operating-system kernel with an end-to-end proof of implementation
