@@ -123,6 +123,8 @@ patterns of cooperation without vulnerability.
     operating-system kernel with an end-to-end proof of implementation
     correctness and security enforcement; it is available as open
     source.
+    - [Getting started with seL4, CAmkES, and L4v: Dependencies](https://research.csiro.au/tsblog/getting-started-sel4-camkes-l4v-dependencies/) MAY 19, 2017
+    - [seL4 on the Raspberry Pi 3](https://research.csiro.au/tsblog/sel4-raspberry-pi-3/) FEBRUARY 8, 2017
     - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
       [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
       ACM Transactions on Computer Systems, Volume 32, Number 1, pp. 2:1-2:70, February, 2014
