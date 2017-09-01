@@ -115,6 +115,14 @@ patterns of cooperation without vulnerability.
       [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
       ACM Transactions on Computer Systems, Volume 32, Number 1, pp. 2:1-2:70, February, 2014
 
+  - [cosix](https://github.com/sgielen/cosix) is a capability-based
+    operating system that consists of a small kernel that provides
+    memory management and inter-process communication, and a userland
+    that provides an IP stack and filesystems. The capability
+    enforcing mechanism comes from implementing only CloudABI as an
+    Application Binary Interface between the userland and the kernel.
+    - [2017-06-17: Release of Cosix 1.0](https://github.com/sgielen/cosix/blob/master/RELEASE-1.0.md)
+
   - [Barrelfish](http://www.barrelfish.org/) is a research operating
     system motivated by two closely related trends in hardware design:
     the rapidly growing number of cores and the increasing diversity
