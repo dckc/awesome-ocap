@@ -127,7 +127,19 @@ patterns of cooperation without vulnerability.
     - [seL4 on the Raspberry Pi 3](https://research.csiro.au/tsblog/sel4-raspberry-pi-3/) FEBRUARY 8, 2017
     - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
       [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
-      ACM Transactions on Computer Systems, Volume 32, Number 1, pp. 2:1-2:70, February, 2014
+    - Thomas Sewell, Simon Winwood, Peter Gammie, Toby Murray, June Andronick and Gerwin Klein  
+      [seL4 enforces integrity](http://ts.data61.csiro.au/projects/seL4/)  
+      International Conference on Interactive Theorem Proving, pp. 325-340, Nijmegen, The Netherlands, August, 2011
+      > Abstract. We prove the enforcement of two high-level access
+      > control properties in the seL4 microkernel: integrity and
+      > authority confinement.  Integrity provides an upper bound on
+      > write operations. Authority con- finement provides an upper
+      > bound on how authority may change. Apart from being a
+      > desirable security property in its own right, integrity can be
+      > used as a general framing property for the verification of
+      > user-level system composition. The proof is machine checked in
+      > Isabelle/HOL and the results hold via refinement for the C
+      > implementation of the kernel.
 
   - [cosix](https://github.com/sgielen/cosix) is a capability-based
     operating system that consists of a small kernel that provides
