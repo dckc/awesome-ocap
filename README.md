@@ -68,6 +68,7 @@ patterns of cooperation without vulnerability.
     arbitrary files on disk and connect to arbitrary systems on the
     network, you as a user exactly inject those resources that the
     application should access.
+    - [Kumina sponsoring CloudABI: practical sandboxing for UNIX](https://blog.kumina.nl/2016/10/kumina-sponsoring-cloudabi-practical-sandboxing-for-unix/) October 14th, 2016
     - [Welcoming all Python enthusiasts: CPython 3.6 for CloudABI!](https://nuxi.nl/blog/2016/08/01/cloudabi-python.html)
       August 1, 2016 by Ed Schouten
 
