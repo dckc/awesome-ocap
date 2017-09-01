@@ -111,10 +111,9 @@ patterns of cooperation without vulnerability.
     operating-system kernel with an end-to-end proof of implementation
     correctness and security enforcement; it is available as open
     source.
-
-   - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
-     [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
-     ACM Transactions on Computer Systems, Volume 32, Number 1, pp. 2:1-2:70, February, 2014
+    - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
+      [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
+      ACM Transactions on Computer Systems, Volume 32, Number 1, pp. 2:1-2:70, February, 2014
 
   - [Barrelfish](http://www.barrelfish.org/) is a research operating
     system motivated by two closely related trends in hardware design:
