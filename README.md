@@ -81,6 +81,7 @@ patterns of cooperation without vulnerability.
     Capsicum is a lightweight OS capability and sandbox framework that
     extends the POSIX API, providing several new OS primitives to
     support object-capability security on UNIX-like operating systems
+    - [Capsicum Go support](https://lists.cam.ac.uk/pipermail/cl-capsicum-discuss/2017-July/msg00004.html) Ben Laurie 19 Jul 2017
     - [Capsicum for FreeBSD](https://www.cl.cam.ac.uk/research/security/capsicum/freebsd.html)
     - [Capsicum for Linux](https://www.cl.cam.ac.uk/research/security/capsicum/linux.html)
     - Watson,
