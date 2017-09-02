@@ -60,14 +60,6 @@ patterns of cooperation without vulnerability.
   - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
     object capability discipline by letting the caller handle network access.
 
-  - [Shill](http://shill-lang.org): Shill is a shell scripting
-    language designed to make it easy to follow the Principle of Least
-    Privilege. It runs on FreeBSD and is developed in Racket.
-    - [Shill: A Secure Shell Scripting Language][shill-osdi]. Scott
-      Moore, Christos Dimoulas, Dan King, and Stephen Chong. 11th
-      USENIX Symposium on Operating Systems Design and Implementation
-      (OSDI), October 2014.
-
   - [CloudABI](https://nuxi.nl/) is a runtime environment for
     Unix-like systems that introduces dependency injection to full
     Unix applications. Instead of allowing applications to open
@@ -82,7 +74,34 @@ patterns of cooperation without vulnerability.
       August 1, 2016 by Ed Schouten
 
 [1412]: https://sandstorm.io/news/2014-12-15-capnproto-0.5
+
+
+## Programming Languages
+
+  - [Pony](http://www.ponylang.org/) is an open-source,
+    object-oriented, actor-model, capabilities-secure, high
+    performance programming language.
+    - [Fully concurrent garbage collection of actors on many-core machines][237]  
+      S. Clebsch and S. Drossopoulou  
+      OOPSLA 2013
+
+  - [Monte](http://www.monte-language.org/) is a nascent dynamic
+    programming language reminiscent of Python and E. It is based upon
+    _The Principle of Least Authority_ (POLA), which governs
+    interactions between objects, and a _capability-based object
+    model_, which grants certain essential safety guarantees to all
+    objects.
+
+  - [Shill](http://shill-lang.org): Shill is a shell scripting
+    language designed to make it easy to follow the Principle of Least
+    Privilege. It runs on FreeBSD and is developed in Racket.
+    - [Shill: A Secure Shell Scripting Language][shill-osdi]. Scott
+      Moore, Christos Dimoulas, Dan King, and Stephen Chong. 11th
+      USENIX Symposium on Operating Systems Design and Implementation
+      (OSDI), October 2014.
+
 [shill-osdi]: http://shill.seas.harvard.edu/shill-osdi-2014.pdf
+
 
 ## Operating Systems
 
@@ -165,23 +184,6 @@ patterns of cooperation without vulnerability.
     - [release2016-07-20](http://git.barrelfish.org/?p=barrelfish;a=shortlog;h=refs/tags/release2016-07-20)
      
 [AEMSKH_14]: http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml
-
-
-## Programming Languages
-
-  - [Pony](http://www.ponylang.org/) is an open-source,
-    object-oriented, actor-model, capabilities-secure, high
-    performance programming language.
-    - [Fully concurrent garbage collection of actors on many-core machines][237]  
-      S. Clebsch and S. Drossopoulou  
-      OOPSLA 2013
-
-  - [Monte](http://www.monte-language.org/) is a nascent dynamic
-    programming language reminiscent of Python and E. It is based upon
-    _The Principle of Least Authority_ (POLA), which governs
-    interactions between objects, and a _capability-based object
-    model_, which grants certain essential safety guarantees to all
-    objects.
 
 
 ## CPUs
