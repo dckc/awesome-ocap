@@ -52,7 +52,19 @@ patterns of cooperation without vulnerability.
     integrity while being exposed to untrusted but confined objects.
 
     - [Distributed Resilient Secure ECMAScript (Dr. SES)](http://soft.vub.ac.be/~tvcutsem/invokedynamic/drses) ESOP 2013
-    
+
+  - [COAST](http://isr.uci.edu/projects/coast/) is COmputAtional State
+    Transfer, An Architectural Style for Secure Decentralized
+    Systems. The sole means of interaction among computations is the
+    asynchronous messaging. Motile is a single-assignment, functional,
+    and mobile code language based on Scheme
+    - Gorlick, Michael M., Kyle Strasser, and Richard N. Taylor.  
+    [Coast: An architectural style for decentralized on-demand tailored services.](http://wicsa2012.soberit.hut.fi/wp/assets/WEB-Gorlick_WICSA-2012.pdf) Software Architecture (WICSA) and European Conference on Software Architecture (ECSA), 2012 Joint Working IEEE/IFIP Conference on. IEEE, 2012.
+    - Gorlick, Michael M., and Richard N. Taylor.  
+    [Motile: Reflecting an Architectural Style in a Mobile Code Language.](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.310.4496) (2013).
+    - Baquero, Alegria.  
+    [COASTmed: software architectures for delivering customizable, policy-based differential web services.](http://dl.acm.org/citation.cfm?id=2591083) Companion Proceedings of the 36th International Conference on Software Engineering. ACM, 2014.
+
   - [Capper](https://github.com/marcsAtSkyhunter/Capper) is web
     application server with built-in object capability security built
     on Node.js/Express
