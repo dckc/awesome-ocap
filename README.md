@@ -224,11 +224,12 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
     [Fully concurrent garbage collection of actors on many-core machines][237]  
     OOPSLA 2013
 
-  - Close, T.: [Web-key: Mashing with permission](http://waterken.sourceforge.net/web-key/). In: W2SP’08. (2008)
-
   - Mark S. Miller, Tom Van Cutsem, Bill Tulloh  
     [Distributed Electronic Rights in JavaScript][40673]  
     ESOP'13 22nd European Symposium on Programming, Springer (2013)
+
+  - Close, T.: [Web-key: Mashing with permission](http://waterken.sourceforge.net/web-key/). In: W2SP’08. (2008)
+
   - Miller MS  
     [Robust composition: towards a unified approach to access control and concurrency control][markm-thesis]  
     Ph.D. Thesis, Johns Hopkins University; 2006.
@@ -250,6 +251,8 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
     > distributed, persistent, secure programming language, and
     > CapDesk, a virus-safe desktop built in E, as embodiments of the
     > techniques we explain.
+
+  - Miller, Mark S., E. Dean Tribble, and Jonathan Shapiro. [Concurrency among strangers.](http://www.erights.org/talks/promises/paper/tgc05-submitted.pdf) TGC. Vol. 5. 2005.
 
   - Mark S. Miller, Chip Morningstar, Bill Frantz  
     [Capability-based Financial Instruments][ode]  
