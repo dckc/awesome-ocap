@@ -199,7 +199,6 @@ patterns of cooperation without vulnerability.
     Ed Schouten, 32nd Chaos Communication Congress (32C3), Dec 2015
     
     
-    
   - [Secure Distributed Programming with Object-capabilities in JavaScript](http://soft.vub.ac.be/events/mobicrant_talks/talk1_ocaps_js.pdf)
     - [Oct 2011 video](https://www.youtube.com/watch?v=w9hHHvhZ_HY) 
   - [Bringing Object-orientation to Security Programming](http://soft.vub.ac.be/events/mobicrant_talks/talk2_OO_security.pdf)
@@ -207,6 +206,11 @@ patterns of cooperation without vulnerability.
 
   - [Passwords or Webkeys: Which is More Secure?](https://www.youtube.com/watch?v=C7Pt9PGs4C4)  
     video by Marc Stiegler Feb 2012
+
+  - Barth, Adam, Joel Weinberger, and Dawn Song.  
+    [Cross-Origin JavaScript Capability Leaks: Detection, Exploitation, and Defense.](https://www.usenix.org/conference/usenixsecurity09/technical-sessions/presentation/cross-origin-javascript-capability-leaks) USENIX
+    security symposium. 2009.
+
 
 ## Scholarly Articles
 
@@ -229,7 +233,7 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
     ESOP'13 22nd European Symposium on Programming, Springer (2013)
 
   - Barth, Adam, Joel Weinberger, and Dawn Song.  
-    [Cross-Origin JavaScript Capability Leaks: Detection, Exploitation, and Defense.](https://www.usenix.org/conference/usenixsecurity09/technical-sessions/presentation/cross-origin-javascript-capability-leaks) USENIX
+    [Cross-Origin JavaScript Capability Leaks: Detection, Exploitation, and Defense.](http://webblaze.cs.berkeley.edu/capleaks.html) USENIX
     security symposium. 2009.
 
   - Close, T.: [Web-key: Mashing with permission](http://waterken.sourceforge.net/web-key/). In: W2SP’08. (2008)
