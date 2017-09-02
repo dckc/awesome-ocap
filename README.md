@@ -4,7 +4,7 @@ Capability-based security enables the concise composition of powerful
 patterns of cooperation without vulnerability.
 
 
-## Application Hosting
+## Applications and Services
 
   - [Sandstorm](https://sandstorm.io/) is a self-hostable web
     productivity suite and [App Market](https://apps.sandstorm.io/)
@@ -19,6 +19,12 @@ patterns of cooperation without vulnerability.
       By Asheesh Laroia - 06 Feb 2015
     - [Open Source Web Apps Aren't Viable; Let's Fix That][1407]  
       By Kenton Varda - 21 Jul 2014  
+  - [Tahoe-LAFS](https://tahoe-lafs.org/) is a highly available
+    decentralized cloud storage system. Even if some of the servers
+    fail or are taken over by an attacker, the entire file store
+    continues to function correctly, preserving your privacy and
+    security.
+    - 2017-01-18 v1.12.1 released
 
 [scap]: https://sandstorm.io/how-it-works#capabilities
 [1407]: https://sandstorm.io/news/2014-07-21-open-source-web-apps-require-federated-hosting
