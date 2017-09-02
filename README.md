@@ -33,41 +33,53 @@ patterns of cooperation without vulnerability.
 
 ## Libraries and Frameworks
 
-  - [Caja](https://developers.google.com/caja/) is a compiler for making
-    third-party HTML, CSS and JavaScript safe for embedding.
-    Caja safely supports mashups and extends JSON with code.
-    - 12 Jan 2017: release v6011 74ba0da
- 
-  - [Cap’n Proto](https://capnproto.org/) is an open source
-    serialization and RPC protocol with distributed and persistent
-    capabilities and promise pipelining.
-    - [Cap'n Proto 0.5, and how it is central to Sandstorm][1412]  
-      By Kenton Varda - 15 Dec 2014
+  - JavaScript
+    - [Caja](https://developers.google.com/caja/) is a compiler for making
+      third-party HTML, CSS and JavaScript safe for embedding.
+      Caja safely supports mashups and extends JSON with code.
+      - 12 Jan 2017: release v6011 74ba0da
+    - [Secure EcmaScript (SES)](https://github.com/google/caja/wiki/SES)
+      is a fail-stop subset of ES5. SES should compatibly run all ES5
+      code that follows recognized ES5 best practices. The SES
+      restrictions support the writing of defensively consistent
+      abstractions -- object abstractions that can defend their
+      integrity while being exposed to untrusted but confined objects.
+      - [Distributed Resilient Secure ECMAScript (Dr. SES)](http://soft.vub.ac.be/~tvcutsem/invokedynamic/drses) ESOP 2013
+    - [Capper](https://github.com/marcsAtSkyhunter/Capper) is a web
+      application server built on Node.js/Express using
+      the [Waterken](http://waterken.sourceforge.net/) webkey protocol
+      for object capability security.
+      - [fun with Capper and OFX financial transaction fetching](https://groups.google.com/forum/#!topic/captalk/vw1yOecgU10) Jan 2016 to cap-talk
 
-  - [Secure EcmaScript (SES)](https://github.com/google/caja/wiki/SES)
-    is a fail-stop subset of ES5. SES should compatibly run all ES5
-    code that follows recognized ES5 best practices. The SES
-    restrictions support the writing of defensively consistent
-    abstractions -- object abstractions that can defend their
-    integrity while being exposed to untrusted but confined objects.
+  - C++
+      - [Cap’n Proto](https://capnproto.org/) is a high performance
+        serialization and RPC protocol with distributed and persistent
+        capabilities and promise pipelining. Bindings to python,
+        JavaScript (in node.js), Go, Rust, etc. are available
+        - [Cap'n Proto 0.5, and how it is central to Sandstorm][1412]  
+          By Kenton Varda - 15 Dec 2014
 
-    - [Distributed Resilient Secure ECMAScript (Dr. SES)](http://soft.vub.ac.be/~tvcutsem/invokedynamic/drses) ESOP 2013
+  - Scheme (racket)
+      - [COAST](http://isr.uci.edu/projects/coast/) is COmputAtional State
+        Transfer, An Architectural Style for Secure Decentralized
+        Systems. The sole means of interaction among computations is the
+        asynchronous messaging. Motile is a single-assignment, functional,
+        and mobile code language based on Scheme
+        - Gorlick, Michael M., and Richard N. Taylor.  
+        [Motile: Reflecting an Architectural Style in a Mobile Code Language.](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.310.4496) (2013).
+        - Baquero, Alegria.  
+        [COASTmed: software architectures for delivering customizable, policy-based differential web services.](http://dl.acm.org/citation.cfm?id=2591083) Companion Proceedings of the 36th International Conference on Software Engineering. ACM, 2014.
 
-  - [COAST](http://isr.uci.edu/projects/coast/) is COmputAtional State
-    Transfer, An Architectural Style for Secure Decentralized
-    Systems. The sole means of interaction among computations is the
-    asynchronous messaging. Motile is a single-assignment, functional,
-    and mobile code language based on Scheme
-    - Gorlick, Michael M., and Richard N. Taylor.  
-    [Motile: Reflecting an Architectural Style in a Mobile Code Language.](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.310.4496) (2013).
-    - Baquero, Alegria.  
-    [COASTmed: software architectures for delivering customizable, policy-based differential web services.](http://dl.acm.org/citation.cfm?id=2591083) Companion Proceedings of the 36th International Conference on Software Engineering. ACM, 2014.
+      - [Shill](http://shill-lang.org): Shill is a shell scripting
+        language designed to make it easy to follow the Principle of Least
+        Privilege. It runs on FreeBSD and is developed in Racket.
+        - [Shill: A Secure Shell Scripting Language][shill-osdi]. Scott
+          Moore, Christos Dimoulas, Dan King, and Stephen Chong. 11th
+          USENIX Symposium on Operating Systems Design and Implementation
+          (OSDI), October 2014.
 
-  - [Capper](https://github.com/marcsAtSkyhunter/Capper) is web
-    application server using
-    the [Waterken](http://waterken.sourceforge.net/) webkey protocol
-    for object capability security built on Node.js/Express.
-    
+[shill-osdi]: http://shill.seas.harvard.edu/shill-osdi-2014.pdf
+
   - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
     object capability discipline by letting the caller handle network access.
 
@@ -79,6 +91,8 @@ patterns of cooperation without vulnerability.
   - [Pony](http://www.ponylang.org/) is an open-source,
     object-oriented, actor-model, capabilities-secure, high
     performance programming language.
+    - bootstrapped using LLVM on x86 and ARM; packaged for linux and Mac OS X
+    - docker images: [ponylang](https://hub.docker.com/u/ponylang/)
     - [Fully concurrent garbage collection of actors on many-core machines][237]  
       S. Clebsch and S. Drossopoulou  
       OOPSLA 2013
@@ -89,16 +103,9 @@ patterns of cooperation without vulnerability.
     interactions between objects, and a _capability-based object
     model_, which grants certain essential safety guarantees to all
     objects.
-
-  - [Shill](http://shill-lang.org): Shill is a shell scripting
-    language designed to make it easy to follow the Principle of Least
-    Privilege. It runs on FreeBSD and is developed in Racket.
-    - [Shill: A Secure Shell Scripting Language][shill-osdi]. Scott
-      Moore, Christos Dimoulas, Dan King, and Stephen Chong. 11th
-      USENIX Symposium on Operating Systems Design and Implementation
-      (OSDI), October 2014.
-
-[shill-osdi]: http://shill.seas.harvard.edu/shill-osdi-2014.pdf
+    - bootstrapped from rpython (pypy toolchain) and libuv and
+    libsodium using (primarily) the nix build system.
+    - Docker images: [montelang](https://hub.docker.com/r/montelang/)
 
 
 ## Operating Systems
@@ -109,6 +116,7 @@ patterns of cooperation without vulnerability.
     arbitrary files on disk and connect to arbitrary systems on the
     network, you as a user exactly inject those resources that the
     application should access.
+    - reference platform: FreeBSD
     - [Capability-Based Network Communication for Capsicum/CloudABI](ftp://www.si.freebsd.org/www/data//news/status/report-2017-04-2017-06.html#Capability-Based-Network-Communication-for-Capsicum/CloudABI) April–June 2017 FreeBSD status report.
       - [ARPC: GRPC-Like RPC Library That Supports File Descriptor Passing](https://github.com/NuxiNL/arpc)
       - [Flower: A Label-Based Network Backplane](https://github.com/NuxiNL/flower)
