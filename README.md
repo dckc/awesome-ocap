@@ -58,8 +58,6 @@ patterns of cooperation without vulnerability.
     Systems. The sole means of interaction among computations is the
     asynchronous messaging. Motile is a single-assignment, functional,
     and mobile code language based on Scheme
-    - Gorlick, Michael M., Kyle Strasser, and Richard N. Taylor.  
-    [Coast: An architectural style for decentralized on-demand tailored services.](http://wicsa2012.soberit.hut.fi/wp/assets/WEB-Gorlick_WICSA-2012.pdf) Software Architecture (WICSA) and European Conference on Software Architecture (ECSA), 2012 Joint Working IEEE/IFIP Conference on. IEEE, 2012.
     - Gorlick, Michael M., and Richard N. Taylor.  
     [Motile: Reflecting an Architectural Style in a Mobile Code Language.](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.310.4496) (2013).
     - Baquero, Alegria.  
