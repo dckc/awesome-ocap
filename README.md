@@ -60,19 +60,6 @@ patterns of cooperation without vulnerability.
   - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
     object capability discipline by letting the caller handle network access.
 
-  - [CloudABI](https://nuxi.nl/) is a runtime environment for
-    Unix-like systems that introduces dependency injection to full
-    Unix applications. Instead of allowing applications to open
-    arbitrary files on disk and connect to arbitrary systems on the
-    network, you as a user exactly inject those resources that the
-    application should access.
-    - [Capability-Based Network Communication for Capsicum/CloudABI](ftp://www.si.freebsd.org/www/data//news/status/report-2017-04-2017-06.html#Capability-Based-Network-Communication-for-Capsicum/CloudABI) April–June 2017 FreeBSD status report.
-      - [ARPC: GRPC-Like RPC Library That Supports File Descriptor Passing](https://github.com/NuxiNL/arpc)
-      - [Flower: A Label-Based Network Backplane](https://github.com/NuxiNL/flower)
-    - [Kumina sponsoring CloudABI: practical sandboxing for UNIX](https://blog.kumina.nl/2016/10/kumina-sponsoring-cloudabi-practical-sandboxing-for-unix/) October 14th, 2016
-    - [Welcoming all Python enthusiasts: CPython 3.6 for CloudABI!](https://nuxi.nl/blog/2016/08/01/cloudabi-python.html)
-      August 1, 2016 by Ed Schouten
-
 [1412]: https://sandstorm.io/news/2014-12-15-capnproto-0.5
 
 
@@ -104,6 +91,19 @@ patterns of cooperation without vulnerability.
 
 
 ## Operating Systems
+
+  - [CloudABI](https://nuxi.nl/) is a runtime environment for
+    Unix-like systems that introduces dependency injection to full
+    Unix applications. Instead of allowing applications to open
+    arbitrary files on disk and connect to arbitrary systems on the
+    network, you as a user exactly inject those resources that the
+    application should access.
+    - [Capability-Based Network Communication for Capsicum/CloudABI](ftp://www.si.freebsd.org/www/data//news/status/report-2017-04-2017-06.html#Capability-Based-Network-Communication-for-Capsicum/CloudABI) April–June 2017 FreeBSD status report.
+      - [ARPC: GRPC-Like RPC Library That Supports File Descriptor Passing](https://github.com/NuxiNL/arpc)
+      - [Flower: A Label-Based Network Backplane](https://github.com/NuxiNL/flower)
+    - [Kumina sponsoring CloudABI: practical sandboxing for UNIX](https://blog.kumina.nl/2016/10/kumina-sponsoring-cloudabi-practical-sandboxing-for-unix/) October 14th, 2016
+    - [Welcoming all Python enthusiasts: CPython 3.6 for CloudABI!](https://nuxi.nl/blog/2016/08/01/cloudabi-python.html)
+      August 1, 2016 by Ed Schouten
 
   - [Capsicum](https://www.cl.cam.ac.uk/research/security/capsicum/)
     Capsicum is a lightweight OS capability and sandbox framework that
