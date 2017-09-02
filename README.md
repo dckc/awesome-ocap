@@ -163,6 +163,13 @@ patterns of cooperation without vulnerability.
 [1608]: https://genode.org/news/genode-os-framework-release-16.08
 [1708]: https://genode.org/documentation/release-notes/17.08
 
+  - [Fuchsia](https://fuchsia.googlesource.com/docs/+/HEAD/getting_started.md) is
+    a real-time operating system in development by Google since
+    Aug 2016. It's based on a
+    microkernel,
+    [Magenta](https://fuchsia.googlesource.com/magenta/+/master/README.md),
+    with a capability security model.
+  
   - [seL4](https://sel4.systems/) is the world's first
     operating-system kernel with an end-to-end proof of implementation
     correctness and security enforcement; it is available as open
