@@ -228,6 +228,10 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
     [Distributed Electronic Rights in JavaScript][40673]  
     ESOP'13 22nd European Symposium on Programming, Springer (2013)
 
+  - Barth, Adam, Joel Weinberger, and Dawn Song.  
+    [Cross-Origin JavaScript Capability Leaks: Detection, Exploitation, and Defense.](https://www.usenix.org/conference/usenixsecurity09/technical-sessions/presentation/cross-origin-javascript-capability-leaks) USENIX
+    security symposium. 2009.
+
   - Close, T.: [Web-key: Mashing with permission](http://waterken.sourceforge.net/web-key/). In: W2SP’08. (2008)
 
   - Miller MS  
