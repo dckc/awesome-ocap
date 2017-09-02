@@ -66,8 +66,9 @@ patterns of cooperation without vulnerability.
     [COASTmed: software architectures for delivering customizable, policy-based differential web services.](http://dl.acm.org/citation.cfm?id=2591083) Companion Proceedings of the 36th International Conference on Software Engineering. ACM, 2014.
 
   - [Capper](https://github.com/marcsAtSkyhunter/Capper) is web
-    application server with built-in object capability security built
-    on Node.js/Express
+    application server using
+    the [Waterken](http://waterken.sourceforge.net/) webkey protocol
+    for object capability security built on Node.js/Express.
     
   - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
     object capability discipline by letting the caller handle network access.
