@@ -51,6 +51,10 @@ patterns of cooperation without vulnerability.
       for object capability security.
       - [fun with Capper and OFX financial transaction fetching](https://groups.google.com/forum/#!topic/captalk/vw1yOecgU10) Jan 2016 to cap-talk
 
+  - rust
+    - [Using Capabilities to Design Safer, More Expressive APIs](http://zsck.co/writing/capability-based-apis.html)
+      Zack Mullaly Jan 19, 2018
+
   - C++
       - [Cap’n Proto](https://capnproto.org/) is a high performance
         serialization and RPC protocol with distributed and persistent
