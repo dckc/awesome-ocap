@@ -13,6 +13,9 @@ patterns of cooperation without vulnerability.
     your data against application bugs. You can host it yourself, pay
     a few dollars to use Sandstorm Oasis, or deploy it on-premise with
     Sandstorm for Work.
+    - [connecting to external HTTP APIs via the Powerbox](https://github.com/sandstorm-io/sandstorm/pull/2870)
+      and related powerbox enhancements  
+      v0.200 (2017-01-28), v0.203 (2017-03-02)
     - [Sandstorm gets a security review](https://sandstorm.io/news/2017-03-02-security-review)  
       Mar 2017
     - [One click to try an open source web application][1502]  
