@@ -244,7 +244,12 @@ patterns of cooperation without vulnerability.
     security symposium. 2009.
 
 
-## Scholarly Articles
+## Articles
+
+  - [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/)  
+    May 7, 2017 by Chip Morningstar ([Hacker News discussion Jan 7, 2018](https://news.ycombinator.com/item?id=16091975))
+
+### Peer-reviewed Articles
 
 _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/items/collectionKey/FZ8P5G54/itemKey/2ZPIX23N) bibliography._
 
