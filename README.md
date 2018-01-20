@@ -150,22 +150,28 @@ patterns of cooperation without vulnerability.
     operating systems -- by applying a strict organizational structure
     to all software components including device drivers, system
     services, and applications.
+    - [Road Map for 2018](https://genode.org/news/road-map-for-2018) Jan 17, 2018
+      > 2018 will be the year of Sculpt.
+    - [Genode OS Framework release 17.11][1711] Nov 30, 2017
+      > Most of the many improvements of version 17.11 are geared
+      > towards the practical use of Genode as day-to-day OS. They
+      > include a reworked GUI stack, new user-input features, and the
+      > packaging of many components. The new version also revises the
+      > boot concept on x86, updates the seL4 kernel, and enhances
+      > Genode's user-level networking facilities.
+
     - [Genode OS Framework release 17.08][1708] Aug 30, 2017  
       > Version 17.08 enables hardware-accelerated graphics on
       > Intel-Gen8 GPUs and expands Genode's seL4-kernel support to
       > the ARM and 64-bit x86 architectures. Further topics are UEFI
       > boot, VFS enhancements such as a new FatFS plugin, and the use
       > of Genode as Xen DomU.
-    - [Genode OS Framework release 16.08][1608] Aug 31, 2016  
-      > Genode 16.08 makes the entirety of the framework's drivers,
-      > protocol stacks, and libraries available on the seL4 kernel,
-      > brings VirtualBox 4 to the Muen separation kernel, and hosts
-      > VirtualBox 5 on top of the NOVA kernel. Further highlights are
-      > virtual networking and TOR, profound Zynq board support, and
-      > tools for statistical profiling.
+
+    - [Genode OS Framework release 16.08][1608] Aug 31, 2016
 
 [1608]: https://genode.org/news/genode-os-framework-release-16.08
 [1708]: https://genode.org/documentation/release-notes/17.08
+[1711]: https://genode.org/news/genode-os-framework-release-17.11
 
   - [Fuchsia](https://fuchsia.googlesource.com/docs/+/HEAD/getting_started.md) is
     a real-time operating system in development by Google since
