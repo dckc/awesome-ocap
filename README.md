@@ -5,8 +5,16 @@
 Capability-based security enables the concise composition of powerful
 patterns of cooperation without vulnerability. [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/) explains in detail.
 
+ - [Applications and Services](#app-svc)
+ - [Libraries and Frameworks](#lib)
+ - [Programming Languages](#lang)
+ - [Operating Systems](#os)
+ - [CPUs](#cpu)
+ - [Presentations, Talks, Slides, and Videos](#talk)
+ - [Articles](#article)
+   - [Peer-reviewed Articles](#lit)
 
-## Applications and Services
+## Applications and Services<a name="app-svc"></a>
 
   - [Sandstorm](https://sandstorm.io/) is a self-hostable web
     productivity suite and [App Market](https://apps.sandstorm.io/)
@@ -36,7 +44,7 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
 [1502]: https://sandstorm.io/news/2015-02-06-app-demo
 
 
-## Libraries and Frameworks
+## Libraries and Frameworks<a name="lib"></a>
 
   - JavaScript
     - [Caja](https://developers.google.com/caja/) is a compiler for making
@@ -95,7 +103,7 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
 [1412]: https://sandstorm.io/news/2014-12-15-capnproto-0.5
 
 
-## Programming Languages
+## Programming Languages<a name="lang"></a>
 
   - [Pony](http://www.ponylang.org/) is an open-source,
     object-oriented, actor-model, capabilities-secure, high
@@ -117,7 +125,7 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     - Docker images: [montelang](https://hub.docker.com/r/montelang/)
 
 
-## Operating Systems
+## Operating Systems<a name="os"></a>
 
   - [CloudABI](https://nuxi.nl/) is a runtime environment for
     Unix-like systems that introduces dependency injection to full
@@ -227,7 +235,7 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
 [AEMSKH_14]: http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml
 
 
-## CPUs
+## CPUs<a name="cpu"></a>
 
   - [CHERI](https://www.cl.cam.ac.uk/research/security/ctsrd/) is an open source capability CPU design.
 
@@ -236,7 +244,7 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     - May 2016: slides from the first CHERI microkernel workshop, Cambridge, UK in April 2016.
 
 
-## Presentations, Talks, Slides, and Videos
+## Presentations, Talks, Slides, and Videos<a name="talk"></a>
 
   - [CloudABI - Pure capability-based security for UNIX](https://www.youtube.com/watch?v=62cYMmSY2Dc)  
     Ed Schouten, 32nd Chaos Communication Congress (32C3), Dec 2015
@@ -255,12 +263,12 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     security symposium. 2009.
 
 
-## Articles
+## Articles<a name="article"></a>
 
   - [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/)  
     May 7, 2017 by Chip Morningstar ([Hacker News discussion Jan 7, 2018](https://news.ycombinator.com/item?id=16091975))
 
-### Peer-reviewed Articles
+### Peer-reviewed Articles<a name="lit"></a>
 
 _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/items/collectionKey/FZ8P5G54/itemKey/2ZPIX23N) bibliography._
 
