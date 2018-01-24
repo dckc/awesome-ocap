@@ -3,7 +3,7 @@
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 Capability-based security enables the concise composition of powerful
-patterns of cooperation without vulnerability.
+patterns of cooperation without vulnerability. [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/) explains in detail.
 
 
 ## Applications and Services
