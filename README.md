@@ -1,5 +1,7 @@
 # Awesome Object Capabilities and Capability-based Security
 
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+
 Capability-based security enables the concise composition of powerful
 patterns of cooperation without vulnerability.
 
