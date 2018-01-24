@@ -5,6 +5,8 @@
 Capability-based security enables the concise composition of powerful
 patterns of cooperation without vulnerability. [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/) explains in detail.
 
+## Contents
+
  - [Applications and Services](#app-svc)
  - [Libraries and Frameworks](#lib)
  - [Programming Languages](#lang)
