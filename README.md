@@ -14,7 +14,8 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
  - [Articles](#article)
    - [Peer-reviewed Articles](#lit)
 
-## Applications and Services<a name="app-svc"></a>
+<a name="app-svc"></a>
+## Applications and Services
 
   - [Sandstorm](https://sandstorm.io/) is a self-hostable web
     productivity suite and [App Market](https://apps.sandstorm.io/)
@@ -43,8 +44,8 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
 [1407]: https://sandstorm.io/news/2014-07-21-open-source-web-apps-require-federated-hosting
 [1502]: https://sandstorm.io/news/2015-02-06-app-demo
 
-
-## Libraries and Frameworks<a name="lib"></a>
+<a name="lib"></a>
+## Libraries and Frameworks
 
   - JavaScript
     - [Caja](https://developers.google.com/caja/) is a compiler for making
@@ -102,8 +103,8 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
 
 [1412]: https://sandstorm.io/news/2014-12-15-capnproto-0.5
 
-
-## Programming Languages<a name="lang"></a>
+<a name="lang"></a>
+## Programming Languages
 
   - [Pony](http://www.ponylang.org/) is an open-source,
     object-oriented, actor-model, capabilities-secure, high
@@ -124,8 +125,8 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     libsodium using (primarily) the nix build system.
     - Docker images: [montelang](https://hub.docker.com/r/montelang/)
 
-
-## Operating Systems<a name="os"></a>
+<a name="os"></a>
+## Operating Systems
 
   - [CloudABI](https://nuxi.nl/) is a runtime environment for
     Unix-like systems that introduces dependency injection to full
@@ -234,8 +235,8 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
      
 [AEMSKH_14]: http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml
 
-
-## CPUs<a name="cpu"></a>
+<a name="cpu"></a>
+## CPUs
 
   - [CHERI](https://www.cl.cam.ac.uk/research/security/ctsrd/) is an open source capability CPU design.
 
@@ -243,8 +244,8 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     - June 2016: _CHERI-JNI: Sinking the Java security model into the C_, explores how CHERI capabilities can be used to support sandboxing with safe and efficient memory sharing between Java Native Interface (JNI) code and the Java Virtual Machine.  ASPLOS 2017
     - May 2016: slides from the first CHERI microkernel workshop, Cambridge, UK in April 2016.
 
-
-## Presentations, Talks, Slides, and Videos<a name="talk"></a>
+<a name="talk"></a>
+## Presentations, Talks, Slides, and Videos
 
   - [CloudABI - Pure capability-based security for UNIX](https://www.youtube.com/watch?v=62cYMmSY2Dc)  
     Ed Schouten, 32nd Chaos Communication Congress (32C3), Dec 2015
@@ -262,13 +263,14 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     [Cross-Origin JavaScript Capability Leaks: Detection, Exploitation, and Defense.](https://www.usenix.org/conference/usenixsecurity09/technical-sessions/presentation/cross-origin-javascript-capability-leaks) USENIX
     security symposium. 2009.
 
-
-## Articles<a name="article"></a>
+<a name="article"></a>
+## Articles
 
   - [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/)  
     May 7, 2017 by Chip Morningstar ([Hacker News discussion Jan 7, 2018](https://news.ycombinator.com/item?id=16091975))
 
-### Peer-reviewed Articles<a name="lit"></a>
+<a name="lit"></a>
+### Peer-reviewed Articles
 
 _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/items/collectionKey/FZ8P5G54/itemKey/2ZPIX23N) bibliography._
 
