@@ -78,7 +78,16 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
         JavaScript (in node.js), Go, Rust, etc. are available
         - [Cap'n Proto 0.5, and how it is central to Sandstorm][1412]  
           By Kenton Varda - 15 Dec 2014
-
+          
+  - Scala
+      - [ocaps](https://wsargent.github.io/ocaps) is a library for working with object capabilities in Scala.
+         * Revoker / Revocable classes for revoking capabilities.
+         * Brand for sealing and unsealing capabilities
+         * PermeableMembrane for revocation as an effect.
+         * Macros for composition, attenuation, revocable and modulating capabilities.
+      - Comes with a [guide to capabilities](https://wsargent.github.io/ocaps/guide/index.html)
+         - 2018-06-20 v0.1.0 released 
+       
   - Scheme (racket)
       - [COAST](http://isr.uci.edu/projects/coast/) is COmputAtional State
         Transfer, An Architectural Style for Secure Decentralized
