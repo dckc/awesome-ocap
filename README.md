@@ -60,7 +60,7 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
       restrictions support the writing of defensively consistent
       abstractions -- object abstractions that can defend their
       integrity while being exposed to untrusted but confined objects.
-      - [Distributed Resilient Secure ECMAScript (Dr. SES)](http://soft.vub.ac.be/~tvcutsem/invokedynamic/drses) ESOP 2013
+      - [Distributed Resilient Secure ECMAScript (Dr. SES)](https://tvcutsem.github.io/drses) ESOP 2013
     - [Capper](https://github.com/marcsAtSkyhunter/Capper) is a web
       application server built on Node.js/Express using
       the [Waterken](http://waterken.sourceforge.net/) webkey protocol
