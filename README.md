@@ -136,6 +136,10 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     libsodium using (primarily) the nix build system.
     - Docker images: [montelang](https://hub.docker.com/r/montelang/)
 
+  - [E](http://erights.org/) is a secure distributed persistent language
+for capability-based smart contracting.
+    - on Wikipedia: https://en.wikipedia.org/wiki/E_(programming_language)
+
 <a name="os"></a>
 ## Operating Systems
 
