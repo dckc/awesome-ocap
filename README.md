@@ -26,15 +26,15 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     your data against application bugs. You can host it yourself, pay
     a few dollars to use Sandstorm Oasis, or deploy it on-premise with
     Sandstorm for Work.
+    - [Results of discontinuing the free plan](https://sandstorm.io/news/2018-10-28-results-of-ending-free-plan)  
+      By Kenton Varda - 28 Oct 2018
+    - [HTTP proxy rewrite and other updates](https://sandstorm.io/news/2018-02-19-http-rewrite-and-more)  
+      By Kenton Varda - 19 Feb 2018
     - [connecting to external HTTP APIs via the Powerbox](https://github.com/sandstorm-io/sandstorm/pull/2870)
       and related powerbox enhancements  
       v0.200 (2017-01-28), v0.203 (2017-03-02)
-    - [Sandstorm gets a security review](https://sandstorm.io/news/2017-03-02-security-review)  
-      Mar 2017
     - [One click to try an open source web application][1502]  
       By Asheesh Laroia - 06 Feb 2015
-    - [Open Source Web Apps Aren't Viable; Let's Fix That][1407]  
-      By Kenton Varda - 21 Jul 2014  
   - [Tahoe-LAFS](https://tahoe-lafs.org/) is a highly available
     decentralized cloud storage system. Even if some of the servers
     fail or are taken over by an attacker, the entire file store
