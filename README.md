@@ -175,6 +175,13 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     operating systems -- by applying a strict organizational structure
     to all software components including device drivers, system
     services, and applications.
+    - [Genode OS Framework release 18.11](https://genode.org/news/genode-os-framework-release-18.11) Nov 29, 2018  
+      Genode 18.11 is focused on improving quality assurance on various fronts, including static code analysis, on-target test orchestration, and code-coverage measurements. Furthermore, it introduces support for Mirage-OS unikernels, a new health-monitoring mechanism, a Genode SDK, an SSH server, and a new window layouter.
+    - [Sculpt with Visual Composition](https://genode.org/news/sculpt-with-visual-composition) Sep 21, 2018  
+      The third version of Sculpt OS introduces an interactive runtime view for managing components.
+    - [Sculpt for The Curious](https://genode.org/news/sculpt-for-the-curious) Jun 13, 2018  
+      The second incarnation of Sculpt OS comes in the form of a ready-to-use disk image.
+    - [Genode Foundations](http://genode.org/documentation/genode-foundations-18-05.pdf) book; May 2018 edition
     - [Road Map for 2018](https://genode.org/news/road-map-for-2018) Jan 17, 2018
       > 2018 will be the year of Sculpt.
     - [Genode OS Framework release 17.11][1711] Nov 30, 2017
@@ -185,14 +192,6 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
       > boot concept on x86, updates the seL4 kernel, and enhances
       > Genode's user-level networking facilities.
 
-    - [Genode OS Framework release 17.08][1708] Aug 30, 2017  
-      > Version 17.08 enables hardware-accelerated graphics on
-      > Intel-Gen8 GPUs and expands Genode's seL4-kernel support to
-      > the ARM and 64-bit x86 architectures. Further topics are UEFI
-      > boot, VFS enhancements such as a new FatFS plugin, and the use
-      > of Genode as Xen DomU.
-
-    - [Genode OS Framework release 16.08][1608] Aug 31, 2016
 
 [1608]: https://genode.org/news/genode-os-framework-release-16.08
 [1708]: https://genode.org/documentation/release-notes/17.08
