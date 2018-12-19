@@ -277,6 +277,9 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
 <a name="article"></a>
 ## Articles
 
+  - [POLA Would Have Prevented the Event-Stream Incident](https://medium.com/agoric/pola-would-have-prevented-the-event-stream-incident-45653ecbda99)  
+    Nov 30, 2018 Kate Sills, Agoric
+  
   - [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/)  
     May 7, 2017 by Chip Morningstar ([Hacker News discussion Jan 7, 2018](https://news.ycombinator.com/item?id=16091975))
 
