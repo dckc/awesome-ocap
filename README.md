@@ -41,6 +41,9 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     continues to function correctly, preserving your privacy and
     security.
     - 2017-01-18 v1.12.1 released
+  - [capability.io](https://capability.io/) offers capability-based services.
+    - [Membrane Service (Early Access)](https://capability.io/blog/2018/12/16/announcing-membrane-service-early-access) solves the problem of being able to delegate authority in a decentralized manner. It does this by using capabilities and offering capability-based authorization at any scale in accordance with any policy via membranes.<br/>By Tristan Slominski - 2018-12-16
+    - [Certificate Manager Service (Early Access)](https://capability.io/blog/2018/12/22/announcing-certificate-manager-service-early-access) simplifies public Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificate management while letting you deploy those certificates wherever you like.<br/>By Tristan Slominski - 2018-12-22
 
 [scap]: https://sandstorm.io/how-it-works#capabilities
 [1407]: https://sandstorm.io/news/2014-07-21-open-source-web-apps-require-federated-hosting
