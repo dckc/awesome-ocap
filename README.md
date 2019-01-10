@@ -89,7 +89,9 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
          * PermeableMembrane for revocation as an effect.
          * Macros for composition, attenuation, revocable and modulating capabilities.
       - Comes with a [guide to capabilities](https://wsargent.github.io/ocaps/guide/index.html)
-         - 2018-06-20 v0.1.0 released 
+         - 2018-06-20 v0.1.0 released
+         - 2018-09-22 [Presentation at Scaladays](https://youtu.be/wfbF5jQiAhQ)
+         
        
   - Scheme (racket)
       - [COAST](http://isr.uci.edu/projects/coast/) is COmputAtional State
@@ -275,6 +277,9 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
   - Barth, Adam, Joel Weinberger, and Dawn Song.  
     [Cross-Origin JavaScript Capability Leaks: Detection, Exploitation, and Defense.](https://www.usenix.org/conference/usenixsecurity09/technical-sessions/presentation/cross-origin-javascript-capability-leaks) USENIX
     security symposium. 2009.
+
+  - Sargent, Will
+    [Security in Scala: Refined Types and Object Capabilities](https://youtu.be/wfbF5jQiAhQ) Scaladays NYC 2018.
 
 <a name="article"></a>
 ## Articles
