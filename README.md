@@ -226,6 +226,7 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
       > user-level system composition. The proof is machine checked in
       > Isabelle/HOL and the results hold via refinement for the C
       > implementation of the kernel.
+    - [Robigalia](https://robigalia.org/) is an OS "continuing the heritage of EROS and Coyotos" using seL4 and written in Rust
 
   - [cosix](https://github.com/sgielen/cosix) is a capability-based
     operating system that consists of a small kernel that provides
