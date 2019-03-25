@@ -58,12 +58,14 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
       Caja safely supports mashups and extends JSON with code.
       - Apr 2, 2018: release v6013 964609d
       - 12 Jan 2017: release v6011 74ba0da
-    - [Secure EcmaScript (SES)](https://github.com/google/caja/wiki/SES)
+    - [Secure EcmaScript (SES)](https://github.com/Agoric/SES/releases)
       is a fail-stop subset of ES5. SES should compatibly run all ES5
       code that follows recognized ES5 best practices. The SES
       restrictions support the writing of defensively consistent
       abstractions -- object abstractions that can defend their
       integrity while being exposed to untrusted but confined objects.
+      - Feb 20, 2019: SES-0.4.0 8597417
+      - Jul 28, 2018: [Agoric Releases SES: Secure JavaScript](https://agoric.com/agoric-releases-ses/)  f4d3d5a
       - [Distributed Resilient Secure ECMAScript (Dr. SES)](https://tvcutsem.github.io/drses) ESOP 2013
     - [Capper](https://github.com/marcsAtSkyhunter/Capper) is a web
       application server built on Node.js/Express using
