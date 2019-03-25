@@ -128,6 +128,7 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
   - [Pony](http://www.ponylang.org/) is an open-source,
     object-oriented, actor-model, capabilities-secure, high
     performance programming language.
+    - March 22, 2019: 0.28.0 Released 0e67d08
     - bootstrapped using LLVM on x86 and ARM; packaged for linux and Mac OS X
     - docker images: [ponylang](https://hub.docker.com/u/ponylang/)
     - [Fully concurrent garbage collection of actors on many-core machines][237]  
