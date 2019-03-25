@@ -56,6 +56,7 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     - [Caja](https://developers.google.com/caja/) is a compiler for making
       third-party HTML, CSS and JavaScript safe for embedding.
       Caja safely supports mashups and extends JSON with code.
+      - Apr 2, 2018: release v6013 964609d
       - 12 Jan 2017: release v6011 74ba0da
     - [Secure EcmaScript (SES)](https://github.com/google/caja/wiki/SES)
       is a fail-stop subset of ES5. SES should compatibly run all ES5
