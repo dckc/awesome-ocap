@@ -75,21 +75,9 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
         JavaScript (in node.js), Go, Rust, etc. are available
         - 2020-04-23: [Cap'n Proto: Cap'n Proto 0\.8: Streaming flow control, HTTP\-over\-RPC, fibers, etc\.](https://capnproto.org/news/2020-04-23-capnproto-0.8.html)
         - 2014-12-15: [Cap'n Proto 0.5, and how it is central to Sandstorm][1412] by Kenton Varda
-  - Scala
-      - [ocaps](https://wsargent.github.io/ocaps) is a library for working with object capabilities in Scala.
-         * Revoker / Revocable classes for revoking capabilities.
-         * Brand for sealing and unsealing capabilities
-         * PermeableMembrane for revocation as an effect.
-         * Macros for composition, attenuation, revocable and modulating capabilities.
-      - Comes with a [guide to capabilities](https://wsargent.github.io/ocaps/guide/index.html)
-         - 2018-06-20 v0.1.0 released
-         - 2018-09-22 [Presentation at Scaladays](https://slideslive.com/38908776/security-with-scala-refined-types-and-object-capabilities?subdomain=false)
-  - rust
-    - [Using Capabilities to Design Safer, More Expressive APIs](http://zsck.co/writing/capability-based-apis.html)
-      Zack Mullaly Jan 19, 2018
-
-       
   - Scheme (racket)
+      - [Spritely](https://dustycloud.org/blog/spritely/)
+        - 2020-05-13 [Spritely's NLNet grant: Interface Discovery for Distributed Systems \-\- DustyCloud Brainstorms](https://dustycloud.org/blog/spritely-nlnet-grant/)
       - [COAST](http://isr.uci.edu/projects/coast/) is COmputAtional State
         Transfer, An Architectural Style for Secure Decentralized
         Systems. The sole means of interaction among computations is the
@@ -109,6 +97,18 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
           (OSDI), October 2014.
 
 [shill-osdi]: http://shill.seas.harvard.edu/shill-osdi-2014.pdf
+  - Scala
+      - [ocaps](https://wsargent.github.io/ocaps) is a library for working with object capabilities in Scala.
+         * Revoker / Revocable classes for revoking capabilities.
+         * Brand for sealing and unsealing capabilities
+         * PermeableMembrane for revocation as an effect.
+         * Macros for composition, attenuation, revocable and modulating capabilities.
+      - Comes with a [guide to capabilities](https://wsargent.github.io/ocaps/guide/index.html)
+         - 2018-06-20 v0.1.0 released
+         - 2018-09-22 [Presentation at Scaladays](https://slideslive.com/38908776/security-with-scala-refined-types-and-object-capabilities?subdomain=false)
+  - rust
+    - [Using Capabilities to Design Safer, More Expressive APIs](http://zsck.co/writing/capability-based-apis.html)
+      Zack Mullaly Jan 19, 2018
 
   - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
     object capability discipline by letting the caller handle network access.
