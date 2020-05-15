@@ -137,6 +137,7 @@ Capability-based security enables the concise composition of powerful
     - bootstrapped from rpython (pypy toolchain) and libuv and
     libsodium using (primarily) the nix build system.
     - Docker images: [montelang](https://hub.docker.com/r/montelang/)
+    - 2017-03: [Monte: A Spiritual Successor to E](https://www.youtube.com/watch?v=FJnck8bgmXg&list=PLCq8mSCP664TUdgHl1cD5sDiAmrDoio2p) presented by Corbin Simpson at OCAP 2017
 
 <a name="os"></a>
 ## Operating Systems
