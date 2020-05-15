@@ -19,22 +19,17 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
 <a name="app-svc"></a>
 ## Applications and Services
 
-  - [Sandstorm](https://sandstorm.io/) is a self-hostable web
+  - [Sandstorm](https://sandstorm.io/) is a self-hosted web
     productivity suite and [App Market](https://apps.sandstorm.io/)
     with WordPress, Rocket.Chat, IPython Notebook and many more.
     [Sandstorm's Capability-based Security][scap] protects you and
-    your data against application bugs. You can host it yourself, pay
-    a few dollars to use Sandstorm Oasis, or deploy it on-premise with
-    Sandstorm for Work.
-    - [Results of discontinuing the free plan](https://sandstorm.io/news/2018-10-28-results-of-ending-free-plan)  
-      By Kenton Varda - 28 Oct 2018
-    - [HTTP proxy rewrite and other updates](https://sandstorm.io/news/2018-02-19-http-rewrite-and-more)  
-      By Kenton Varda - 19 Feb 2018
-    - [connecting to external HTTP APIs via the Powerbox](https://github.com/sandstorm-io/sandstorm/pull/2870)
+    your data against application bugs.
+    - 2020-02-22: [Announcing the release of vagrant\-spk 1\.0](https://sandstorm.io/news/2020-02-22-announcing-vagrant-spk-1.0)
+    - 2020-02-03: [Reviving Sandstorm \- Sandstorm Blog](https://sandstorm.io/news/2020-02-03-reviving-sandstorm)
+    - 2017-03-02: [connecting to external HTTP APIs via the Powerbox](https://github.com/sandstorm-io/sandstorm/pull/2870)
       and related powerbox enhancements  
-      v0.200 (2017-01-28), v0.203 (2017-03-02)
-    - [One click to try an open source web application][1502]  
-      By Asheesh Laroia - 06 Feb 2015
+      v0.200 (2017-01-28), v0.203
+    - 2015-02-06: [One click to try an open source web application][1502] 
   - [Tahoe-LAFS](https://tahoe-lafs.org/) is a highly available
     decentralized cloud storage system. Even if some of the servers
     fail or are taken over by an attacker, the entire file store
