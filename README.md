@@ -55,6 +55,7 @@ Capability-based security enables the concise composition of powerful
       abstractions -- object abstractions that can defend their
       integrity while being exposed to untrusted but confined objects.
       - 2020-03-31: SES-0.7.6 9385d44
+      - 2018-10-15: [SF Cryptocurrency Devs: Agoric \- Programming Secure Smart Contracts](https://www.youtube.com/watch?v=YXUqfgdDbr8)
       - 2018-07-28: [Agoric Releases SES: Secure JavaScript](https://agoric.com/agoric-releases-ses/)  f4d3d5a
       - [Distributed Resilient Secure ECMAScript (Dr. SES)](https://tvcutsem.github.io/drses) ESOP 2013
     - [Caja](https://developers.google.com/caja/) is a compiler for making
