@@ -143,6 +143,32 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
 <a name="os"></a>
 ## Operating Systems
 
+  - [genode](https://genode.org/) is a novel OS architecture that is
+    able to master the complexity of code and policy -- the most
+    fundamental security problem shared by modern general-purpose
+    operating systems -- by applying a strict organizational structure
+    to all software components including device drivers, system
+    services, and applications.
+    - 2020-05-07: [MNT Reform \- The Campaign is Live](https://www.crowdsupply.com/mnt/reform/updates/the-campaign-is-live)
+      > we’re collaborating with Genode Labs to ship Genode for Reform.
+    - 2020-03-10: [Sculpt OS release 20.02](https://genode.org/news/sculpt-os-release-20.02)
+      Version 20.02 of the Sculpt operating system revisits the administrative user interface for a more intuitive and logical user experience.
+    - 2020-02-28: [Genode OS Framework release 20.02](https://genode.org/news/genode-os-framework-release-20.02)
+      With version 20.02, Genode makes Sculpt OS fit for running on i.MX 64-bit ARM hardware, optimizes the performance throughout the entire software stack, and takes the next evolutionary step of the user-facing side of Sculpt OS.
+    - 2020-01-20: [Road Map for 2020](https://genode.org/about/road-map)
+    - 2019-05: [Genode OS Framework Foundations](https://genode.org/documentation/genode-foundations/19.05/index.html) book ([PDF](https://genode.org/documentation/genode-foundations-19-05.pdf))
+    - [Genode OS Framework release 17.11][1711] Nov 30, 2017
+      > Most of the many improvements of version 17.11 are geared
+      > towards the practical use of Genode as day-to-day OS. They
+      > include a reworked GUI stack, new user-input features, and the
+      > packaging of many components. The new version also revises the
+      > boot concept on x86, updates the seL4 kernel, and enhances
+      > Genode's user-level networking facilities.
+
+[1608]: https://genode.org/news/genode-os-framework-release-16.08
+[1708]: https://genode.org/documentation/release-notes/17.08
+[1711]: https://genode.org/news/genode-os-framework-release-17.11
+
   - [CloudABI](https://nuxi.nl/) is a runtime environment for
     Unix-like systems that introduces dependency injection to full
     Unix applications. Instead of allowing applications to open
@@ -173,34 +199,6 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
       students, joint work with the University of Wisconsin on
       Capsicum, and future funded Capsicum work.
 
-  - [genode](https://genode.org/) is a novel OS architecture that is
-    able to master the complexity of code and policy -- the most
-    fundamental security problem shared by modern general-purpose
-    operating systems -- by applying a strict organizational structure
-    to all software components including device drivers, system
-    services, and applications.
-    - [Genode OS Framework release 18.11](https://genode.org/news/genode-os-framework-release-18.11) Nov 29, 2018  
-      Genode 18.11 is focused on improving quality assurance on various fronts, including static code analysis, on-target test orchestration, and code-coverage measurements. Furthermore, it introduces support for Mirage-OS unikernels, a new health-monitoring mechanism, a Genode SDK, an SSH server, and a new window layouter.
-    - [Sculpt with Visual Composition](https://genode.org/news/sculpt-with-visual-composition) Sep 21, 2018  
-      The third version of Sculpt OS introduces an interactive runtime view for managing components.
-    - [Sculpt for The Curious](https://genode.org/news/sculpt-for-the-curious) Jun 13, 2018  
-      The second incarnation of Sculpt OS comes in the form of a ready-to-use disk image.
-    - [Genode Foundations](http://genode.org/documentation/genode-foundations-18-05.pdf) book; May 2018 edition
-    - [Road Map for 2018](https://genode.org/news/road-map-for-2018) Jan 17, 2018
-      > 2018 will be the year of Sculpt.
-    - [Genode OS Framework release 17.11][1711] Nov 30, 2017
-      > Most of the many improvements of version 17.11 are geared
-      > towards the practical use of Genode as day-to-day OS. They
-      > include a reworked GUI stack, new user-input features, and the
-      > packaging of many components. The new version also revises the
-      > boot concept on x86, updates the seL4 kernel, and enhances
-      > Genode's user-level networking facilities.
-
-
-[1608]: https://genode.org/news/genode-os-framework-release-16.08
-[1708]: https://genode.org/documentation/release-notes/17.08
-[1711]: https://genode.org/news/genode-os-framework-release-17.11
-
   - [Fuchsia](https://fuchsia.googlesource.com/docs/+/HEAD/getting_started.md) is
     a real-time operating system in development by Google since
     Aug 2016. It's based on a
@@ -212,6 +210,7 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
     operating-system kernel with an end-to-end proof of implementation
     correctness and security enforcement; it is available as open
     source.
+    - 2020-04-08: [seL4 developers create open source foundation to enable safer, more secure and more reliable computing systems \- CSIRO](https://www.csiro.au/en/News/News-releases/2020/seL4-developers-create-open-source-foundation)
     - [Getting started with seL4, CAmkES, and L4v: Dependencies](https://research.csiro.au/tsblog/getting-started-sel4-camkes-l4v-dependencies/) MAY 19, 2017
     - [seL4 on the Raspberry Pi 3](https://research.csiro.au/tsblog/sel4-raspberry-pi-3/) FEBRUARY 8, 2017
     - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
