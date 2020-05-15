@@ -68,18 +68,13 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
       for object capability security.
       - [fun with Capper and OFX financial transaction fetching](https://groups.google.com/forum/#!topic/captalk/vw1yOecgU10) Jan 2016 to cap-talk
 
-  - rust
-    - [Using Capabilities to Design Safer, More Expressive APIs](http://zsck.co/writing/capability-based-apis.html)
-      Zack Mullaly Jan 19, 2018
-
   - C++
       - [Cap’n Proto](https://capnproto.org/) is a high performance
         serialization and RPC protocol with distributed and persistent
         capabilities and promise pipelining. Bindings to python,
         JavaScript (in node.js), Go, Rust, etc. are available
-        - [Cap'n Proto 0.5, and how it is central to Sandstorm][1412]  
-          By Kenton Varda - 15 Dec 2014
-          
+        - 2020-04-23: [Cap'n Proto: Cap'n Proto 0\.8: Streaming flow control, HTTP\-over\-RPC, fibers, etc\.](https://capnproto.org/news/2020-04-23-capnproto-0.8.html)
+        - 2014-12-15: [Cap'n Proto 0.5, and how it is central to Sandstorm][1412] by Kenton Varda
   - Scala
       - [ocaps](https://wsargent.github.io/ocaps) is a library for working with object capabilities in Scala.
          * Revoker / Revocable classes for revoking capabilities.
@@ -88,8 +83,11 @@ patterns of cooperation without vulnerability. [What Are Capabilities?](http://h
          * Macros for composition, attenuation, revocable and modulating capabilities.
       - Comes with a [guide to capabilities](https://wsargent.github.io/ocaps/guide/index.html)
          - 2018-06-20 v0.1.0 released
-         - 2018-09-22 [Presentation at Scaladays](https://youtu.be/wfbF5jQiAhQ)
-         
+         - 2018-09-22 [Presentation at Scaladays](https://slideslive.com/38908776/security-with-scala-refined-types-and-object-capabilities?subdomain=false)
+  - rust
+    - [Using Capabilities to Design Safer, More Expressive APIs](http://zsck.co/writing/capability-based-apis.html)
+      Zack Mullaly Jan 19, 2018
+
        
   - Scheme (racket)
       - [COAST](http://isr.uci.edu/projects/coast/) is COmputAtional State
