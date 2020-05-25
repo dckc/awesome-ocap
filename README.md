@@ -169,6 +169,35 @@ Capability-based security enables the concise composition of powerful
 [1708]: https://genode.org/documentation/release-notes/17.08
 [1711]: https://genode.org/news/genode-os-framework-release-17.11
 
+  - [seL4](https://sel4.systems/) is the world's first
+    operating-system kernel with an end-to-end proof of implementation
+    correctness and security enforcement; it is available as open
+    source.
+    - 2020-05-25 [The seL4® Microkernel An Introduction](https://sel4.systems/About/seL4-whitepaper.pdf) Gernot Heiser
+    - 2020-04-08: [seL4 developers create open source foundation to enable safer, more secure and more reliable computing systems \- CSIRO](https://www.csiro.au/en/News/News-releases/2020/seL4-developers-create-open-source-foundation)
+    - [Getting started with seL4, CAmkES, and L4v: Dependencies](https://research.csiro.au/tsblog/getting-started-sel4-camkes-l4v-dependencies/) MAY 19, 2017
+    - [seL4 on the Raspberry Pi 3](https://research.csiro.au/tsblog/sel4-raspberry-pi-3/) FEBRUARY 8, 2017
+    - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
+      [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
+    - Thomas Sewell, Simon Winwood, Peter Gammie, Toby Murray, June Andronick and Gerwin Klein  
+      [seL4 enforces integrity](http://ts.data61.csiro.au/projects/seL4/)  
+      International Conference on Interactive Theorem Proving, pp. 325-340, Nijmegen, The Netherlands, August, 2011
+      > Abstract. We prove the enforcement of two high-level access
+      > control properties in the seL4 microkernel: integrity and
+      > authority confinement.  Integrity provides an upper bound on
+      > write operations. Authority con- finement provides an upper
+      > bound on how authority may change. Apart from being a
+      > desirable security property in its own right, integrity can be
+      > used as a general framing property for the verification of
+      > user-level system composition. The proof is machine checked in
+      > Isabelle/HOL and the results hold via refinement for the C
+      > implementation of the kernel.
+  - [Fuchsia](https://fuchsia.googlesource.com/docs/+/HEAD/getting_started.md) is
+    a real-time operating system in development by Google since
+    Aug 2016. It's based on a
+    microkernel,
+    [Magenta](https://fuchsia.googlesource.com/magenta/+/master/README.md),
+    with a capability security model.
   - [CloudABI](https://nuxi.nl/) is a runtime environment for
     Unix-like systems that introduces dependency injection to full
     Unix applications. Instead of allowing applications to open
@@ -198,38 +227,6 @@ Capability-based security enables the concise composition of powerful
       Drysdale's port of Capsicum to Linux at Google, Summer of Code
       students, joint work with the University of Wisconsin on
       Capsicum, and future funded Capsicum work.
-
-  - [Fuchsia](https://fuchsia.googlesource.com/docs/+/HEAD/getting_started.md) is
-    a real-time operating system in development by Google since
-    Aug 2016. It's based on a
-    microkernel,
-    [Magenta](https://fuchsia.googlesource.com/magenta/+/master/README.md),
-    with a capability security model.
-  
-  - [seL4](https://sel4.systems/) is the world's first
-    operating-system kernel with an end-to-end proof of implementation
-    correctness and security enforcement; it is available as open
-    source.
-    - 2020-05-25 [The seL4® Microkernel An Introduction](https://sel4.systems/About/seL4-whitepaper.pdf) Gernot Heiser
-    - 2020-04-08: [seL4 developers create open source foundation to enable safer, more secure and more reliable computing systems \- CSIRO](https://www.csiro.au/en/News/News-releases/2020/seL4-developers-create-open-source-foundation)
-    - [Getting started with seL4, CAmkES, and L4v: Dependencies](https://research.csiro.au/tsblog/getting-started-sel4-camkes-l4v-dependencies/) MAY 19, 2017
-    - [seL4 on the Raspberry Pi 3](https://research.csiro.au/tsblog/sel4-raspberry-pi-3/) FEBRUARY 8, 2017
-    - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
-      [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
-    - Thomas Sewell, Simon Winwood, Peter Gammie, Toby Murray, June Andronick and Gerwin Klein  
-      [seL4 enforces integrity](http://ts.data61.csiro.au/projects/seL4/)  
-      International Conference on Interactive Theorem Proving, pp. 325-340, Nijmegen, The Netherlands, August, 2011
-      > Abstract. We prove the enforcement of two high-level access
-      > control properties in the seL4 microkernel: integrity and
-      > authority confinement.  Integrity provides an upper bound on
-      > write operations. Authority con- finement provides an upper
-      > bound on how authority may change. Apart from being a
-      > desirable security property in its own right, integrity can be
-      > used as a general framing property for the verification of
-      > user-level system composition. The proof is machine checked in
-      > Isabelle/HOL and the results hold via refinement for the C
-      > implementation of the kernel.
-
   - [cosix](https://github.com/sgielen/cosix) is a capability-based
     operating system that consists of a small kernel that provides
     memory management and inter-process communication, and a userland
