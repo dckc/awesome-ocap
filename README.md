@@ -150,6 +150,7 @@ Capability-based security enables the concise composition of powerful
     operating systems -- by applying a strict organizational structure
     to all software components including device drivers, system
     services, and applications.
+    - 2020-05-28 [Genode OS Framework 20.05](https://genode.org/documentation/release-notes/20.05) with [Capability-based security using seccomp on Linux](https://genode.org/documentation/release-notes/20.05#Capability-based_security_using_seccomp_on_Linux), ...
     - 2020-05-07: [MNT Reform \- The Campaign is Live](https://www.crowdsupply.com/mnt/reform/updates/the-campaign-is-live)
       > we’re collaborating with Genode Labs to ship Genode for Reform.
     - 2020-03-10: [Sculpt OS release 20.02](https://genode.org/news/sculpt-os-release-20.02)
