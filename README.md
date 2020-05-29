@@ -194,6 +194,23 @@ Capability-based security enables the concise composition of powerful
       > user-level system composition. The proof is machine checked in
       > Isabelle/HOL and the results hold via refinement for the C
       > implementation of the kernel.
+  - [Capsicum](https://www.cl.cam.ac.uk/research/security/capsicum/)
+    Capsicum is a lightweight OS capability and sandbox framework that
+    extends the POSIX API, providing several new OS primitives to
+    support object-capability security on UNIX-like operating systems
+    - 2019-10 _Capsicum Update 2019_ by Mariusz Zaborski in [FreeBSD Journal: Security](https://www.freebsdfoundation.org/past-issues/security-3/)
+    
+    - 2017-07-19 [Capsicum Go support](https://lists.cam.ac.uk/pipermail/cl-capsicum-discuss/2017-July/msg00004.html) Ben Laurie
+    - [Capsicum for FreeBSD](https://www.cl.cam.ac.uk/research/security/capsicum/freebsd.html)
+    - [Capsicum for Linux](https://www.cl.cam.ac.uk/research/security/capsicum/linux.html)
+    - Watson,
+      R. N. M. [2013 Capsicum year in review](https://www.lightbluetouchpaper.org/2013/12/20/2013-capsicum-year-in-review/). Light
+      Blue Touchpaper, 20 December, 2013. Robert Watson reviews
+      Capsicum events from 2013: work funded by the FreeBSD Foundation
+      and Google on FreeBSD 10.0, Casper in FreeBSD 11, David
+      Drysdale's port of Capsicum to Linux at Google, Summer of Code
+      students, joint work with the University of Wisconsin on
+      Capsicum, and future funded Capsicum work.
   - [Fuchsia](https://fuchsia.googlesource.com/docs/+/HEAD/getting_started.md) is
     a real-time operating system in development by Google since
     Aug 2016. It's based on a
@@ -214,21 +231,6 @@ Capability-based security enables the concise composition of powerful
     - [Welcoming all Python enthusiasts: CPython 3.6 for CloudABI!](https://nuxi.nl/blog/2016/08/01/cloudabi-python.html)
       August 1, 2016 by Ed Schouten
 
-  - [Capsicum](https://www.cl.cam.ac.uk/research/security/capsicum/)
-    Capsicum is a lightweight OS capability and sandbox framework that
-    extends the POSIX API, providing several new OS primitives to
-    support object-capability security on UNIX-like operating systems
-    - [Capsicum Go support](https://lists.cam.ac.uk/pipermail/cl-capsicum-discuss/2017-July/msg00004.html) Ben Laurie 19 Jul 2017
-    - [Capsicum for FreeBSD](https://www.cl.cam.ac.uk/research/security/capsicum/freebsd.html)
-    - [Capsicum for Linux](https://www.cl.cam.ac.uk/research/security/capsicum/linux.html)
-    - Watson,
-      R. N. M. [2013 Capsicum year in review](https://www.lightbluetouchpaper.org/2013/12/20/2013-capsicum-year-in-review/). Light
-      Blue Touchpaper, 20 December, 2013. Robert Watson reviews
-      Capsicum events from 2013: work funded by the FreeBSD Foundation
-      and Google on FreeBSD 10.0, Casper in FreeBSD 11, David
-      Drysdale's port of Capsicum to Linux at Google, Summer of Code
-      students, joint work with the University of Wisconsin on
-      Capsicum, and future funded Capsicum work.
   - [cosix](https://github.com/sgielen/cosix) is a capability-based
     operating system that consists of a small kernel that provides
     memory management and inter-process communication, and a userland
