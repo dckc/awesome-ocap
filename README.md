@@ -217,6 +217,7 @@ Capability-based security enables the concise composition of powerful
     microkernel,
     [Magenta](https://fuchsia.googlesource.com/magenta/+/master/README.md),
     with a capability security model.
+    - 2020-06-09 [Playing Around With The Fuchsia Operating System](https://blog.quarkslab.com/playing-around-with-the-fuchsia-operating-system.html) - [Quarkslab's blog](https://blog.quarkslab.com/index.html)
   - [CloudABI](https://nuxi.nl/) is a runtime environment for
     Unix-like systems that introduces dependency injection to full
     Unix applications. Instead of allowing applications to open
