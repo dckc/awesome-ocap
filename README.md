@@ -255,7 +255,7 @@ Capability-based security enables the concise composition of powerful
 ## CPUs
 
   - [CHERI](https://www.cl.cam.ac.uk/research/security/ctsrd/) is an open source capability CPU design.
-
+    - 2019-09 [The Arm Morello Board](https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/cheri-morello.html) Arm announced Morello, an experimental CHERI-extended, multicore, superscalar ARMv8-A processor, System-on-Chip (SoC), and prototype board to be available from late 2021. Morello is a part of the UKRI £187M Digital Security by Design Challenge (DSbD) supported by the UK Industrial Strategy Challenge Fund, including a commitment of over £50M commitment by Arm. 
     - June 2016: _CHERI ISAv5 specification_: improves the maturity of 128-bit capabilities, code efficiency, and description of the protection model.
     - June 2016: _CHERI-JNI: Sinking the Java security model into the C_, explores how CHERI capabilities can be used to support sandboxing with safe and efficient memory sharing between Java Native Interface (JNI) code and the Java Virtual Machine.  ASPLOS 2017
     - May 2016: slides from the first CHERI microkernel workshop, Cambridge, UK in April 2016.
