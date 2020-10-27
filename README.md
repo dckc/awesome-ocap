@@ -109,6 +109,8 @@ Capability-based security enables the concise composition of powerful
          - 2018-06-20 v0.1.0 released
          - 2018-09-22 [Presentation at Scaladays](https://slideslive.com/38908776/security-with-scala-refined-types-and-object-capabilities?subdomain=false)
   - rust
+    - [cap-std](https://github.com/sunfishcode/cap-std) Capability-oriented version of the Rust standard library\
+      0.4.0 Sep 24, 2020
     - [Using Capabilities to Design Safer, More Expressive APIs](http://zsck.co/writing/capability-based-apis.html)
       Zack Mullaly Jan 19, 2018
 
