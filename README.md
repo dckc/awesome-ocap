@@ -322,6 +322,11 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
     [Distributed Electronic Rights in JavaScript][40673]  
     ESOP'13 22nd European Symposium on Programming, Springer (2013)
 
+  - Maffeis, Sergio, John C. Mitchell, and Ankur Taly.
+    [Object capabilities and isolation of untrusted web applications.](https://ieeexplore.ieee.org/document/5504710)
+    In _2010 IEEE Symposium on Security and Privacy_, pp. 125-140. IEEE, 2010.
+    - [slide presentation](https://pdfs.semanticscholar.org/9f52/d7066f3d231ee4e5fba3718871cc2d0cb389.pdf)
+
   - Barth, Adam, Joel Weinberger, and Dawn Song.  
     [Cross-Origin JavaScript Capability Leaks: Detection, Exploitation, and Defense.](http://webblaze.cs.berkeley.edu/capleaks.html) USENIX
     security symposium. 2009.
