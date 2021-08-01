@@ -298,11 +298,14 @@ Capability-based security enables the concise composition of powerful
 <a name="article"></a>
 ## Articles
 
-  - [POLA Would Have Prevented the Event-Stream Incident](https://medium.com/agoric/pola-would-have-prevented-the-event-stream-incident-45653ecbda99)  
-    Nov 30, 2018 Kate Sills, Agoric
+  - 2018-11 [POLA Would Have Prevented the Event-Stream Incident](https://medium.com/agoric/pola-would-have-prevented-the-event-stream-incident-45653ecbda99)  
+    Kate Sills, Agoric
   
-  - [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/)  
-    May 7, 2017 by Chip Morningstar ([Hacker News discussion Jan 7, 2018](https://news.ycombinator.com/item?id=16091975))
+  - 2017-05 [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/)  
+    by Chip Morningstar ([Hacker News discussion Jan 7, 2018](https://news.ycombinator.com/item?id=16091975))
+
+  - 2015-11 [Objects as Secure Capabilities](http://joeduffyblog.com/2015/11/10/objects-as-secure-capabilities/) Joe Duffy
+    - in series: [Blogging about Midori](http://joeduffyblog.com/2015/11/03/blogging-about-midori/)
 
 <a name="lit"></a>
 ### Peer-reviewed Articles
