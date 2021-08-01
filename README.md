@@ -279,6 +279,8 @@ Capability-based security enables the concise composition of powerful
 
   - 2019-02-28: [Delegation: The Missing Piece of Authorization](https://capability.io/blog/2019/02/28/delegation-the-missing-piece-of-authorization) talk by Tristan Slominski at the Austin Node.js meetup
 
+  - 2016-06 [Learn Object Capabilities](https://frontendmasters.com/courses/good-parts-javascript-web/object-capabilities/) by Douglas Crockford, part of [Good Parts of JavaScript and the Web](https://frontendmasters.com/courses/good-parts-javascript-web/). _Using the principle of least authority, Doug explains how the “actor model” can be applied to object oriented programming to create more secure software. He calls this application Object Capabilities._
+
   - [CloudABI - Pure capability-based security for UNIX](https://www.youtube.com/watch?v=62cYMmSY2Dc)  
     Ed Schouten, 32nd Chaos Communication Congress (32C3), Dec 2015
     
