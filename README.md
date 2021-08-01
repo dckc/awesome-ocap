@@ -273,6 +273,8 @@ Capability-based security enables the concise composition of powerful
 <a name="talk"></a>
 ## Presentations, Talks, Slides, and Videos
 
+ - 2021-05: [Attested TEEs for Transactional Workloads](https://cfp.padsec.com/padsec-2020/talk/7YRMFG/)  :: Sid Hussmann PADSEC 2021. _We present a generic TEE toolkit applicable for many use-cases in finance, healthcare, and government. Gapfruit TEE embodies a microkernel operating system with capability-based security._ 
+
   - 2019-02-28: [Delegation: The Missing Piece of Authorization](https://capability.io/blog/2019/02/28/delegation-the-missing-piece-of-authorization) talk by Tristan Slominski at the Austin Node.js meetup
 
   - [CloudABI - Pure capability-based security for UNIX](https://www.youtube.com/watch?v=62cYMmSY2Dc)  
