@@ -36,10 +36,6 @@ Capability-based security enables the concise composition of powerful
     continues to function correctly, preserving your privacy and
     security.
     - 2017-01-18 v1.12.1 released
-  - [capability.io](https://capability.io/) offers capability-based services.
-    - 2019-02-28: [Delegation: The Missing Piece of Authorization](https://capability.io/blog/2019/02/28/delegation-the-missing-piece-of-authorization) talk by Tristan Slominski at the Austin Node.js meetup
-    - 2018-12-16: [Membrane Service (Early Access)](https://capability.io/blog/2018/12/16/announcing-membrane-service-early-access) solves the problem of being able to delegate authority in a decentralized manner. It does this by using capabilities and offering capability-based authorization at any scale in accordance with any policy via membranes.<br/>By Tristan Slominski - 
-    - 2018-12-22: [Certificate Manager Service (Early Access)](https://capability.io/blog/2018/12/22/announcing-certificate-manager-service-early-access) simplifies public Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificate management while letting you deploy those certificates wherever you like.<br/>By Tristan Slominski
 
 [scap]: https://sandstorm.io/how-it-works#capabilities
 [1407]: https://sandstorm.io/news/2014-07-21-open-source-web-apps-require-federated-hosting
