@@ -307,6 +307,8 @@ Capability-based security enables the concise composition of powerful
   - 2015-11 [Objects as Secure Capabilities](http://joeduffyblog.com/2015/11/10/objects-as-secure-capabilities/) Joe Duffy
     - in series: [Blogging about Midori](http://joeduffyblog.com/2015/11/03/blogging-about-midori/)
 
+  - 2009-03 [Not One Click for Security](https://www.hpl.hp.com/techreports/2009/HPL-2009-53.html) Karp, Alan H.; Stiegler, Marc; Close, Tyler, HP Laboratories, HPL-2009-53 _Conventional wisdom holds that security must negatively affect usability. We have developed SCoopFS (Simple Cooperative File Sharing) as a demonstration that need not be so. SCoopFS addresses the problem of sharing files, both with others and with ourselves across machines. Although SCoopFS provides server authentication, client authorization, and end-to-end encryption, the user never sees any of that. The user interface and underlying infrastructure are designed so that normal user acts of designation provide all the information needed to make the desired security decisions. While SCoopFS is a useful tool, it may be more important as a demonstration of the usability that comes from designing the infrastructure and user interaction together._
+
 <a name="lit"></a>
 ### Peer-reviewed Articles
 
