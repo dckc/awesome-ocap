@@ -240,15 +240,6 @@ Capability-based security enables the concise composition of powerful
     Application Binary Interface between the userland and the kernel.
     - [2017-06-17: Release of Cosix 1.0](https://github.com/sgielen/cosix/blob/master/RELEASE-1.0.md)
 
-  - [Barrelfish](http://www.barrelfish.org/) is a research operating
-    system motivated by two closely related trends in hardware design:
-    the rapidly growing number of cores and the increasing diversity
-    in computer hardware. Barrelfish uses a single model of
-    capabilities to control access to all physical memory, kernel
-    objects, communication end-points, and other miscellaneous access
-    rights.
-    - [release2016-07-20](http://git.barrelfish.org/?p=barrelfish;a=shortlog;h=refs/tags/release2016-07-20)
-     
 [AEMSKH_14]: http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml
 
 <a name="cpu"></a>
