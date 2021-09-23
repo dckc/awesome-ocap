@@ -214,27 +214,7 @@ Capability-based security enables the concise composition of powerful
     - 2021-06 [cr0 blog: A few thoughts on Fuchsia security](https://blog.cr0.org/2021/06/a-few-thoughts-on-fuchsia-security.html) Julien Tinnes. _Sandboxing is trivial. In fact a new process with access to no capabilities_
     - 2020-06-09 [Playing Around With The Fuchsia Operating System](https://blog.quarkslab.com/playing-around-with-the-fuchsia-operating-system.html) - [Quarkslab's blog](https://blog.quarkslab.com/index.html)
     - 2017-05-08 [Google’s “Fuchsia” smartphone OS dumps Linux, has a wild new UI](https://arstechnica.com/gadgets/2017/05/googles-fuchsia-smartphone-os-dumps-linux-has-a-wild-new-ui/) Ars Technica
-  - [CloudABI](https://nuxi.nl/) is a runtime environment for
-    Unix-like systems that introduces dependency injection to full
-    Unix applications. Instead of allowing applications to open
-    arbitrary files on disk and connect to arbitrary systems on the
-    network, you as a user exactly inject those resources that the
-    application should access.
-    - reference platform: FreeBSD
-    - [Capability-Based Network Communication for Capsicum/CloudABI](ftp://www.si.freebsd.org/www/data//news/status/report-2017-04-2017-06.html#Capability-Based-Network-Communication-for-Capsicum/CloudABI) April–June 2017 FreeBSD status report.
-      - [ARPC: GRPC-Like RPC Library That Supports File Descriptor Passing](https://github.com/NuxiNL/arpc)
-      - [Flower: A Label-Based Network Backplane](https://github.com/NuxiNL/flower)
-    - [Kumina sponsoring CloudABI: practical sandboxing for UNIX](https://blog.kumina.nl/2016/10/kumina-sponsoring-cloudabi-practical-sandboxing-for-unix/) October 14th, 2016
-    - [Welcoming all Python enthusiasts: CPython 3.6 for CloudABI!](https://nuxi.nl/blog/2016/08/01/cloudabi-python.html)
-      August 1, 2016 by Ed Schouten
 
-  - [cosix](https://github.com/sgielen/cosix) is a capability-based
-    operating system that consists of a small kernel that provides
-    memory management and inter-process communication, and a userland
-    that provides an IP stack and filesystems. The capability
-    enforcing mechanism comes from implementing only CloudABI as an
-    Application Binary Interface between the userland and the kernel.
-    - [2017-06-17: Release of Cosix 1.0](https://github.com/sgielen/cosix/blob/master/RELEASE-1.0.md)
 
 [AEMSKH_14]: http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml
 
@@ -287,9 +267,16 @@ Capability-based security enables the concise composition of powerful
 
   - 2018-11 [POLA Would Have Prevented the Event-Stream Incident](https://medium.com/agoric/pola-would-have-prevented-the-event-stream-incident-45653ecbda99)  
     Kate Sills, Agoric
-  
+
+  - 2017-06 [Capability-Based Network Communication for Capsicum/CloudABI](ftp://www.si.freebsd.org/www/data//news/status/report-2017-04-2017-06.html#Capability-Based-Network-Communication-for-Capsicum/CloudABI) April–June 2017 FreeBSD status report.
+      - [ARPC: GRPC-Like RPC Library That Supports File Descriptor Passing](https://github.com/NuxiNL/arpc)
+      - [Flower: A Label-Based Network Backplane](https://github.com/NuxiNL/flower)
+
   - 2017-05 [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/)  
     by Chip Morningstar ([Hacker News discussion Jan 7, 2018](https://news.ycombinator.com/item?id=16091975))
+
+  - 2016-08 [Welcoming all Python enthusiasts: CPython 3.6 for CloudABI!](https://nuxi.nl/blog/2016/08/01/cloudabi-python.html)
+      August 1, 2016 by Ed Schouten
 
   - 2015-11 [Objects as Secure Capabilities](http://joeduffyblog.com/2015/11/10/objects-as-secure-capabilities/) Joe Duffy
     - in series: [Blogging about Midori](http://joeduffyblog.com/2015/11/03/blogging-about-midori/)
