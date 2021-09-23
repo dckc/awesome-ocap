@@ -190,6 +190,10 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     operating-system kernel with an end-to-end proof of implementation
     correctness and security enforcement; it is available as open
     source.
+    - 2021-08: [Ghost donates to the seL4 Foundation](https://sel4.systems/news/2021)
+      - 2021-07: [Ghost Raises $100M for Breakthrough in Autonomous Driving Safety](https://driveghost.com/blog/breakthrough-autonomous-driving-safety)
+    - 2021-08: [Lotus Cars joins the seL4 Foundation](https://sel4.systems/news/2021)
+    - 2021-08: [seL4 protects world's most secure drone from DEFCON hackers](https://sel4.systems/news/2021)
     - 2020-05-25 [The seL4® Microkernel An Introduction](https://sel4.systems/About/seL4-whitepaper.pdf) Gernot Heiser
     - 2020-04-08: [seL4 developers create open source foundation to enable safer, more secure and more reliable computing systems \- CSIRO](https://www.csiro.au/en/News/News-releases/2020/seL4-developers-create-open-source-foundation)
     - [Getting started with seL4, CAmkES, and L4v: Dependencies](https://research.csiro.au/tsblog/getting-started-sel4-camkes-l4v-dependencies/) MAY 19, 2017
