@@ -167,6 +167,16 @@ Capability-based security enables the concise composition of powerful
 [1708]: https://genode.org/documentation/release-notes/17.08
 [1711]: https://genode.org/news/genode-os-framework-release-17.11
 
+  - [Fuchsia](https://fuchsia.googlesource.com/docs/+/HEAD/getting_started.md) is
+    a real-time operating system in development by Google since
+    Aug 2016. It's based on a
+    microkernel,
+    [Magenta](https://fuchsia.googlesource.com/magenta/+/master/README.md),
+    with a capability security model.
+    - 2021-06 [cr0 blog: A few thoughts on Fuchsia security](https://blog.cr0.org/2021/06/a-few-thoughts-on-fuchsia-security.html) Julien Tinnes. _Sandboxing is trivial. In fact a new process with access to no capabilities_
+    - 2020-06-09 [Playing Around With The Fuchsia Operating System](https://blog.quarkslab.com/playing-around-with-the-fuchsia-operating-system.html) - [Quarkslab's blog](https://blog.quarkslab.com/index.html)
+    - 2017-05-08 [Google’s “Fuchsia” smartphone OS dumps Linux, has a wild new UI](https://arstechnica.com/gadgets/2017/05/googles-fuchsia-smartphone-os-dumps-linux-has-a-wild-new-ui/) Ars Technica
+
   - [seL4](https://sel4.systems/) is the world's first
     operating-system kernel with an end-to-end proof of implementation
     correctness and security enforcement; it is available as open
@@ -207,16 +217,6 @@ Capability-based security enables the concise composition of powerful
       Drysdale's port of Capsicum to Linux at Google, Summer of Code
       students, joint work with the University of Wisconsin on
       Capsicum, and future funded Capsicum work.
-  - [Fuchsia](https://fuchsia.googlesource.com/docs/+/HEAD/getting_started.md) is
-    a real-time operating system in development by Google since
-    Aug 2016. It's based on a
-    microkernel,
-    [Magenta](https://fuchsia.googlesource.com/magenta/+/master/README.md),
-    with a capability security model.
-    - 2021-06 [cr0 blog: A few thoughts on Fuchsia security](https://blog.cr0.org/2021/06/a-few-thoughts-on-fuchsia-security.html) Julien Tinnes. _Sandboxing is trivial. In fact a new process with access to no capabilities_
-    - 2020-06-09 [Playing Around With The Fuchsia Operating System](https://blog.quarkslab.com/playing-around-with-the-fuchsia-operating-system.html) - [Quarkslab's blog](https://blog.quarkslab.com/index.html)
-    - 2017-05-08 [Google’s “Fuchsia” smartphone OS dumps Linux, has a wild new UI](https://arstechnica.com/gadgets/2017/05/googles-fuchsia-smartphone-os-dumps-linux-has-a-wild-new-ui/) Ars Technica
-
 
 [AEMSKH_14]: http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml
 
