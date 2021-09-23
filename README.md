@@ -45,13 +45,9 @@ Capability-based security enables the concise composition of powerful
 ## Libraries and Frameworks
 
   - JavaScript
-    - [Secure EcmaScript (SES)](https://www.npmjs.com/package/ses)
-      is a fail-stop subset of ES5. SES should compatibly run all ES5
-      code that follows recognized ES5 best practices. The SES
-      restrictions support the writing of defensively consistent
-      abstractions -- object abstractions that can defend their
-      integrity while being exposed to untrusted but confined objects.
-      - 2020-03-31: SES-0.7.6 9385d44
+    - [SES](https://www.npmjs.com/package/ses) is "hardened JavaScript. SES stands for fearless cooperation. ... SES safely executes third-party JavaScript 'strict' mode programs in compartments that have no excess authority in their global scope. SES runs atop an ES6-compliant platform, enabling safe interaction of mutually-suspicious code, using object-capability-style programming. See https://github.com/Agoric/Jessie to see how SES fits into the various flavors of confined JavaScript execution. And visit https://ses-demo.agoric.app/demos/ for a demo. "
+      - 2021-09-01: SES-0.14.3 `6190052`
+      - 2020-03-31: SES-0.7.6 `9385d44`
       - 2018-10-15: [SF Cryptocurrency Devs: Agoric \- Programming Secure Smart Contracts](https://www.youtube.com/watch?v=YXUqfgdDbr8)
       - 2018-07-28: [Agoric Releases SES: Secure JavaScript](https://agoric.com/agoric-releases-ses/)  f4d3d5a
       - [Distributed Resilient Secure ECMAScript (Dr. SES)](https://tvcutsem.github.io/drses) ESOP 2013
