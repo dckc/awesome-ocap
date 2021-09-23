@@ -3,7 +3,13 @@
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 Capability-based security enables the concise composition of powerful
-[patterns](https://github.com/dckc/awesome-ocap/wiki) of cooperation without vulnerability. [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/) explains in detail.
+[patterns](https://github.com/dckc/awesome-ocap/wiki) of cooperation without vulnerability.
+
+In 3 minutes:
+
+  - 2018-10: [Opening Statement on SOSP 50th Anniversary Panel](https://www.youtube.com/watch?v=br9DwtjqmVI) Mark Miller
+
+Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/) 2017 by Morningstar.
 
 ## Contents
 
@@ -242,13 +248,15 @@ Capability-based security enables the concise composition of powerful
 
 <a name="talk"></a>
 ## Presentations, Talks, Slides, and Videos
+  - 2021-05: [Attested TEEs for Transactional Workloads](https://cfp.padsec.com/padsec-2020/talk/7YRMFG/)  :: Sid Hussmann PADSEC 2021. _We present a generic TEE toolkit applicable for many use-cases in finance, healthcare, and government. Gapfruit TEE embodies a microkernel operating system with capability-based security._ 
+
   - 2019-12: [Making 'npm install' Safe \- QCon New York](https://www.youtube.com/watch?v=hP00w4r4zhg&list=PLzDw4TTug5O0ywHrOz4VevVTYr6Kj_KtW&index=22) "Kate Sills on security issues using NPM packages, the EventStream incident, and SES" as possible solutions to npm supply-chain risks.
 
   - 2019-06: [Higher\-order Smart Contracts across Chains](https://www.youtube.com/watch?v=iyuo0ymTt4g&list=PLhuBigpl7lqth_Ow_eQWZs7NFxmeDw9W8&index=1) Agoric \+ Protocol Labs //  \- Mark Miller
     
- - 2021-05: [Attested TEEs for Transactional Workloads](https://cfp.padsec.com/padsec-2020/talk/7YRMFG/)  :: Sid Hussmann PADSEC 2021. _We present a generic TEE toolkit applicable for many use-cases in finance, healthcare, and government. Gapfruit TEE embodies a microkernel operating system with capability-based security._ 
-
   - 2019-02-28: [Delegation: The Missing Piece of Authorization](https://capability.io/blog/2019/02/28/delegation-the-missing-piece-of-authorization) talk by Tristan Slominski at the Austin Node.js meetup
+
+  - 2018-10: [Opening Statement on SOSP 50th Anniversary Panel](https://www.youtube.com/watch?v=br9DwtjqmVI) Mark Miller
 
   - 2016-06 [Learn Object Capabilities](https://frontendmasters.com/courses/good-parts-javascript-web/object-capabilities/) by Douglas Crockford, part of [Good Parts of JavaScript and the Web](https://frontendmasters.com/courses/good-parts-javascript-web/). _Using the principle of least authority, Doug explains how the “actor model” can be applied to object oriented programming to create more secure software. He calls this application Object Capabilities._
 
