@@ -70,7 +70,8 @@ Capability-based security enables the concise composition of powerful
         - 2020-04-23: [Cap'n Proto: Cap'n Proto 0\.8: Streaming flow control, HTTP\-over\-RPC, fibers, etc\.](https://capnproto.org/news/2020-04-23-capnproto-0.8.html)
         - 2014-12-15: [Cap'n Proto 0.5, and how it is central to Sandstorm][1412] by Kenton Varda
   - Scheme (racket)
-      - [Spritely](https://dustycloud.org/blog/spritely/)
+      - [Spritely](https://spritelyproject.org/)
+        - 2021-07 [Content Addressed Descriptors and Interfaces with Spritely Goblins paper)[https://spritelyproject.org/news/content-addressed-descriptors-paper.html] "how to perform "conversational" programming in Spritely Goblins, or any other system which assumes a mutually suspicious network. ... The reason this system is able to be elegantly embedded in a network environment is its use of Spritely's implementation of CapTP."
         - 2020-05-13 [Spritely's NLNet grant: Interface Discovery for Distributed Systems \-\- DustyCloud Brainstorms](https://dustycloud.org/blog/spritely-nlnet-grant/)
       - [COAST](http://isr.uci.edu/projects/coast/) is COmputAtional State
         Transfer, An Architectural Style for Secure Decentralized
