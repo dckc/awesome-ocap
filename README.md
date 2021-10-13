@@ -284,6 +284,9 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
   - Sargent, Will
     [Security in Scala: Refined Types and Object Capabilities](https://youtu.be/wfbF5jQiAhQ) Scaladays NYC 2018.
 
+  - 2002-05 [Immunity from Viruses, Safety from Geeks Bearing Gifts](https://www.youtube.com/watch?v=KoM_aCuFk1w) Mark S\. Miller  
+    "This talk is centered on a demo of CapDesk, our capability-based distributed desktop and application installation/launching framework. CapDesk uses no passwords, no user group lists, no firewalls, yet supplies a computing world invulnerable to viruses and Trojan horses."
+
 <a name="article"></a>
 ## Articles
 
