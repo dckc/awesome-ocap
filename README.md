@@ -13,14 +13,16 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
 ## Contents
 
- - [Applications and Services](#app-svc)
- - [Libraries and Frameworks](#lib)
- - [Programming Languages](#lang)
- - [Operating Systems](#os)
- - [CPUs](#cpu)
- - [Presentations, Talks, Slides, and Videos](#talk)
- - [Articles](#article)
-   - [Peer-reviewed Articles](#lit)
+ - Tech you can use
+   - [Applications and Services](#app-svc)
+   - [Libraries and Frameworks](#lib)
+   - [Programming Languages](#lang)
+   - [Operating Systems](#os)
+   - [CPUs](#cpu)
+ - Learn, Watch, Read
+   - [Presentations, Talks, Slides, and Videos](#talk)
+   - [Articles](#article)
+     - [Peer-reviewed Articles](#lit)
 
 <a name="app-svc"></a>
 ## Applications and Services
