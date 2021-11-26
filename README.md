@@ -61,11 +61,6 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       - 2018-10-15: [SF Cryptocurrency Devs: Agoric \- Programming Secure Smart Contracts](https://www.youtube.com/watch?v=YXUqfgdDbr8)
       - 2018-07-28: [Agoric Releases SES: Secure JavaScript](https://agoric.com/agoric-releases-ses/)  f4d3d5a
       - [Distributed Resilient Secure ECMAScript (Dr. SES)](https://tvcutsem.github.io/drses) ESOP 2013
-    - [Caja](https://developers.google.com/caja/) is a compiler for making
-      third-party HTML, CSS and JavaScript safe for embedding.
-      Caja safely supports mashups and extends JSON with code.
-      - Apr 2, 2018: release v6013 964609d
-      - 12 Jan 2017: release v6011 74ba0da
     - [Capper](https://github.com/marcsAtSkyhunter/Capper) is a web
       application server built on Node.js/Express using
       the [Waterken](http://waterken.sourceforge.net/) webkey protocol
