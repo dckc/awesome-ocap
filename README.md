@@ -130,6 +130,11 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       S. Clebsch and S. Drossopoulou  
       OOPSLA 2013
 
+  - [Newspeak](https://newspeaklanguage.org/) is an object-capability programming platform that lets you develop code in your web browser. Like Self, Newspeak is message-based; all names are dynamically bound. However, like Smalltalk, Newspeak uses classes rather than prototypes.
+    The current version of Newspeak runs on top of WASM.
+    - 2021-09: [Gilad Bracha: Newspeak on the Web](https://www.youtube.com/watch?v=SG08kxIIlHQ&t=1083s) at California Smalltalkers
+    - 2021-03: [Live IDEs in the Web Browser: What's Holding Us Back](https://www.youtube.com/watch?v=CJX_6B24Hho) Includes a brief demo of the WASM based Newspeak IDE.
+
   - [Monte](http://www.monte-language.org/) is a nascent dynamic
     programming language reminiscent of Python and E. It is based upon
     _The Principle of Least Authority_ (POLA), which governs
