@@ -98,18 +98,18 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
 [shill-osdi]: http://shill.seas.harvard.edu/shill-osdi-2014.pdf
   - Scala
-      - [ocaps](https://wsargent.github.io/ocaps) is a library for working with object capabilities in Scala.
+      - [ocaps](https://tersesystems.github.io/ocaps) is a library for working with object capabilities in Scala.
          * Revoker / Revocable classes for revoking capabilities.
          * Brand for sealing and unsealing capabilities
          * PermeableMembrane for revocation as an effect.
          * Macros for composition, attenuation, revocable and modulating capabilities.
-      - Comes with a [guide to capabilities](https://wsargent.github.io/ocaps/guide/index.html)
+      - Comes with a [guide to capabilities](https://tersesystems.github.io/ocaps/guide/index.html)
          - 2018-06-20 v0.1.0 released
          - 2018-09-22 [Presentation at Scaladays](https://slideslive.com/38908776/security-with-scala-refined-types-and-object-capabilities?subdomain=false)
   - rust
     - [cap-std](https://github.com/sunfishcode/cap-std) Capability-oriented version of the Rust standard library\
       0.4.0 Sep 24, 2020
-    - [Using Capabilities to Design Safer, More Expressive APIs](http://zsck.co/writing/capability-based-apis.html)
+    - [Using Capabilities to Design Safer, More Expressive APIs](https://web.archive.org/web/20180903114550/https://zsck.co/writing/capability-based-apis.html)
       Zack Mullaly Jan 19, 2018
 
   - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
@@ -178,11 +178,11 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 [1708]: https://genode.org/documentation/release-notes/17.08
 [1711]: https://genode.org/news/genode-os-framework-release-17.11
 
-  - [Fuchsia](https://fuchsia.googlesource.com/docs/+/HEAD/getting_started.md) is
+  - [Fuchsia](https://fuchsia.dev/fuchsia-src/get-started) is
     a real-time operating system in development by Google since
     Aug 2016. It's based on a
     microkernel,
-    [Magenta](https://fuchsia.googlesource.com/magenta/+/master/README.md),
+    [Zircon](https://fuchsia.dev/fuchsia-src/concepts/kernel),
     with a capability security model.
     - 2021-06 [cr0 blog: A few thoughts on Fuchsia security](https://blog.cr0.org/2021/06/a-few-thoughts-on-fuchsia-security.html) Julien Tinnes. _Sandboxing is trivial. In fact a new process with access to no capabilities_
     - 2020-06-09 [Playing Around With The Fuchsia Operating System](https://blog.quarkslab.com/playing-around-with-the-fuchsia-operating-system.html) - [Quarkslab's blog](https://blog.quarkslab.com/index.html)
@@ -205,7 +205,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
       [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
     - Thomas Sewell, Simon Winwood, Peter Gammie, Toby Murray, June Andronick and Gerwin Klein  
-      [seL4 enforces integrity](http://ts.data61.csiro.au/projects/seL4/)  
+      [seL4 enforces integrity](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.220.4596&rep=rep1&type=pdf)  
       International Conference on Interactive Theorem Proving, pp. 325-340, Nijmegen, The Netherlands, August, 2011
       > Abstract. We prove the enforcement of two high-level access
       > control properties in the seL4 microkernel: integrity and
@@ -235,7 +235,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       students, joint work with the University of Wisconsin on
       Capsicum, and future funded Capsicum work.
 
-[AEMSKH_14]: http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml
+[AEMSKH_14]: https://trustworthy.systems/publications/nicta_full_text/7371.pdf
 
 <a name="cpu"></a>
 ## CPUs
@@ -256,13 +256,13 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
 <a name="talk"></a>
 ## Presentations, Talks, Slides, and Videos
-  - 2021-05: [Attested TEEs for Transactional Workloads](https://cfp.padsec.com/padsec-2020/talk/7YRMFG/)  :: Sid Hussmann PADSEC 2021. _We present a generic TEE toolkit applicable for many use-cases in finance, healthcare, and government. Gapfruit TEE embodies a microkernel operating system with capability-based security._ 
+  - 2021-05: [Attested TEEs for Transactional Workloads](https://www.youtube.com/watch?v=su8lnMaYQHg)  :: Sid Hussmann PADSEC 2021. _We present a generic TEE toolkit applicable for many use-cases in finance, healthcare, and government. Gapfruit TEE embodies a microkernel operating system with capability-based security._ 
 
   - 2019-12: [Making 'npm install' Safe \- QCon New York](https://www.youtube.com/watch?v=hP00w4r4zhg&list=PLzDw4TTug5O0ywHrOz4VevVTYr6Kj_KtW&index=22) "Kate Sills on security issues using NPM packages, the EventStream incident, and SES" as possible solutions to npm supply-chain risks.
 
   - 2019-06: [Higher\-order Smart Contracts across Chains](https://www.youtube.com/watch?v=iyuo0ymTt4g&list=PLhuBigpl7lqth_Ow_eQWZs7NFxmeDw9W8&index=1) Agoric \+ Protocol Labs //  \- Mark Miller
     
-  - 2019-02-28: [Delegation: The Missing Piece of Authorization](https://capability.io/blog/2019/02/28/delegation-the-missing-piece-of-authorization) talk by Tristan Slominski at the Austin Node.js meetup
+  - 2019-02-28: [Delegation: The Missing Piece of Authorization](https://www.youtube.com/watch?v=I-jkjj62jTw) talk by Tristan Slominski at the Austin Node.js meetup
 
   - 2018-10: [Opening Statement on SOSP 50th Anniversary Panel](https://www.youtube.com/watch?v=br9DwtjqmVI) Mark Miller
 
@@ -387,7 +387,7 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
     > automatically implemented as a cryptographic protocol coordinating five
     > mutually suspicious parties
 
-[237]: https://github.com/ponylang/ponylang.github.io/blob/master/media/papers/opsla237-clebsch.pdf
+[237]: https://www.ponylang.io/media/papers/opsla237-clebsch.pdf
 [40673]: http://research.google.com/pubs/pub40673.html
 [markm-thesis]: http://www.erights.org/talks/thesis/markm-thesis.pdf
 [ode]: http://www.erights.org/elib/capability/ode/ode.pdf
