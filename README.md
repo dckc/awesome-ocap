@@ -67,6 +67,9 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       for object capability security.
       - [fun with Capper and OFX financial transaction fetching](https://groups.google.com/forum/#!topic/captalk/vw1yOecgU10) Jan 2016 to cap-talk
 
+    - [LavaMoat/LavaMoat: tools for sandboxing your dependency graph](https://github.com/LavaMoat/LavaMoat)
+      - 2021-01: [Speakeasy JS – Lavamoat: Securing your dependency graph \(Kumavis\)](https://www.youtube.com/watch?v=iaqe6F4S2tA)
+
   - C++
       - [Cap’n Proto](https://capnproto.org/) is a high performance
         serialization and RPC protocol with distributed and persistent
