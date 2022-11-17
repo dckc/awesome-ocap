@@ -246,6 +246,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       Drysdale's port of Capsicum to Linux at Google, Summer of Code
       students, joint work with the University of Wisconsin on
       Capsicum, and future funded Capsicum work.
+  - [KataOS](https://github.com/AmbiML/sparrow-manifest) - embeded platform that runs on top of seL4
+    - 2022-10: [Announcing KataOS and Sparrow \| Google Open Source Blog](https://opensource.googleblog.com/2022/10/announcing-kataos-and-sparrow.html) “As the foundation for this new operating system, we chose seL4 as the microkernel because it puts security front and center; it is mathematically proven secure, with guaranteed confidentiality, integrity, and availability.”
 
 [AEMSKH_14]: https://trustworthy.systems/publications/nicta_full_text/7371.pdf
 
