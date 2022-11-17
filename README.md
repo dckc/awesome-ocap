@@ -7,7 +7,11 @@ Capability-based security enables the concise composition of powerful
 
 In 3 minutes:
 
-  - 2018-10: [Opening Statement on SOSP 50th Anniversary Panel](https://www.youtube.com/watch?v=br9DwtjqmVI) Mark Miller
+  - [Opening Statement on SOSP 50th Anniversary Panel](https://www.youtube.com/watch?v=br9DwtjqmVI) Mark Miller
+
+In 15 minutes:
+
+  - [Navigating the Attack Surface to achieve a *multiplicative* reduction in risk](https://www.youtube.com/watch?v=wW9-KuezPp8&t=664s)
 
 Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/) 2017 by Morningstar.
 
@@ -272,6 +276,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 <a name="talk"></a>
 ## Presentations, Talks, Slides, and Videos
   - 2021-05: [Attested TEEs for Transactional Workloads](https://www.youtube.com/watch?v=su8lnMaYQHg)  :: Sid Hussmann PADSEC 2021. _We present a generic TEE toolkit applicable for many use-cases in finance, healthcare, and government. Gapfruit TEE embodies a microkernel operating system with capability-based security._ 
+
+  - 2020-12: [Navigating the Attack Surface to achieve a \*multiplicative\* reduction in risk](https://www.youtube.com/watch?v=wW9-KuezPp8&t=664s) Mark Miller. 15min
 
   - 2019-12: [Making 'npm install' Safe \- QCon New York](https://www.youtube.com/watch?v=hP00w4r4zhg&list=PLzDw4TTug5O0ywHrOz4VevVTYr6Kj_KtW&index=22) "Kate Sills on security issues using NPM packages, the EventStream incident, and SES" as possible solutions to npm supply-chain risks.
 
