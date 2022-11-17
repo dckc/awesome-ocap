@@ -127,6 +127,9 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       - 2022-11: [Release capnpc\-v0\.15\.0 · capnproto/capnproto\-rust](https://github.com/capnproto/capnproto-rust/releases/tag/capnpc-v0.15.0)
     - [Using Capabilities to Design Safer, More Expressive APIs](https://web.archive.org/web/20180903114550/https://zsck.co/writing/capability-based-apis.html)
       Zack Mullaly Jan 19, 2018
+  - go
+    - [capnproto/go\-capnproto2: Cap'n Proto library and code generator for Go](https://github.com/capnproto/go-capnproto2)
+      - 2019-12: [Release v2\.18\.0 · capnproto/go\-capnproto2](https://github.com/capnproto/go-capnproto2/releases/tag/v2.18.0)
 
   - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
     object capability discipline by letting the caller handle network access.
