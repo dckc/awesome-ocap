@@ -282,6 +282,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
   - [Bringing Object-orientation to Security Programming](http://soft.vub.ac.be/events/mobicrant_talks/talk2_OO_security.pdf)
     - [Nov 2011 video](https://www.youtube.com/watch?v=oBqeDYETXME)
 
+  - 2012-03: [Belay Demo](https://www.youtube.com/watch?v=2_5p6S2eW8s&t=1s) 5min. Mark Lentczner, Security Team, Google
+
   - [Passwords or Webkeys: Which is More Secure?](https://www.youtube.com/watch?v=C7Pt9PGs4C4)  
     video by Marc Stiegler Feb 2012
 
