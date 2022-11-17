@@ -146,6 +146,9 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       S. Clebsch and S. Drossopoulou  
       OOPSLA 2013
 
+  - [Austral](https://austral-lang.org/) - a systems language with linear types and capability security
+    - 2022-09: [Release 0\.1\.0: Core language complete](https://github.com/austral/austral/releases/tag/v0.1.0)
+
   - [Newspeak](https://newspeaklanguage.org/) is an object-capability programming platform that lets you develop code in your web browser. Like Self, Newspeak is message-based; all names are dynamically bound. However, like Smalltalk, Newspeak uses classes rather than prototypes.
     The current version of Newspeak runs on top of WASM.
     - 2021-09: [Gilad Bracha: Newspeak on the Web](https://www.youtube.com/watch?v=SG08kxIIlHQ&t=1083s) at California Smalltalkers
