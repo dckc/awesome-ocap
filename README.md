@@ -27,6 +27,10 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 <a name="app-svc"></a>
 ## Applications and Services
 
+  - [Cloudflare Workers](https://developers.cloudflare.com/workers/)
+    - 2021-10: [Dynamic Process Isolation: Research by Cloudflare and TU Graz](https://blog.cloudflare.com/spectre-research-with-tu-graz/)
+    - 2021-08: [Durable Objects: Easy, Fast, Correct — Choose three](https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/)
+    - 2020-07: [Mitigating Spectre and Other Security Threats: The Cloudflare Workers Security Model](https://blog.cloudflare.com/mitigating-spectre-and-other-security-threats-the-cloudflare-workers-security-model/)
   - [Sandstorm](https://sandstorm.io/) is a self-hosted web
     productivity suite and [App Market](https://apps.sandstorm.io/)
     with WordPress, Rocket.Chat, IPython Notebook and many more.
