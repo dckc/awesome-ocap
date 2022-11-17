@@ -68,6 +68,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       - [fun with Capper and OFX financial transaction fetching](https://groups.google.com/forum/#!topic/captalk/vw1yOecgU10) Jan 2016 to cap-talk
 
     - [LavaMoat/LavaMoat: tools for sandboxing your dependency graph](https://github.com/LavaMoat/LavaMoat)
+      - 2022-11: [The Attacker is Inside: Javascript Supplychain Security and LavaMoat](https://www.youtube.com/watch?v=Z5Bz0DYga1k&t=14s) by kumavis at Ethereum Devcon Bogota
       - 2021-01: [Speakeasy JS – Lavamoat: Securing your dependency graph \(Kumavis\)](https://www.youtube.com/watch?v=iaqe6F4S2tA)
 
   - C++
