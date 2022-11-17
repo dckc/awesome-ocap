@@ -113,8 +113,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
          - 2018-06-20 v0.1.0 released
          - 2018-09-22 [Presentation at Scaladays](https://slideslive.com/38908776/security-with-scala-refined-types-and-object-capabilities?subdomain=false)
   - rust
-    - [cap-std](https://github.com/sunfishcode/cap-std) Capability-oriented version of the Rust standard library\
-      0.4.0 Sep 24, 2020
+    - [cap-std](https://github.com/sunfishcode/cap-std) Capability-oriented version of the Rust standard library
+      - 2022-11 [Release v1\.0\.0 · bytecodealliance/cap\-std](https://github.com/bytecodealliance/cap-std/releases/tag/v1.0.0)
     - [Using Capabilities to Design Safer, More Expressive APIs](https://web.archive.org/web/20180903114550/https://zsck.co/writing/capability-based-apis.html)
       Zack Mullaly Jan 19, 2018
 
