@@ -321,6 +321,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
   - 2004 [A PictureBook of Secure Cooperation](http://erights.org/talks/efun/SecurityPictureBook.pdf) Marc Stiegler
   - 2002-05 [Immunity from Viruses, Safety from Geeks Bearing Gifts](https://www.youtube.com/watch?v=KoM_aCuFk1w) Mark S\. Miller  
     "This talk is centered on a demo of CapDesk, our capability-based distributed desktop and application installation/launching framework. CapDesk uses no passwords, no user group lists, no firewalls, yet supplies a computing world invulnerable to viruses and Trojan horses."
+    - ref: [DarpaBrowser: Final Report](http://www.combex.com/papers/darpa-report/html/index.html)
 
 <a name="article"></a>
 ## Articles
@@ -346,6 +347,9 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
   - 2009-02 [ACLs don't](https://www.hpl.hp.com/techreports/2009/HPL-2009-20.pdf) Tyler Close, HP Laboratories 
 _The ACL model is unable to make correct access decisions for interactions involving more than two  principals, since required information is not retained across message sends. Though this deficiency has long been documented in the published literature, it is not widely understood. This logic error in the ACL model is exploited by both the clickjacking and Cross-Site Request Forgery attacks that affect many Web applications_
 
+ - 2002-06 [DarpaBrowser: Final Report](http://www.combex.com/papers/darpa-report/html/index.html) by Marc Stiegler and Mark Miller  
+ _The broad goal of this research was to assess whether capability-based security [Levy84] could achieve security goals that are unachievable with current traditional security technologies such as access control lists and firewalls. The specific goal of this research was to create an HTML browser that could use capability confinement on a collection of plug-replaceable, possibly malicious, rendering engines. In confining the renderer, the browser would ensure that a malicious renderer could do no harm either to the browser or to the underlying system._
+ 
 <a name="lit"></a>
 ### Peer-reviewed Articles
 
