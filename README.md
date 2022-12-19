@@ -214,6 +214,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     operating-system kernel with an end-to-end proof of implementation
     correctness and security enforcement; it is available as open
     source.
+    - 2022-10: [seL4 Summit 2022](https://sel4.systems/Foundation/Summit/abstracts2022) Munich, Germany (hybrid), 10-13 Oct 2022
+      - [2022-10: 4th seL4 Summit](https://www.youtube.com/watch?v=PDVMVSSpGOQ&list=PLtoQeavghzr3atxNQig-sLGbwoKBSVxGV) video playlist
     - 2021-10: [wasmedge-seL4](https://github.com/second-state/wasmedge-seL4) `fc25cae` Integrate WasmEdge with seL4  
       [demo video](https://www.youtube.com/watch?v=2Qu-Trtkspk)
     - 2021-08: [Ghost donates to the seL4 Foundation](https://sel4.systems/news/2021)
