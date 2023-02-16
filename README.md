@@ -168,6 +168,9 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     - Docker images: [montelang](https://hub.docker.com/r/montelang/)
     - 2017-03: [Monte: A Spiritual Successor to E](https://www.youtube.com/watch?v=FJnck8bgmXg&list=PLCq8mSCP664TUdgHl1cD5sDiAmrDoio2p) presented by Corbin Simpson at OCAP 2017
 
+  - [Cadence](https://developers.flow.com/cadence) is a smart contract language with resources (linear types) and capability security.
+    Its static type system has direct support for object-capability security. For example, the facade pattern is natively supported, and the type system has special down-casting rules to express access control patterns.
+
 <a name="os"></a>
 ## Operating Systems
 
