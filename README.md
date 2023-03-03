@@ -361,7 +361,7 @@ _The ACL model is unable to make correct access decisions for interactions invol
 _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/items/collectionKey/FZ8P5G54/itemKey/2ZPIX23N) bibliography._
 
   - D. Devriese, Birkedal, and Piessens  
-    [Reasoning about Object Capabilities with Logical Relations and Effect Parametricity](https://lirias.kuleuven.be/handle/123456789/529252)  
+    [Reasoning about Object Capabilities with Logical Relations and Effect Parametricity](https://core.ac.uk/download/pdf/34655681.pdf)  
     1st IEEE European Symposium on Security and Privacy, Congress Center Saar, Saarbrücken, GERMANY, 2016.
 
   - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
