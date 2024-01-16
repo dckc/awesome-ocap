@@ -80,6 +80,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       - 2021-01: [Speakeasy JS – Lavamoat: Securing your dependency graph \(Kumavis\)](https://www.youtube.com/watch?v=iaqe6F4S2tA)
     - [cloudflare/workerd: The JavaScript / Wasm runtime that powers Cloudflare Workers](https://github.com/cloudflare/workerd)
       - 2022-09: [Introducing workerd: the Open Source Workers runtime](https://blog.cloudflare.com/workerd-open-source-workers-runtime/)
+    - [The Syndicated Actor Model](https://git.syndicate-lang.org/syndicate-lang/syndicate-js)
   - C++
       - [Cap’n Proto](https://capnproto.org/) is a high performance
         serialization and RPC protocol with distributed and persistent
@@ -109,6 +110,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
           Moore, Christos Dimoulas, Dan King, and Stephen Chong. 11th
           USENIX Symposium on Operating Systems Design and Implementation
           (OSDI), October 2014.
+      - [The Syndicated Actor Model](https://git.syndicate-lang.org/syndicate-lang/syndicate-rkt)
 
 [shill-osdi]: http://shill.seas.harvard.edu/shill-osdi-2014.pdf
   - Scala
@@ -127,12 +129,16 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       - 2022-11: [Release capnpc\-v0\.15\.0 · capnproto/capnproto\-rust](https://github.com/capnproto/capnproto-rust/releases/tag/capnpc-v0.15.0)
     - [Using Capabilities to Design Safer, More Expressive APIs](https://web.archive.org/web/20180903114550/https://zsck.co/writing/capability-based-apis.html)
       Zack Mullaly Jan 19, 2018
+    - [The Syndicated Actor Model](https://git.syndicate-lang.org/syndicate-lang/syndicate-rs)
   - go
     - [capnproto/go\-capnproto2: Cap'n Proto library and code generator for Go](https://github.com/capnproto/go-capnproto2)
       - 2019-12: [Release v2\.18\.0 · capnproto/go\-capnproto2](https://github.com/capnproto/go-capnproto2/releases/tag/v2.18.0)
-
-  - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
-    object capability discipline by letting the caller handle network access.
+  - python
+    - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
+      object capability discipline by letting the caller handle network access.
+    - [The Syndicated Actor Model](https://git.syndicate-lang.org/syndicate-lang/syndicate-py)
+  - nim
+    - [The Syndicated Actor Model](https://git.syndicate-lang.org/ehmry/syndicate-nim)
 
 [1412]: https://sandstorm.io/news/2014-12-15-capnproto-0.5
 
