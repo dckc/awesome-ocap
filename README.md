@@ -51,7 +51,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     fail or are taken over by an attacker, the entire file store
     continues to function correctly, preserving your privacy and
     security.
-    - 2017-01-18 v1.12.1 released
+    - 2024-01-01 [v1.19.0 released](https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-January/010064.html)
 
 [scap]: https://sandstorm.io/how-it-works#capabilities
 [1407]: https://sandstorm.io/news/2014-07-21-open-source-web-apps-require-federated-hosting
