@@ -304,6 +304,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
   - 2018-10: [Opening Statement on SOSP 50th Anniversary Panel](https://www.youtube.com/watch?v=br9DwtjqmVI) Mark Miller
 
+  - 2017-02: [Designing with Capabilities](https://www.youtube.com/watch?v=fi1FsDW1QeY) - Scott Wlaschin at Domain-Driven Design Europe Conference
+
   - 2016-06 [Learn Object Capabilities](https://frontendmasters.com/courses/good-parts-javascript-web/object-capabilities/) by Douglas Crockford, part of [Good Parts of JavaScript and the Web](https://frontendmasters.com/courses/good-parts-javascript-web/). _Using the principle of least authority, Doug explains how the “actor model” can be applied to object oriented programming to create more secure software. He calls this application Object Capabilities._
 
   - [CloudABI - Pure capability-based security for UNIX](https://www.youtube.com/watch?v=62cYMmSY2Dc)  
