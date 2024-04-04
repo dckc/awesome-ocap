@@ -32,6 +32,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 ## Applications and Services
 
   - [Cloudflare Workers](https://developers.cloudflare.com/workers/)
+    - 2024-04: [Why Workers environment variables contain live objects](https://blog.cloudflare.com/workers-environment-live-object-bindings)
     - 2021-10: [Dynamic Process Isolation: Research by Cloudflare and TU Graz](https://blog.cloudflare.com/spectre-research-with-tu-graz/)
     - 2021-08: [Durable Objects: Easy, Fast, Correct — Choose three](https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/)
     - 2020-07: [Mitigating Spectre and Other Security Threats: The Cloudflare Workers Security Model](https://blog.cloudflare.com/mitigating-spectre-and-other-security-threats-the-cloudflare-workers-security-model/)
