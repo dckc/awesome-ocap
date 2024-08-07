@@ -437,8 +437,18 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
     > written in a simple security formalism independent of cryptography, but
     > automatically implemented as a cryptographic protocol coordinating five
     > mutually suspicious parties
+  - Jens Finkhaeuser, Sergio D. Penna:
+    [Capabilities for Distributed Authorization][I-D.jfinkhaeuser-caps-for-distributed-auth]
+    Active Internet-Draft (individual) 
+    > Authorization is often the last remaining centralized function in a
+    > distributed system.  Advances in compute capabilities of miniaturized
+    > CPUs make alternative cryptographic approaches feasible that did not
+    > find such use when first envisioned.  This document describes the
+    > elements of such cryptographically backed distributed authorization
+    > schemes as a reference for implementations.
 
 [237]: https://www.ponylang.io/media/papers/opsla237-clebsch.pdf
 [40673]: http://research.google.com/pubs/pub40673.html
 [markm-thesis]: http://www.erights.org/talks/thesis/markm-thesis.pdf
 [ode]: http://www.erights.org/elib/capability/ode/ode.pdf
+[I-D.jfinkhaeuser-caps-for-distributed-auth]: https://datatracker.ietf.org/doc/draft-jfinkhaeuser-caps-for-distributed-auth/
