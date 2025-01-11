@@ -44,13 +44,14 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     - 2021-10: [Dynamic Process Isolation: Research by Cloudflare and TU Graz](https://blog.cloudflare.com/spectre-research-with-tu-graz/)
     - 2021-08: [Durable Objects: Easy, Fast, Correct — Choose three](https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/)
     - 2020-07: [Mitigating Spectre and Other Security Threats: The Cloudflare Workers Security Model](https://blog.cloudflare.com/mitigating-spectre-and-other-security-threats-the-cloudflare-workers-security-model/)
-  - [Sandstorm](https://sandstorm.io/) is a self-hosted web
+  - [Sandstorm](https://sandstorm.org/) is a self-hosted web
     productivity suite and [App Market](https://apps.sandstorm.io/)
     with WordPress, Rocket.Chat, IPython Notebook and many more.
     [Sandstorm's Capability-based Security][scap] protects you and
     your data against application bugs.
+    - 2024-01: [Sandstorm now belongs to Sandstorm.org](https://sandstorm.io/news/2024-01-14-move-to-sandstorm-org)
+    - 2023-10: [Sandstorm, Tempest, and the Future](https://sandstorm.org/news/2023-10-23-sandstorm-tempest-and-the-future)
     - 2020-02-22: [Announcing the release of vagrant\-spk 1\.0](https://sandstorm.io/news/2020-02-22-announcing-vagrant-spk-1.0)
-    - 2020-02-03: [Reviving Sandstorm \- Sandstorm Blog](https://sandstorm.io/news/2020-02-03-reviving-sandstorm)
     - 2017-03-02: [connecting to external HTTP APIs via the Powerbox](https://github.com/sandstorm-io/sandstorm/pull/2870)
       and related powerbox enhancements  
       v0.200 (2017-01-28), v0.203
@@ -60,7 +61,10 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     fail or are taken over by an attacker, the entire file store
     continues to function correctly, preserving your privacy and
     security.
+    - 2024-12: [v1.20.0 is released]https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html)
     - 2024-01-01 [v1.19.0 released](https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-January/010064.html)
+    - 2023-11: [new work on a Haskell client implementation](https://hackage.haskell.org/package/tahoe-great-black-swamp)
+    - 2020-02: [Tahoe-LAFS Summit at PyCon2020](https://tahoe-lafs.org/pipermail/tahoe-dev/2020-February/009983.html)
 
 [scap]: https://sandstorm.io/how-it-works#capabilities
 [1407]: https://sandstorm.io/news/2014-07-21-open-source-web-apps-require-federated-hosting
