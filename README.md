@@ -316,9 +316,11 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
   - 2016-06 [Learn Object Capabilities](https://frontendmasters.com/courses/good-parts-javascript-web/object-capabilities/) by Douglas Crockford, part of [Good Parts of JavaScript and the Web](https://frontendmasters.com/courses/good-parts-javascript-web/). _Using the principle of least authority, Doug explains how the “actor model” can be applied to object oriented programming to create more secure software. He calls this application Object Capabilities._
 
-  - [CloudABI - Pure capability-based security for UNIX](https://www.youtube.com/watch?v=62cYMmSY2Dc)  
-    Ed Schouten, 32nd Chaos Communication Congress (32C3), Dec 2015
-    
+  - 2015-12: [CloudABI - Pure capability-based security for UNIX](https://www.youtube.com/watch?v=62cYMmSY2Dc)  
+    Ed Schouten, 32nd Chaos Communication Congress (32C3)
+
+  - 2013: [Distributed Resilient Secure ECMAScript (Dr. SES)](https://tvcutsem.github.io/drses) ESOP
+
   - [Secure Distributed Programming with Object-capabilities in JavaScript](http://soft.vub.ac.be/events/mobicrant_talks/talk1_ocaps_js.pdf)
     - [Oct 2011 video](https://www.youtube.com/watch?v=w9hHHvhZ_HY) 
   - [Bringing Object-orientation to Security Programming](http://soft.vub.ac.be/events/mobicrant_talks/talk2_OO_security.pdf)
@@ -359,6 +361,12 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
   - 2016-08 [Welcoming all Python enthusiasts: CPython 3.6 for CloudABI!](https://nuxi.nl/blog/2016/08/01/cloudabi-python.html)
       August 1, 2016 by Ed Schouten
+
+  - 2016-01: [fun with Capper and OFX financial transaction fetching](https://groups.google.com/forum/#!topic/captalk/vw1yOecgU10) to cap-talk
+    - [Capper](https://github.com/marcsAtSkyhunter/Capper) is a web
+      application server built on Node.js/Express using
+      the [Waterken](http://waterken.sourceforge.net/) webkey protocol
+      for object capability security.
 
   - 2015-11 [Objects as Secure Capabilities](http://joeduffyblog.com/2015/11/10/objects-as-secure-capabilities/) Joe Duffy
     - in series: [Blogging about Midori](http://joeduffyblog.com/2015/11/03/blogging-about-midori/)
