@@ -450,3 +450,7 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
 [40673]: http://research.google.com/pubs/pub40673.html
 [markm-thesis]: http://www.erights.org/talks/thesis/markm-thesis.pdf
 [ode]: http://www.erights.org/elib/capability/ode/ode.pdf
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=dckc/awesome-ocap&type=Date)](https://star-history.com/#dckc/awesome-ocap&Date)
