@@ -74,48 +74,41 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 ## Libraries and Frameworks
 
   - JavaScript
-    - [SES](https://www.npmjs.com/package/ses) is "hardened JavaScript. SES stands for fearless cooperation. ... SES safely executes third-party JavaScript 'strict' mode programs in compartments that have no excess authority in their global scope. SES runs atop an ES6-compliant platform, enabling safe interaction of mutually-suspicious code, using object-capability-style programming. See https://github.com/Agoric/Jessie to see how SES fits into the various flavors of confined JavaScript execution. And visit https://ses-demo.agoric.app/demos/ for a demo. "
-      - 2021-09-01: SES-0.14.3 `6190052`
-      - 2020-03-31: SES-0.7.6 `9385d44`
+    - [cloudflare/workerd: The JavaScript / Wasm runtime that powers Cloudflare Workers](https://github.com/cloudflare/workerd)
+      - 2025-01: [Release v1\.20250108\.0 · cloudflare/workerd](https://github.com/cloudflare/workerd/releases/tag/v1.20250108.0)
+      - 2022-09: [Introducing workerd: the Open Source Workers runtime](https://blog.cloudflare.com/workerd-open-source-workers-runtime/)
+    - [Hardened JavaScript](https://hardenedjs.org/) "Hardened JavaScript is a standards track mode for the JavaScript language for safe plugin systems and supply chain attack resistance. Hardening JavaScript improves a program’s integrity in the face of adversarial code in the same process."
+      - 2024-10 [SES 1.9.0 introduces immutable ArrayBuffers](https://hardenedjs.org/blog/ses-1.9.0/)
+      - 2023-09 [Decentralizing the wallet experience with MetaMask Snaps](https://metamask.io/news/latest/decentralizing-the-wallet-experience-with-metamask-snaps/)
+      - 2021-09: SES-0.14.3 `6190052`
+      - 2020-03: SES-0.7.6 `9385d44`
       - 2019-12: [Making 'npm install' Safe \- QCon New York](https://www.youtube.com/watch?v=hP00w4r4zhg&list=PLzDw4TTug5O0ywHrOz4VevVTYr6Kj_KtW&index=22) "Kate Sills on security issues using NPM packages, the EventStream incident, and SES" as possible solutions to npm supply-chain risks.
       - 2019-06: [Higher\-order Smart Contracts across Chains](https://www.youtube.com/watch?v=iyuo0ymTt4g&list=PLhuBigpl7lqth_Ow_eQWZs7NFxmeDw9W8&index=1) Agoric \+ Protocol Labs //  \- Mark Miller
       - 2018-10-15: [SF Cryptocurrency Devs: Agoric \- Programming Secure Smart Contracts](https://www.youtube.com/watch?v=YXUqfgdDbr8)
       - 2018-07-28: [Agoric Releases SES: Secure JavaScript](https://agoric.com/agoric-releases-ses/)  f4d3d5a
-      - [Distributed Resilient Secure ECMAScript (Dr. SES)](https://tvcutsem.github.io/drses) ESOP 2013
-    - [Capper](https://github.com/marcsAtSkyhunter/Capper) is a web
-      application server built on Node.js/Express using
-      the [Waterken](http://waterken.sourceforge.net/) webkey protocol
-      for object capability security.
-      - [fun with Capper and OFX financial transaction fetching](https://groups.google.com/forum/#!topic/captalk/vw1yOecgU10) Jan 2016 to cap-talk
-
     - [LavaMoat/LavaMoat: tools for sandboxing your dependency graph](https://github.com/LavaMoat/LavaMoat)
+      - 2024-12: [Release lavamoat: v9.0.5](https://github.com/LavaMoat/LavaMoat/releases/tag/lavamoat-v9.0.5)
       - 2022-11: [The Attacker is Inside: Javascript Supplychain Security and LavaMoat](https://www.youtube.com/watch?v=Z5Bz0DYga1k&t=14s) by kumavis at Ethereum Devcon Bogota
       - 2021-01: [Speakeasy JS – Lavamoat: Securing your dependency graph \(Kumavis\)](https://www.youtube.com/watch?v=iaqe6F4S2tA)
-    - [cloudflare/workerd: The JavaScript / Wasm runtime that powers Cloudflare Workers](https://github.com/cloudflare/workerd)
-      - 2022-09: [Introducing workerd: the Open Source Workers runtime](https://blog.cloudflare.com/workerd-open-source-workers-runtime/)
     - [The Syndicated Actor Model](https://git.syndicate-lang.org/syndicate-lang/syndicate-js)
-  - C++
+  - C / C++
       - [Cap’n Proto](https://capnproto.org/) is a high performance
         serialization and RPC protocol with distributed and persistent
         capabilities and promise pipelining. Bindings to python,
         JavaScript (in node.js), Go, Rust, etc. are available
         - 2020-04-23: [Cap'n Proto: Cap'n Proto 0\.8: Streaming flow control, HTTP\-over\-RPC, fibers, etc\.](https://capnproto.org/news/2020-04-23-capnproto-0.8.html)
         - 2014-12-15: [Cap'n Proto 0.5, and how it is central to Sandstorm][1412] by Kenton Varda
-  - Scheme (racket)
-      - [Spritely](https://spritelyproject.org/)
+      - [Moddable SDK](https://github.com/Moddable-OpenSource/moddable) - "Tools for developers to create truly open IoT products using standard JavaScript on low cost microcontrollers."
+        - 2024-12: [Release Moddable SDK 5.3.3](https://github.com/Moddable-OpenSource/moddable/releases/tag/5.3.3)
+  - Scheme (guile, racket)
+      - [Spritely Goblins](https://spritely.institute/goblins/) - "distributed object programming environment. Goblins provides an intuitive security model, automatic local transactions for locally synchronous operations, and an easy to use and efficient asynchronous programming interface for encapsulated objects which can live anywhere on the network. Its networking model abstracts away these details so the programmer can focus on object programming rather than protocol architecture."
+        - 2024-10 [Our first office hours: A recap (and how to join the next one) — Spritely Institute](https://spritely.institute/news/first-office-hours-recap.html)
+        - 2024-06 [Announcing the Pre-Scheme Restoration — Pre-Scheme](https://prescheme.org/posts/announcing-the-pre-scheme-restoration.html)
+        - 2024-09: [Spritely Goblins v0\.14\.0: libp2p and Improved Persistence — Spritely Institute](https://spritely.institute/news/spritely-goblins-v0-14-0-libp2p-and-improved-persistence.html)
+        - 2024-05 [Distributed System Daemons: More Than a Twinkle in Goblins' Eye — Spritely Institute](https://spritely.institute/news/spritely-nlnet-grants-december-2023.html) "a port of the GNU Shepherd system layer to Guile Goblins — the first step in making Guix the object-capability operating system!"
         - 2022-10 [NLnet grant bootstraps OCapN protocol standardization effort](https://spritely.institute/news/nlnet-grant-bootstraps-ocapn-protocol-standardization-effort.html)
         - 2021-07 [Content Addressed Descriptors and Interfaces with Spritely Goblins paper](https://spritelyproject.org/news/content-addressed-descriptors-paper.html) "how to perform "conversational" programming in Spritely Goblins, or any other system which assumes a mutually suspicious network. ... The reason this system is able to be elegantly embedded in a network environment is its use of Spritely's implementation of CapTP."
         - 2020-05-13 [Spritely's NLNet grant: Interface Discovery for Distributed Systems \-\- DustyCloud Brainstorms](https://dustycloud.org/blog/spritely-nlnet-grant/)
-      - [COAST](http://isr.uci.edu/projects/coast/) is COmputAtional State
-        Transfer, An Architectural Style for Secure Decentralized
-        Systems. The sole means of interaction among computations is the
-        asynchronous messaging. Motile is a single-assignment, functional,
-        and mobile code language based on Scheme
-        - Gorlick, Michael M., and Richard N. Taylor.  
-        [Motile: Reflecting an Architectural Style in a Mobile Code Language.](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.310.4496) (2013).
-        - Baquero, Alegria.  
-        [COASTmed: software architectures for delivering customizable, policy-based differential web services.](http://dl.acm.org/citation.cfm?id=2591083) Companion Proceedings of the 36th International Conference on Software Engineering. ACM, 2014.
-
       - [Shill](http://shill-lang.org): Shill is a shell scripting
         language designed to make it easy to follow the Principle of Least
         Privilege. It runs on FreeBSD and is developed in Racket.
