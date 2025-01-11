@@ -2,8 +2,28 @@
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
+<img src="./assets/Introduction.BoETHwCZ.svg"
+     alt="Alice sends a greet message to Bob with a reference to Carol"
+     width=300 align="right"
+     style="border: 2px solid #cccccc;
+            border-radius: 15px;
+            padding: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
+/>
+
 Capability-based security enables the concise composition of powerful
-[patterns](https://github.com/dckc/awesome-ocap/wiki) of cooperation without vulnerability.
+[patterns of cooperation without vulnerability](https://github.com/dckc/awesome-ocap/wiki).
+
+ - Tech you can use
+   - [Applications and Services](#app-svc)
+   - [Libraries and Frameworks](#lib)
+   - [Programming Languages](#lang)
+   - [Operating Systems](#os)
+   - [CPUs and embedded devices](#cpu)
+ - Learn, Watch, Read
+   - [Presentations, Talks, Slides, and Videos](#talk)
+   - [Articles](#article)
+     - [Peer-reviewed Articles](#lit)
 
 In 3 minutes:
 
@@ -13,20 +33,7 @@ In 15 minutes:
 
   - [Navigating the Attack Surface to achieve a *multiplicative* reduction in risk](https://www.youtube.com/watch?v=wW9-KuezPp8&t=664s)
 
-Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/) 2017 by Morningstar.
-
-## Contents
-
- - Tech you can use
-   - [Applications and Services](#app-svc)
-   - [Libraries and Frameworks](#lib)
-   - [Programming Languages](#lang)
-   - [Operating Systems](#os)
-   - [CPUs](#cpu)
- - Learn, Watch, Read
-   - [Presentations, Talks, Slides, and Videos](#talk)
-   - [Articles](#article)
-     - [Peer-reviewed Articles](#lit)
+Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/) by Morningstar in 2017.
 
 <a name="app-svc"></a>
 ## Applications and Services
