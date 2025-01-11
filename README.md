@@ -279,8 +279,10 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 [AEMSKH_14]: https://trustworthy.systems/publications/nicta_full_text/7371.pdf
 
 <a name="cpu"></a>
-## CPUs
+## CPUs and Embedded Devices
 
+  - [Moddable](https://www.moddable.com/) "Moddable brings the JavaScript ecosystem to embedded software development"
+    - 2024-07 [Introducing Moddable Six](https://www.moddable.com/blog/introducing-moddable-six/) "Moddable Six is for developers who want to use industry standard JavaScript to deliver dynamic IoT projects, especially those with a rich, mobile-style user experience."
   - [CHERI](https://www.cl.cam.ac.uk/research/security/ctsrd/) is an open source capability CPU design.
     - 2022-01 [Arm releases experimental CHERI-enabled Morello board as part of £187M UKRI Digital Security by Design programme](https://www.lightbluetouchpaper.org/2022/01/20/arm-releases-experimental-cheri-enabled-morello-board-as-part-of-187m-ukri-digital-security-by-design-programme/) CHERI implements architectural capabilities that directly enable software security features such as fine-grained memory protection and scalable software compartmentalisation — both important software vulnerability mitigation techniques that are not well supported on current processor architectures. ... memory-safe C compilation and linkage ...
     - 2019-09 [The Arm Morello Board](https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/cheri-morello.html) Arm announced Morello, an experimental CHERI-extended, multicore, superscalar ARMv8-A processor, System-on-Chip (SoC), and prototype board to be available from late 2021. Morello is a part of the UKRI £187M Digital Security by Design Challenge (DSbD) supported by the UK Industrial Strategy Challenge Fund, including a commitment of over £50M commitment by Arm.
