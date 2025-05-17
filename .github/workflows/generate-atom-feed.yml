@@ -6,51 +6,35 @@ on:
       - main
     paths:
       - 'README.md'
-  workflow_dispatch:  # Allow manual triggering
+  workflow_dispatch: # Allow manual triggering
 
 jobs:
   generate-feed:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Fetch all history for git operations
-      
+          fetch-depth: 0 # Fetch all history for git operations
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          
+
       - name: Install dependencies
         run: npm install
-          
-      - name: Create scripts directory
-        run: mkdir -p .github/scripts
-          
-      - name: Copy feed generator script
-        run: |
-          cp assets/atom-feed-generator.js .github/scripts/generate_feed.js
-          chmod +x .github/scripts/generate_feed.js
-        
+
+      - name: Create feed directory
+        run: mkdir -p feed
+
       - name: Generate Atom feed
-        run: node .github/scripts/generate_feed.js
-        
+        run: node assets/atom-feed-generator.js
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./feed
           destination_dir: feed
-          
-      - name: Add feed link to README if not present
-        run: |
-          if ! grep -q "Subscribe to updates" README.md; then
-            echo -e "\n## Subscribe to Updates\n\nYou can subscribe to updates to this list via the [Atom feed](https://dckc.github.io/awesome-ocap/feed/atom.xml)." >> README.md
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add README.md
-            git commit -m "Add Atom feed subscription link to README"
-            git push
-          fi
