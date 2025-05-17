@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://github.com/dckc/awesome-ocap</id>
+    <title>Awesome Object Capabilities and Capability-based Security</title>
+    <updated>2025-05-17T07:21:50.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <author>
+        <name>Dan Connolly</name>
+        <email>dckc@madmode.com</email>
+    </author>
+    <link rel="alternate" href="https://github.com/dckc/awesome-ocap"/>
+    <link rel="self" href="https://github.com/dckc/awesome-ocap/raw/main/feed/atom.xml"/>
+    <subtitle>Updates to the awesome-ocap list of capability-based security resources</subtitle>
+    <rights>Copyright © 2025 Dan Connolly</rights>
+    <entry>
+        <title type="html"><![CDATA[genode]]></title>
+        <id>https://genode.org/</id>
+        <link href="https://genode.org/"/>
+        <updated>2025-04-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[is a novel OS architecture that is
+able to master the complexity of code and policy -- the most
+fundamental security problem shared by modern general-purpose
+operating systems -- by applying a strict organizational structure
+to all software components including device drivers, system
+services, and applications.]]></summary>
+        <content type="html"><![CDATA[is a novel OS architecture that is
+able to master the complexity of code and policy -- the most
+fundamental security problem shared by modern general-purpose
+operating systems -- by applying a strict organizational structure
+to all software components including device drivers, system
+services, and applications.]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Sculpt OS release 25.04]]></title>
+        <id>https://genode.org/news/sculpt-os-release-25.04</id>
+        <link href="https://genode.org/news/sculpt-os-release-25.04"/>
+        <updated>2025-04-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– introduces multi-monitor window management and display rotation, integrates Chromium WebEngine 112, and extends hardware support to Intel Meteor Lake and F&amp;S i.MX8MP armStone boards]]></summary>
+        <content type="html"><![CDATA[– introduces multi-monitor window management and display rotation, integrates Chromium WebEngine 112, and extends hardware support to Intel Meteor Lake and F&amp;S i.MX8MP armStone boards]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Fuchsia]]></title>
+        <id>https://fuchsia.dev/fuchsia-src/get-started</id>
+        <link href="https://fuchsia.dev/fuchsia-src/get-started"/>
+        <updated>2025-04-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[is
+a real-time operating system in development by Google since
+Aug 2016. It's based on a
+microkernel,
+<a href="https://fuchsia.dev/fuchsia-src/concepts/kernel">Zircon</a>,
+with a capability security model.]]></summary>
+        <content type="html"><![CDATA[is
+a real-time operating system in development by Google since
+Aug 2016. It's based on a
+microkernel,
+<a href="https://fuchsia.dev/fuchsia-src/concepts/kernel">Zircon</a>,
+with a capability security model.]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Fuchsia F26 release notes]]></title>
+        <id>https://fuchsia.dev/whats-new/release-notes/f26</id>
+        <link href="https://fuchsia.dev/whats-new/release-notes/f26"/>
+        <updated>2025-04-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– continues refinement of the component framework, emphasizing explicit capability routing, lifecycle control, and modular isolation between components]]></summary>
+        <content type="html"><![CDATA[– continues refinement of the component framework, emphasizing explicit capability routing, lifecycle control, and modular isolation between components]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spritely Goblins]]></title>
+        <id>https://spritely.institute/goblins/</id>
+        <link href="https://spritely.institute/goblins/"/>
+        <updated>2025-03-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<span class="p-summary"> - "distributed object programming environment. Goblins provides an intuitive security model, automatic local transactions for locally synchronous operations, and an easy to use and efficient asynchronous programming interface for encapsulated objects which can live anywhere on the network. Its networking model abstracts away these details so the programmer can focus on object programming rather than protocol architecture."</span>]]></summary>
+        <content type="html"><![CDATA[<span class="p-summary"> - "distributed object programming environment. Goblins provides an intuitive security model, automatic local transactions for locally synchronous operations, and an easy to use and efficient asynchronous programming interface for encapsulated objects which can live anywhere on the network. Its networking model abstracts away these details so the programmer can focus on object programming rather than protocol architecture."</span>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spritely Goblins]]></title>
+        <id>https://spritely.institute/goblins/</id>
+        <link href="https://spritely.institute/goblins/"/>
+        <updated>2025-03-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<span class="p-summary"> - "distributed object programming environment. Goblins provides an intuitive security model, automatic local transactions for locally synchronous operations, and an easy to use and efficient asynchronous programming interface for encapsulated objects which can live anywhere on the network. Its networking model abstracts away these details so the programmer can focus on object programming rather than protocol architecture."</span>]]></summary>
+        <content type="html"><![CDATA[<span class="p-summary"> - "distributed object programming environment. Goblins provides an intuitive security model, automatic local transactions for locally synchronous operations, and an easy to use and efficient asynchronous programming interface for encapsulated objects which can live anywhere on the network. Its networking model abstracts away these details so the programmer can focus on object programming rather than protocol architecture."</span>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spritely Goblins v0.15.1
+Released]]></title>
+        <id>https://www.spritely.institute/news/spritely-goblins-v0-15-1-released.html</id>
+        <link href="https://www.spritely.institute/news/spritely-goblins-v0-15-1-released.html"/>
+        <updated>2025-03-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["a quality release focused on polish, fixing bugs in CapTP
+GC, message handling in persistent vats, and netlayer
+reconnection; also adds a <code>timeout</code> helper and improved
+<code>race*</code> joiner"]]></summary>
+        <content type="html"><![CDATA["a quality release focused on polish, fixing bugs in CapTP
+GC, message handling in persistent vats, and netlayer
+reconnection; also adds a <code>timeout</code> helper and improved
+<code>race*</code> joiner"]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Genode OS Framework release 25.02]]></title>
+        <id>https://genode.org/news/genode-os-framework-release-25.02</id>
+        <link href="https://genode.org/news/genode-os-framework-release-25.02"/>
+        <updated>2025-02-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– extends multi-monitor capabilities to window management and virtual machines, ports QEMU and Chromium WebEngine 112, boosts graphics performance via SIMD optimizations]]></summary>
+        <content type="html"><![CDATA[– extends multi-monitor capabilities to window management and virtual machines, ports QEMU and Chromium WebEngine 112, boosts graphics performance via SIMD optimizations]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Goblins: The framework for your next project!]]></title>
+        <id>https://fosdem.org/2025/schedule/event/fosdem-2025-5239-goblins-the-framework-for-your-next-project-/</id>
+        <link href="https://fosdem.org/2025/schedule/event/fosdem-2025-5239-goblins-the-framework-for-your-next-project-/"/>
+        <updated>2025-02-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["Jessica Tallon introduces Goblins, a Guile framework for building secure, fault-tolerant peer-to-peer applications using object capability security and the actor model"]]></summary>
+        <content type="html"><![CDATA["Jessica Tallon introduces Goblins, a Guile framework for building secure, fault-tolerant peer-to-peer applications using object capability security and the actor model"]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spritely and a secure, collaborative, distributed future]]></title>
+        <id>https://spritely.institute/news/spritely-is-going-to-guix-days-and-fosdem.html</id>
+        <link href="https://spritely.institute/news/spritely-is-going-to-guix-days-and-fosdem.html"/>
+        <updated>2025-02-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["Christine Lemmer-Webber outlines Spritely's mission to create decentralized infrastructure that empowers user autonomy and security"]]></summary>
+        <content type="html"><![CDATA["Christine Lemmer-Webber outlines Spritely's mission to create decentralized infrastructure that empowers user autonomy and security"]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[cloudflare/workerd: The JavaScript / Wasm runtime that powers Cloudflare Workers]]></title>
+        <id>https://github.com/cloudflare/workerd</id>
+        <link href="https://github.com/cloudflare/workerd"/>
+        <updated>2025-01-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<span class="p-summary"><ul>
+<li class="h-entry"><time class="dt-published" datetime="2025-01-01"><time class="dt-published" datetime="2025-01-01"><time class="dt-published" datetime="2025-01-01">2025-01: </time></time></time><a href="https://github.com/cloudflare/workerd/releases/tag/v1.20250108.0" class="p-name u-url">Release v1.20250108.0 · cloudflare/workerd</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2022-09-01">2022-09: </time><a href="https://blog.cloudflare.com/workerd-open-source-workers-runtime/" class="p-name u-url">Introducing workerd: the Open Source Workers runtime</a></li>
+</ul>
+</span>]]></summary>
+        <content type="html"><![CDATA[<span class="p-summary"><ul>
+<li class="h-entry"><time class="dt-published" datetime="2025-01-01"><time class="dt-published" datetime="2025-01-01"><time class="dt-published" datetime="2025-01-01">2025-01: </time></time></time><a href="https://github.com/cloudflare/workerd/releases/tag/v1.20250108.0" class="p-name u-url">Release v1.20250108.0 · cloudflare/workerd</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2022-09-01">2022-09: </time><a href="https://blog.cloudflare.com/workerd-open-source-workers-runtime/" class="p-name u-url">Introducing workerd: the Open Source Workers runtime</a></li>
+</ul>
+</span>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[cloudflare/workerd: The JavaScript / Wasm runtime that powers Cloudflare Workers]]></title>
+        <id>https://github.com/cloudflare/workerd</id>
+        <link href="https://github.com/cloudflare/workerd"/>
+        <updated>2025-01-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<span class="p-summary"><ul>
+<li class="h-entry"><time class="dt-published" datetime="2025-01-01"><time class="dt-published" datetime="2025-01-01"><time class="dt-published" datetime="2025-01-01">2025-01: </time></time></time><a href="https://github.com/cloudflare/workerd/releases/tag/v1.20250108.0" class="p-name u-url">Release v1.20250108.0 · cloudflare/workerd</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2022-09-01">2022-09: </time><a href="https://blog.cloudflare.com/workerd-open-source-workers-runtime/" class="p-name u-url">Introducing workerd: the Open Source Workers runtime</a></li>
+</ul>
+</span>]]></summary>
+        <content type="html"><![CDATA[<span class="p-summary"><ul>
+<li class="h-entry"><time class="dt-published" datetime="2025-01-01"><time class="dt-published" datetime="2025-01-01"><time class="dt-published" datetime="2025-01-01">2025-01: </time></time></time><a href="https://github.com/cloudflare/workerd/releases/tag/v1.20250108.0" class="p-name u-url">Release v1.20250108.0 · cloudflare/workerd</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2022-09-01">2022-09: </time><a href="https://blog.cloudflare.com/workerd-open-source-workers-runtime/" class="p-name u-url">Introducing workerd: the Open Source Workers runtime</a></li>
+</ul>
+</span>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release v1.20250108.0 · cloudflare/workerd]]></title>
+        <id>https://github.com/cloudflare/workerd/releases/tag/v1.20250108.0</id>
+        <link href="https://github.com/cloudflare/workerd/releases/tag/v1.20250108.0"/>
+        <updated>2025-01-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spritely Goblins v0.15.0: Goblins in the
+Browser]]></title>
+        <id>https://spritely.institute/news/spritely-goblins-v0-15-0-goblins-in-the-browser.html</id>
+        <link href="https://spritely.institute/news/spritely-goblins-v0-15-0-goblins-in-the-browser.html"/>
+        <updated>2025-01-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["Goblins code can now be compiled to WebAssembly and run in
+the browser, with a WebSocket netlayer and <code>goblin-chat</code>
+demo; includes major performance boosts"]]></summary>
+        <content type="html"><![CDATA["Goblins code can now be compiled to WebAssembly and run in
+the browser, with a WebSocket netlayer and <code>goblin-chat</code>
+demo; includes major performance boosts"]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Fuchsia F24 release notes]]></title>
+        <id>https://fuchsia.dev/whats-new/release-notes/f24</id>
+        <link href="https://fuchsia.dev/whats-new/release-notes/f24"/>
+        <updated>2025-01-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– introduces improvements in diagnostics scoping and structured logging, reinforcing least-authority principles in observability tooling]]></summary>
+        <content type="html"><![CDATA[– introduces improvements in diagnostics scoping and structured logging, reinforcing least-authority principles in observability tooling]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Tahoe-LAFS]]></title>
+        <id>https://tahoe-lafs.org/</id>
+        <link href="https://tahoe-lafs.org/"/>
+        <updated>2024-12-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[is a highly available
+decentralized cloud storage system. Even if some of the servers
+fail or are taken over by an attacker, the entire file store
+continues to function correctly, preserving your privacy and
+security.<ul>
+<li class="h-entry"><time class="dt-published" datetime="2024-12-01"><time class="dt-published" datetime="2024-12-01">2024-12: [v1.20.0 is released]</time></time><a href="https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html" class="p-name u-url">https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html</a><span class="p-summary">)</span></li>
+<li>2024-01-01 <a href="https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-January/010064.html">v1.19.0 released</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2023-11-01">2023-11: </time><a href="https://hackage.haskell.org/package/tahoe-great-black-swamp" class="p-name u-url">new work on a Haskell client implementation</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2020-02-01">2020-02: </time><a href="https://tahoe-lafs.org/pipermail/tahoe-dev/2020-February/009983.html" class="p-name u-url">Tahoe-LAFS Summit at PyCon2020</a></li>
+</ul>]]></summary>
+        <content type="html"><![CDATA[is a highly available
+decentralized cloud storage system. Even if some of the servers
+fail or are taken over by an attacker, the entire file store
+continues to function correctly, preserving your privacy and
+security.<ul>
+<li class="h-entry"><time class="dt-published" datetime="2024-12-01"><time class="dt-published" datetime="2024-12-01">2024-12: [v1.20.0 is released]</time></time><a href="https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html" class="p-name u-url">https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html</a><span class="p-summary">)</span></li>
+<li>2024-01-01 <a href="https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-January/010064.html">v1.19.0 released</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2023-11-01">2023-11: </time><a href="https://hackage.haskell.org/package/tahoe-great-black-swamp" class="p-name u-url">new work on a Haskell client implementation</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2020-02-01">2020-02: </time><a href="https://tahoe-lafs.org/pipermail/tahoe-dev/2020-February/009983.html" class="p-name u-url">Tahoe-LAFS Summit at PyCon2020</a></li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html]]></title>
+        <id>https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html</id>
+        <link href="https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html"/>
+        <updated>2024-12-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[)]]></summary>
+        <content type="html"><![CDATA[)]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[LavaMoat/LavaMoat: tools for sandboxing your dependency graph]]></title>
+        <id>https://github.com/LavaMoat/LavaMoat</id>
+        <link href="https://github.com/LavaMoat/LavaMoat"/>
+        <updated>2024-12-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<ul>
+<li class="h-entry"><time class="dt-published" datetime="2024-12-01"><time class="dt-published" datetime="2024-12-01">2024-12: </time></time><a href="https://github.com/LavaMoat/LavaMoat/releases/tag/lavamoat-v9.0.5" class="p-name u-url">Release lavamoat: v9.0.5</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2022-11-01">2022-11: </time><a href="https://www.youtube.com/watch?v=Z5Bz0DYga1k&amp;t=14s" class="p-name u-url">The Attacker is Inside: Javascript Supplychain Security and LavaMoat</a><span class="p-summary"> by kumavis at Ethereum Devcon Bogota</span></li>
+<li class="h-entry"><time class="dt-published" datetime="2021-01-01">2021-01: </time><a href="https://www.youtube.com/watch?v=iaqe6F4S2tA" class="p-name u-url">Speakeasy JS –&nbsp;Lavamoat: Securing your dependency graph (Kumavis)</a></li>
+</ul>]]></summary>
+        <content type="html"><![CDATA[<ul>
+<li class="h-entry"><time class="dt-published" datetime="2024-12-01"><time class="dt-published" datetime="2024-12-01">2024-12: </time></time><a href="https://github.com/LavaMoat/LavaMoat/releases/tag/lavamoat-v9.0.5" class="p-name u-url">Release lavamoat: v9.0.5</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2022-11-01">2022-11: </time><a href="https://www.youtube.com/watch?v=Z5Bz0DYga1k&amp;t=14s" class="p-name u-url">The Attacker is Inside: Javascript Supplychain Security and LavaMoat</a><span class="p-summary"> by kumavis at Ethereum Devcon Bogota</span></li>
+<li class="h-entry"><time class="dt-published" datetime="2021-01-01">2021-01: </time><a href="https://www.youtube.com/watch?v=iaqe6F4S2tA" class="p-name u-url">Speakeasy JS –&nbsp;Lavamoat: Securing your dependency graph (Kumavis)</a></li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release lavamoat: v9.0.5]]></title>
+        <id>https://github.com/LavaMoat/LavaMoat/releases/tag/lavamoat-v9.0.5</id>
+        <link href="https://github.com/LavaMoat/LavaMoat/releases/tag/lavamoat-v9.0.5"/>
+        <updated>2024-12-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Moddable SDK]]></title>
+        <id>https://github.com/Moddable-OpenSource/moddable</id>
+        <link href="https://github.com/Moddable-OpenSource/moddable"/>
+        <updated>2024-12-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[- "Tools for developers to create truly open IoT products using standard JavaScript on low cost microcontrollers."<ul>
+<li class="h-entry"><time class="dt-published" datetime="2024-12-01"><time class="dt-published" datetime="2024-12-01">2024-12: </time></time><a href="https://github.com/Moddable-OpenSource/moddable/releases/tag/5.3.3" class="p-name u-url">Release Moddable SDK 5.3.3</a></li>
+</ul>]]></summary>
+        <content type="html"><![CDATA[- "Tools for developers to create truly open IoT products using standard JavaScript on low cost microcontrollers."<ul>
+<li class="h-entry"><time class="dt-published" datetime="2024-12-01"><time class="dt-published" datetime="2024-12-01">2024-12: </time></time><a href="https://github.com/Moddable-OpenSource/moddable/releases/tag/5.3.3" class="p-name u-url">Release Moddable SDK 5.3.3</a></li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release Moddable SDK 5.3.3]]></title>
+        <id>https://github.com/Moddable-OpenSource/moddable/releases/tag/5.3.3</id>
+        <link href="https://github.com/Moddable-OpenSource/moddable/releases/tag/5.3.3"/>
+        <updated>2024-12-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Genode OS Framework release 24.11]]></title>
+        <id>https://genode.org/news/genode-os-framework-release-24.11</id>
+        <link href="https://genode.org/news/genode-os-framework-release-24.11"/>
+        <updated>2024-11-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– multi-monitor display support and the <em>Genode Applications</em> book signal a maturity milestone for desktop use]]></summary>
+        <content type="html"><![CDATA[– multi-monitor display support and the <em>Genode Applications</em> book signal a maturity milestone for desktop use]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spritely Goblins v0.14.0: libp2p and Improved
+Persistence]]></title>
+        <id>https://spritely.institute/news/spritely-goblins-v0-14-0-libp2p-and-improved-persistence.html</id>
+        <link href="https://spritely.institute/news/spritely-goblins-v0-14-0-libp2p-and-improved-persistence.html"/>
+        <updated>2024-09-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["introduces a libp2p netlayer, cross-vat persistence using
+<code>^persistence-registry</code>, self-referential actors with
+<code>#:self</code>, and actor upgrade macros"]]></summary>
+        <content type="html"><![CDATA["introduces a libp2p netlayer, cross-vat persistence using
+<code>^persistence-registry</code>, self-referential actors with
+<code>#:self</code>, and actor upgrade macros"]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Genode OS Framework release 24.05]]></title>
+        <id>https://genode.org/news/genode-os-framework-release-24.05</id>
+        <link href="https://genode.org/news/genode-os-framework-release-24.05"/>
+        <updated>2024-05-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– Sculpt OS now runs on Genode’s custom kernel and gains GDB debugging support; USB stack redesigned]]></summary>
+        <content type="html"><![CDATA[– Sculpt OS now runs on Genode’s custom kernel and gains GDB debugging support; USB stack redesigned]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Cloudflare Workers]]></title>
+        <id>https://developers.cloudflare.com/workers/</id>
+        <link href="https://developers.cloudflare.com/workers/"/>
+        <updated>2024-04-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<ul>
+<li class="h-entry"><p><time class="dt-published" datetime="2024-04-01"><time class="dt-published" datetime="2024-04-01">2024-04: </time></time><a href="https://blog.cloudflare.com/javascript-native-rpc/" class="p-name u-url">We’ve added JavaScript-native RPC to Cloudflare Workers</a><span class="p-summary"> – Kenton Varda introduces a secure, ergonomic RPC mechanism built into the Workers platform, enabling structured, streamed, bidirectional communication between components with Cap’n Proto-style semantics and ocap-aligned design</span></p>
+</li>
+<li class="h-entry"><p><time class="dt-published" datetime="2024-04-01">2024-04: </time><a href="https://blog.cloudflare.com/workers-environment-live-object-bindings" class="p-name u-url">Why Workers environment variables contain live objects</a></p>
+</li>
+<li class="h-entry"><p><time class="dt-published" datetime="2022-09-01">2022-09: </time><a href="https://blog.cloudflare.com/workerd-open-source-workers-runtime/" class="p-name u-url">Introducing workerd: the Open Source Workers runtime</a></p>
+</li>
+<li class="h-entry"><p><time class="dt-published" datetime="2021-10-01">2021-10: </time><a href="https://blog.cloudflare.com/spectre-research-with-tu-graz/" class="p-name u-url">Dynamic Process Isolation: Research by Cloudflare and TU Graz</a></p>
+</li>
+<li class="h-entry"><p><time class="dt-published" datetime="2021-08-01">2021-08: </time><a href="https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/" class="p-name u-url">Durable Objects: Easy, Fast, Correct — Choose three</a></p>
+</li>
+<li class="h-entry"><p><time class="dt-published" datetime="2020-07-01">2020-07: </time><a href="https://blog.cloudflare.com/mitigating-spectre-and-other-security-threats-the-cloudflare-workers-security-model/" class="p-name u-url">Mitigating Spectre and Other Security Threats: The Cloudflare Workers Security Model</a></p>
+</li>
+</ul>]]></summary>
+        <content type="html"><![CDATA[<ul>
+<li class="h-entry"><p><time class="dt-published" datetime="2024-04-01"><time class="dt-published" datetime="2024-04-01">2024-04: </time></time><a href="https://blog.cloudflare.com/javascript-native-rpc/" class="p-name u-url">We’ve added JavaScript-native RPC to Cloudflare Workers</a><span class="p-summary"> – Kenton Varda introduces a secure, ergonomic RPC mechanism built into the Workers platform, enabling structured, streamed, bidirectional communication between components with Cap’n Proto-style semantics and ocap-aligned design</span></p>
+</li>
+<li class="h-entry"><p><time class="dt-published" datetime="2024-04-01">2024-04: </time><a href="https://blog.cloudflare.com/workers-environment-live-object-bindings" class="p-name u-url">Why Workers environment variables contain live objects</a></p>
+</li>
+<li class="h-entry"><p><time class="dt-published" datetime="2022-09-01">2022-09: </time><a href="https://blog.cloudflare.com/workerd-open-source-workers-runtime/" class="p-name u-url">Introducing workerd: the Open Source Workers runtime</a></p>
+</li>
+<li class="h-entry"><p><time class="dt-published" datetime="2021-10-01">2021-10: </time><a href="https://blog.cloudflare.com/spectre-research-with-tu-graz/" class="p-name u-url">Dynamic Process Isolation: Research by Cloudflare and TU Graz</a></p>
+</li>
+<li class="h-entry"><p><time class="dt-published" datetime="2021-08-01">2021-08: </time><a href="https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/" class="p-name u-url">Durable Objects: Easy, Fast, Correct — Choose three</a></p>
+</li>
+<li class="h-entry"><p><time class="dt-published" datetime="2020-07-01">2020-07: </time><a href="https://blog.cloudflare.com/mitigating-spectre-and-other-security-threats-the-cloudflare-workers-security-model/" class="p-name u-url">Mitigating Spectre and Other Security Threats: The Cloudflare Workers Security Model</a></p>
+</li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[We’ve added JavaScript-native RPC to Cloudflare Workers]]></title>
+        <id>https://blog.cloudflare.com/javascript-native-rpc/</id>
+        <link href="https://blog.cloudflare.com/javascript-native-rpc/"/>
+        <updated>2024-04-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– Kenton Varda introduces a secure, ergonomic RPC mechanism built into the Workers platform, enabling structured, streamed, bidirectional communication between components with Cap’n Proto-style semantics and ocap-aligned design]]></summary>
+        <content type="html"><![CDATA[– Kenton Varda introduces a secure, ergonomic RPC mechanism built into the Workers platform, enabling structured, streamed, bidirectional communication between components with Cap’n Proto-style semantics and ocap-aligned design]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Why Workers environment variables contain live objects]]></title>
+        <id>https://blog.cloudflare.com/workers-environment-live-object-bindings</id>
+        <link href="https://blog.cloudflare.com/workers-environment-live-object-bindings"/>
+        <updated>2024-04-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spritely Goblins v0.13.0: Object Persistence and
+Easier
+IO]]></title>
+        <id>https://spritely.institute/news/spritely-goblins-v0-13-0-object-persistence-and-easier-io.html</id>
+        <link href="https://spritely.institute/news/spritely-goblins-v0-13-0-object-persistence-and-easier-io.html"/>
+        <updated>2024-04-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["introduces the Aurie persistence system for long-lived
+objects, simplifies actor definition with <code>define-actor</code>,
+and adds the <code>^io</code> actor for asynchronous IO"]]></summary>
+        <content type="html"><![CDATA["introduces the Aurie persistence system for long-lived
+objects, simplifies actor definition with <code>define-actor</code>,
+and adds the <code>^io</code> actor for asynchronous IO"]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Fuchsia OS powers all Nest Hub devices]]></title>
+        <id>https://9to5google.com/2024/03/01/fuchsia-16-nest-hub-whats-new</id>
+        <link href="https://9to5google.com/2024/03/01/fuchsia-16-nest-hub-whats-new"/>
+        <updated>2024-03-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– Fuchsia’s capability-based component framework is now deployed across all Nest Hub models, replacing the legacy Cast OS; each system component runs with only the capabilities it is explicitly granted, demonstrating ocap principles at scale in a mainstream consumer product]]></summary>
+        <content type="html"><![CDATA[– Fuchsia’s capability-based component framework is now deployed across all Nest Hub models, replacing the legacy Cast OS; each system component runs with only the capabilities it is explicitly granted, demonstrating ocap principles at scale in a mainstream consumer product]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Sandstorm]]></title>
+        <id>https://sandstorm.org/</id>
+        <link href="https://sandstorm.org/"/>
+        <updated>2024-01-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[is a self-hosted web
+productivity suite and <a href="https://apps.sandstorm.io/">App Market</a>
+with WordPress, Rocket.Chat, IPython Notebook and many more.
+<a href="https://sandstorm.io/how-it-works#capabilities">Sandstorm's Capability-based Security</a> protects you and
+your data against application bugs.<ul>
+<li class="h-entry"><time class="dt-published" datetime="2024-01-01"><time class="dt-published" datetime="2024-01-01">2024-01: </time></time><a href="https://sandstorm.io/news/2024-01-14-move-to-sandstorm-org" class="p-name u-url">Sandstorm now belongs to Sandstorm.org</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2023-10-01">2023-10: </time><a href="https://sandstorm.org/news/2023-10-23-sandstorm-tempest-and-the-future" class="p-name u-url">Sandstorm, Tempest, and the Future</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2020-02-22">2020-02-22: </time><a href="https://sandstorm.io/news/2020-02-22-announcing-vagrant-spk-1.0" class="p-name u-url">Announcing the release of vagrant-spk 1.0</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2017-03-02">2017-03-02: </time><a href="https://github.com/sandstorm-io/sandstorm/pull/2870" class="p-name u-url">connecting to external HTTP APIs via the Powerbox</a><span class="p-summary">
+and related powerbox enhancements<br>v0.200 (2017-01-28), v0.203</span></li>
+<li class="h-entry"><time class="dt-published" datetime="2015-02-06">2015-02-06: </time><a href="https://sandstorm.io/news/2015-02-06-app-demo" class="p-name u-url">One click to try an open source web application</a></li>
+</ul>]]></summary>
+        <content type="html"><![CDATA[is a self-hosted web
+productivity suite and <a href="https://apps.sandstorm.io/">App Market</a>
+with WordPress, Rocket.Chat, IPython Notebook and many more.
+<a href="https://sandstorm.io/how-it-works#capabilities">Sandstorm's Capability-based Security</a> protects you and
+your data against application bugs.<ul>
+<li class="h-entry"><time class="dt-published" datetime="2024-01-01"><time class="dt-published" datetime="2024-01-01">2024-01: </time></time><a href="https://sandstorm.io/news/2024-01-14-move-to-sandstorm-org" class="p-name u-url">Sandstorm now belongs to Sandstorm.org</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2023-10-01">2023-10: </time><a href="https://sandstorm.org/news/2023-10-23-sandstorm-tempest-and-the-future" class="p-name u-url">Sandstorm, Tempest, and the Future</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2020-02-22">2020-02-22: </time><a href="https://sandstorm.io/news/2020-02-22-announcing-vagrant-spk-1.0" class="p-name u-url">Announcing the release of vagrant-spk 1.0</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2017-03-02">2017-03-02: </time><a href="https://github.com/sandstorm-io/sandstorm/pull/2870" class="p-name u-url">connecting to external HTTP APIs via the Powerbox</a><span class="p-summary">
+and related powerbox enhancements<br>v0.200 (2017-01-28), v0.203</span></li>
+<li class="h-entry"><time class="dt-published" datetime="2015-02-06">2015-02-06: </time><a href="https://sandstorm.io/news/2015-02-06-app-demo" class="p-name u-url">One click to try an open source web application</a></li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Sandstorm now belongs to Sandstorm.org]]></title>
+        <id>https://sandstorm.io/news/2024-01-14-move-to-sandstorm-org</id>
+        <link href="https://sandstorm.io/news/2024-01-14-move-to-sandstorm-org"/>
+        <updated>2024-01-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[new work on a Haskell client implementation]]></title>
+        <id>https://hackage.haskell.org/package/tahoe-great-black-swamp</id>
+        <link href="https://hackage.haskell.org/package/tahoe-great-black-swamp"/>
+        <updated>2023-11-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Sandstorm, Tempest, and the Future]]></title>
+        <id>https://sandstorm.org/news/2023-10-23-sandstorm-tempest-and-the-future</id>
+        <link href="https://sandstorm.org/news/2023-10-23-sandstorm-tempest-and-the-future"/>
+        <updated>2023-10-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[The Attacker is Inside: Javascript Supplychain Security and LavaMoat]]></title>
+        <id>https://www.youtube.com/watch?v=Z5Bz0DYga1k&amp;t=14s</id>
+        <link href="https://www.youtube.com/watch?v=Z5Bz0DYga1k&amp;t=14s"/>
+        <updated>2022-11-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[by kumavis at Ethereum Devcon Bogota]]></summary>
+        <content type="html"><![CDATA[by kumavis at Ethereum Devcon Bogota]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[cap-std]]></title>
+        <id>https://github.com/sunfishcode/cap-std</id>
+        <link href="https://github.com/sunfishcode/cap-std"/>
+        <updated>2022-11-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<span class="p-summary"> Capability-oriented version of the Rust standard library<ul>
+<li class="h-entry"><time class="dt-published" datetime="2022-11-01"><time class="dt-published" datetime="2022-11-01"><time class="dt-published" datetime="2022-11-01">2022-11: </time></time></time><a href="https://github.com/bytecodealliance/cap-std/releases/tag/v1.0.0" class="p-name u-url">Release v1.0.0 · bytecodealliance/cap-std</a></li>
+</ul>
+</span>]]></summary>
+        <content type="html"><![CDATA[<span class="p-summary"> Capability-oriented version of the Rust standard library<ul>
+<li class="h-entry"><time class="dt-published" datetime="2022-11-01"><time class="dt-published" datetime="2022-11-01"><time class="dt-published" datetime="2022-11-01">2022-11: </time></time></time><a href="https://github.com/bytecodealliance/cap-std/releases/tag/v1.0.0" class="p-name u-url">Release v1.0.0 · bytecodealliance/cap-std</a></li>
+</ul>
+</span>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[cap-std]]></title>
+        <id>https://github.com/sunfishcode/cap-std</id>
+        <link href="https://github.com/sunfishcode/cap-std"/>
+        <updated>2022-11-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<span class="p-summary"> Capability-oriented version of the Rust standard library<ul>
+<li class="h-entry"><time class="dt-published" datetime="2022-11-01"><time class="dt-published" datetime="2022-11-01"><time class="dt-published" datetime="2022-11-01">2022-11: </time></time></time><a href="https://github.com/bytecodealliance/cap-std/releases/tag/v1.0.0" class="p-name u-url">Release v1.0.0 · bytecodealliance/cap-std</a></li>
+</ul>
+</span>]]></summary>
+        <content type="html"><![CDATA[<span class="p-summary"> Capability-oriented version of the Rust standard library<ul>
+<li class="h-entry"><time class="dt-published" datetime="2022-11-01"><time class="dt-published" datetime="2022-11-01"><time class="dt-published" datetime="2022-11-01">2022-11: </time></time></time><a href="https://github.com/bytecodealliance/cap-std/releases/tag/v1.0.0" class="p-name u-url">Release v1.0.0 · bytecodealliance/cap-std</a></li>
+</ul>
+</span>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release v1.0.0 · bytecodealliance/cap-std]]></title>
+        <id>https://github.com/bytecodealliance/cap-std/releases/tag/v1.0.0</id>
+        <link href="https://github.com/bytecodealliance/cap-std/releases/tag/v1.0.0"/>
+        <updated>2022-11-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[capnproto/capnproto-rust: Cap'n Proto for Rust]]></title>
+        <id>https://github.com/capnproto/capnproto-rust</id>
+        <link href="https://github.com/capnproto/capnproto-rust"/>
+        <updated>2022-11-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<ul>
+<li class="h-entry"><time class="dt-published" datetime="2022-11-01"><time class="dt-published" datetime="2022-11-01">2022-11: </time></time><a href="https://github.com/capnproto/capnproto-rust/releases/tag/capnpc-v0.15.0" class="p-name u-url">Release capnpc-v0.15.0 · capnproto/capnproto-rust</a></li>
+</ul>]]></summary>
+        <content type="html"><![CDATA[<ul>
+<li class="h-entry"><time class="dt-published" datetime="2022-11-01"><time class="dt-published" datetime="2022-11-01">2022-11: </time></time><a href="https://github.com/capnproto/capnproto-rust/releases/tag/capnpc-v0.15.0" class="p-name u-url">Release capnpc-v0.15.0 · capnproto/capnproto-rust</a></li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release capnpc-v0.15.0 · capnproto/capnproto-rust]]></title>
+        <id>https://github.com/capnproto/capnproto-rust/releases/tag/capnpc-v0.15.0</id>
+        <link href="https://github.com/capnproto/capnproto-rust/releases/tag/capnpc-v0.15.0"/>
+        <updated>2022-11-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[seL4]]></title>
+        <id>https://sel4.systems/</id>
+        <link href="https://sel4.systems/"/>
+        <updated>2022-10-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[is the world's first
+operating-system kernel with an end-to-end proof of implementation
+correctness and security enforcement; it is available as open
+source.]]></summary>
+        <content type="html"><![CDATA[is the world's first
+operating-system kernel with an end-to-end proof of implementation
+correctness and security enforcement; it is available as open
+source.]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[seL4 Summit 2022]]></title>
+        <id>https://sel4.systems/Foundation/Summit/abstracts2022</id>
+        <link href="https://sel4.systems/Foundation/Summit/abstracts2022"/>
+        <updated>2022-10-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Munich, Germany (hybrid), 10-13 Oct 2022<ul>
+<li class="h-entry"><a href="https://www.youtube.com/watch?v=PDVMVSSpGOQ&amp;list=PLtoQeavghzr3atxNQig-sLGbwoKBSVxGV" class="p-name u-url"><time class="dt-published" datetime="2022-10-01">2022-10: 4th seL4 Summit</time></a><span class="p-summary"> video playlist</span></li>
+</ul>]]></summary>
+        <content type="html"><![CDATA[Munich, Germany (hybrid), 10-13 Oct 2022<ul>
+<li class="h-entry"><a href="https://www.youtube.com/watch?v=PDVMVSSpGOQ&amp;list=PLtoQeavghzr3atxNQig-sLGbwoKBSVxGV" class="p-name u-url"><time class="dt-published" datetime="2022-10-01">2022-10: 4th seL4 Summit</time></a><span class="p-summary"> video playlist</span></li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2022-10: 4th seL4 Summit]]></title>
+        <id>https://www.youtube.com/watch?v=PDVMVSSpGOQ&amp;list=PLtoQeavghzr3atxNQig-sLGbwoKBSVxGV</id>
+        <link href="https://www.youtube.com/watch?v=PDVMVSSpGOQ&amp;list=PLtoQeavghzr3atxNQig-sLGbwoKBSVxGV"/>
+        <updated>2022-10-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[video playlist]]></summary>
+        <content type="html"><![CDATA[video playlist]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[KataOS]]></title>
+        <id>https://github.com/AmbiML/sparrow-manifest</id>
+        <link href="https://github.com/AmbiML/sparrow-manifest"/>
+        <updated>2022-10-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[- embeded platform that runs on top of seL4]]></summary>
+        <content type="html"><![CDATA[- embeded platform that runs on top of seL4]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Announcing KataOS and Sparrow | Google Open Source Blog]]></title>
+        <id>https://opensource.googleblog.com/2022/10/announcing-kataos-and-sparrow.html</id>
+        <link href="https://opensource.googleblog.com/2022/10/announcing-kataos-and-sparrow.html"/>
+        <updated>2022-10-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[“As the foundation for this new operating system, we chose seL4 as the microkernel because it puts security front and center; it is mathematically proven secure, with guaranteed confidentiality, integrity, and availability.”]]></summary>
+        <content type="html"><![CDATA[“As the foundation for this new operating system, we chose seL4 as the microkernel because it puts security front and center; it is mathematically proven secure, with guaranteed confidentiality, integrity, and availability.”]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Introducing workerd: the Open Source Workers runtime]]></title>
+        <id>https://blog.cloudflare.com/workerd-open-source-workers-runtime/</id>
+        <link href="https://blog.cloudflare.com/workerd-open-source-workers-runtime/"/>
+        <updated>2022-09-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Introducing workerd: the Open Source Workers runtime]]></title>
+        <id>https://blog.cloudflare.com/workerd-open-source-workers-runtime/</id>
+        <link href="https://blog.cloudflare.com/workerd-open-source-workers-runtime/"/>
+        <updated>2022-09-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Austral]]></title>
+        <id>https://austral-lang.org/</id>
+        <link href="https://austral-lang.org/"/>
+        <updated>2022-09-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[- a systems language with linear types and capability security]]></summary>
+        <content type="html"><![CDATA[- a systems language with linear types and capability security]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release 0.1.0: Core language complete]]></title>
+        <id>https://github.com/austral/austral/releases/tag/v0.1.0</id>
+        <link href="https://github.com/austral/austral/releases/tag/v0.1.0"/>
+        <updated>2022-09-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Dynamic Process Isolation: Research by Cloudflare and TU Graz]]></title>
+        <id>https://blog.cloudflare.com/spectre-research-with-tu-graz/</id>
+        <link href="https://blog.cloudflare.com/spectre-research-with-tu-graz/"/>
+        <updated>2021-10-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[wasmedge-seL4]]></title>
+        <id>https://github.com/second-state/wasmedge-seL4</id>
+        <link href="https://github.com/second-state/wasmedge-seL4"/>
+        <updated>2021-10-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<code>fc25cae</code> Integrate WasmEdge with seL4<br><a href="https://www.youtube.com/watch?v=2Qu-Trtkspk">demo video</a>]]></summary>
+        <content type="html"><![CDATA[<code>fc25cae</code> Integrate WasmEdge with seL4<br><a href="https://www.youtube.com/watch?v=2Qu-Trtkspk">demo video</a>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hardened JavaScript]]></title>
+        <id>https://hardenedjs.org/</id>
+        <link href="https://hardenedjs.org/"/>
+        <updated>2021-09-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["Hardened JavaScript is a standards track mode for the JavaScript language for safe plugin systems and supply chain attack resistance. Hardening JavaScript improves a program’s integrity in the face of adversarial code in the same process."<ul>
+<li>2024-10 <a href="https://hardenedjs.org/blog/ses-1.9.0/">SES 1.9.0 introduces immutable ArrayBuffers</a></li>
+<li>2023-09 <a href="https://metamask.io/news/latest/decentralizing-the-wallet-experience-with-metamask-snaps/">Decentralizing the wallet experience with MetaMask Snaps</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2021-09-01"><time class="dt-published" datetime="2021-09-01">2021-09: SES-0.14.3 </time></time><code>6190052</code></li>
+<li class="h-entry"><time class="dt-published" datetime="2020-03-01">2020-03: SES-0.7.6 </time><code>9385d44</code></li>
+<li class="h-entry"><time class="dt-published" datetime="2019-12-01">2019-12: </time><a href="https://www.youtube.com/watch?v=hP00w4r4zhg&amp;list=PLzDw4TTug5O0ywHrOz4VevVTYr6Kj_KtW&amp;index=22" class="p-name u-url">Making 'npm install' Safe - QCon New York</a><span class="p-summary"> "Kate Sills on security issues using NPM packages, the EventStream incident, and SES" as possible solutions to npm supply-chain risks.</span></li>
+<li class="h-entry"><time class="dt-published" datetime="2019-06-01">2019-06: </time><a href="https://www.youtube.com/watch?v=iyuo0ymTt4g&amp;list=PLhuBigpl7lqth_Ow_eQWZs7NFxmeDw9W8&amp;index=1" class="p-name u-url">Higher-order Smart Contracts across Chains</a><span class="p-summary"> Agoric + Protocol Labs //  - Mark Miller</span></li>
+<li class="h-entry"><time class="dt-published" datetime="2018-10-15">2018-10-15: </time><a href="https://www.youtube.com/watch?v=YXUqfgdDbr8" class="p-name u-url">SF Cryptocurrency Devs: Agoric - Programming Secure Smart Contracts</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2018-07-28">2018-07-28: </time><a href="https://agoric.com/agoric-releases-ses/" class="p-name u-url">Agoric Releases SES: Secure JavaScript</a><span class="p-summary">  f4d3d5a</span></li>
+</ul>]]></summary>
+        <content type="html"><![CDATA["Hardened JavaScript is a standards track mode for the JavaScript language for safe plugin systems and supply chain attack resistance. Hardening JavaScript improves a program’s integrity in the face of adversarial code in the same process."<ul>
+<li>2024-10 <a href="https://hardenedjs.org/blog/ses-1.9.0/">SES 1.9.0 introduces immutable ArrayBuffers</a></li>
+<li>2023-09 <a href="https://metamask.io/news/latest/decentralizing-the-wallet-experience-with-metamask-snaps/">Decentralizing the wallet experience with MetaMask Snaps</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2021-09-01"><time class="dt-published" datetime="2021-09-01">2021-09: SES-0.14.3 </time></time><code>6190052</code></li>
+<li class="h-entry"><time class="dt-published" datetime="2020-03-01">2020-03: SES-0.7.6 </time><code>9385d44</code></li>
+<li class="h-entry"><time class="dt-published" datetime="2019-12-01">2019-12: </time><a href="https://www.youtube.com/watch?v=hP00w4r4zhg&amp;list=PLzDw4TTug5O0ywHrOz4VevVTYr6Kj_KtW&amp;index=22" class="p-name u-url">Making 'npm install' Safe - QCon New York</a><span class="p-summary"> "Kate Sills on security issues using NPM packages, the EventStream incident, and SES" as possible solutions to npm supply-chain risks.</span></li>
+<li class="h-entry"><time class="dt-published" datetime="2019-06-01">2019-06: </time><a href="https://www.youtube.com/watch?v=iyuo0ymTt4g&amp;list=PLhuBigpl7lqth_Ow_eQWZs7NFxmeDw9W8&amp;index=1" class="p-name u-url">Higher-order Smart Contracts across Chains</a><span class="p-summary"> Agoric + Protocol Labs //  - Mark Miller</span></li>
+<li class="h-entry"><time class="dt-published" datetime="2018-10-15">2018-10-15: </time><a href="https://www.youtube.com/watch?v=YXUqfgdDbr8" class="p-name u-url">SF Cryptocurrency Devs: Agoric - Programming Secure Smart Contracts</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2018-07-28">2018-07-28: </time><a href="https://agoric.com/agoric-releases-ses/" class="p-name u-url">Agoric Releases SES: Secure JavaScript</a><span class="p-summary">  f4d3d5a</span></li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Newspeak]]></title>
+        <id>https://newspeaklanguage.org/</id>
+        <link href="https://newspeaklanguage.org/"/>
+        <updated>2021-09-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[is an object-capability programming platform that lets you develop code in your web browser. Like Self, Newspeak is message-based; all names are dynamically bound. However, like Smalltalk, Newspeak uses classes rather than prototypes.
+The current version of Newspeak runs on top of WASM.]]></summary>
+        <content type="html"><![CDATA[is an object-capability programming platform that lets you develop code in your web browser. Like Self, Newspeak is message-based; all names are dynamically bound. However, like Smalltalk, Newspeak uses classes rather than prototypes.
+The current version of Newspeak runs on top of WASM.]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Gilad Bracha: Newspeak on the Web]]></title>
+        <id>https://www.youtube.com/watch?v=SG08kxIIlHQ&amp;t=1083s</id>
+        <link href="https://www.youtube.com/watch?v=SG08kxIIlHQ&amp;t=1083s"/>
+        <updated>2021-09-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[at California Smalltalkers]]></summary>
+        <content type="html"><![CDATA[at California Smalltalkers]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Durable Objects: Easy, Fast, Correct — Choose three]]></title>
+        <id>https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/</id>
+        <link href="https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/"/>
+        <updated>2021-08-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Ghost donates to the seL4 Foundation]]></title>
+        <id>https://sel4.systems/news/2021</id>
+        <link href="https://sel4.systems/news/2021"/>
+        <updated>2021-08-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Lotus Cars joins the seL4 Foundation]]></title>
+        <id>https://sel4.systems/news/2021</id>
+        <link href="https://sel4.systems/news/2021"/>
+        <updated>2021-08-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[seL4 protects world's most secure drone from DEFCON hackers]]></title>
+        <id>https://sel4.systems/news/2021</id>
+        <link href="https://sel4.systems/news/2021"/>
+        <updated>2021-08-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Ghost Raises $100M for Breakthrough in Autonomous Driving Safety]]></title>
+        <id>https://driveghost.com/blog/breakthrough-autonomous-driving-safety</id>
+        <link href="https://driveghost.com/blog/breakthrough-autonomous-driving-safety"/>
+        <updated>2021-07-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Attested TEEs for Transactional Workloads]]></title>
+        <id>https://www.youtube.com/watch?v=su8lnMaYQHg</id>
+        <link href="https://www.youtube.com/watch?v=su8lnMaYQHg"/>
+        <updated>2021-05-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[:: Sid Hussmann PADSEC 2021. <em>We present a generic TEE toolkit applicable for many use-cases in finance, healthcare, and government. Gapfruit TEE embodies a microkernel operating system with capability-based security.</em>]]></summary>
+        <content type="html"><![CDATA[:: Sid Hussmann PADSEC 2021. <em>We present a generic TEE toolkit applicable for many use-cases in finance, healthcare, and government. Gapfruit TEE embodies a microkernel operating system with capability-based security.</em>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Live IDEs in the Web Browser: What's Holding Us Back]]></title>
+        <id>https://www.youtube.com/watch?v=CJX_6B24Hho</id>
+        <link href="https://www.youtube.com/watch?v=CJX_6B24Hho"/>
+        <updated>2021-03-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Includes a brief demo of the WASM based Newspeak IDE.]]></summary>
+        <content type="html"><![CDATA[Includes a brief demo of the WASM based Newspeak IDE.]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Speakeasy JS – Lavamoat: Securing your dependency graph (Kumavis)]]></title>
+        <id>https://www.youtube.com/watch?v=iaqe6F4S2tA</id>
+        <link href="https://www.youtube.com/watch?v=iaqe6F4S2tA"/>
+        <updated>2021-01-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Navigating the Attack Surface to achieve a *multiplicative* reduction in risk]]></title>
+        <id>https://www.youtube.com/watch?v=wW9-KuezPp8&amp;t=664s</id>
+        <link href="https://www.youtube.com/watch?v=wW9-KuezPp8&amp;t=664s"/>
+        <updated>2020-12-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Mark Miller. 15min]]></summary>
+        <content type="html"><![CDATA[Mark Miller. 15min]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Fuchsia Component Framework]]></title>
+        <id>https://fuchsia.dev/fuchsia-src/concepts/components/v2/introduction</id>
+        <link href="https://fuchsia.dev/fuchsia-src/concepts/components/v2/introduction"/>
+        <updated>2020-11-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– Fuchsia’s core architectural model based on sandboxed components and explicit capability routing, offering a native implementation of capability-secure composition]]></summary>
+        <content type="html"><![CDATA[– Fuchsia’s core architectural model based on sandboxed components and explicit capability routing, offering a native implementation of capability-secure composition]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Mitigating Spectre and Other Security Threats: The Cloudflare Workers Security Model]]></title>
+        <id>https://blog.cloudflare.com/mitigating-spectre-and-other-security-threats-the-cloudflare-workers-security-model/</id>
+        <link href="https://blog.cloudflare.com/mitigating-spectre-and-other-security-threats-the-cloudflare-workers-security-model/"/>
+        <updated>2020-07-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Re-stacking the GUI stack]]></title>
+        <id>https://genodians.org/nfeske/2020-06-23-gui-stack</id>
+        <link href="https://genodians.org/nfeske/2020-06-23-gui-stack"/>
+        <updated>2020-06-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– Norman Feske outlines a redesign of Genode's GUI architecture, inverting the traditional client-server relationship between GUI servers and drivers to enhance resilience and modularity]]></summary>
+        <content type="html"><![CDATA[– Norman Feske outlines a redesign of Genode's GUI architecture, inverting the traditional client-server relationship between GUI servers and drivers to enhance resilience and modularity]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Cap’n Proto]]></title>
+        <id>https://capnproto.org/</id>
+        <link href="https://capnproto.org/"/>
+        <updated>2020-04-23T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<span class="p-summary"> is a high performance
+serialization and RPC protocol with distributed and persistent
+capabilities and promise pipelining. Bindings to python,
+JavaScript (in node.js), Go, Rust, etc. are available<ul>
+<li class="h-entry"><time class="dt-published" datetime="2020-04-23"><time class="dt-published" datetime="2020-04-23"><time class="dt-published" datetime="2020-04-23">2020-04-23: </time></time></time><a href="https://capnproto.org/news/2020-04-23-capnproto-0.8.html" class="p-name u-url">Cap'n Proto: Cap'n Proto 0.8: Streaming flow control, HTTP-over-RPC, fibers, etc.</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2014-12-15">2014-12-15: </time><a href="https://sandstorm.io/news/2014-12-15-capnproto-0.5" class="p-name u-url">Cap'n Proto 0.5, and how it is central to Sandstorm</a><span class="p-summary"> by Kenton Varda</span></li>
+</ul>
+</span>]]></summary>
+        <content type="html"><![CDATA[<span class="p-summary"> is a high performance
+serialization and RPC protocol with distributed and persistent
+capabilities and promise pipelining. Bindings to python,
+JavaScript (in node.js), Go, Rust, etc. are available<ul>
+<li class="h-entry"><time class="dt-published" datetime="2020-04-23"><time class="dt-published" datetime="2020-04-23"><time class="dt-published" datetime="2020-04-23">2020-04-23: </time></time></time><a href="https://capnproto.org/news/2020-04-23-capnproto-0.8.html" class="p-name u-url">Cap'n Proto: Cap'n Proto 0.8: Streaming flow control, HTTP-over-RPC, fibers, etc.</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2014-12-15">2014-12-15: </time><a href="https://sandstorm.io/news/2014-12-15-capnproto-0.5" class="p-name u-url">Cap'n Proto 0.5, and how it is central to Sandstorm</a><span class="p-summary"> by Kenton Varda</span></li>
+</ul>
+</span>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Cap’n Proto]]></title>
+        <id>https://capnproto.org/</id>
+        <link href="https://capnproto.org/"/>
+        <updated>2020-04-23T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<span class="p-summary"> is a high performance
+serialization and RPC protocol with distributed and persistent
+capabilities and promise pipelining. Bindings to python,
+JavaScript (in node.js), Go, Rust, etc. are available<ul>
+<li class="h-entry"><time class="dt-published" datetime="2020-04-23"><time class="dt-published" datetime="2020-04-23"><time class="dt-published" datetime="2020-04-23">2020-04-23: </time></time></time><a href="https://capnproto.org/news/2020-04-23-capnproto-0.8.html" class="p-name u-url">Cap'n Proto: Cap'n Proto 0.8: Streaming flow control, HTTP-over-RPC, fibers, etc.</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2014-12-15">2014-12-15: </time><a href="https://sandstorm.io/news/2014-12-15-capnproto-0.5" class="p-name u-url">Cap'n Proto 0.5, and how it is central to Sandstorm</a><span class="p-summary"> by Kenton Varda</span></li>
+</ul>
+</span>]]></summary>
+        <content type="html"><![CDATA[<span class="p-summary"> is a high performance
+serialization and RPC protocol with distributed and persistent
+capabilities and promise pipelining. Bindings to python,
+JavaScript (in node.js), Go, Rust, etc. are available<ul>
+<li class="h-entry"><time class="dt-published" datetime="2020-04-23"><time class="dt-published" datetime="2020-04-23"><time class="dt-published" datetime="2020-04-23">2020-04-23: </time></time></time><a href="https://capnproto.org/news/2020-04-23-capnproto-0.8.html" class="p-name u-url">Cap'n Proto: Cap'n Proto 0.8: Streaming flow control, HTTP-over-RPC, fibers, etc.</a></li>
+<li class="h-entry"><time class="dt-published" datetime="2014-12-15">2014-12-15: </time><a href="https://sandstorm.io/news/2014-12-15-capnproto-0.5" class="p-name u-url">Cap'n Proto 0.5, and how it is central to Sandstorm</a><span class="p-summary"> by Kenton Varda</span></li>
+</ul>
+</span>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Cap'n Proto: Cap'n Proto 0.8: Streaming flow control, HTTP-over-RPC, fibers, etc.]]></title>
+        <id>https://capnproto.org/news/2020-04-23-capnproto-0.8.html</id>
+        <link href="https://capnproto.org/news/2020-04-23-capnproto-0.8.html"/>
+        <updated>2020-04-23T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[seL4 developers create open source foundation to enable safer, more secure and more reliable computing systems - CSIRO]]></title>
+        <id>https://www.csiro.au/en/News/News-releases/2020/seL4-developers-create-open-source-foundation</id>
+        <link href="https://www.csiro.au/en/News/News-releases/2020/seL4-developers-create-open-source-foundation"/>
+        <updated>2020-04-08T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Announcing the release of vagrant-spk 1.0]]></title>
+        <id>https://sandstorm.io/news/2020-02-22-announcing-vagrant-spk-1.0</id>
+        <link href="https://sandstorm.io/news/2020-02-22-announcing-vagrant-spk-1.0"/>
+        <updated>2020-02-22T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Tahoe-LAFS Summit at PyCon2020]]></title>
+        <id>https://tahoe-lafs.org/pipermail/tahoe-dev/2020-February/009983.html</id>
+        <link href="https://tahoe-lafs.org/pipermail/tahoe-dev/2020-February/009983.html"/>
+        <updated>2020-02-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Making 'npm install' Safe - QCon New York]]></title>
+        <id>https://www.youtube.com/watch?v=hP00w4r4zhg&amp;list=PLzDw4TTug5O0ywHrOz4VevVTYr6Kj_KtW&amp;index=22</id>
+        <link href="https://www.youtube.com/watch?v=hP00w4r4zhg&amp;list=PLzDw4TTug5O0ywHrOz4VevVTYr6Kj_KtW&amp;index=22"/>
+        <updated>2019-12-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["Kate Sills on security issues using NPM packages, the EventStream incident, and SES" as possible solutions to npm supply-chain risks.]]></summary>
+        <content type="html"><![CDATA["Kate Sills on security issues using NPM packages, the EventStream incident, and SES" as possible solutions to npm supply-chain risks.]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[capnproto/go-capnproto2: Cap'n Proto library and code generator for Go]]></title>
+        <id>https://github.com/capnproto/go-capnproto2</id>
+        <link href="https://github.com/capnproto/go-capnproto2"/>
+        <updated>2019-12-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<span class="p-summary"><ul>
+<li class="h-entry"><time class="dt-published" datetime="2019-12-01"><time class="dt-published" datetime="2019-12-01"><time class="dt-published" datetime="2019-12-01">2019-12: </time></time></time><a href="https://github.com/capnproto/go-capnproto2/releases/tag/v2.18.0" class="p-name u-url">Release v2.18.0 · capnproto/go-capnproto2</a></li>
+</ul>
+</span>]]></summary>
+        <content type="html"><![CDATA[<span class="p-summary"><ul>
+<li class="h-entry"><time class="dt-published" datetime="2019-12-01"><time class="dt-published" datetime="2019-12-01"><time class="dt-published" datetime="2019-12-01">2019-12: </time></time></time><a href="https://github.com/capnproto/go-capnproto2/releases/tag/v2.18.0" class="p-name u-url">Release v2.18.0 · capnproto/go-capnproto2</a></li>
+</ul>
+</span>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[capnproto/go-capnproto2: Cap'n Proto library and code generator for Go]]></title>
+        <id>https://github.com/capnproto/go-capnproto2</id>
+        <link href="https://github.com/capnproto/go-capnproto2"/>
+        <updated>2019-12-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<span class="p-summary"><ul>
+<li class="h-entry"><time class="dt-published" datetime="2019-12-01"><time class="dt-published" datetime="2019-12-01"><time class="dt-published" datetime="2019-12-01">2019-12: </time></time></time><a href="https://github.com/capnproto/go-capnproto2/releases/tag/v2.18.0" class="p-name u-url">Release v2.18.0 · capnproto/go-capnproto2</a></li>
+</ul>
+</span>]]></summary>
+        <content type="html"><![CDATA[<span class="p-summary"><ul>
+<li class="h-entry"><time class="dt-published" datetime="2019-12-01"><time class="dt-published" datetime="2019-12-01"><time class="dt-published" datetime="2019-12-01">2019-12: </time></time></time><a href="https://github.com/capnproto/go-capnproto2/releases/tag/v2.18.0" class="p-name u-url">Release v2.18.0 · capnproto/go-capnproto2</a></li>
+</ul>
+</span>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release v2.18.0 · capnproto/go-capnproto2]]></title>
+        <id>https://github.com/capnproto/go-capnproto2/releases/tag/v2.18.0</id>
+        <link href="https://github.com/capnproto/go-capnproto2/releases/tag/v2.18.0"/>
+        <updated>2019-12-01T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Making 'npm install' Safe - QCon New York]]></title>
+        <id>https://www.youtube.com/watch?v=hP00w4r4zhg&amp;list=PLzDw4TTug5O0ywHrOz4VevVTYr6Kj_KtW&amp;index=22</id>
+        <link href="https://www.youtube.com/watch?v=hP00w4r4zhg&amp;list=PLzDw4TTug5O0ywHrOz4VevVTYr6Kj_KtW&amp;index=22"/>
+        <updated>2019-12-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["Kate Sills on security issues using NPM packages, the EventStream incident, and SES" as possible solutions to npm supply-chain risks.]]></summary>
+        <content type="html"><![CDATA["Kate Sills on security issues using NPM packages, the EventStream incident, and SES" as possible solutions to npm supply-chain risks.]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Higher-order Smart Contracts across Chains]]></title>
+        <id>https://www.youtube.com/watch?v=iyuo0ymTt4g&amp;list=PLhuBigpl7lqth_Ow_eQWZs7NFxmeDw9W8&amp;index=1</id>
+        <link href="https://www.youtube.com/watch?v=iyuo0ymTt4g&amp;list=PLhuBigpl7lqth_Ow_eQWZs7NFxmeDw9W8&amp;index=1"/>
+        <updated>2019-06-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Agoric + Protocol Labs //  - Mark Miller]]></summary>
+        <content type="html"><![CDATA[Agoric + Protocol Labs //  - Mark Miller]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Higher-order Smart Contracts across Chains]]></title>
+        <id>https://www.youtube.com/watch?v=iyuo0ymTt4g&amp;list=PLhuBigpl7lqth_Ow_eQWZs7NFxmeDw9W8&amp;index=1</id>
+        <link href="https://www.youtube.com/watch?v=iyuo0ymTt4g&amp;list=PLhuBigpl7lqth_Ow_eQWZs7NFxmeDw9W8&amp;index=1"/>
+        <updated>2019-06-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Agoric + Protocol Labs //  - Mark Miller]]></summary>
+        <content type="html"><![CDATA[Agoric + Protocol Labs //  - Mark Miller]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Delegation: The Missing Piece of Authorization]]></title>
+        <id>https://www.youtube.com/watch?v=I-jkjj62jTw</id>
+        <link href="https://www.youtube.com/watch?v=I-jkjj62jTw"/>
+        <updated>2019-02-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[talk by Tristan Slominski at the Austin Node.js meetup]]></summary>
+        <content type="html"><![CDATA[talk by Tristan Slominski at the Austin Node.js meetup]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[SF Cryptocurrency Devs: Agoric - Programming Secure Smart Contracts]]></title>
+        <id>https://www.youtube.com/watch?v=YXUqfgdDbr8</id>
+        <link href="https://www.youtube.com/watch?v=YXUqfgdDbr8"/>
+        <updated>2018-10-15T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Opening Statement on SOSP 50th Anniversary Panel]]></title>
+        <id>https://www.youtube.com/watch?v=br9DwtjqmVI</id>
+        <link href="https://www.youtube.com/watch?v=br9DwtjqmVI"/>
+        <updated>2018-10-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Mark Miller]]></summary>
+        <content type="html"><![CDATA[Mark Miller]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Agoric Releases SES: Secure JavaScript]]></title>
+        <id>https://agoric.com/agoric-releases-ses/</id>
+        <link href="https://agoric.com/agoric-releases-ses/"/>
+        <updated>2018-07-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[f4d3d5a]]></summary>
+        <content type="html"><![CDATA[f4d3d5a]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[On-target package installation and deployment]]></title>
+        <id>https://genode.org/documentation/release-notes/18.02#On-target_package_installation_and_deployment</id>
+        <link href="https://genode.org/documentation/release-notes/18.02#On-target_package_installation_and_deployment"/>
+        <updated>2018-02-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[– introduces a package management model where untrusted tools like <code>curl</code>, <code>libarchive</code>, and <code>GnuPG</code> are used within tightly confined compartments; a ~1000-line download manager orchestrates deployment without expanding the TCB]]></summary>
+        <content type="html"><![CDATA[– introduces a package management model where untrusted tools like <code>curl</code>, <code>libarchive</code>, and <code>GnuPG</code> are used within tightly confined compartments; a ~1000-line download manager orchestrates deployment without expanding the TCB]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[connecting to external HTTP APIs via the Powerbox]]></title>
+        <id>https://github.com/sandstorm-io/sandstorm/pull/2870</id>
+        <link href="https://github.com/sandstorm-io/sandstorm/pull/2870"/>
+        <updated>2017-03-02T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[and related powerbox enhancements<br>v0.200 (2017-01-28), v0.203]]></summary>
+        <content type="html"><![CDATA[and related powerbox enhancements<br>v0.200 (2017-01-28), v0.203]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Monte]]></title>
+        <id>http://www.monte-language.org/</id>
+        <link href="http://www.monte-language.org/"/>
+        <updated>2017-03-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[is a nascent dynamic
+programming language reminiscent of Python and E. It is based upon
+<em>The Principle of Least Authority</em> (POLA), which governs
+interactions between objects, and a <em>capability-based object
+model</em>, which grants certain essential safety guarantees to all
+objects.]]></summary>
+        <content type="html"><![CDATA[is a nascent dynamic
+programming language reminiscent of Python and E. It is based upon
+<em>The Principle of Least Authority</em> (POLA), which governs
+interactions between objects, and a <em>capability-based object
+model</em>, which grants certain essential safety guarantees to all
+objects.]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Monte: A Spiritual Successor to E]]></title>
+        <id>https://www.youtube.com/watch?v=FJnck8bgmXg&amp;list=PLCq8mSCP664TUdgHl1cD5sDiAmrDoio2p</id>
+        <link href="https://www.youtube.com/watch?v=FJnck8bgmXg&amp;list=PLCq8mSCP664TUdgHl1cD5sDiAmrDoio2p"/>
+        <updated>2017-03-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[presented by Corbin Simpson at OCAP 2017]]></summary>
+        <content type="html"><![CDATA[presented by Corbin Simpson at OCAP 2017]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Designing with Capabilities]]></title>
+        <id>https://www.youtube.com/watch?v=fi1FsDW1QeY</id>
+        <link href="https://www.youtube.com/watch?v=fi1FsDW1QeY"/>
+        <updated>2017-02-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[- Scott Wlaschin at Domain-Driven Design Europe Conference]]></summary>
+        <content type="html"><![CDATA[- Scott Wlaschin at Domain-Driven Design Europe Conference]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[fun with Capper and OFX financial transaction fetching]]></title>
+        <id>https://groups.google.com/forum/#!topic/captalk/vw1yOecgU10</id>
+        <link href="https://groups.google.com/forum/#!topic/captalk/vw1yOecgU10"/>
+        <updated>2016-01-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[to cap-talk]]></summary>
+        <content type="html"><![CDATA[to cap-talk]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CloudABI - Pure capability-based security for UNIX]]></title>
+        <id>https://www.youtube.com/watch?v=62cYMmSY2Dc</id>
+        <link href="https://www.youtube.com/watch?v=62cYMmSY2Dc"/>
+        <updated>2015-12-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<br>Ed Schouten, 32nd Chaos Communication Congress (32C3)]]></summary>
+        <content type="html"><![CDATA[<br>Ed Schouten, 32nd Chaos Communication Congress (32C3)]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[One click to try an open source web application]]></title>
+        <id>https://sandstorm.io/news/2015-02-06-app-demo</id>
+        <link href="https://sandstorm.io/news/2015-02-06-app-demo"/>
+        <updated>2015-02-06T00:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Cap'n Proto 0.5, and how it is central to Sandstorm]]></title>
+        <id>https://sandstorm.io/news/2014-12-15-capnproto-0.5</id>
+        <link href="https://sandstorm.io/news/2014-12-15-capnproto-0.5"/>
+        <updated>2014-12-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[by Kenton Varda]]></summary>
+        <content type="html"><![CDATA[by Kenton Varda]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Belay Demo]]></title>
+        <id>https://www.youtube.com/watch?v=2_5p6S2eW8s&amp;t=1s</id>
+        <link href="https://www.youtube.com/watch?v=2_5p6S2eW8s&amp;t=1s"/>
+        <updated>2012-03-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[5min. Mark Lentczner, Security Team, Google]]></summary>
+        <content type="html"><![CDATA[5min. Mark Lentczner, Security Team, Google]]></content>
+    </entry>
+</feed>
