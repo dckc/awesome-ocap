@@ -27,8 +27,10 @@ const CONFIG = {
     name: 'Dan Connolly',
     email: 'dckc@madmode.com',
   },
-  outputDir: 'feed',
-  outputFile: 'atom.xml',
+  output: {
+    dir: 'feed',
+    file: 'atom.xml',
+  },
 };
 
 /**
@@ -131,7 +133,7 @@ function generateFeed(entries, lastUpdated) {
     updated: lastUpdated,
     author: CONFIG.author,
     feedLinks: {
-      atom: `${CONFIG.repoUrl}/raw/main/feed/${CONFIG.outputFile}`,
+      atom: `${CONFIG.repoUrl}/raw/main/${CONFIG.output.dir}/${CONFIG.output.file}`,
     },
     copyright: `Copyright © ${lastUpdated.getFullYear()} ${CONFIG.author.name}`,
   });
@@ -162,7 +164,7 @@ function generateFeed(entries, lastUpdated) {
 async function main(io, config = CONFIG) {
   const {
     fsp,
-    path,
+    path: { join },
     child_process: { exec },
   } = io;
   // Read README.md
@@ -176,7 +178,8 @@ async function main(io, config = CONFIG) {
 
   // Save HTML to file for debugging/reference
   const htmlFile = config.readMe.replace('.md', '.html');
-  await fsp.writeFile(path.join(config.outputDir, htmlFile), html);
+  const { output } = config;
+  await fsp.writeFile(join(output.dir, htmlFile), html);
 
   // Extract entries from HTML
   const entries = extractEntriesFromHtml(html);
@@ -189,10 +192,7 @@ async function main(io, config = CONFIG) {
   const feed = generateFeed(entries, lastUpdated);
 
   // Write feed to file
-  await fsp.writeFile(
-    path.join(CONFIG.outputDir, CONFIG.outputFile),
-    feed.atom1()
-  );
+  await fsp.writeFile(join(output.dir, output.file), feed.atom1());
 
   console.log(`Generated Atom feed with ${entries.length} entries`);
 }
