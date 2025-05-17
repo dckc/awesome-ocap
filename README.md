@@ -102,9 +102,40 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
         - 2024-12: [Release Moddable SDK 5.3.3](https://github.com/Moddable-OpenSource/moddable/releases/tag/5.3.3)
   - Scheme (guile, racket)
       - [Spritely Goblins](https://spritely.institute/goblins/) - "distributed object programming environment. Goblins provides an intuitive security model, automatic local transactions for locally synchronous operations, and an easy to use and efficient asynchronous programming interface for encapsulated objects which can live anywhere on the network. Its networking model abstracts away these details so the programmer can focus on object programming rather than protocol architecture."
-        - 2024-10 [Our first office hours: A recap (and how to join the next one) — Spritely Institute](https://spritely.institute/news/first-office-hours-recap.html)
-        - 2024-06 [Announcing the Pre-Scheme Restoration — Pre-Scheme](https://prescheme.org/posts/announcing-the-pre-scheme-restoration.html)
-        - 2024-09: [Spritely Goblins v0\.14\.0: libp2p and Improved Persistence — Spritely Institute](https://spritely.institute/news/spritely-goblins-v0-14-0-libp2p-and-improved-persistence.html)
+
+        - 2025-03: [Spritely Goblins v0.15.1
+          Released](https://www.spritely.institute/news/spritely-goblins-v0-15-1-released.html)
+          "a quality release focused on polish, fixing bugs in CapTP
+          GC, message handling in persistent vats, and netlayer
+          reconnection; also adds a `timeout` helper and improved
+          `race*` joiner"
+
+        - 2025-01: [Spritely Goblins v0.15.0: Goblins in the
+          Browser](https://spritely.institute/news/spritely-goblins-v0-15-0-goblins-in-the-browser.html)
+          "Goblins code can now be compiled to WebAssembly and run in
+          the browser, with a WebSocket netlayer and `goblin-chat`
+          demo; includes major performance boosts"
+
+        - 2024-09: [Spritely Goblins v0.14.0: libp2p and Improved
+          Persistence](https://spritely.institute/news/spritely-goblins-v0-14-0-libp2p-and-improved-persistence.html)
+          "introduces a libp2p netlayer, cross-vat persistence using
+          `^persistence-registry`, self-referential actors with
+          `#:self`, and actor upgrade macros"
+
+        - 2024-05 [Distributed System Daemons: More Than a Twinkle in
+          Goblins' Eye — Spritely
+          Institute](https://spritely.institute/news/spritely-nlnet-grants-december-2023.html)
+          "a port of the GNU Shepherd system layer to Guile Goblins —
+          the first step in making Guix the object-capability
+          operating system!"
+
+        - 2024-04: [Spritely Goblins v0.13.0: Object Persistence and
+          Easier
+          IO](https://spritely.institute/news/spritely-goblins-v0-13-0-object-persistence-and-easier-io.html)
+          "introduces the Aurie persistence system for long-lived
+          objects, simplifies actor definition with `define-actor`,
+          and adds the `^io` actor for asynchronous IO"
+
         - 2024-05 [Distributed System Daemons: More Than a Twinkle in Goblins' Eye — Spritely Institute](https://spritely.institute/news/spritely-nlnet-grants-december-2023.html) "a port of the GNU Shepherd system layer to Guile Goblins — the first step in making Guix the object-capability operating system!"
         - 2022-10 [NLnet grant bootstraps OCapN protocol standardization effort](https://spritely.institute/news/nlnet-grant-bootstraps-ocapn-protocol-standardization-effort.html)
         - 2021-07 [Content Addressed Descriptors and Interfaces with Spritely Goblins paper](https://spritelyproject.org/news/content-addressed-descriptors-paper.html) "how to perform "conversational" programming in Spritely Goblins, or any other system which assumes a mutually suspicious network. ... The reason this system is able to be elegantly embedded in a network environment is its use of Spritely's implementation of CapTP."
@@ -300,6 +331,12 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
 <a name="talk"></a>
 ## Presentations, Talks, Slides, and Videos
+
+  - 2025-02: [Goblins: The framework for your next project!](https://fosdem.org/2025/schedule/event/fosdem-2025-5239-goblins-the-framework-for-your-next-project-/) "Jessica Tallon introduces Goblins, a Guile framework for building secure, fault-tolerant peer-to-peer applications using object capability security and the actor model"
+
+  - 2025-02: [Spritely and a secure, collaborative, distributed future](https://spritely.institute/news/spritely-is-going-to-guix-days-and-fosdem.html) "Christine Lemmer-Webber outlines Spritely's mission to create decentralized infrastructure that empowers user autonomy and security"
+
+
   - 2021-05: [Attested TEEs for Transactional Workloads](https://www.youtube.com/watch?v=su8lnMaYQHg)  :: Sid Hussmann PADSEC 2021. _We present a generic TEE toolkit applicable for many use-cases in finance, healthcare, and government. Gapfruit TEE embodies a microkernel operating system with capability-based security._ 
 
   - 2020-12: [Navigating the Attack Surface to achieve a \*multiplicative\* reduction in risk](https://www.youtube.com/watch?v=wW9-KuezPp8&t=664s) Mark Miller. 15min
