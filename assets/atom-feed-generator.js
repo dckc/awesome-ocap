@@ -122,6 +122,7 @@ function generateFeed(entries, lastUpdated) {
     feedLinks: {
       atom: `${CONFIG.repoUrl}/raw/main/feed/${CONFIG.outputFile}`,
     },
+    copyright: `Copyright © ${lastUpdated.getFullYear()} ${CONFIG.author.name}`,
   });
 
   entries.forEach((entry) => {
