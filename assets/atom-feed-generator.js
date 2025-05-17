@@ -18,6 +18,7 @@ import { marked } from 'marked';
 // Configuration
 const CONFIG = {
   repoUrl: 'https://github.com/dckc/awesome-ocap',
+  readMe: 'README.md',
   feedTitle: 'Awesome Object Capabilities and Capability-based Security',
   feedSubtitle:
     'Updates to the awesome-ocap list of capability-based security resources',
@@ -140,30 +141,47 @@ function generateFeed(entries, lastUpdated) {
 
 /**
  * Main function to generate the Atom feed.
+ *
+ * @param {{
+ *   fsp:  Pick<import('fs/promises'), 'readFile' | 'writeFile'>;
+ *   path: Pick<import('path'), 'join'>;
+ *   child_process: Pick<import('child_process'), 'execSync'>;
+ * }} io
  */
-function main({ fs, path, child_process: { execSync } }) {
-
+async function main(io, config = CONFIG) {
+  const {
+    fsp,
+    path,
+    child_process: { execSync },
+  } = io;
   // Read README.md
-  const readmePath = path.join(process.cwd(), 'README.md');
-  const readmeContent = fs.readFileSync(readmePath, 'utf-8');
+  const readmeContent = await fsp.readFile(config.readMe, 'utf-8');
 
   // Get last commit date
+  // TODO: no need for sync exec
   const lastUpdated = getLastCommitDate(execSync);
 
   // Extract entries
   const entries = extractDatedEntries(readmeContent);
 
+  if (entries.length === 0) {
+    console.warn('Warning: No dated entries found in README.md');
+  }
+
   // Generate feed
   const feed = generateFeed(entries, lastUpdated);
 
   // Write feed to file
-  fs.writeFileSync(path.join(CONFIG.outputDir, CONFIG.outputFile), feed.atom1());
+  await fsp.writeFile(
+    path.join(CONFIG.outputDir, CONFIG.outputFile),
+    feed.atom1()
+  );
 
   console.log(`Generated Atom feed with ${entries.length} entries`);
 }
 
 // Check for CLI invocation.
-const isCLIEntryPoint = (async () => {
+const isCLIEntryPoint = await (async () => {
   const [fs, { isMainThread }, { fileURLToPath }] = await Promise.all([
     import('fs'),
     import('node:worker_threads'),
@@ -176,10 +194,10 @@ const isCLIEntryPoint = (async () => {
 
 // Run the main function if invoked as a script
 if (isCLIEntryPoint) {
-  const [fs, path, { execSync }] = await Promise.all([
-    import('fs'),
+  const [fsp, path, { execSync }] = await Promise.all([
+    import('fs/promises'),
     import('path'),
     import('child_process'),
   ]);
-  main({ fs, path, child_process: { execSync } });
+  main({ fsp, path, child_process: { execSync } });
 }
