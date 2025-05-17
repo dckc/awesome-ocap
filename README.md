@@ -248,6 +248,15 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     [Zircon](https://fuchsia.dev/fuchsia-src/concepts/kernel),
     with a capability security model.
     - 2021-06 [cr0 blog: A few thoughts on Fuchsia security](https://blog.cr0.org/2021/06/a-few-thoughts-on-fuchsia-security.html) Julien Tinnes. _Sandboxing is trivial. In fact a new process with access to no capabilities_
+
+    - 2025-04: [Fuchsia F26 release notes](https://fuchsia.dev/whats-new/release-notes/f26) – continues refinement of the component framework, emphasizing explicit capability routing, lifecycle control, and modular isolation between components
+
+    - 2025-01: [Fuchsia F24 release notes](https://fuchsia.dev/whats-new/release-notes/f24) – introduces improvements in diagnostics scoping and structured logging, reinforcing least-authority principles in observability tooling
+
+    - 2024-03: [Fuchsia OS powers all Nest Hub devices](https://9to5google.com/2024/03/01/fuchsia-16-nest-hub-whats-new) – Fuchsia’s capability-based component framework is now deployed across all Nest Hub models, replacing the legacy Cast OS; each system component runs with only the capabilities it is explicitly granted, demonstrating ocap principles at scale in a mainstream consumer product
+
+    - 2020-11: [Fuchsia Component Framework](https://fuchsia.dev/fuchsia-src/concepts/components/v2/introduction) – Fuchsia’s core architectural model based on sandboxed components and explicit capability routing, offering a native implementation of capability-secure composition
+
     - 2020-06-09 [Playing Around With The Fuchsia Operating System](https://blog.quarkslab.com/playing-around-with-the-fuchsia-operating-system.html) - [Quarkslab's blog](https://blog.quarkslab.com/index.html)
     - 2017-05-08 [Google’s “Fuchsia” smartphone OS dumps Linux, has a wild new UI](https://arstechnica.com/gadgets/2017/05/googles-fuchsia-smartphone-os-dumps-linux-has-a-wild-new-ui/) Ars Technica
 
