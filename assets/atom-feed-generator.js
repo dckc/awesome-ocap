@@ -5,10 +5,15 @@
  * This script parses the README.md file from the awesome-ocap repository
  * and generates an Atom feed containing all dated entries.
  */
+// @ts-check
 
 import { Feed } from 'feed';
 import { JSDOM } from 'jsdom';
 import { marked } from 'marked';
+
+/**
+ * @import {Item} from 'feed';
+ */
 
 // Configuration
 const CONFIG = {
@@ -26,6 +31,8 @@ const CONFIG = {
 
 /**
  * Get the date of the last commit to the repository.
+ *
+ * @param {typeof import('child_process').execSync} execSync
  */
 function getLastCommitDate(execSync) {
   const lastCommitDate = execSync('git log -1 --format=%cd --date=iso')
@@ -40,21 +47,24 @@ function getLastCommitDate(execSync) {
  * Looks for patterns like:
  * - YYYY-MM: [Title](URL) description...
  * - YYYY-MM-DD: [Title](URL) description...
+ *
+ * @param {string} readmeContent
  */
 function extractDatedEntries(readmeContent) {
   // Parse markdown to HTML
   const html = marked(readmeContent);
   const dom = new JSDOM(html);
-  const document = dom.window.document;
+  const document = dom.window._document;
 
+  /** @type {Item[]} */
   const entries = [];
 
   // Find all list items
   const listItems = document.querySelectorAll('li');
 
-  listItems.forEach((item) => {
+  listItems.forEach((/** @type {HTMLElement} */ item) => {
     // Look for date pattern at the beginning of the list item
-    const text = item.textContent;
+    const text = item.textContent || '';
     const dateMatch = text.match(/^(\d{4}-\d{2}(?:-\d{2})?): /);
 
     if (dateMatch) {
@@ -68,7 +78,7 @@ function extractDatedEntries(readmeContent) {
       // Extract the title and URL
       const link = item.querySelector('a');
       if (link) {
-        const title = link.textContent;
+        const title = link.textContent || '';
         const url = link.href;
 
         // Get the description (everything after the link)
@@ -89,12 +99,15 @@ function extractDatedEntries(readmeContent) {
   });
 
   // Sort entries by date, newest first
-  entries.sort((a, b) => b.date - a.date);
+  entries.sort((a, b) => b.date.valueOf() - a.date.valueOf());
   return entries;
 }
 
 /**
  * Generate an Atom feed from the extracted entries.
+ *
+ * @param {Item[]} entries
+ * @param {Date} lastUpdated
  */
 function generateFeed(entries, lastUpdated) {
   const feed = new Feed({
