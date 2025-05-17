@@ -33,13 +33,19 @@ const CONFIG = {
 /**
  * Get the date of the last commit to the repository.
  *
- * @param {typeof import('child_process').execSync} execSync
+ * @param {typeof import('child_process').exec} exec
+ * @returns {Promise<Date>}
  */
-function getLastCommitDate(execSync) {
-  const lastCommitDate = execSync('git log -1 --format=%cd --date=iso')
-    .toString()
-    .trim();
-  return new Date(lastCommitDate);
+function getLastCommitDate(exec) {
+  return new Promise((resolve, reject) => {
+    exec('git log -1 --format=%cd --date=iso', (error, stdout) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(new Date(stdout.trim()));
+    });
+  });
 }
 
 /**
@@ -152,14 +158,13 @@ async function main(io, config = CONFIG) {
   const {
     fsp,
     path,
-    child_process: { execSync },
+    child_process: { exec },
   } = io;
   // Read README.md
   const readmeContent = await fsp.readFile(config.readMe, 'utf-8');
 
   // Get last commit date
-  // TODO: no need for sync exec
-  const lastUpdated = getLastCommitDate(execSync);
+  const lastUpdated = await getLastCommitDate(exec);
 
   // Extract entries
   const entries = extractDatedEntries(readmeContent);
@@ -194,10 +199,13 @@ const isCLIEntryPoint = await (async () => {
 
 // Run the main function if invoked as a script
 if (isCLIEntryPoint) {
-  const [fsp, path, { execSync }] = await Promise.all([
+  const [fsp, path, { exec }] = await Promise.all([
     import('fs/promises'),
     import('path'),
     import('child_process'),
   ]);
-  main({ fsp, path, child_process: { execSync } });
+  main({ fsp, path, child_process: { exec } }).catch(err => {
+    console.error('Error generating feed:', err);
+    process.exit(1);
+  });
 }
