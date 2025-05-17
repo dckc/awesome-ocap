@@ -1,0 +1,15 @@
+{
+  "name": "awesome-ocap-feed",
+  "version": "1.0.0",
+  "description": "Atom feed generator for awesome-ocap repository",
+  "type": "module",
+  "scripts": {
+    "generate": "node assets/atom-feed-generator.js",
+    "generate:scripts": "node scripts/atom-feed-generator.js"
+  },
+  "dependencies": {
+    "feed": "^4.2.2",
+    "marked": "^4.0.10",
+    "jsdom": "^19.0.0"
+  }
+}
