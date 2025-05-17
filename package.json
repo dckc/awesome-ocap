@@ -5,11 +5,15 @@
   "type": "module",
   "scripts": {
     "generate": "node assets/atom-feed-generator.js",
-    "generate:scripts": "node scripts/atom-feed-generator.js"
+    "generate:scripts": "node scripts/atom-feed-generator.js",
+    "test": "vitest run"
   },
   "dependencies": {
     "feed": "^4.2.2",
     "marked": "^4.0.10",
     "jsdom": "^19.0.0"
+  },
+  "devDependencies": {
+    "vitest": "^0.34.6"
   }
 }
