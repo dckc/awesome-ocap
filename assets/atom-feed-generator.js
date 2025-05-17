@@ -23,8 +23,8 @@ const CONFIG = {
   feedSubtitle:
     'Updates to the awesome-ocap list of capability-based security resources',
   author: {
-    name: 'Awesome OCAP Contributors',
-    email: 'noreply@github.com',
+    name: 'Dan Connolly',
+    email: 'dckc@madmode.com',
   },
   outputDir: 'feed',
   outputFile: 'atom.xml',
@@ -132,7 +132,6 @@ function generateFeed(entries, lastUpdated) {
       link: entry.link,
       description: entry.content,
       content: entry.content,
-      author: [CONFIG.author],
       date: entry.date,
     });
   });
