@@ -39,6 +39,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 ## Applications and Services
 
   - [Cloudflare Workers](https://developers.cloudflare.com/workers/)
+    - 2024-04: [We’ve added JavaScript-native RPC to Cloudflare Workers](https://blog.cloudflare.com/javascript-native-rpc/) – Kenton Varda introduces a secure, ergonomic RPC mechanism built into the Workers platform, enabling structured, streamed, bidirectional communication between components with Cap’n Proto-style semantics and ocap-aligned design
+
     - 2024-04: [Why Workers environment variables contain live objects](https://blog.cloudflare.com/workers-environment-live-object-bindings)
     - 2022-09: [Introducing workerd: the Open Source Workers runtime](https://blog.cloudflare.com/workerd-open-source-workers-runtime/)
     - 2021-10: [Dynamic Process Isolation: Research by Cloudflare and TU Graz](https://blog.cloudflare.com/spectre-research-with-tu-graz/)
