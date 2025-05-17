@@ -45,17 +45,26 @@ async function getLastCommitDate(exec) {
 }
 
 /**
- * Extract dated entries from the README.md file.
+ * Convert markdown content to HTML.
+ *
+ * @param {string} markdownContent
+ * @returns {string} HTML content
+ */
+function convertMarkdownToHtml(markdownContent) {
+  return marked(markdownContent);
+}
+
+/**
+ * Extract dated entries from HTML content.
  *
  * Looks for patterns like:
  * - YYYY-MM: [Title](URL) description...
  * - YYYY-MM-DD: [Title](URL) description...
  *
- * @param {string} readmeContent
+ * @param {string} html
+ * @returns {Item[]} Extracted entries sorted by date (newest first)
  */
-function extractDatedEntries(readmeContent) {
-  // Parse markdown to HTML
-  const html = marked(readmeContent);
+function extractEntriesFromHtml(html) {
   const dom = new JSDOM(html);
   const document = dom.window._document;
 
@@ -162,8 +171,15 @@ async function main(io, config = CONFIG) {
   // Get last commit date
   const lastUpdated = await getLastCommitDate(exec);
 
-  // Extract entries
-  const entries = extractDatedEntries(readmeContent);
+  // Convert markdown to HTML
+  const html = convertMarkdownToHtml(readmeContent);
+
+  // Save HTML to file for debugging/reference
+  const htmlFile = config.readMe.replace('.md', '.html');
+  await fsp.writeFile(path.join(config.outputDir, htmlFile), html);
+
+  // Extract entries from HTML
+  const entries = extractEntriesFromHtml(html);
 
   if (entries.length === 0) {
     console.warn('Warning: No dated entries found in README.md');
