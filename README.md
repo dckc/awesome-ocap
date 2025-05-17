@@ -223,8 +223,24 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     operating systems -- by applying a strict organizational structure
     to all software components including device drivers, system
     services, and applications.
+
+    - 2025-04: [Sculpt OS release 25.04](https://genode.org/news/sculpt-os-release-25.04) "introduces multi-monitor window management and display rotation, integrates Chromium WebEngine 112, and extends hardware support to Intel Meteor Lake and F&S i.MX8MP armStone boards"
+
+    - 2025-02: [Genode OS Framework release 25.02](https://genode.org/news/genode-os-framework-release-25.02) "extends multi-monitor capabilities to window management and virtual machines, ports QEMU and Chromium WebEngine 112, boosts graphics performance via SIMD optimizations, and adds support for Intel Meteor Lake and F&S i.MX8MP armStone hardware"
+
+    - 2024-11: [Genode OS Framework release 24.11](https://genode.org/news/genode-os-framework-release-24.11) "introduces multi-monitor support with mirrored and panoramic setups, pointer grabbing, and panel-self-refresh; releases 'Genode Applications' book for application developers"
+
+    - 2024-08: [Genode OS Framework release 24.08](https://genode.org/news/genode-os-framework-release-24.08) "adds Qt6 application framework, updates Linux-based components and PC device drivers to Linux 6.6.47, equips Goa SDK with remote debugging support, and extends board support for i.MX-based devices"
+
+    - 2024-05: [Genode OS Framework release 24.05](https://genode.org/news/genode-os-framework-release-24.05) "enables Sculpt OS to run on Genode's custom kernel, introduces GDB support on Sculpt OS, redesigns USB infrastructure, and completes transition to new audio interfaces"
+
+    - 2024-02: [Genode OS Framework release 24.02](https://genode.org/news/genode-os-framework-release-24.02) "revisits audio support for latency-sensitive scenarios, introduces Goa SDK's ability to use Sculpt OS as a remote test target, and updates the TCP/IP stack based on Linux 6.1.20"
+
     - 2023-10 [Genode \- Sculpt OS release 23.10](https://genode.org/news/sculpt-os-release-23.10) with power management
     - 2021-08 [Genode OS Framework release 21.08](https://genode.org/news/genode-os-framework-release-21.08) "revamped GPU support as well as new drivers for the Pinephone and MNT-Reform"
+
+    - 2020-06: [Re-stacking the GUI stack](https://genodians.org/nfeske/2020-06-23-gui-stack) – Norman Feske outlines a redesign of Genode's GUI architecture, inverting the traditional client-server relationship between GUI servers and drivers to enhance resilience and modularity
+
     - 2020-05-28 [Genode OS Framework 20.05](https://genode.org/documentation/release-notes/20.05) with [Capability-based security using seccomp on Linux](https://genode.org/documentation/release-notes/20.05#Capability-based_security_using_seccomp_on_Linux), ...
     - 2020-05-07: [MNT Reform \- The Campaign is Live](https://www.crowdsupply.com/mnt/reform/updates/the-campaign-is-live)
       > we’re collaborating with Genode Labs to ship Genode for Reform.
@@ -241,6 +257,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       > packaging of many components. The new version also revises the
       > boot concept on x86, updates the seL4 kernel, and enhances
       > Genode's user-level networking facilities.
+
+    - 2018-02: [On-target package installation and deployment](https://genode.org/documentation/release-notes/18.02#On-target_package_installation_and_deployment) – introduces a package management model where untrusted tools like `curl`, `libarchive`, and `GnuPG` are used within tightly confined compartments; a ~1000-line download manager orchestrates deployment without expanding the TCB
 
 [1608]: https://genode.org/news/genode-os-framework-release-16.08
 [1708]: https://genode.org/documentation/release-notes/17.08
