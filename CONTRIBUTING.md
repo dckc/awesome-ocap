@@ -1,3 +1,9 @@
+# Contributing
+
+Thanks for your contribution!
+
+## README structure
+
 Sections are ordered in increasing effort / investment, from a few clicks to use a hosted web service
 to writing code with libraries and frameworks to switching programming languages to replacing your OS
 or even your hardware.
@@ -13,3 +19,10 @@ The format of a typical entry is:
 and/or
 
 - YYYY-MM: [Title of linked doc](url-of-linked-doc) summarized news...
+
+## Coding style
+
+For JavaScript, use Airbnb style. Never leave blank space at the end of a line.
+
+All I/O, randomness, clock, etc. should be injected explicitly to each module level function.
+Each function / method should get the least authority that it needs.
