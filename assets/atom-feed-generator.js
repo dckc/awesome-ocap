@@ -10,6 +10,7 @@
 import { Feed } from 'feed';
 import { JSDOM } from 'jsdom';
 import { marked } from 'marked';
+import { promisify } from 'node:util';
 
 /**
  * @import {Item} from 'feed';
@@ -36,16 +37,11 @@ const CONFIG = {
  * @param {typeof import('child_process').exec} exec
  * @returns {Promise<Date>}
  */
-function getLastCommitDate(exec) {
-  return new Promise((resolve, reject) => {
-    exec('git log -1 --format=%cd --date=iso', (error, stdout) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(new Date(stdout.trim()));
-    });
-  });
+async function getLastCommitDate(exec) {
+  const execPromise = promisify(exec);
+
+  const { stdout } = await execPromise('git log -1 --format=%cd --date=iso');
+  return new Date(stdout.trim());
 }
 
 /**
@@ -151,7 +147,7 @@ function generateFeed(entries, lastUpdated) {
  * @param {{
  *   fsp:  Pick<import('fs/promises'), 'readFile' | 'writeFile'>;
  *   path: Pick<import('path'), 'join'>;
- *   child_process: Pick<import('child_process'), 'execSync'>;
+ *   child_process: Pick<import('child_process'), 'exec'>;
  * }} io
  */
 async function main(io, config = CONFIG) {
@@ -204,7 +200,7 @@ if (isCLIEntryPoint) {
     import('path'),
     import('child_process'),
   ]);
-  main({ fsp, path, child_process: { exec } }).catch(err => {
+  main({ fsp, path, child_process: { exec } }).catch((err) => {
     console.error('Error generating feed:', err);
     process.exit(1);
   });
