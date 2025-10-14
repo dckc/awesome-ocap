@@ -39,6 +39,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 ## Applications and Services
 
   - [Cloudflare Workers](https://developers.cloudflare.com/workers/)
+    - 2025-09: [Cap'n Web: a new RPC system for browsers and web servers](https://blog.cloudflare.com/capnweb-javascript-rpc-library/)
     - 2024-04: [We’ve added JavaScript-native RPC to Cloudflare Workers](https://blog.cloudflare.com/javascript-native-rpc/) – Kenton Varda introduces a secure, ergonomic RPC mechanism built into the Workers platform, enabling structured, streamed, bidirectional communication between components with Cap’n Proto-style semantics and ocap-aligned design
 
     - 2024-04: [Why Workers environment variables contain live objects](https://blog.cloudflare.com/workers-environment-live-object-bindings)
@@ -77,6 +78,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
   - JavaScript
     - [cloudflare/workerd: The JavaScript / Wasm runtime that powers Cloudflare Workers](https://github.com/cloudflare/workerd)
+      - 2025-09: [Cap'n Web: a new RPC system for browsers and web servers](https://blog.cloudflare.com/capnweb-javascript-rpc-library/)
       - 2025-01: [Release v1\.20250108\.0 · cloudflare/workerd](https://github.com/cloudflare/workerd/releases/tag/v1.20250108.0)
       - 2022-09: [Introducing workerd: the Open Source Workers runtime](https://blog.cloudflare.com/workerd-open-source-workers-runtime/)
     - [Hardened JavaScript](https://hardenedjs.org/) "Hardened JavaScript is a standards track mode for the JavaScript language for safe plugin systems and supply chain attack resistance. Hardening JavaScript improves a program’s integrity in the face of adversarial code in the same process."
