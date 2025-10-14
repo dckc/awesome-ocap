@@ -100,6 +100,9 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
         JavaScript (in node.js), Go, Rust, etc. are available
         - 2020-04-23: [Cap'n Proto: Cap'n Proto 0\.8: Streaming flow control, HTTP\-over\-RPC, fibers, etc\.](https://capnproto.org/news/2020-04-23-capnproto-0.8.html)
         - 2014-12-15: [Cap'n Proto 0.5, and how it is central to Sandstorm][1412] by Kenton Varda
+      - [Chromium Mojo](https://chromium.googlesource.com/chromium/src.git/+/refs/heads/main/docs/mojo_and_services.md)
+         - 2020-05 [How Chromium Got its Mojo?](https://blogs.igalia.com/gyuyoung/2020/05/11/how-chromium-got-its-mojo/)
+         - 2017-04 [Why not protobuf? Why a new thing?](https://chromium.googlesource.com/chromium/src.git/+/master/mojo/README.md#why-not-protobuf_why-a-new-thing) _There are number of potentially decent answers to this question, but the deal-breaker is that a useful IPC mechanism must support transfer of native object handles (e.g. file descriptors) across process boundaries._
       - [Moddable SDK](https://github.com/Moddable-OpenSource/moddable) - "Tools for developers to create truly open IoT products using standard JavaScript on low cost microcontrollers."
         - 2024-12: [Release Moddable SDK 5.3.3](https://github.com/Moddable-OpenSource/moddable/releases/tag/5.3.3)
   - Scheme (guile, racket)
