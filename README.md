@@ -64,7 +64,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     fail or are taken over by an attacker, the entire file store
     continues to function correctly, preserving your privacy and
     security.
-    - 2024-12: [v1.20.0 is released]https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html)
+    - 2024-12: [v1.20.0 is released](https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html)
     - 2024-01-01 [v1.19.0 released](https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-January/010064.html)
     - 2023-11: [new work on a Haskell client implementation](https://hackage.haskell.org/package/tahoe-great-black-swamp)
     - 2020-02: [Tahoe-LAFS Summit at PyCon2020](https://tahoe-lafs.org/pipermail/tahoe-dev/2020-February/009983.html)
