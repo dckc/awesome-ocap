@@ -271,6 +271,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     operating-system kernel with an end-to-end proof of implementation
     correctness and security enforcement; it is available as open
     source.
+    - 2023-09: [OS for Software Defined Vehicle](https://sel4.systems/Summit/2023/abstracts2023.html#a-gold-nio) all NIO’s production vehicles released since 2024-09 are running an seL4-based OS
+      - watch: [Gold Sponsor: OS for Software Defined Vehicle \- Qiyan Wang, NIO](https://www.youtube.com/watch?v=W_Y3M6s4E9w)
     - 2022-10: [seL4 Summit 2022](https://sel4.systems/Foundation/Summit/abstracts2022) Munich, Germany (hybrid), 10-13 Oct 2022
       - [2022-10: 4th seL4 Summit](https://www.youtube.com/watch?v=PDVMVSSpGOQ&list=PLtoQeavghzr3atxNQig-sLGbwoKBSVxGV) video playlist
     - 2021-10: [wasmedge-seL4](https://github.com/second-state/wasmedge-seL4) `fc25cae` Integrate WasmEdge with seL4  
@@ -347,6 +349,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
   - 2025-02: [Spritely and a secure, collaborative, distributed future](https://spritely.institute/news/spritely-is-going-to-guix-days-and-fosdem.html) "Christine Lemmer-Webber outlines Spritely's mission to create decentralized infrastructure that empowers user autonomy and security"
 
+  - 2023-09: [OS for Software Defined Vehicle](https://sel4.systems/Summit/2023/abstracts2023.html#a-gold-nio) all NIO’s production vehicles released since 2024-09 are running an seL4-based OS
+    - watch: [Gold Sponsor: OS for Software Defined Vehicle \- Qiyan Wang, NIO](https://www.youtube.com/watch?v=W_Y3M6s4E9w)
 
   - 2021-05: [Attested TEEs for Transactional Workloads](https://www.youtube.com/watch?v=su8lnMaYQHg)  :: Sid Hussmann PADSEC 2021. _We present a generic TEE toolkit applicable for many use-cases in finance, healthcare, and government. Gapfruit TEE embodies a microkernel operating system with capability-based security._ 
 
