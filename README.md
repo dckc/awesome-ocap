@@ -95,6 +95,12 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       - 2022-11: [The Attacker is Inside: Javascript Supplychain Security and LavaMoat](https://www.youtube.com/watch?v=Z5Bz0DYga1k&t=14s) by kumavis at Ethereum Devcon Bogota
       - 2021-01: [Speakeasy JS – Lavamoat: Securing your dependency graph \(Kumavis\)](https://www.youtube.com/watch?v=iaqe6F4S2tA)
     - [The Syndicated Actor Model](https://git.syndicate-lang.org/syndicate-lang/syndicate-js)
+
+    - [NextAuth.js](https://next-auth.js.org/) — authentication for Next.js, including an Email Provider that issues short-lived “magic link” URLs as bearer capabilities.
+      - 2024-12 — [Next.js + NextAuth Email Magic Link Login (YouTube demo)](https://www.youtube.com/watch?v=75AVkg85aOQ)  
+      - 2024-02 — [Discussion: Email Provider magic links](https://github.com/nextauthjs/next-auth/discussions/10074)  
+      - 2023-06 — [Clerk blog: Secure authentication in Next.js with email magic links](https://clerk.com/blog/secure-authentication-nextjs-email-magic-links)
+
   - C / C++
       - [Cap’n Proto](https://capnproto.org/) is a high performance
         serialization and RPC protocol with distributed and persistent
@@ -178,6 +184,12 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     - [capnproto/go\-capnproto2: Cap'n Proto library and code generator for Go](https://github.com/capnproto/go-capnproto2)
       - 2019-12: [Release v2\.18\.0 · capnproto/go\-capnproto2](https://github.com/capnproto/go-capnproto2/releases/tag/v2.18.0)
   - python
+    - [Flask-Security-Too](https://flask-security-too.readthedocs.io/) — security extension for Flask with token-based password reset and email confirmation using time-limited, signed URLs.
+
+      - 2024-01 — [AppSeed blog: How to use Flask-Security-Too in a Flask project](https://blog.appseed.us/how-to-use-flask-security-too-into-a-flask-project/)  
+      - 2023-10 — [Release 5.3.0](https://pypi.org/project/Flask-Security-Too/5.3.0/) — adds configurable token expiration and improved email templates  
+      - 2015-12 — [Stack Overflow: Flask-Security reset password Q&A](https://stackoverflow.com/questions/34310143/flask-security-reset-password)
+
     - [Network protocols, sans I/O](http://sans-io.readthedocs.io/) supports
       object capability discipline by letting the caller handle network access.
     - [The Syndicated Actor Model](https://git.syndicate-lang.org/syndicate-lang/syndicate-py)
