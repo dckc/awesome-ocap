@@ -55,6 +55,11 @@ If `create-vm` fails or if you want to remove the VM definition from VirtualBox,
 make destroy-vm
 ```
 
+To remove the generated `.vmdk` file and force its recreation on the next run, use:
+```sh
+make clean
+```
+
 ## Files
 
 -   `README.md`: This file.

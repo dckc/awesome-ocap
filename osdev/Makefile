@@ -16,7 +16,7 @@ VM_NAME?=ocap-dev-vm
 # --- Non-Destructive Targets ---
 #
 
-.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm
+.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm clean
 
 # Default target
 
@@ -38,6 +38,7 @@ help:
 	@echo "  make -C osdev physical.vmdk  - Create the VMDK file pointing to TARGET_DISK."
 	@echo "  make -C osdev create-vm      - Create the VirtualBox VM definition."
 	@echo "  make -C osdev run            - Start the VirtualBox VM."
+	@echo "  make -C osdev clean          - Remove generated files (e.g. physical.vmdk)."
 	@echo "  sudo make -C osdev check-partitioning - Check if partitioning is already done."
 	@echo "  sudo make -C osdev check-formatting - Check if formatting is already done."
 	@echo ""
@@ -51,6 +52,10 @@ perms:
 	@echo "Adding user '$(USER)' to the 'disk' group..."
 	@echo "You must log out and log back in for this to take effect."
 	sudo usermod -aG disk $(USER)
+
+clean:
+	@echo "Removing generated files..."
+	rm -f physical.vmdk
 
 physical.vmdk:
 	@if ! grep -q 'createType="fullDevice"' $@ 2>/dev/null; then \
