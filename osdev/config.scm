@@ -37,7 +37,7 @@
                 %base-user-accounts))
 
   ;; Basic system services.
-  (services (cons* (service getty-service-type
-                            (getty-configuration
+  (services (cons* (service mingetty-service-type
+                            (mingetty-configuration
                              (tty "tty1")))
                    %base-services)))
