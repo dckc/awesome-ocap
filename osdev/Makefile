@@ -29,6 +29,7 @@ MKFS_BTRFS?=mkfs.btrfs
 REALPATH?=realpath
 SUDO?=sudo
 JQ?=jq
+GUIX?=guix
 GRUB_INSTALL?=grub-install
 MOUNT?=mount
 UMOUNT?=umount
@@ -38,7 +39,7 @@ MKDIR?=mkdir
 # --- Non-Destructive Targets ---
 #
 
-.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm clean physical.vmdk partition-disk format-disk provision-disk install-bootloader mount-target unmount-target
+.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm clean physical.vmdk partition-disk format-disk provision-disk install-bootloader install-guix mount-target unmount-target
 
 # Default target
 
@@ -63,7 +64,8 @@ help:
 	@echo "  make -C osdev clean          - Remove generated files (e.g. physical.vmdk)."
 	@echo "  sudo make -C osdev check-partitioning - Check if partitioning is already done."
 	@echo "  sudo make -C osdev check-formatting - Check if formatting is already done."
-	@echo "  sudo make -C osdev install-bootloader - Install GRUB bootloader to the disk."
+	@echo "  sudo make -C osdev install-bootloader - Install GRUB bootloader to the disk (for testing boot)."
+	@echo "  sudo make -C osdev install-guix - Install a minimal Guix system to the disk."
 	@echo ""
 	@echo "  WARNING: Destructive commands follow."
 	@echo "  sudo make -C osdev provision-disk - Partition and format TARGET_DISK (WIPES ALL DATA)."
@@ -191,3 +193,9 @@ unmount-target:
 
 install-bootloader:
 	$(SUDO) $(GRUB_INSTALL) --target=x86_64-efi --efi-directory=/mnt/boot/efi --boot-directory=/mnt/boot --removable
+
+install-guix: config.scm mount-target
+	@echo "Installing Guix system..."
+	$(SUDO) $(GUIX) system init $(CURDIR)/config.scm /mnt
+	$(SUDO) $(MAKE) -C $(CURDIR) unmount-target
+	@echo "Guix installation complete."
