@@ -7,7 +7,7 @@
 # DANGER: Set this to the target physical disk.
 # All data on this disk may be lost.
 # Use `lsblk` to find the correct device.
-TARGET_DISK=/dev/disk/by-id/ata-SAMSUNG_SSD_PM871b_2.5_7mm_256GB_S3U4NE0JA19970
+TARGET_DISK=/dev/disk/by-id/ata-Samsung_SSD_860_QVO_1TB_S59HNG0N105827B
 
 # Name of the VirtualBox VM to create and manage.
 VM_NAME=ocap-dev-vm
