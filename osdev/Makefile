@@ -150,3 +150,5 @@ format-disk:
 		$(SUDO) $(MKFS_VFAT) -n ESP "$$($(REALPATH) $(TARGET_DISK)-part1)"; \
 		$(SUDO) $(MKFS_EXT4) -L osdev-root -F "$$($(REALPATH) $(TARGET_DISK)-part2)"; \
 	fi
+
+provision-disk: partition-disk format-disk
