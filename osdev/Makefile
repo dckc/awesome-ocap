@@ -77,10 +77,10 @@ check-partitioning:
 		exit 1; \
 	fi
 	@if sudo sfdisk --json $(TARGET_DISK) | jq -e \
-		'.partitiontable.label == "gpt" and \
-		(.partitiontable.partitions | length == 2) and \
-		.partitiontable.partitions[0].size == 2095104 and \
-		.partitiontable.partitions[0].type == "C12A7328-F81F-11D2-BA4B-00A0C93EC93B" and \
+		'.partitiontable.label == "gpt" and
+		(.partitiontable.partitions | length == 2) and
+		.partitiontable.partitions[0].size == 2095104 and
+		.partitiontable.partitions[0].type == "C12A7328-F81F-11D2-BA4B-00A0C93EC93B" and
 		.partitiontable.partitions[1].type == "0FC63DAF-8483-4772-8E79-3D69D8477DE4"' > /dev/null; then \
 		echo "Partition layout is correct."; \
 	else \
@@ -104,10 +104,10 @@ partition-disk: partition-table.sfdisk
 		exit 1; \
 	fi
 	@if sudo sfdisk --json $(TARGET_DISK) | jq -e \
-		'.partitiontable.label == "gpt" and \
-		(.partitiontable.partitions | length == 2) and \
-		.partitiontable.partitions[0].size == 2095104 and \
-		.partitiontable.partitions[0].type == "C12A7328-F81F-11D2-BA4B-00A0C93EC93B" and \
+		'.partitiontable.label == "gpt" and
+		(.partitiontable.partitions | length == 2) and
+		.partitiontable.partitions[0].size == 2095104 and
+		.partitiontable.partitions[0].type == "C12A7328-F81F-11D2-BA4B-00A0C93EC93B" and
 		.partitiontable.partitions[1].type == "0FC63DAF-8483-4772-8E79-3D69D8477DE4"' > /dev/null 2>&1; then \
 		echo "Partition layout on $(TARGET_DISK) is already correct. Nothing to do."; \
 	else \
