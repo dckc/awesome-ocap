@@ -23,6 +23,12 @@ VM_NAME?=ocap-dev-vm
 help:
 	@echo "Makefile for OCap OS Dev VM"
 	@echo ""
+	@if [ ! -b "$(TARGET_DISK)" ]; then \
+		echo "ERROR: TARGET_DISK '$(TARGET_DISK)' does not exist or is not a block device."; \
+		echo "Please set TARGET_DISK to a valid device. For example:"; \
+		echo "  export TARGET_DISK=/dev/sdX"; \
+		exit 1; \
+	fi
 	@echo "Current configuration:"
 	@echo "  TARGET_DISK = $(TARGET_DISK)"
 	@echo "  VM_NAME     = $(VM_NAME)"
