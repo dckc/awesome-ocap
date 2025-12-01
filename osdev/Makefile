@@ -170,8 +170,4 @@ unmount-target:
 	$(SUDO) $(UMOUNT) /mnt
 
 install-bootloader:
-	@echo "Installing GRUB bootloader..."
-	$(SUDO) $(MAKE) mount-target
 	$(SUDO) $(GRUB_INSTALL) --target=x86_64-efi --efi-directory=/mnt/boot/efi --boot-directory=/mnt/boot --removable
-	$(SUDO) $(MAKE) unmount-target
-	@echo "Bootloader installed successfully."
