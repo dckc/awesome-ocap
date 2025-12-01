@@ -70,12 +70,21 @@ create-vm: physical.vmdk
 		echo "VM '$(VM_NAME)' created successfully."; \
 	fi
 
-check-partitioning: partition-table.sfdisk
-	@echo "Checking if partition layout on $(TARGET_DISK) matches $<..."
-	@if sudo sfdisk -d $(TARGET_DISK) | diff -u $< -; then \
-		echo "Partition layout matches."; \
+check-partitioning:
+	@echo "Checking if partition layout on $(TARGET_DISK) is correct..."
+	@if ! command -v jq > /dev/null; then \
+		echo "ERROR: 'jq' command not found. Please install jq."; \
+		exit 1; \
+	fi
+	@if sudo sfdisk --json $(TARGET_DISK) | jq -e \
+		'.partitiontable.label == "gpt" and \
+		(.partitiontable.partitions | length == 2) and \
+		.partitiontable.partitions[0].size == 2095104 and \
+		.partitiontable.partitions[0].type == "C12A7328-F81F-11D2-BA4B-00A0C93EC93B" and \
+		.partitiontable.partitions[1].type == "0FC63DAF-8483-4772-8E79-3D69D8477DE4"' > /dev/null; then \
+		echo "Partition layout is correct."; \
 	else \
-		echo; echo "Partition layout MISMATCH (see diff above)."; \
+		echo "Partition layout is INCORRECT or disk is not partitioned."; \
 		exit 1; \
 	fi
 
@@ -90,8 +99,17 @@ check-partitioning: partition-table.sfdisk
 .PHONY: partition-disk format-disk
 
 partition-disk: partition-table.sfdisk
-	@if sudo sfdisk -d $(TARGET_DISK) | diff -q $< - >/dev/null 2>&1; then \
-		echo "Partition layout on $(TARGET_DISK) already matches $<. Nothing to do."; \
+	@if ! command -v jq > /dev/null; then \
+		echo "ERROR: 'jq' command not found. Please install jq."; \
+		exit 1; \
+	fi
+	@if sudo sfdisk --json $(TARGET_DISK) | jq -e \
+		'.partitiontable.label == "gpt" and \
+		(.partitiontable.partitions | length == 2) and \
+		.partitiontable.partitions[0].size == 2095104 and \
+		.partitiontable.partitions[0].type == "C12A7328-F81F-11D2-BA4B-00A0C93EC93B" and \
+		.partitiontable.partitions[1].type == "0FC63DAF-8483-4772-8E79-3D69D8477DE4"' > /dev/null 2>&1; then \
+		echo "Partition layout on $(TARGET_DISK) is already correct. Nothing to do."; \
 	else \
 		echo "!!! WARNING: About to partition $(TARGET_DISK) using layout from $<. ALL DATA WILL BE LOST. !!!"; \
 		read -p "Press Enter to continue or Ctrl+C to abort."; \

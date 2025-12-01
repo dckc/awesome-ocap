@@ -2,6 +2,10 @@
 
 This directory contains tools to create a [VirtualBox VM](https://en.wikipedia.org/wiki/VirtualBox) that boots from a physical disk, for operating system development experiments.
 
+## Prerequisites
+
+-   **jq**: This tool is used for parsing the partition table. You can install it with `sudo apt-get install jq` on Debian/Ubuntu.
+
 ## Setup
 
 1.  **Check Configuration**: The `Makefile` has defaults for `TARGET_DISK` and `VM_NAME`. To see them, run `make -C osdev`. To override, set environment variables:
