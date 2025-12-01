@@ -160,8 +160,8 @@ provision-disk: partition-disk format-disk
 
 mount-target:
 	@echo "Mounting target partitions..."
-	$(SUDO) $(MKDIR) -p /mnt/boot/efi
 	$(SUDO) $(MOUNT) "$$($(REALPATH) $(TARGET_DISK)-part2)" /mnt
+	$(SUDO) $(MKDIR) -p /mnt/boot/efi
 	$(SUDO) $(MOUNT) "$$($(REALPATH) $(TARGET_DISK)-part1)" /mnt/boot/efi
 
 unmount-target:
