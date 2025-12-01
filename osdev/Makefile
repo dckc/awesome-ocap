@@ -66,16 +66,10 @@ run:
 
 .PHONY: partition-disk format-disk
 
-partition-disk:
-	@echo "!!! WARNING: About to partition $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"
+partition-disk: partition-table.sfdisk
+	@echo "!!! WARNING: About to partition $(TARGET_DISK) using layout from $<. ALL DATA WILL BE LOST. !!!"
 	@read -p "Press Enter to continue or Ctrl+C to abort."
-	sudo parted -s $(TARGET_DISK) -- mklabel gpt
-	# EFI system partition
-	sudo parted -s $(TARGET_DISK) -- mkpart ESP fat32 1MiB 1024MiB
-	sudo parted -s $(TARGET_DISK) -- set 1 esp on
-	# Root partition using remaining space
-	sudo parted -s $(TARGET_DISK) -- mkpart osdev-root ext4 1024MiB 100%
-	sudo parted -s $(TARGET_DISK) -- print
+	sudo sfdisk $(TARGET_DISK) < $<
 
 format-disk:
 	@echo "!!! WARNING: About to format $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"

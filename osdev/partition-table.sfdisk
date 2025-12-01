@@ -1,0 +1,13 @@
+# sfdisk script for awesome-ocap osdev disk
+#
+# To apply, run:
+#   sudo sfdisk <device> < partition-table.sfdisk
+
+label: gpt
+unit: MiB
+
+# partition 1: EFI System Partition, 1023MiB
+,1023,U,name=ESP
+
+# partition 2: Linux filesystem, rest of disk
+, ,L,name=osdev-root
