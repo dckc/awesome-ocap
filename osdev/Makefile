@@ -16,7 +16,7 @@ VM_NAME?=ocap-dev-vm
 # --- Non-Destructive Targets ---
 #
 
-.PHONY: help perms run check-partitioning create-vm
+.PHONY: help perms run check-partitioning create-vm check-formatting
 
 # Default target
 
@@ -39,6 +39,7 @@ help:
 	@echo "  make -C osdev create-vm      - Create the VirtualBox VM definition."
 	@echo "  make -C osdev run            - Start the VirtualBox VM."
 	@echo "  sudo make -C osdev check-partitioning - Check if partitioning is already done."
+	@echo "  sudo make -C osdev check-formatting - Check if formatting is already done."
 	@echo ""
 	@echo "  WARNING: Destructive commands follow."
 	@echo "  sudo make -C osdev partition-disk - Partition TARGET_DISK (WIPES ALL DATA)."
@@ -83,6 +84,27 @@ check-partitioning: check-partition-layout.jq
 		exit 1; \
 	fi
 
+check-formatting:
+	@echo "Checking formatting on $(TARGET_DISK)..."
+	@PART1_OK=false; \
+	if [ -b "$(TARGET_DISK)-part1" ] && \
+	   [ "$$(sudo blkid -s TYPE -o value $(TARGET_DISK)-part1 2>/dev/null)" = "vfat" ] && \
+	   [ "$$(sudo blkid -s LABEL -o value $(TARGET_DISK)-part1 2>/dev/null)" = "ESP" ]; then \
+		PART1_OK=true; \
+	fi; \
+	PART2_OK=false; \
+	if [ -b "$(TARGET_DISK)-part2" ] && \
+	   [ "$$(sudo blkid -s TYPE -o value $(TARGET_DISK)-part2 2>/dev/null)" = "ext4" ] && \
+	   [ "$$(sudo blkid -s LABEL -o value $(TARGET_DISK)-part2 2>/dev/null)" = "osdev-root" ]; then \
+		PART2_OK=true; \
+	fi; \
+	if $$PART1_OK && $$PART2_OK; then \
+		echo "Partitions are correctly formatted."; \
+	else \
+		echo "Partitions are NOT correctly formatted."; \
+		exit 1; \
+	fi
+
 
 #
 # --- DANGEROUS: Destructive Disk Operations ---
@@ -107,7 +129,23 @@ partition-disk: partition-table.sfdisk check-partition-layout.jq
 	fi
 
 format-disk:
-	@echo "!!! WARNING: About to format $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"
-	@read -p "Press Enter to continue or Ctrl+C to abort."
-	sudo mkfs.vfat -n ESP $$(realpath $(TARGET_DISK)-part1)
-	sudo mkfs.ext4 -L osdev-root -F $$(realpath $(TARGET_DISK)-part2)
+	@PART1_OK=false; \
+	if [ -b "$(TARGET_DISK)-part1" ] && \
+	   [ "$$(sudo blkid -s TYPE -o value $(TARGET_DISK)-part1 2>/dev/null)" = "vfat" ] && \
+	   [ "$$(sudo blkid -s LABEL -o value $(TARGET_DISK)-part1 2>/dev/null)" = "ESP" ]; then \
+		PART1_OK=true; \
+	fi; \
+	PART2_OK=false; \
+	if [ -b "$(TARGET_DISK)-part2" ] && \
+	   [ "$$(sudo blkid -s TYPE -o value $(TARGET_DISK)-part2 2>/dev/null)" = "ext4" ] && \
+	   [ "$$(sudo blkid -s LABEL -o value $(TARGET_DISK)-part2 2>/dev/null)" = "osdev-root" ]; then \
+		PART2_OK=true; \
+	fi; \
+	if $$PART1_OK && $$PART2_OK; then \
+		echo "Partitions on $(TARGET_DISK) are already formatted. Nothing to do."; \
+	else \
+		echo "!!! WARNING: About to format $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"; \
+		read -p "Press Enter to continue or Ctrl+C to abort."; \
+		sudo mkfs.vfat -n ESP $$(realpath $(TARGET_DISK)-part1); \
+		sudo mkfs.ext4 -L osdev-root -F $$(realpath $(TARGET_DISK)-part2); \
+	fi

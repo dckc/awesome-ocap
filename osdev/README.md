@@ -31,9 +31,10 @@ This directory contains tools to create a [VirtualBox VM](https://en.wikipedia.o
     ```
     This creates a VM definition in VirtualBox that uses the `.vmdk` file and enables [EFI](https://en.wikipedia.org/wiki/UEFI) booting.
 
-5.  **Provision Disk (Optional & DESTRUCTIVE)**: If the disk is empty, you can [partition](https://en.wikipedia.org/wiki/Disk_partitioning) and format it. First, you can check if it's already partitioned correctly:
+5.  **Provision Disk (Optional & DESTRUCTIVE)**: If the disk is empty, you can [partition](https://en.wikipedia.org/wiki/Disk_partitioning) and format it. First, you can check if it's already provisioned correctly:
     ```sh
     sudo make -C osdev check-partitioning
+    sudo make -C osdev check-formatting
     ```
     If not, you can use the destructive targets. The [partition layout](https://en.wikipedia.org/wiki/Disk_partitioning) is defined in `partition-table.sfdisk`. **THIS WILL WIPE THE DISK.**
     ```sh
