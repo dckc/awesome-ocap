@@ -23,6 +23,7 @@ SFDISK?=sfdisk
 BLKID?=blkid
 MKFS_VFAT?=mkfs.vfat
 MKFS_EXT4?=mkfs.ext4
+MKFS_BTRFS?=mkfs.btrfs
 REALPATH?=realpath
 SUDO?=sudo
 JQ?=jq
@@ -121,8 +122,14 @@ check-formatting:
 		[ "$$($(SUDO) $(BLKID) -s TYPE -o value "$(TARGET_DISK)-part1" 2>/dev/null)" = "vfat" ] && \
 		[ "$$($(SUDO) $(BLKID) -s LABEL -o value "$(TARGET_DISK)-part1" 2>/dev/null)" = "ESP" ] && \
 		[ -b "$(TARGET_DISK)-part2" ] && \
-		[ "$$($(SUDO) $(BLKID) -s TYPE -o value "$(TARGET_DISK)-part2" 2>/dev/null)" = "ext4" ] && \
-		[ "$$($(SUDO) $(BLKID) -s LABEL -o value "$(TARGET_DISK)-part2" 2>/dev/null)" = "osdev-root" ]; then \
+		[ "$$($(SUDO) $(BLKID) -s TYPE -o value "$(TARGET_DISK)-part2" 2>/dev/null)" = "btrfs" ] && \
+		[ "$$($(SUDO) $(BLKID) -s LABEL -o value "$(TARGET_DISK)-part2" 2>/dev/null)" = "guix" ] && \
+		[ -b "$(TARGET_DISK)-part3" ] && \
+		[ "$$($(SUDO) $(BLKID) -s TYPE -o value "$(TARGET_DISK)-part3" 2>/dev/null)" = "ext4" ] && \
+		[ "$$($(SUDO) $(BLKID) -s LABEL -o value "$(TARGET_DISK)-part3" 2>/dev/null)" = "genode" ] && \
+		[ -b "$(TARGET_DISK)-part4" ] && \
+		[ "$$($(SUDO) $(BLKID) -s TYPE -o value "$(TARGET_DISK)-part4" 2>/dev/null)" = "btrfs" ] && \
+		[ "$$($(SUDO) $(BLKID) -s LABEL -o value "$(TARGET_DISK)-part4" 2>/dev/null)" = "shared" ]; then \
 		echo "Partitions are correctly formatted."; \
 	else \
 		echo "Partitions are NOT correctly formatted."; \
@@ -153,7 +160,9 @@ format-disk:
 		echo "!!! WARNING: About to format $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"; \
 		read -p "Press Enter to continue or Ctrl+C to abort."; \
 		$(SUDO) $(MKFS_VFAT) -n ESP "$$($(REALPATH) $(TARGET_DISK)-part1)"; \
-		$(SUDO) $(MKFS_EXT4) -L osdev-root -F "$$($(REALPATH) $(TARGET_DISK)-part2)"; \
+		$(SUDO) $(MKFS_BTRFS) -L guix -f "$$($(REALPATH) $(TARGET_DISK)-part2)"; \
+		$(SUDO) $(MKFS_EXT4) -L genode -F "$$($(REALPATH) $(TARGET_DISK)-part3)"; \
+		$(SUDO) $(MKFS_BTRFS) -L shared -f "$$($(REALPATH) $(TARGET_DISK)-part4)"; \
 	fi
 
 provision-disk: partition-disk format-disk

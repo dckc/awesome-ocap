@@ -1,13 +1,13 @@
-# sfdisk script for awesome-ocap osdev disk
-#
-# To apply, run:
-#   sudo sfdisk <device> < partition-table.sfdisk
-
 label: gpt
 
-# partition 1: EFI System Partition, 1023MiB
-# (1023 MiB * 1024 * 1024 bytes/MiB) / 512 bytes/sector = 2095104 sectors
-,2095104,U
+# partition 1: EFI System Partition, 1GiB
+,1G,U,name="ESP"
 
-# partition 2: Linux filesystem, rest of disk
-, ,L
+# partition 2: Guix System, 100GiB
+,100G,L,name="Guix"
+
+# partition 3: Genode System, 20GiB
+,20G,L,name="Genode"
+
+# partition 4: Shared Data, 200GiB
+,200G,L,name="Shared"
