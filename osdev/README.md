@@ -77,4 +77,9 @@ The approach documented here is based on:
 
 ## TODO
 
+-   Install an OS to get past the UEFI Interactive Shell. The `ps23.mk` file from a prior experiment suggests GNU Guix. The steps are roughly:
+    1.  Create a Guix `config.scm` file for the target system.
+    2.  Add a `mount-target` target to the Makefile to mount `$(TARGET_DISK)-part2` on `/mnt` and `$(TARGET_DISK)-part1` on `/mnt/boot/efi`.
+    3.  Add an `install-guix` target that copies `config.scm` to `/mnt/etc/` and then runs `guix system init /mnt/etc/config.scm /mnt`.
+
 -   Consider [LVM](https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)) or [btrfs](https://en.wikipedia.org/wiki/Btrfs) to allow for multiple resizable volumes.
