@@ -36,8 +36,5 @@
                  (supplementary-groups '("wheel" "netdev" "audio" "video")))
                 %base-user-accounts))
 
-  ;; Basic system services.
-  (services (cons* (service mingetty-service-type
-                            (mingetty-configuration
-                             (tty "tty1")))
-                   %base-services)))
+  ;; Basic system services, including a getty on tty1.
+  (services %base-services))
