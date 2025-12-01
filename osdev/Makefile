@@ -7,10 +7,10 @@
 # DANGER: Set this to the target physical disk.
 # All data on this disk may be lost.
 # Use `lsblk` to find the correct device.
-TARGET_DISK=/dev/disk/by-id/ata-Samsung_SSD_860_QVO_1TB_S59HNG0N105827B
+TARGET_DISK?=/dev/disk/by-id/ata-Samsung_SSD_860_QVO_1TB_S59HNG0N105827B
 
 # Name of the VirtualBox VM to create and manage.
-VM_NAME=ocap-dev-vm
+VM_NAME?=ocap-dev-vm
 
 #
 # --- Non-Destructive Targets ---
@@ -22,6 +22,10 @@ VM_NAME=ocap-dev-vm
 
 help:
 	@echo "Makefile for OCap OS Dev VM"
+	@echo ""
+	@echo "Current configuration:"
+	@echo "  TARGET_DISK = $(TARGET_DISK)"
+	@echo "  VM_NAME     = $(VM_NAME)"
 	@echo ""
 	@echo "Usage:"
 	@echo "  make -C osdev perms          - Add current user to 'disk' group (requires logout/login)."

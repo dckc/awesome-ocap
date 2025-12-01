@@ -4,7 +4,11 @@ This directory contains tools to create a VirtualBox VM that boots from a physic
 
 ## Setup
 
-1.  **Edit Makefile**: Open `Makefile` and set `TARGET_DISK` to your raw disk device (e.g., `/dev/sdc`). **BE VERY CAREFUL** as subsequent steps can wipe this disk. Also set `VM_NAME` to the name of your VirtualBox VM.
+1.  **Check Configuration**: The `Makefile` has defaults for `TARGET_DISK` and `VM_NAME`. To see them, run `make -C osdev`. To override, set environment variables:
+    ```sh
+    export TARGET_DISK=/dev/sdX  # DANGER: Change to your target disk
+    ```
+    **BE VERY CAREFUL** as subsequent steps can wipe the disk.
 
 2.  **Set Permissions**: Grant your user access to raw disks.
     ```sh
