@@ -1,14 +1,12 @@
-# jq script to validate the partition table of the target disk.
+# jq script to validate the partition table of the target disk using lsblk output.
 #
 # It checks for:
-# - GPT label
 # - At least four partitions
-# - Correct size, type, and name for the first four partitions
+# - Correct partlabel, size (in bytes), and parttype UUID for the first four partitions
 #
 # Exits with status 0 if all checks pass, non-zero otherwise.
-.partitiontable.label == "gpt" and
-(.partitiontable.partitions | length >= 4) and
-(.partitiontable.partitions[0] | .size == 2097152 and .type == "C12A7328-F81F-11D2-BA4B-00A0C93EC93B" and .name == "ESP") and
-(.partitiontable.partitions[1] | .size == 209715200 and .type == "0FC63DAF-8483-4772-8E79-3D69D8477DE4" and .name == "Guix") and
-(.partitiontable.partitions[2] | .size == 41943040 and .type == "0FC63DAF-8483-4772-8E79-3D69D8477DE4" and .name == "Genode") and
-(.partitiontable.partitions[3] | .size == 419430400 and .type == "0FC63DAF-8483-4772-8E79-3D69D8477DE4" and .name == "Shared")
+( .blockdevices[0].children | length >= 4 ) and
+( .blockdevices[0].children[0] | .partlabel == "ESP"    and .size == 1073741824 and .parttype == "c12a7328-f81f-11d2-ba4b-00a0c93ec93b" ) and
+( .blockdevices[0].children[1] | .partlabel == "Guix"   and .size == 107374182400 and .parttype == "0fc63daf-8483-4772-8e79-3d69d8477de4" ) and
+( .blockdevices[0].children[2] | .partlabel == "Genode" and .size == 21474836480 and .parttype == "0fc63daf-8483-4772-8e79-3d69d8477de4" ) and
+( .blockdevices[0].children[3] | .partlabel == "Shared" and .size == 214748364800 and .parttype == "0fc63daf-8483-4772-8e79-3d69d8477de4" )

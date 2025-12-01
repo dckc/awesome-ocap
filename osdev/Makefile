@@ -19,7 +19,8 @@ VM_NAME?=ocap-dev-vm
 # e.g. make SFDISK=/path/to/sfdisk ...
 VBOXMANAGE?=VBoxManage
 USERMOD?=usermod
-SFDISK?=sfdisk
+SGDISK?=sgdisk
+LSBLK?=lsblk
 BLKID?=blkid
 MKFS_VFAT?=mkfs.vfat
 MKFS_EXT4?=mkfs.ext4
@@ -109,7 +110,7 @@ create-vm: physical.vmdk
 
 check-partitioning: check-partition-layout.jq
 	@echo "Checking if partition layout on $(TARGET_DISK) is correct..."
-	@if $(SUDO) $(SFDISK) --json $(TARGET_DISK) | $(JQ) -e -f $< > /dev/null; then \
+	@if $(SUDO) $(LSBLK) --json -b -o PARTLABEL,SIZE,PARTTYPE $(TARGET_DISK) | $(JQ) -e -f $< > /dev/null; then \
 		echo "Partition layout is correct."; \
 	else \
 		echo "Partition layout is INCORRECT or disk is not partitioned."; \
@@ -144,13 +145,18 @@ check-formatting:
 # Adapted from https://gist.github.com/dckc/c11561caed0d24f23d9224ce38e0133f
 #
 
-partition-disk: partition-table.sfdisk check-partition-layout.jq
-	@if $(SUDO) $(SFDISK) --json $(TARGET_DISK) | $(JQ) -e -f check-partition-layout.jq > /dev/null 2>&1; then \
+partition-disk: check-partition-layout.jq
+	@if $(MAKE) check-partitioning > /dev/null 2>&1; then \
 		echo "Partition layout on $(TARGET_DISK) is already correct. Nothing to do."; \
 	else \
-		echo "!!! WARNING: About to partition $(TARGET_DISK) using layout from partition-table.sfdisk. ALL DATA WILL BE LOST. !!!"; \
+		echo "!!! WARNING: About to partition $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"; \
 		read -p "Press Enter to continue or Ctrl+C to abort."; \
-		$(SUDO) $(SFDISK) $(TARGET_DISK) < partition-table.sfdisk; \
+		$(SUDO) $(SGDISK) --zap-all \
+			--new=1:0:+1G   --change-name=1:"ESP"    --typecode=1:EF00 \
+			--new=2:0:+100G --change-name=2:"Guix"   --typecode=2:8300 \
+			--new=3:0:+20G  --change-name=3:"Genode" --typecode=3:8300 \
+			--new=4:0:+200G --change-name=4:"Shared" --typecode=4:8300 \
+			$(TARGET_DISK); \
 	fi
 
 format-disk:
