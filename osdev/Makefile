@@ -148,6 +148,6 @@ format-disk:
 	else \
 		echo "!!! WARNING: About to format $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"; \
 		read -p "Press Enter to continue or Ctrl+C to abort."; \
-		$(SUDO) $(MKFS_VFAT) -n ESP $$($(REALPATH) $(TARGET_DISK)-part1); \
-		$(SUDO) $(MKFS_EXT4) -L osdev-root -F $$($(REALPATH) $(TARGET_DISK)-part2); \
+		$(SUDO) $(MKFS_VFAT) -n ESP "$$($(REALPATH) $(TARGET_DISK)-part1)"; \
+		$(SUDO) $(MKFS_EXT4) -L osdev-root -F "$$($(REALPATH) $(TARGET_DISK)-part2)"; \
 	fi
