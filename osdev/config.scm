@@ -1,7 +1,7 @@
 ;; osdev/config.scm -- Guix system configuration for the OCap dev environment.
 
 (use-modules (gnu)
-             (gnu services)
+             (gnu services base)
              (guix gexp))
 
 (use-service-modules base)
