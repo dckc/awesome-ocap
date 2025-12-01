@@ -16,7 +16,7 @@ VM_NAME?=ocap-dev-vm
 # --- Non-Destructive Targets ---
 #
 
-.PHONY: help perms run
+.PHONY: help perms run check-partitioning
 
 # Default target
 
@@ -37,6 +37,7 @@ help:
 	@echo "  make -C osdev perms          - Add current user to 'disk' group (requires logout/login)."
 	@echo "  make -C osdev physical.vmdk  - Create the VMDK file pointing to TARGET_DISK."
 	@echo "  make -C osdev run            - Start the VirtualBox VM."
+	@echo "  sudo make -C osdev check-partitioning - Check if partitioning is already done."
 	@echo ""
 	@echo "  WARNING: Destructive commands follow."
 	@echo "  sudo make -C osdev partition-disk - Partition TARGET_DISK (WIPES ALL DATA)."
@@ -55,6 +56,15 @@ physical.vmdk:
 
 run:
 	VBoxManage startvm "$(VM_NAME)"
+
+check-partitioning: partition-table.sfdisk
+	@echo "Checking if partition layout on $(TARGET_DISK) matches $<..."
+	@if sudo sfdisk -d $(TARGET_DISK) | diff -u $< -; then \
+		echo "Partition layout matches."; \
+	else \
+		echo; echo "Partition layout MISMATCH (see diff above)."; \
+		exit 1; \
+	fi
 
 
 #

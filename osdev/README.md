@@ -27,7 +27,11 @@ This directory contains tools to create a VirtualBox VM that boots from a physic
     -   When asked for a Hard Disk, select "Use an existing virtual hard disk file" and choose `osdev/physical.vmdk`.
     -   Ensure EFI is enabled in the VM settings if you're booting an EFI system.
 
-5.  **Provision Disk (Optional & DESTRUCTIVE)**: If the disk is empty, you can partition and format it using the Makefile's destructive targets. The partition layout is defined in `partition-table.sfdisk`. **THIS WILL WIPE THE DISK.**
+5.  **Provision Disk (Optional & DESTRUCTIVE)**: If the disk is empty, you can partition and format it. First, you can check if it's already partitioned correctly:
+    ```sh
+    sudo make -C osdev check-partitioning
+    ```
+    If not, you can use the destructive targets. The partition layout is defined in `partition-table.sfdisk`. **THIS WILL WIPE THE DISK.**
     ```sh
     # Example for partitioning and formatting
     sudo make partition-disk
