@@ -7,7 +7,7 @@ label: gpt
 
 # partition 1: EFI System Partition, 1023MiB
 # (1023 MiB * 1024 * 1024 bytes/MiB) / 512 bytes/sector = 2095104 sectors
-,2095104,U,name=ESP
+,2095104,U
 
 # partition 2: Linux filesystem, rest of disk
-, ,L,name=osdev-root
+, ,L
