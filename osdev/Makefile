@@ -111,19 +111,12 @@ check-partitioning: check-partition-layout.jq
 
 check-formatting:
 	@echo "Checking formatting on $(TARGET_DISK)..."
-	@PART1_OK=false; \
-	if [ -b "$(TARGET_DISK)-part1" ] && \
+	@if [ -b "$(TARGET_DISK)-part1" ] && \
 	   [ "$$($(SUDO) $(BLKID) -s TYPE -o value $(TARGET_DISK)-part1 2>/dev/null)" = "vfat" ] && \
-	   [ "$$($(SUDO) $(BLKID) -s LABEL -o value $(TARGET_DISK)-part1 2>/dev/null)" = "ESP" ]; then \
-		PART1_OK=true; \
-	fi; \
-	PART2_OK=false; \
-	if [ -b "$(TARGET_DISK)-part2" ] && \
+	   [ "$$($(SUDO) $(BLKID) -s LABEL -o value $(TARGET_DISK)-part1 2>/dev/null)" = "ESP" ] && \
+	   [ -b "$(TARGET_DISK)-part2" ] && \
 	   [ "$$($(SUDO) $(BLKID) -s TYPE -o value $(TARGET_DISK)-part2 2>/dev/null)" = "ext4" ] && \
 	   [ "$$($(SUDO) $(BLKID) -s LABEL -o value $(TARGET_DISK)-part2 2>/dev/null)" = "osdev-root" ]; then \
-		PART2_OK=true; \
-	fi; \
-	if $$PART1_OK && $$PART2_OK; then \
 		echo "Partitions are correctly formatted."; \
 	else \
 		echo "Partitions are NOT correctly formatted."; \
