@@ -16,7 +16,7 @@ VM_NAME?=ocap-dev-vm
 # --- Non-Destructive Targets ---
 #
 
-.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm clean
+.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm clean physical.vmdk
 
 # Default target
 
@@ -58,13 +58,8 @@ clean:
 	rm -f physical.vmdk
 
 physical.vmdk:
-	@if ! grep -q 'createType="fullDevice"' $@ 2>/dev/null; then \
-		echo "Placeholder or invalid physical.vmdk found. Creating a new one for $(TARGET_DISK)..."; \
-		rm -f $@; \
-		VBoxManage internalcommands createrawvmdk -filename $@ -rawdisk $(TARGET_DISK); \
-	else \
-		echo "Valid physical.vmdk found. Skipping creation."; \
-	fi
+	@echo "Creating/updating VMDK mapping for $(TARGET_DISK)..."
+	VBoxManage internalcommands createrawvmdk -filename $@ -rawdisk $(TARGET_DISK)
 
 run:
 	VBoxManage startvm "$(VM_NAME)"
@@ -148,19 +143,7 @@ partition-disk: partition-table.sfdisk check-partition-layout.jq
 	fi
 
 format-disk:
-	@PART1_OK=false; \
-	if [ -b "$(TARGET_DISK)-part1" ] && \
-	   [ "$$(sudo blkid -s TYPE -o value $(TARGET_DISK)-part1 2>/dev/null)" = "vfat" ] && \
-	   [ "$$(sudo blkid -s LABEL -o value $(TARGET_DISK)-part1 2>/dev/null)" = "ESP" ]; then \
-		PART1_OK=true; \
-	fi; \
-	PART2_OK=false; \
-	if [ -b "$(TARGET_DISK)-part2" ] && \
-	   [ "$$(sudo blkid -s TYPE -o value $(TARGET_DISK)-part2 2>/dev/null)" = "ext4" ] && \
-	   [ "$$(sudo blkid -s LABEL -o value $(TARGET_DISK)-part2 2>/dev/null)" = "osdev-root" ]; then \
-		PART2_OK=true; \
-	fi; \
-	if $$PART1_OK && $$PART2_OK; then \
+	@if $(MAKE) check-formatting > /dev/null 2>&1; then \
 		echo "Partitions on $(TARGET_DISK) are already formatted. Nothing to do."; \
 	else \
 		echo "!!! WARNING: About to format $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"; \
