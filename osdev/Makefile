@@ -70,18 +70,13 @@ create-vm: physical.vmdk
 		echo "VM '$(VM_NAME)' created successfully."; \
 	fi
 
-check-partitioning:
+check-partitioning: check-partition-layout.jq
 	@echo "Checking if partition layout on $(TARGET_DISK) is correct..."
 	@if ! command -v jq > /dev/null; then \
 		echo "ERROR: 'jq' command not found. Please install jq."; \
 		exit 1; \
 	fi
-	@if sudo sfdisk --json $(TARGET_DISK) | jq -e \
-		'.partitiontable.label == "gpt" and
-		(.partitiontable.partitions | length == 2) and
-		.partitiontable.partitions[0].size == 2095104 and
-		.partitiontable.partitions[0].type == "C12A7328-F81F-11D2-BA4B-00A0C93EC93B" and
-		.partitiontable.partitions[1].type == "0FC63DAF-8483-4772-8E79-3D69D8477DE4"' > /dev/null; then \
+	@if sudo sfdisk --json $(TARGET_DISK) | jq -e -f $< > /dev/null; then \
 		echo "Partition layout is correct."; \
 	else \
 		echo "Partition layout is INCORRECT or disk is not partitioned."; \
@@ -98,22 +93,17 @@ check-partitioning:
 
 .PHONY: partition-disk format-disk
 
-partition-disk: partition-table.sfdisk
+partition-disk: partition-table.sfdisk check-partition-layout.jq
 	@if ! command -v jq > /dev/null; then \
 		echo "ERROR: 'jq' command not found. Please install jq."; \
 		exit 1; \
 	fi
-	@if sudo sfdisk --json $(TARGET_DISK) | jq -e \
-		'.partitiontable.label == "gpt" and
-		(.partitiontable.partitions | length == 2) and
-		.partitiontable.partitions[0].size == 2095104 and
-		.partitiontable.partitions[0].type == "C12A7328-F81F-11D2-BA4B-00A0C93EC93B" and
-		.partitiontable.partitions[1].type == "0FC63DAF-8483-4772-8E79-3D69D8477DE4"' > /dev/null 2>&1; then \
+	@if sudo sfdisk --json $(TARGET_DISK) | jq -e -f check-partition-layout.jq > /dev/null 2>&1; then \
 		echo "Partition layout on $(TARGET_DISK) is already correct. Nothing to do."; \
 	else \
-		echo "!!! WARNING: About to partition $(TARGET_DISK) using layout from $<. ALL DATA WILL BE LOST. !!!"; \
+		echo "!!! WARNING: About to partition $(TARGET_DISK) using layout from partition-table.sfdisk. ALL DATA WILL BE LOST. !!!"; \
 		read -p "Press Enter to continue or Ctrl+C to abort."; \
-		sudo sfdisk $(TARGET_DISK) < $<; \
+		sudo sfdisk $(TARGET_DISK) < partition-table.sfdisk; \
 	fi
 
 format-disk:
