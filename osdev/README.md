@@ -4,8 +4,8 @@ This directory contains tools to create a [VirtualBox VM](https://en.wikipedia.o
 
 ## Prerequisites
 
--   **VirtualBox**, **jq**, and standard Linux disk utilities (`sgdisk`, `lsblk`, `blkid`, `grub-install`, etc.) must be installed.
--   On Debian/Ubuntu, `jq` can be installed with `sudo apt-get install jq`, `sgdisk` with `sudo apt-get install gdisk`, and GRUB with `sudo apt-get install grub-efi-amd64-bin`.
+-   **VirtualBox**, **jq**, and standard Linux disk utilities (`sgdisk`, `partprobe`, `lsblk`, `blkid`, `grub-install`, etc.) must be installed.
+-   On Debian/Ubuntu, `jq` can be installed with `sudo apt-get install jq`, `sgdisk` with `sudo apt-get install gdisk`, `partprobe` with `sudo apt-get install parted`, and GRUB with `sudo apt-get install grub-efi-amd64-bin`.
 -   The paths to these tools can be overridden, e.g., `make JQ=/path/to/jq ...`.
 
 ## Setup
