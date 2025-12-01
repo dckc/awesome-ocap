@@ -22,10 +22,10 @@ This directory contains tools to create a [VirtualBox VM](https://en.wikipedia.o
     ```
 
 4.  **Create VirtualBox VM**:
-    -   Open VirtualBox.
-    -   Create a new VM (the name must match `VM_NAME` from the `Makefile`).
-    -   When asked for a Hard Disk, select "Use an existing virtual hard disk file" and choose `osdev/physical.vmdk`.
-    -   Ensure [EFI](https://en.wikipedia.org/wiki/UEFI) is enabled in the VM settings if you're booting an EFI system.
+    ```sh
+    make create-vm
+    ```
+    This creates a VM definition in VirtualBox that uses the `.vmdk` file and enables [EFI](https://en.wikipedia.org/wiki/UEFI) booting.
 
 5.  **Provision Disk (Optional & DESTRUCTIVE)**: If the disk is empty, you can [partition](https://en.wikipedia.org/wiki/Disk_partitioning) and format it. First, you can check if it's already partitioned correctly:
     ```sh

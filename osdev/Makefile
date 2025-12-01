@@ -16,7 +16,7 @@ VM_NAME?=ocap-dev-vm
 # --- Non-Destructive Targets ---
 #
 
-.PHONY: help perms run check-partitioning
+.PHONY: help perms run check-partitioning create-vm
 
 # Default target
 
@@ -36,6 +36,7 @@ help:
 	@echo "Usage:"
 	@echo "  make -C osdev perms          - Add current user to 'disk' group (requires logout/login)."
 	@echo "  make -C osdev physical.vmdk  - Create the VMDK file pointing to TARGET_DISK."
+	@echo "  make -C osdev create-vm      - Create the VirtualBox VM definition."
 	@echo "  make -C osdev run            - Start the VirtualBox VM."
 	@echo "  sudo make -C osdev check-partitioning - Check if partitioning is already done."
 	@echo ""
@@ -56,6 +57,18 @@ physical.vmdk:
 
 run:
 	VBoxManage startvm "$(VM_NAME)"
+
+create-vm: physical.vmdk
+	@if VBoxManage showvminfo "$(VM_NAME)" >/dev/null 2>&1; then \
+		echo "VirtualBox VM '$(VM_NAME)' already exists. Nothing to do."; \
+	else \
+		echo "Creating VirtualBox VM '$(VM_NAME)'..."; \
+		VBoxManage createvm --name "$(VM_NAME)" --ostype "Linux_64" --register; \
+		VBoxManage modifyvm "$(VM_NAME)" --firmware efi; \
+		VBoxManage storagectl "$(VM_NAME)" --name "SATA Controller" --add sata --controller IntelAhci; \
+		VBoxManage storageattach "$(VM_NAME)" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium $(CURDIR)/physical.vmdk; \
+		echo "VM '$(VM_NAME)' created successfully."; \
+	fi
 
 check-partitioning: partition-table.sfdisk
 	@echo "Checking if partition layout on $(TARGET_DISK) matches $<..."
