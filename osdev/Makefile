@@ -31,7 +31,7 @@ JQ?=jq
 # --- Non-Destructive Targets ---
 #
 
-.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm clean physical.vmdk
+.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm clean physical.vmdk partition-disk format-disk
 
 # Default target
 
@@ -130,8 +130,6 @@ check-formatting:
 # These targets will WIPE ALL DATA on TARGET_DISK.
 # Adapted from https://gist.github.com/dckc/c11561caed0d24f23d9224ce38e0133f
 #
-
-.PHONY: partition-disk format-disk
 
 partition-disk: partition-table.sfdisk check-partition-layout.jq
 	@if $(SUDO) $(SFDISK) --json $(TARGET_DISK) | $(JQ) -e -f check-partition-layout.jq > /dev/null 2>&1; then \
