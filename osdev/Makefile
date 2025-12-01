@@ -109,11 +109,14 @@ create-vm: physical.vmdk
 		(echo "VM creation failed. Cleaning up..." && $(VBOXMANAGE) unregistervm "$(VM_NAME)" --delete >/dev/null 2>&1); \
 	fi
 
-check-partitioning: check-partition-layout.jq
-	@if $(SUDO) $(LSBLK) --json -b -o PARTLABEL,SIZE,PARTTYPE $(TARGET_DISK) | $(JQ) -e -f $< > /dev/null; then \
+check-partitioning: expected-partition-layout.json check-partition-layout.jq
+	@tmp_layout=$$(mktemp); \
+	trap 'rm -f $$tmp_layout' EXIT; \
+	$(SUDO) $(LSBLK) --json -b -o PARTLABEL,SIZE,PARTTYPE $(TARGET_DISK) | $(JQ) -f check-partition-layout.jq > $$tmp_layout; \
+	if diff -u expected-partition-layout.json $$tmp_layout; then \
 		echo "Partition layout is correct."; \
 	else \
-		echo "Partition layout is INCORRECT or disk is not partitioned."; \
+		echo "Partition layout is INCORRECT."; \
 		exit 1; \
 	fi
 
