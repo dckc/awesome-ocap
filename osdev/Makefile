@@ -4,7 +4,7 @@
 # --- Configuration ---
 #
 
-# DANGER: Set this to the target physical disk.
+# WARNING: Set this to the target physical disk.
 # All data on this disk may be lost.
 # Use `lsblk` to find the correct device.
 TARGET_DISK?=/dev/disk/by-id/ata-Samsung_SSD_860_QVO_1TB_S59HNG0N105827B
