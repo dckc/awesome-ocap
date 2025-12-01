@@ -110,15 +110,15 @@ create-vm: physical.vmdk
 	fi
 
 check-partitioning: check-partition-layout.jq
-	if $(SUDO) $(LSBLK) --json -b -o PARTLABEL,SIZE,PARTTYPE $(TARGET_DISK) | $(JQ) -e -f $< > /dev/null; then \
-		@echo "Partition layout is correct."; \
+	@if $(SUDO) $(LSBLK) --json -b -o PARTLABEL,SIZE,PARTTYPE $(TARGET_DISK) | $(JQ) -e -f $< > /dev/null; then \
+		echo "Partition layout is correct."; \
 	else \
-		@echo "Partition layout is INCORRECT or disk is not partitioned."; \
+		echo "Partition layout is INCORRECT or disk is not partitioned."; \
 		exit 1; \
 	fi
 
 check-formatting:
-	if [ -b "$(TARGET_DISK)-part1" ] && \
+	@if [ -b "$(TARGET_DISK)-part1" ] && \
 		[ "$$($(SUDO) $(BLKID) -s TYPE -o value "$(TARGET_DISK)-part1" 2>/dev/null)" = "vfat" ] && \
 		[ "$$($(SUDO) $(BLKID) -s LABEL -o value "$(TARGET_DISK)-part1" 2>/dev/null)" = "ESP" ] && \
 		[ -b "$(TARGET_DISK)-part2" ] && \
@@ -130,9 +130,9 @@ check-formatting:
 		[ -b "$(TARGET_DISK)-part4" ] && \
 		[ "$$($(SUDO) $(BLKID) -s TYPE -o value "$(TARGET_DISK)-part4" 2>/dev/null)" = "btrfs" ] && \
 		[ "$$($(SUDO) $(BLKID) -s LABEL -o value "$(TARGET_DISK)-part4" 2>/dev/null)" = "shared" ]; then \
-		@echo "Partitions are correctly formatted."; \
+		echo "Partitions are correctly formatted."; \
 	else \
-		@echo "Partitions are NOT correctly formatted."; \
+		echo "Partitions are NOT correctly formatted."; \
 		exit 1; \
 	fi
 
@@ -145,11 +145,11 @@ check-formatting:
 #
 
 partition-disk: check-partition-layout.jq
-	if $(MAKE) check-partitioning > /dev/null 2>&1; then \
-		@echo "Partition layout on $(TARGET_DISK) is already correct. Nothing to do."; \
+	@if $(MAKE) check-partitioning > /dev/null 2>&1; then \
+		echo "Partition layout on $(TARGET_DISK) is already correct. Nothing to do."; \
 	else \
-		@echo "!!! WARNING: About to partition $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"; \
-		@echo "Press Enter to continue or Ctrl+C to abort."; \
+		echo "!!! WARNING: About to partition $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"; \
+		echo "Press Enter to continue or Ctrl+C to abort."; \
 		read REPLY; \
 		$(SUDO) $(SGDISK) --zap-all \
 			--new=1:0:+1G   --change-name=1:"ESP"    --typecode=1:EF00 \
@@ -161,11 +161,11 @@ partition-disk: check-partition-layout.jq
 	fi
 
 format-disk:
-	if $(MAKE) check-formatting > /dev/null 2>&1; then \
-		@echo "Partitions on $(TARGET_DISK) are already formatted. Nothing to do."; \
+	@if $(MAKE) check-formatting > /dev/null 2>&1; then \
+		echo "Partitions on $(TARGET_DISK) are already formatted. Nothing to do."; \
 	else \
-		@echo "!!! WARNING: About to format $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"; \
-		@echo "Press Enter to continue or Ctrl+C to abort."; \
+		echo "!!! WARNING: About to format $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"; \
+		echo "Press Enter to continue or Ctrl+C to abort."; \
 		read REPLY; \
 		$(SUDO) $(MKFS_VFAT) -n ESP "$$($(REALPATH) $(TARGET_DISK)-part1)"; \
 		$(SUDO) $(MKFS_BTRFS) -L guix -f "$$($(REALPATH) $(TARGET_DISK)-part2)"; \
