@@ -14,7 +14,9 @@
   ;; Bootloader configuration for EFI systems.
   (bootloader (bootloader-configuration
                (bootloader grub-efi-bootloader)
-               (target "/boot/efi")))
+               (target "/boot/efi")
+               ;; Ensure GRUB can read the btrfs root filesystem.
+               (grub-modules (list "btrfs"))))
 
   ;; Define the filesystems.
   (file-systems (cons* (file-system
