@@ -1,6 +1,6 @@
 # OCap OS Dev Exploration with VirtualBox
 
-This directory contains tools to create a VirtualBox VM that boots from a physical disk, for operating system development experiments.
+This directory contains tools to create a [VirtualBox VM](https://en.wikipedia.org/wiki/VirtualBox) that boots from a physical disk, for operating system development experiments.
 
 ## Setup
 
@@ -10,13 +10,13 @@ This directory contains tools to create a VirtualBox VM that boots from a physic
     ```
     **WARNING**: Subsequent steps can wipe this disk.
 
-2.  **Set Permissions**: Grant your user access to raw disks.
+2.  **Set Permissions**: Grant your user access to [raw disks](https://en.wikipedia.org/wiki/Raw_device).
     ```sh
     make perms
     ```
     Then, **log out and log back in** for the group change to take effect.
 
-3.  **Create VMDK**: Generate the `.vmdk` file that points to the physical disk.
+3.  **Create VMDK**: Generate the [.vmdk file](https://en.wikipedia.org/wiki/VMDK) that points to the physical disk.
     ```sh
     make physical.vmdk
     ```
@@ -25,13 +25,13 @@ This directory contains tools to create a VirtualBox VM that boots from a physic
     -   Open VirtualBox.
     -   Create a new VM (the name must match `VM_NAME` from the `Makefile`).
     -   When asked for a Hard Disk, select "Use an existing virtual hard disk file" and choose `osdev/physical.vmdk`.
-    -   Ensure EFI is enabled in the VM settings if you're booting an EFI system.
+    -   Ensure [EFI](https://en.wikipedia.org/wiki/UEFI) is enabled in the VM settings if you're booting an EFI system.
 
-5.  **Provision Disk (Optional & DESTRUCTIVE)**: If the disk is empty, you can partition and format it. First, you can check if it's already partitioned correctly:
+5.  **Provision Disk (Optional & DESTRUCTIVE)**: If the disk is empty, you can [partition](https://en.wikipedia.org/wiki/Disk_partitioning) and format it. First, you can check if it's already partitioned correctly:
     ```sh
     sudo make -C osdev check-partitioning
     ```
-    If not, you can use the destructive targets. The partition layout is defined in `partition-table.sfdisk`. **THIS WILL WIPE THE DISK.**
+    If not, you can use the destructive targets. The [partition layout](https://en.wikipedia.org/wiki/Disk_partitioning) is defined in `partition-table.sfdisk`. **THIS WILL WIPE THE DISK.**
     ```sh
     # Example for partitioning and formatting
     sudo make partition-disk
