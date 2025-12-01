@@ -31,7 +31,7 @@ JQ?=jq
 # --- Non-Destructive Targets ---
 #
 
-.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm clean physical.vmdk partition-disk format-disk
+.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm clean physical.vmdk partition-disk format-disk provision-disk
 
 # Default target
 
@@ -58,8 +58,9 @@ help:
 	@echo "  sudo make -C osdev check-formatting - Check if formatting is already done."
 	@echo ""
 	@echo "  WARNING: Destructive commands follow."
-	@echo "  sudo make -C osdev partition-disk - Partition TARGET_DISK (WIPES ALL DATA)."
-	@echo "  sudo make -C osdev format-disk    - Format partitions on TARGET_DISK (WIPES ALL DATA)."
+	@echo "  sudo make -C osdev provision-disk - Partition and format TARGET_DISK (WIPES ALL DATA)."
+	@echo "  sudo make -C osdev partition-disk - (part of provision) Partition TARGET_DISK."
+	@echo "  sudo make -C osdev format-disk    - (part of provision) Format partitions on TARGET_DISK."
 	@echo "  make -C osdev destroy-vm     - DANGER: Deletes the VirtualBox VM definition."
 
 

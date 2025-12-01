@@ -18,18 +18,18 @@ This directory contains tools to create a [VirtualBox VM](https://en.wikipedia.o
 
 2.  **Set Permissions**: Grant your user access to [raw disks](https://en.wikipedia.org/wiki/Raw_device).
     ```sh
-    make perms
+    make -C osdev perms
     ```
     Then, **log out and log back in** for the group change to take effect.
 
 3.  **Create VMDK**: Generate the [.vmdk file](https://en.wikipedia.org/wiki/VMDK) that points to the physical disk.
     ```sh
-    make physical.vmdk
+    make -C osdev physical.vmdk
     ```
 
 4.  **Create VirtualBox VM**:
     ```sh
-    make create-vm
+    make -C osdev create-vm
     ```
     This creates a VM definition in VirtualBox that uses the `.vmdk` file and enables [EFI](https://en.wikipedia.org/wiki/UEFI) booting.
 
@@ -38,28 +38,27 @@ This directory contains tools to create a [VirtualBox VM](https://en.wikipedia.o
     sudo make -C osdev check-partitioning
     sudo make -C osdev check-formatting
     ```
-    If not, you can use the destructive targets. The [partition layout](https://en.wikipedia.org/wiki/Disk_partitioning) is defined in `partition-table.sfdisk`. **THIS WILL WIPE THE DISK.**
+    If not, you can use the combined `provision-disk` target. The [partition layout](https://en.wikipedia.org/wiki/Disk_partitioning) is defined in `partition-table.sfdisk`. **THIS WILL WIPE THE DISK.**
     ```sh
-    # Example for partitioning and formatting
-    sudo make partition-disk
-    sudo make format-disk
+    sudo make -C osdev provision-disk
     ```
+    This runs both `partition-disk` and `format-disk`. You can also run them individually if needed.
 
 6.  **Run**:
     ```sh
-    make run
+    make -C osdev run
     ```
 
 ### Cleanup
 
 If `create-vm` fails or if you want to remove the VM definition from VirtualBox, run:
 ```sh
-make destroy-vm
+make -C osdev destroy-vm
 ```
 
 To remove the generated `.vmdk` file and force its recreation on the next run, use:
 ```sh
-make clean
+make -C osdev clean
 ```
 
 ## Files
