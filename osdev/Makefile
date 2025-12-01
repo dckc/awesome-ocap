@@ -16,7 +16,7 @@ VM_NAME?=ocap-dev-vm
 # --- Non-Destructive Targets ---
 #
 
-.PHONY: help perms run check-partitioning create-vm check-formatting
+.PHONY: help perms run check-partitioning create-vm check-formatting destroy-vm
 
 # Default target
 
@@ -44,6 +44,7 @@ help:
 	@echo "  WARNING: Destructive commands follow."
 	@echo "  sudo make -C osdev partition-disk - Partition TARGET_DISK (WIPES ALL DATA)."
 	@echo "  sudo make -C osdev format-disk    - Format partitions on TARGET_DISK (WIPES ALL DATA)."
+	@echo "  make -C osdev destroy-vm     - DANGER: Deletes the VirtualBox VM definition."
 
 
 perms:
@@ -52,23 +53,36 @@ perms:
 	sudo usermod -aG disk $(USER)
 
 physical.vmdk:
-	@echo "Creating VMDK mapping for $(TARGET_DISK)..."
-	rm -f $@
-	VBoxManage internalcommands createrawvmdk -filename $@ -rawdisk $(TARGET_DISK)
+	@if ! grep -q 'createType="fullDevice"' $@ 2>/dev/null; then \
+		echo "Placeholder or invalid physical.vmdk found. Creating a new one for $(TARGET_DISK)..."; \
+		rm -f $@; \
+		VBoxManage internalcommands createrawvmdk -filename $@ -rawdisk $(TARGET_DISK); \
+	else \
+		echo "Valid physical.vmdk found. Skipping creation."; \
+	fi
 
 run:
 	VBoxManage startvm "$(VM_NAME)"
+
+destroy-vm:
+	@if VBoxManage showvminfo "$(VM_NAME)" >/dev/null 2>&1; then \
+		echo "Destroying VirtualBox VM '$(VM_NAME)'..."; \
+		VBoxManage unregistervm "$(VM_NAME)" --delete; \
+	else \
+		echo "VirtualBox VM '$(VM_NAME)' does not exist. Nothing to do."; \
+	fi
 
 create-vm: physical.vmdk
 	@if VBoxManage showvminfo "$(VM_NAME)" >/dev/null 2>&1; then \
 		echo "VirtualBox VM '$(VM_NAME)' already exists. Nothing to do."; \
 	else \
 		echo "Creating VirtualBox VM '$(VM_NAME)'..."; \
-		VBoxManage createvm --name "$(VM_NAME)" --ostype "Linux_64" --register; \
-		VBoxManage modifyvm "$(VM_NAME)" --firmware efi; \
-		VBoxManage storagectl "$(VM_NAME)" --name "SATA Controller" --add sata --controller IntelAhci; \
-		VBoxManage storageattach "$(VM_NAME)" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium $(CURDIR)/physical.vmdk; \
-		echo "VM '$(VM_NAME)' created successfully."; \
+		(VBoxManage createvm --name "$(VM_NAME)" --ostype "Linux_64" --register && \
+		VBoxManage modifyvm "$(VM_NAME)" --firmware efi && \
+		VBoxManage storagectl "$(VM_NAME)" --name "SATA Controller" --add sata --controller IntelAhci && \
+		VBoxManage storageattach "$(VM_NAME)" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium $(CURDIR)/physical.vmdk && \
+		echo "VM '$(VM_NAME)' created successfully.") || \
+		(echo "VM creation failed. Cleaning up..." && VBoxManage unregistervm "$(VM_NAME)" --delete >/dev/null 2>&1); \
 	fi
 
 check-partitioning: check-partition-layout.jq

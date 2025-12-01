@@ -48,6 +48,13 @@ This directory contains tools to create a [VirtualBox VM](https://en.wikipedia.o
     make run
     ```
 
+### Cleanup
+
+If `create-vm` fails or if you want to remove the VM definition from VirtualBox, run:
+```sh
+make destroy-vm
+```
+
 ## Files
 
 -   `README.md`: This file.
