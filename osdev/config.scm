@@ -12,11 +12,17 @@
   (locale "en_US.utf8")
 
   ;; Bootloader configuration for EFI systems.
-  (bootloader (bootloader-configuration
-               (bootloader grub-efi-bootloader)
-               (target "/boot/efi")
-               ;; Ensure GRUB can read the btrfs root filesystem.
-               (grub-modules (list "btrfs"))))
+  (bootloader
+   (bootloader-configuration
+    (bootloader (bootloader (inherit grub-efi-bootloader)
+                            (grub-modules
+                             '(;; Filesystems
+                               "btrfs" "ext2" "fat" "iso9660"
+                               ;; Compression
+                               "gzio"
+                               ;; Searching
+                               "search_fs_uuid"))))
+    (target "/boot/efi")))
 
   ;; Define the filesystems.
   (file-systems (cons* (file-system
