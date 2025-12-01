@@ -16,10 +16,9 @@ VM_NAME=ocap-dev-vm
 # --- Non-Destructive Targets ---
 #
 
-.PHONY: all help perms run
+.PHONY: help perms run
 
 # Default target
-all: help
 
 help:
 	@echo "Makefile for OCap OS Dev VM"
