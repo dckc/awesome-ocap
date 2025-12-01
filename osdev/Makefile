@@ -77,9 +77,13 @@ check-partitioning: partition-table.sfdisk
 .PHONY: partition-disk format-disk
 
 partition-disk: partition-table.sfdisk
-	@echo "!!! WARNING: About to partition $(TARGET_DISK) using layout from $<. ALL DATA WILL BE LOST. !!!"
-	@read -p "Press Enter to continue or Ctrl+C to abort."
-	sudo sfdisk $(TARGET_DISK) < $<
+	@if sudo sfdisk -d $(TARGET_DISK) | diff -q $< - >/dev/null 2>&1; then \
+		echo "Partition layout on $(TARGET_DISK) already matches $<. Nothing to do."; \
+	else \
+		echo "!!! WARNING: About to partition $(TARGET_DISK) using layout from $<. ALL DATA WILL BE LOST. !!!"; \
+		read -p "Press Enter to continue or Ctrl+C to abort."; \
+		sudo sfdisk $(TARGET_DISK) < $<; \
+	fi
 
 format-disk:
 	@echo "!!! WARNING: About to format $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"
