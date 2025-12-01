@@ -26,7 +26,7 @@ help:
 	@if [ ! -b "$(TARGET_DISK)" ]; then \
 		echo "ERROR: TARGET_DISK '$(TARGET_DISK)' does not exist or is not a block device."; \
 		echo "Please set TARGET_DISK to a valid device. For example:"; \
-		echo "  export TARGET_DISK=/dev/sdX"; \
+		echo "  export TARGET_DISK=/dev/disk/by-id/ata-YOUR_DISK_NAME_HERE"; \
 		exit 1; \
 	fi
 	@echo "Current configuration:"
