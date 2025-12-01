@@ -4,7 +4,9 @@ This directory contains tools to create a [VirtualBox VM](https://en.wikipedia.o
 
 ## Prerequisites
 
--   **jq**: This tool is used for parsing the partition table. You can install it with `sudo apt-get install jq` on Debian/Ubuntu.
+-   **VirtualBox**, **jq**, and standard Linux disk utilities (`sfdisk`, `blkid`, etc.) must be installed.
+-   On Debian/Ubuntu, `jq` can be installed with `sudo apt-get install jq`.
+-   The paths to these tools can be overridden, e.g., `make JQ=/path/to/jq ...`.
 
 ## Setup
 

@@ -13,6 +13,21 @@ TARGET_DISK?=/dev/disk/by-id/ata-Samsung_SSD_860_QVO_1TB_S59HNG0N105827B
 VM_NAME?=ocap-dev-vm
 
 #
+# --- Tool Configuration ---
+#
+# Override these variables to use custom paths for tools.
+# e.g. make SFDISK=/path/to/sfdisk ...
+VBOXMANAGE?=VBoxManage
+USERMOD?=usermod
+SFDISK?=sfdisk
+BLKID?=blkid
+MKFS_VFAT?=mkfs.vfat
+MKFS_EXT4?=mkfs.ext4
+REALPATH?=realpath
+SUDO?=sudo
+JQ?=jq
+
+#
 # --- Non-Destructive Targets ---
 #
 
@@ -51,7 +66,7 @@ help:
 perms:
 	@echo "Adding user '$(USER)' to the 'disk' group..."
 	@echo "You must log out and log back in for this to take effect."
-	sudo usermod -aG disk $(USER)
+	$(SUDO) $(USERMOD) -aG disk $(USER)
 
 clean:
 	@echo "Removing generated files..."
@@ -59,39 +74,35 @@ clean:
 
 physical.vmdk:
 	@echo "Creating/updating VMDK mapping for $(TARGET_DISK)..."
-	VBoxManage internalcommands createrawvmdk -filename $@ -rawdisk $(TARGET_DISK)
+	$(VBOXMANAGE) internalcommands createrawvmdk -filename $@ -rawdisk $(TARGET_DISK)
 
 run:
-	VBoxManage startvm "$(VM_NAME)"
+	$(VBOXMANAGE) startvm "$(VM_NAME)"
 
 destroy-vm:
-	@if VBoxManage showvminfo "$(VM_NAME)" >/dev/null 2>&1; then \
+	@if $(VBOXMANAGE) showvminfo "$(VM_NAME)" >/dev/null 2>&1; then \
 		echo "Destroying VirtualBox VM '$(VM_NAME)'..."; \
-		VBoxManage unregistervm "$(VM_NAME)" --delete; \
+		$(VBOXMANAGE) unregistervm "$(VM_NAME)" --delete; \
 	else \
 		echo "VirtualBox VM '$(VM_NAME)' does not exist. Nothing to do."; \
 	fi
 
 create-vm: physical.vmdk
-	@if VBoxManage showvminfo "$(VM_NAME)" >/dev/null 2>&1; then \
+	@if $(VBOXMANAGE) showvminfo "$(VM_NAME)" >/dev/null 2>&1; then \
 		echo "VirtualBox VM '$(VM_NAME)' already exists. Nothing to do."; \
 	else \
 		echo "Creating VirtualBox VM '$(VM_NAME)'..."; \
-		(VBoxManage createvm --name "$(VM_NAME)" --ostype "Linux_64" --register && \
-		VBoxManage modifyvm "$(VM_NAME)" --firmware efi && \
-		VBoxManage storagectl "$(VM_NAME)" --name "SATA Controller" --add sata --controller IntelAhci && \
-		VBoxManage storageattach "$(VM_NAME)" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium $(CURDIR)/physical.vmdk && \
+		($(VBOXMANAGE) createvm --name "$(VM_NAME)" --ostype "Linux_64" --register && \
+		$(VBOXMANAGE) modifyvm "$(VM_NAME)" --firmware efi && \
+		$(VBOXMANAGE) storagectl "$(VM_NAME)" --name "SATA Controller" --add sata --controller IntelAhci && \
+		$(VBOXMANAGE) storageattach "$(VM_NAME)" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium $(CURDIR)/physical.vmdk && \
 		echo "VM '$(VM_NAME)' created successfully.") || \
-		(echo "VM creation failed. Cleaning up..." && VBoxManage unregistervm "$(VM_NAME)" --delete >/dev/null 2>&1); \
+		(echo "VM creation failed. Cleaning up..." && $(VBOXMANAGE) unregistervm "$(VM_NAME)" --delete >/dev/null 2>&1); \
 	fi
 
 check-partitioning: check-partition-layout.jq
 	@echo "Checking if partition layout on $(TARGET_DISK) is correct..."
-	@if ! command -v jq > /dev/null; then \
-		echo "ERROR: 'jq' command not found. Please install jq."; \
-		exit 1; \
-	fi
-	@if sudo sfdisk --json $(TARGET_DISK) | jq -e -f $< > /dev/null; then \
+	@if $(SUDO) $(SFDISK) --json $(TARGET_DISK) | $(JQ) -e -f $< > /dev/null; then \
 		echo "Partition layout is correct."; \
 	else \
 		echo "Partition layout is INCORRECT or disk is not partitioned."; \
@@ -102,14 +113,14 @@ check-formatting:
 	@echo "Checking formatting on $(TARGET_DISK)..."
 	@PART1_OK=false; \
 	if [ -b "$(TARGET_DISK)-part1" ] && \
-	   [ "$$(sudo blkid -s TYPE -o value $(TARGET_DISK)-part1 2>/dev/null)" = "vfat" ] && \
-	   [ "$$(sudo blkid -s LABEL -o value $(TARGET_DISK)-part1 2>/dev/null)" = "ESP" ]; then \
+	   [ "$$($(SUDO) $(BLKID) -s TYPE -o value $(TARGET_DISK)-part1 2>/dev/null)" = "vfat" ] && \
+	   [ "$$($(SUDO) $(BLKID) -s LABEL -o value $(TARGET_DISK)-part1 2>/dev/null)" = "ESP" ]; then \
 		PART1_OK=true; \
 	fi; \
 	PART2_OK=false; \
 	if [ -b "$(TARGET_DISK)-part2" ] && \
-	   [ "$$(sudo blkid -s TYPE -o value $(TARGET_DISK)-part2 2>/dev/null)" = "ext4" ] && \
-	   [ "$$(sudo blkid -s LABEL -o value $(TARGET_DISK)-part2 2>/dev/null)" = "osdev-root" ]; then \
+	   [ "$$($(SUDO) $(BLKID) -s TYPE -o value $(TARGET_DISK)-part2 2>/dev/null)" = "ext4" ] && \
+	   [ "$$($(SUDO) $(BLKID) -s LABEL -o value $(TARGET_DISK)-part2 2>/dev/null)" = "osdev-root" ]; then \
 		PART2_OK=true; \
 	fi; \
 	if $$PART1_OK && $$PART2_OK; then \
@@ -130,16 +141,12 @@ check-formatting:
 .PHONY: partition-disk format-disk
 
 partition-disk: partition-table.sfdisk check-partition-layout.jq
-	@if ! command -v jq > /dev/null; then \
-		echo "ERROR: 'jq' command not found. Please install jq."; \
-		exit 1; \
-	fi
-	@if sudo sfdisk --json $(TARGET_DISK) | jq -e -f check-partition-layout.jq > /dev/null 2>&1; then \
+	@if $(SUDO) $(SFDISK) --json $(TARGET_DISK) | $(JQ) -e -f check-partition-layout.jq > /dev/null 2>&1; then \
 		echo "Partition layout on $(TARGET_DISK) is already correct. Nothing to do."; \
 	else \
 		echo "!!! WARNING: About to partition $(TARGET_DISK) using layout from partition-table.sfdisk. ALL DATA WILL BE LOST. !!!"; \
 		read -p "Press Enter to continue or Ctrl+C to abort."; \
-		sudo sfdisk $(TARGET_DISK) < partition-table.sfdisk; \
+		$(SUDO) $(SFDISK) $(TARGET_DISK) < partition-table.sfdisk; \
 	fi
 
 format-disk:
@@ -148,6 +155,6 @@ format-disk:
 	else \
 		echo "!!! WARNING: About to format $(TARGET_DISK). ALL DATA WILL BE LOST. !!!"; \
 		read -p "Press Enter to continue or Ctrl+C to abort."; \
-		sudo mkfs.vfat -n ESP $$(realpath $(TARGET_DISK)-part1); \
-		sudo mkfs.ext4 -L osdev-root -F $$(realpath $(TARGET_DISK)-part2); \
+		$(SUDO) $(MKFS_VFAT) -n ESP $$($(REALPATH) $(TARGET_DISK)-part1); \
+		$(SUDO) $(MKFS_EXT4) -L osdev-root -F $$($(REALPATH) $(TARGET_DISK)-part2); \
 	fi
