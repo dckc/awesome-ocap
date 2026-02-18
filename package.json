@@ -9,9 +9,11 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@endo/compartment-mapper": "^1.6.3",
+    "@endo/init": "^1.1.12",
     "feed": "^4.2.2",
-    "marked": "^4.0.10",
-    "jsdom": "^19.0.0"
+    "jsdom": "^19.0.0",
+    "marked": "^4.0.10"
   },
   "devDependencies": {
     "vitest": "^0.34.6"
