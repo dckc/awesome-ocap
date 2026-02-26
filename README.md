@@ -173,7 +173,8 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
          - 2018-06-20 v0.1.0 released
          - 2018-09-22 [Presentation at Scaladays](https://slideslive.com/38908776/security-with-scala-refined-types-and-object-capabilities?subdomain=false)
     - Java
-      - [capnproto-java](https://dwrensha.github.io/capnproto-java)
+      - [capnproto-java](https://dwrensha.github.io/capnproto-java) - Cap'n Proto implementation for Java
+         - 2014/10: [capnproto-java alpha release with benchmarks](https://dwrensha.github.io/capnproto-java/2014/10/13/alpha-release.html)
   - rust
     - [Tenuo](https://github.com/tenuo-ai/tenuo) - Capability-based authorization for AI agents. Uses cryptographic warrants with offline attenuation to enforce least-privilege boundaries on LLM tool calls.
          - 2025-12: [Capability Delegation for AI Agents](https://niyikiza.com/posts/capability-delegation/) - design rationale
