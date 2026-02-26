@@ -172,7 +172,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       - Comes with a [guide to capabilities](https://tersesystems.github.io/ocaps/guide/index.html)
          - 2018-06-20 v0.1.0 released
          - 2018-09-22 [Presentation at Scaladays](https://slideslive.com/38908776/security-with-scala-refined-types-and-object-capabilities?subdomain=false)
-    - Java
+  - Java
       - [capnproto-java](https://dwrensha.github.io/capnproto-java) - Cap'n Proto implementation for Java
          - 2026-02-26: [1a0ac9d](https://github.com/capnproto/capnproto-java/commit/1a0ac9d2e0e607ccae7ca83cb3aacce93b065dd7)
          - 2014-10: [capnproto-java alpha release with benchmarks](https://dwrensha.github.io/capnproto-java/2014/10/13/alpha-release.html)
