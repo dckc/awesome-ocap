@@ -4,6 +4,35 @@
 This is a focused checker for issue #55 style refactors, not a general
 security analyzer. It looks for common ambient entry points such as env,
 clock, network, subprocess, and stdio.
+
+Architecture:
+
+- Parse the source once with `ast`.
+- Run a prepass that finds functions defined under
+  `if __name__ == "__main__":`.
+- Exempt only those guarded functions that are not called from outside the
+  guarded block.
+- Visit the tree again and report direct ambient entry points such as
+  `os.environ`, `datetime.now()`, `urllib.request.urlopen(...)`,
+  `subprocess.run(...)`, `uuid.uuid4()`, and bare `print(...)`.
+- Include the source line for each finding.
+
+Intended use:
+
+- act as a critic for LLM-assisted OCap refactors
+- provide "red squigglies" for common ambient-authority mistakes
+- complement, not replace, the Python OCap style guide and human review
+
+Current limits:
+
+- It is intentionally syntactic and shallow.
+- It does not do full name-resolution or alias tracking.
+- It assumes that functions defined under the `__main__` guard are the only
+  allowed ambient boundary.
+- It does not yet understand all capability-safe patterns.
+- It still has rough edges around constructors such as `Path(...)` and `open(...)`.
+- It does not prove the absence of ambient authority; it only reports a useful
+  subset of likely violations.
 """
 
 from __future__ import annotations
@@ -138,6 +167,10 @@ class AmbientAuthorityVisitor(ast.NodeVisitor):
             if not any(kw.arg == "file" for kw in node.keywords):
                 self.add(node, "ambient-stdio", "print")
         elif name in {"open", "Path"}:
+            # TODO: fold this back into the ambient-authority rules.
+            # Using already-held authority such as cwd / "file" is fine;
+            # the real problem is ambient constructors like Path("file") or
+            # open("file").
             self.add(node, "data-to-authority", name)
         self.generic_visit(node)
 
