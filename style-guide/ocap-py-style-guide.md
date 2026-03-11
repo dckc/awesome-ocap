@@ -265,6 +265,39 @@ Defaults such as API roots, desktop directory names, and project-specific subdir
 They should be visible near the top of the file as data, rather than hidden in the guts of `main(...)`.
 But policy defaults are still different from authority and should not be confused with capability objects.
 
+## Boundary Convention
+
+A useful convention is to separate the script-only authority boundary from the importable program logic.
+
+Use a tiny helper inside:
+
+```py
+if __name__ == "__main__":
+    def _script_io():
+        ...
+    _script_io()
+```
+
+The point of `_script_io()` is to wire authority, not to hide arbitrary program logic.
+
+A practical convention:
+
+- pass existing APIs across the `_script_io()` to `main(...)` boundary rather than wrapping everything immediately
+- for example, pass `datetime.now`, `uuid4`, `subprocess.run`, or `urlopen`
+- then narrow those capabilities inside `main(...)` as needed
+- prefer not to do avoidable observations in `_script_io()` itself
+- for example, pass `datetime.now` rather than calling `datetime.now()` there
+
+One pragmatic exception is that `home` and `cwd` can be treated as platform-provided context for `main(...)`.
+That is, it is reasonable for `_script_io()` to pass `Path.home()` and `Path.cwd()` into `main(...)`.
+
+Rule for allowed ambient scope:
+
+- ambient authority is allowed only in functions defined under `if __name__ == "__main__":`
+- and only when those functions are not called from outside that guarded block
+
+This keeps the ambient boundary explicit and prevents helper functions elsewhere in the module from quietly becoming script-only escape hatches.
+
 ## Review Checklist
 
 When reviewing Python for OCap discipline, look for:
@@ -303,3 +336,4 @@ These are good refactoring targets because the behavior is small while the autho
 - add a section on command names as data becoming process-execution authority, including helpers like `ensure_ocr_pdf()` that should receive an `ocrmypdf` capability instead of calling `subprocess.run(...)` directly
 - explain why turning a piece of data such as `"ocrmypdf"` into authority with `subprocess.run(...)` is a bad pattern, analogous to turning `"abc"` into `open("abc")` or casting an integer to a pointer
 - add a POLA note for rooted network/path-like capability objects: do not expose the underlying opener or other broad authority as a public field, because any holder of the narrowed object could recover access to the wider authority
+- add a note on the slogan "do not prohibit what you cannot enforce": if a path is meant to represent downward-only traversal or read-only access, that should be enforced by the type or wrapper rather than assumed by convention
