@@ -246,6 +246,10 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     to all software components including device drivers, system
     services, and applications.
 
+    - 2025-11: [Genode OS Framework release 25.11](https://genode.org/news/genode-os-framework-release-25.11) – improves custom-kernel interactive performance, adds GPU-accelerated graphics on Intel Alder Lake, introduces USB-serial support, and enables seL4 on 64-bit ARM
+
+    - 2025-08: [Genode OS Framework release 25.08](https://genode.org/news/genode-os-framework-release-25.08) – redesigns the kernel scheduler for fairness and low latency, updates Linux-based PC drivers to 6.12, and expands dynamic scenarios for seL4 13.0
+
     - 2025-04: [Sculpt OS release 25.04](https://genode.org/news/sculpt-os-release-25.04) – introduces multi-monitor window management and display rotation, integrates Chromium WebEngine 112, and extends hardware support to Intel Meteor Lake and F&S i.MX8MP armStone boards
 
     - 2025-02: [Genode OS Framework release 25.02](https://genode.org/news/genode-os-framework-release-25.02) – extends multi-monitor capabilities to window management and virtual machines, ports QEMU and Chromium WebEngine 112, boosts graphics performance via SIMD optimizations
@@ -254,7 +258,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
     - 2024-05: [Genode OS Framework release 24.05](https://genode.org/news/genode-os-framework-release-24.05) – Sculpt OS now runs on Genode’s custom kernel and gains GDB debugging support; USB stack redesigned
 
-    - 2020-06: [Re-stacking the GUI stack](https://genodians.org/nfeske/2020-06-23-gui-stack) – Norman Feske outlines a redesign of Genode's GUI architecture, inverting the traditional client-server relationship between GUI servers and drivers to enhance resilience and modularity
+    - 2020-06: [Re-stacking the GUI stack](https://genodians.org/nfeske/2020-06-23-gui-stack) – a deep architectural rethink of desktop graphics: Genode inverts the usual GUI-server/driver relationship so input and display drivers stay in control of policy-critical resources, shrinking the consequences of compromise in one of the OS's most attack-prone subsystems
 
     - 2020-05-28 [Genode OS Framework 20.05](https://genode.org/documentation/release-notes/20.05) with [Capability-based security using seccomp on Linux](https://genode.org/documentation/release-notes/20.05#Capability-based_security_using_seccomp_on_Linux), ...
     - 2018-02: [On-target package installation and deployment](https://genode.org/documentation/release-notes/18.02#On-target_package_installation_and_deployment) – introduces a package management model where untrusted tools like `curl`, `libarchive`, and `GnuPG` are used within tightly confined compartments; a ~1000-line download manager orchestrates deployment without expanding the TCB
@@ -271,6 +275,10 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     with a capability security model.
     - 2021-06 [cr0 blog: A few thoughts on Fuchsia security](https://blog.cr0.org/2021/06/a-few-thoughts-on-fuchsia-security.html) Julien Tinnes. _Sandboxing is trivial. In fact a new process with access to no capabilities_
 
+    - 2026-01: [Fuchsia F29 release notes](https://fuchsia.dev/whats-new/release-notes/f29) – expands Component Framework support for SDK-exposed `StorageAdmin` and programmatic storage routing in Realm Builder, continuing Fuchsia’s explicit capability-routing model
+
+    - 2025-10: [Fuchsia F28 release notes](https://fuchsia.dev/whats-new/release-notes/f28) – enables a new HTTP/S manifest-driven OTA flow and continues migration from legacy driver interfaces to DFv2 and FIDL services
+
     - 2025-04: [Fuchsia F26 release notes](https://fuchsia.dev/whats-new/release-notes/f26) – continues refinement of the component framework, emphasizing explicit capability routing, lifecycle control, and modular isolation between components
 
     - 2025-01: [Fuchsia F24 release notes](https://fuchsia.dev/whats-new/release-notes/f24) – introduces improvements in diagnostics scoping and structured logging, reinforcing least-authority principles in observability tooling
@@ -279,27 +287,18 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
     - 2020-11: [Fuchsia Component Framework](https://fuchsia.dev/fuchsia-src/concepts/components/v2/introduction) – Fuchsia’s core architectural model based on sandboxed components and explicit capability routing, offering a native implementation of capability-secure composition
 
-    - 2020-06-09 [Playing Around With The Fuchsia Operating System](https://blog.quarkslab.com/playing-around-with-the-fuchsia-operating-system.html) - [Quarkslab's blog](https://blog.quarkslab.com/index.html)
     - 2017-05-08 [Google’s “Fuchsia” smartphone OS dumps Linux, has a wild new UI](https://arstechnica.com/gadgets/2017/05/googles-fuchsia-smartphone-os-dumps-linux-has-a-wild-new-ui/) Ars Technica
 
   - [seL4](https://sel4.systems/) is the world's first
     operating-system kernel with an end-to-end proof of implementation
     correctness and security enforcement; it is available as open
     source.
+    - 2025-11: [seL4 14.0.0 release](https://docs.sel4.systems/releases/sel4/14.0.0) – fixes a critical VT-x defect on unverified x86 configurations, makes all supported Arm platforms verified, and adds support for i.MX93, Cheshire, and HiFive Premier P550
     - 2023-09: [OS for Software Defined Vehicle](https://sel4.systems/Summit/2023/abstracts2023.html#a-gold-nio) all NIO’s production vehicles released since 2024-09 are running an seL4-based OS
       - watch: [Gold Sponsor: OS for Software Defined Vehicle \- Qiyan Wang, NIO](https://www.youtube.com/watch?v=W_Y3M6s4E9w)
-    - 2022-10: [seL4 Summit 2022](https://sel4.systems/Foundation/Summit/abstracts2022) Munich, Germany (hybrid), 10-13 Oct 2022
-      - [2022-10: 4th seL4 Summit](https://www.youtube.com/watch?v=PDVMVSSpGOQ&list=PLtoQeavghzr3atxNQig-sLGbwoKBSVxGV) video playlist
-    - 2021-10: [wasmedge-seL4](https://github.com/second-state/wasmedge-seL4) `fc25cae` Integrate WasmEdge with seL4  
-      [demo video](https://www.youtube.com/watch?v=2Qu-Trtkspk)
-    - 2021-08: [Ghost donates to the seL4 Foundation](https://sel4.systems/news/2021)
-    - 2021-08: [Lotus Cars joins the seL4 Foundation](https://sel4.systems/news/2021)
     - 2021-08: [seL4 protects world's most secure drone from DEFCON hackers](https://sel4.systems/news/2021)
-    - 2021-07: [Ghost Raises $100M for Breakthrough in Autonomous Driving Safety](https://driveghost.com/blog/breakthrough-autonomous-driving-safety)
     - 2020-05-25 [The seL4® Microkernel An Introduction](https://sel4.systems/About/seL4-whitepaper.pdf) Gernot Heiser
     - 2020-04-08: [seL4 developers create open source foundation to enable safer, more secure and more reliable computing systems \- CSIRO](https://www.csiro.au/en/News/News-releases/2020/seL4-developers-create-open-source-foundation)
-    - [Getting started with seL4, CAmkES, and L4v: Dependencies](https://research.csiro.au/tsblog/getting-started-sel4-camkes-l4v-dependencies/) MAY 19, 2017
-    - [seL4 on the Raspberry Pi 3](https://research.csiro.au/tsblog/sel4-raspberry-pi-3/) FEBRUARY 8, 2017
     - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
       [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
     - Thomas Sewell, Simon Winwood, Peter Gammie, Toby Murray, June Andronick and Gerwin Klein  
@@ -321,7 +320,6 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     support object-capability security on UNIX-like operating systems
     - 2019-10 _Capsicum Update 2019_ by Mariusz Zaborski in [FreeBSD Journal: Security](https://www.freebsdfoundation.org/past-issues/security-3/)
     
-    - 2017-07-19 [Capsicum Go support](https://lists.cam.ac.uk/pipermail/cl-capsicum-discuss/2017-July/msg00004.html) Ben Laurie
     - [Capsicum for FreeBSD](https://www.cl.cam.ac.uk/research/security/capsicum/freebsd.html)
     - [Capsicum for Linux](https://www.cl.cam.ac.uk/research/security/capsicum/linux.html)
     - Watson,
@@ -332,6 +330,10 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       Drysdale's port of Capsicum to Linux at Google, Summer of Code
       students, joint work with the University of Wisconsin on
       Capsicum, and future funded Capsicum work.
+  - [Spectrum](https://spectrum-os.org/) is a Linux-based operating
+    system focused on security by compartmentalization, aiming to make
+    isolated application environments easier to use and maintain.
+    - 2025-11: [Documentation: Update support](https://spectrum-os.org/lists/archives/spectrum-devel/20251126-updates-v5-12-fd746748febd%40gmail.com/) – documents developer-enabled atomic OS updates built on `systemd-sysupdate`, showing ongoing work toward maintainable compartmentalized systems
   - [KataOS](https://github.com/AmbiML/sparrow-manifest) - embeded platform that runs on top of seL4
     - 2022-10: [Announcing KataOS and Sparrow \| Google Open Source Blog](https://opensource.googleblog.com/2022/10/announcing-kataos-and-sparrow.html) “As the foundation for this new operating system, we chose seL4 as the microkernel because it puts security front and center; it is mathematically proven secure, with guaranteed confidentiality, integrity, and availability.”
 
