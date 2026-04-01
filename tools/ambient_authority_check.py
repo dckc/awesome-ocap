@@ -29,6 +29,9 @@ Current limits:
 - It does not do full name-resolution or alias tracking.
 - It assumes that functions defined under the `__main__` guard are the only
   allowed ambient boundary.
+- TODO: refactor this checker itself to follow the same boundary discipline it
+  critiques; it still relies on non-boundary `Path(...)`, `sys.stderr`, and
+  ambient `print(...)` in its own entry path.
 - It does not yet understand all capability-safe patterns.
 - It still has rough edges around constructors such as `Path(...)` and `open(...)`.
 - It does not prove the absence of ambient authority; it only reports a useful
@@ -111,16 +114,37 @@ class ScriptBoundaryCollector(ast.NodeVisitor):
 
 
 class AmbientAuthorityVisitor(ast.NodeVisitor):
-    def __init__(self, source_lines: list[str], exempt_boundary_funcs: set[str]) -> None:
+    def __init__(
+        self,
+        source_lines: list[str],
+        exempt_boundary_funcs: set[str],
+        parent_links: dict[int, tuple[ast.AST, str | None]],
+    ) -> None:
         self.findings: list[Finding] = []
         self.scope_depth = 0
         self.source_lines = source_lines
         self.boundary_depth = 0
         self.exempt_boundary_funcs = exempt_boundary_funcs
+        self.parent_links = parent_links
 
     def add(self, node: ast.AST, kind: str, detail: str) -> None:
         source = self.source_lines[node.lineno - 1].rstrip("\n")
         self.findings.append(Finding(node.lineno, kind, detail, source))
+
+    def parent_link(self, node: ast.AST) -> tuple[ast.AST, str | None] | None:
+        return self.parent_links.get(id(node))
+
+    def in_annotation_context(self, node: ast.AST) -> bool:
+        cur: ast.AST | None = node
+        while cur is not None:
+            link = self.parent_link(cur)
+            if link is None:
+                return False
+            parent, field = link
+            if field in {"annotation", "returns"}:
+                return True
+            cur = parent
+        return False
 
     def visit_If(self, node: ast.If) -> None:
         is_boundary = is_main_guard(node)
@@ -182,13 +206,55 @@ class AmbientAuthorityVisitor(ast.NodeVisitor):
             self.add(node, "ambient-stdio", name)
         self.generic_visit(node)
 
+    def visit_Name(self, node: ast.Name) -> None:
+        if node.id != "Path" or not isinstance(node.ctx, ast.Load):
+            self.generic_visit(node)
+            return
+
+        if self.in_annotation_context(node):
+            self.generic_visit(node)
+            return
+
+        link = self.parent_link(node)
+        if link is None:
+            self.add(node, "data-to-authority", "Path")
+            self.generic_visit(node)
+            return
+
+        parent, field = link
+        if isinstance(parent, ast.Call) and field == "func":
+            self.generic_visit(node)
+            return
+        if isinstance(parent, ast.Attribute) and field == "value":
+            self.generic_visit(node)
+            return
+
+        self.add(node, "data-to-authority", "Path")
+        self.generic_visit(node)
+
+
+def build_parent_links(tree: ast.AST) -> dict[int, tuple[ast.AST, str | None]]:
+    parent_links: dict[int, tuple[ast.AST, str | None]] = {}
+    for parent in ast.walk(tree):
+        for field, value in ast.iter_fields(parent):
+            if isinstance(value, ast.AST):
+                parent_links[id(value)] = (parent, field)
+            elif isinstance(value, list):
+                for child in value:
+                    if isinstance(child, ast.AST):
+                        parent_links[id(child)] = (parent, field)
+    return parent_links
+
 
 def check_source(source: str) -> list[Finding]:
     tree = ast.parse(source)
     boundaries = ScriptBoundaryCollector()
     boundaries.visit(tree)
+    parent_links = build_parent_links(tree)
     visitor = AmbientAuthorityVisitor(
-        source.splitlines(), boundaries.exempt_boundary_functions()
+        source.splitlines(),
+        boundaries.exempt_boundary_functions(),
+        parent_links,
     )
     visitor.visit(tree)
     return sorted(visitor.findings, key=lambda f: (f.line, f.kind, f.detail))
