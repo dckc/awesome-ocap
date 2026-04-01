@@ -68,6 +68,10 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     - 2024-01-01 [v1.19.0 released](https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-January/010064.html)
     - 2023-11: [new work on a Haskell client implementation](https://hackage.haskell.org/package/tahoe-great-black-swamp)
     - 2020-02: [Tahoe-LAFS Summit at PyCon2020](https://tahoe-lafs.org/pipermail/tahoe-dev/2020-February/009983.html)
+  - [XDG Desktop Portal](https://flatpak.github.io/xdg-desktop-portal/docs/index.html) provides user-mediated access for sandboxed desktop apps. Its [File Chooser](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.FileChooser.html) is a powerbox-like pattern: the app receives `file://` URIs, while actual access is enforced through the [Documents portal](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Documents.html) and its restricted [FUSE mount](https://flatpak.github.io/xdg-desktop-portal/docs/documents-and-fuse.html), so authority does not depend on guessing `/run/user/$UID/doc/...` paths.
+    - 2018-07: [Flatpak: a look behind the portal](https://blogs.gnome.org/mclasen/2018/07/19/flatpak-a-look-behind-the-portal/) – Matthias Clasen explains the portal model, including file chooser mediation for sandboxed desktop apps, at the point where it had become part of ordinary Flatpak UX rather than just plumbing
+  - [CryptPad](https://cryptpad.org/) is an end-to-end encrypted collaboration suite whose secret links act much like bearer capabilities, with attenuation between edit and view access.
+    - 2025-04: [March 2025 status](https://blog.cryptpad.org/2025/04/02/status-2025-03/) – CryptPad 2025.3.0 begins a major refactor toward a fuller API, improves large-drive and shared-folder performance, and lays groundwork for clients beyond the web app
 
 [scap]: https://sandstorm.io/how-it-works#capabilities
 [1407]: https://sandstorm.io/news/2014-07-21-open-source-web-apps-require-federated-hosting
