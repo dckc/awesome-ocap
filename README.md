@@ -64,6 +64,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     fail or are taken over by an attacker, the entire file store
     continues to function correctly, preserving your privacy and
     security.
+    - 2025-01: [BTC update: launching the Magic Internet project](https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2025-January/010118.html) – the Tahoe-LAFS Software Foundation sponsors a new effort to make Tahoe-style "data capability" ideas more deployable, including a Rust-based `Magic Cap` library
     - 2024-12: [v1.20.0 is released](https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-December/010111.html)
     - 2024-01-01 [v1.19.0 released](https://lists.tahoe-lafs.org/pipermail/tahoe-dev/2024-January/010064.html)
     - 2023-11: [new work on a Haskell client implementation](https://hackage.haskell.org/package/tahoe-great-black-swamp)
