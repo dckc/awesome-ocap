@@ -327,10 +327,10 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
     Capsicum is a lightweight OS capability and sandbox framework that
     extends the POSIX API, providing several new OS primitives to
     support object-capability security on UNIX-like operating systems
-    - 2019-10 _Capsicum Update 2019_ by Mariusz Zaborski in [FreeBSD Journal: Security](https://www.freebsdfoundation.org/past-issues/security-3/)
-    
-    - [Capsicum for FreeBSD](https://www.cl.cam.ac.uk/research/security/capsicum/freebsd.html)
-    - [Capsicum for Linux](https://www.cl.cam.ac.uk/research/security/capsicum/linux.html)
+    - 2025-06: [Sandbox Your Program Using FreeBSD's Capsicum](https://www.bsdcan.org/2025/talks/capsicum.pdf) – BSDCan tutorial on practical "Capsicumization", including pre-opened resources, compartmentalization, and `libcasper` service patterns such as `cap_net`
+    - 2024-11: [Strengthening FreeBSD: Addressing Vulnerabilities Through Synacktiv’s Code Audit](https://freebsdfoundation.org/blog/strengthening-freebsd-addressing-vulnerabilities-through-synacktivs-code-audit/) – reports a security audit covering Capsicum and bhyve; findings led to fixes and robustness improvements in the trusted computing base around the sandbox
+    - 2024-08: [FreeBSD Status Report - Second Quarter 2024](https://www.freebsd.org/status/report-2024-04-2024-06/) – `capsicum-rs` gained `libcasper(3)` and `cap_net(3)` support and was being used by `nfs-exporter` and a TLS-enabled FTP server, showing current Rust adoption
+    - 2023-06: [Capsicum Internship](https://freebsdfoundation.org/project/capsicum-internship/) – FreeBSD Foundation funded work to revitalize Capsicum tooling and ease sandboxing of existing daemons such as `syslogd`, `rpcbind`, `tftpd`, `ntpd`, and `libarchive`
     - Watson,
       R. N. M. [2013 Capsicum year in review](https://www.lightbluetouchpaper.org/2013/12/20/2013-capsicum-year-in-review/). Light
       Blue Touchpaper, 20 December, 2013. Robert Watson reviews
@@ -370,6 +370,11 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
 
 <a name="talk"></a>
 ## Presentations, Talks, Slides, and Videos
+
+  - 2025-06: [Sandbox Your Program Using FreeBSD's Capsicum](https://www.bsdcan.org/2025/talks/capsicum.pdf) "Jake Freeland presents a practical BSDCan tutorial on applying Capsicum to real programs, covering capability mode, pre-opened resources, compartmentalization, and `libcasper` patterns such as `cap_net`"
+    - [BSDCan timetable entry](https://www.bsdcan.org/2025/timetable/timetable-Sandbox-Your-Program.html)
+    - [Indico contribution page](https://indico.bsdcan.org/event/5/contributions/118/)
+    - [video recording](https://www.youtube.com/watch?v=Ne4l5U_ETAw)
 
   - 2025-02: [Goblins: The framework for your next project!](https://fosdem.org/2025/schedule/event/fosdem-2025-5239-goblins-the-framework-for-your-next-project-/) "Jessica Tallon introduces Goblins, a Guile framework for building secure, fault-tolerant peer-to-peer applications using object capability security and the actor model"
 
@@ -466,6 +471,9 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
     [Reasoning about Object Capabilities with Logical Relations and Effect Parametricity](https://core.ac.uk/download/pdf/34655681.pdf)  
     1st IEEE European Symposium on Security and Privacy, Congress Center Saar, Saarbrücken, GERMANY, 2016.
 
+  - 2015 [Clean Application Compartmentalization with SOAAP](https://www.cl.cam.ac.uk/research/security/ctsrd/pdfs/2015ccs-soaap.pdf)
+    Khilan Gudka, Robert N. M. Watson, Jonathan Anderson, David Chisnall, Brooks Davis, Ben Laurie, Ilias Marinos, Peter G. Neumann, and Alex Richardson. ACM CCS 2015.
+
   - Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell, Rafal Kolanski and Gernot Heiser  
     [Comprehensive formal verification of an OS microkernel][AEMSKH_14]  
     ACM Transactions on Computer Systems, Volume 32, Number 1, pp. 2:1-2:70, February, 2014
@@ -482,6 +490,9 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
     [Object capabilities and isolation of untrusted web applications.](https://ieeexplore.ieee.org/document/5504710)
     In _2010 IEEE Symposium on Security and Privacy_, pp. 125-140. IEEE, 2010.
     - [slide presentation](https://pdfs.semanticscholar.org/9f52/d7066f3d231ee4e5fba3718871cc2d0cb389.pdf)
+
+  - 2010 [Capsicum: Practical Capabilities for UNIX](https://www.usenix.org/conference/usenixsecurity10/capsicum-practical-capabilities-unix)
+    Robert N. M. Watson, Jonathan Anderson, Ben Laurie, and Kris Kennaway. USENIX Security 2010.
 
   - Barth, Adam, Joel Weinberger, and Dawn Song.  
     [Cross-Origin JavaScript Capability Leaks: Detection, Exploitation, and Defense.](http://webblaze.cs.berkeley.edu/capleaks.html) USENIX
