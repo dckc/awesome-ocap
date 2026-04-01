@@ -7,6 +7,7 @@ If code is good, we will want to reuse it, and that usually means we will want t
 ## Separate Definition from Execution
 
 Move logic into `main(...)` or `run(...)` and keep the script entrypoint thin.
+The script entrypoint is where ambient authority from the Python runtime becomes available.
 
 Bad:
 
@@ -34,6 +35,10 @@ if __name__ == "__main__":
     main()
 ```
 
+This is only the first step.
+It avoids work at import time, but it does not yet make authority flow explicit.
+The next section addresses that.
+
 ## Pass I/O In Explicitly
 
 Do not let deep helper functions reach out to the environment or other I/O directly. Pass in the specific inputs they need.
@@ -51,17 +56,29 @@ def api_url():
 Good:
 
 ```py
-def api_url(environ):
-    return environ.get("API_URL", "http://127.0.0.1:23119")
+def main(file_name, read_text, stdout):
+    lines = read_text(file_name).splitlines()
+    print(len(lines), file=stdout)
 
 
 if __name__ == "__main__":
     import os
+    import sys
 
-    print(api_url(os.environ))
+    def read_text(path):
+        with open(path) as fp:
+            return fp.read()
+
+    main(
+        file_name=os.environ["INPUT_FILE"],
+        read_text=read_text,
+        stdout=sys.stdout,
+    )
 ```
 
-TODO: find a more plausible Python example for this section. The `api_url(environ)` example makes the dependency explicit, but it is still more mechanical than idiomatic.
+This version makes the filesystem and console dependencies explicit.
+
+FIXME: both examples in this section are still toy-like. Replace them with a realistic CLI or filesystem example when available.
 
 ## Prefer Small Capability Parameters
 
@@ -85,6 +102,14 @@ def sync_file(path, open_text, now, log):
         data = fp.read()
     log.info("synced at %s", now())
 ```
+
+In small scripts, the first boundary function may still take a slightly broader bundle such as
+`argv`, `cwd`, `home`, and `stdout`. That is acceptable when it is clearly the script boundary and
+the function promptly breaks that authority down for narrower helpers.
+
+The reviewability risk is that a large `main(...)` makes it hard to see which of those authorities
+are actually used where. If `main(...)` grows large enough that a reviewer must inspect every line
+to verify authority use, it is time to refactor.
 
 ## Keep Pure Logic Pure
 
@@ -148,6 +173,11 @@ def load_config(environ, home):
     )
 ```
 
+When argument defaults depend on capabilities such as `home` or `cwd`, it can still be appropriate
+to resolve those defaults in `parse_args(argv, *, cwd, home)` rather than in `script_entry()`.
+That keeps path-rooting policy close to the CLI interface. The key point is that `parse_args(...)`
+must receive the relevant capabilities explicitly rather than reaching for them ambiently.
+
 ## Inject Time, Network, and Subprocess Power
 
 Clock, HTTP, and subprocess access are capabilities. Treat them that way.
@@ -202,6 +232,35 @@ if __name__ == "__main__":
     )
 ```
 
+For CLI scripts, a useful convention is to name the boundary function `script_entry()`.
+Import ambient modules such as `sys`, `pathlib.Path`, `os`, `subprocess`, or network clients
+inside `script_entry()` and pass the resulting capabilities inward.
+
+For example:
+
+```py
+from pathlib import Path as Path_T
+
+
+def main(argv, *, cwd: Path_T, home: Path_T, stdout):
+    ...
+
+
+if __name__ == "__main__":
+    def script_entry():
+        from pathlib import Path
+        from sys import argv as sys_argv
+        from sys import stdout
+
+        cwd = Path(".")
+        home = Path.home()
+        return main(sys_argv[1:], cwd=cwd, home=home, stdout=stdout)
+
+    raise SystemExit(script_entry())
+```
+
+FIXME: "tiny shell" is directionally right, but "tiny" should not become dogma. A script boundary can be slightly larger when that makes authority flow clearer. The real goal is reviewable authority decomposition, not golfing the entrypoint.
+
 ## What This Refactor Taught
 
 A useful way to refactor toward OCap discipline is to play "hunt the red squiggly."
@@ -216,6 +275,8 @@ A few concrete lessons:
 - Keep helpers honest about the least authority they need.
 - Keep data separate from authority-bearing objects.
 - Do not smuggle broad authority inside a narrowed object.
+
+FIXME: "hunt the red squiggly" is memorable, but also a bit cute. It should not be the main explanation. The stronger statement is that removing ambient imports is a practical audit technique for finding hidden authority.
 
 ### Least Authority First
 
@@ -244,6 +305,20 @@ That kind of step should happen only at a deliberate boundary.
 A useful analogy is that turning `"abc"` into `open("abc")` is a little like casting an integer to a pointer.
 The string is data. The opened file is authority.
 
+The same issue arises with `Path(...)`.
+Using `Path` in a type annotation is fine.
+Using `Path(...)` as an expression turns path data into a filesystem authority-bearing object.
+That step belongs at a deliberate boundary such as `script_entry()` or another clearly marked script I/O function.
+
+For command-line parsing, this means:
+
+- bad: `argparse` returns `Path(...)` values by reaching for ambient `Path` or ambient `cwd`
+- better: `parse_args(argv, *, cwd, home)` receives rooted capabilities and returns `Path` values derived from them
+- also acceptable: `parse_args(...)` returns strings and a later boundary function turns them into rooted `Path` values
+
+The important part is not which of those two acceptable patterns you choose.
+The important part is that the data-to-authority step is reviewable and capability-rooted.
+
 ### Rooted Capability Objects
 
 Sometimes the right move is to introduce a rooted capability object that behaves a bit like `Path`.
@@ -258,6 +333,29 @@ A better pattern is:
 - inject the broad opener at the boundary
 - store it privately inside the rooted object
 - expose only rooted operations such as `/` and `open()`
+
+FIXME: this section may overfit custom wrapper objects. In many Python scripts, a plain rooted `Path` derived from an injected root capability is sufficient, and a bespoke wrapper would add noise rather than clarity.
+
+## Keep Boundary Functions Reviewable
+
+An OCap script can still become hard to audit if the boundary function grows into a long mixed
+orchestration block.
+
+Warning signs:
+
+- `main(...)` both parses arguments and walks the filesystem and performs verification and formats output
+- a reviewer cannot tell at a glance where `cwd`, `home`, or other capabilities are consumed
+- one comprehension mixes path derivation, file reads, parsing, and object construction
+
+Prefer to split such code into helpers that make authority use obvious:
+
+- `parse_args(argv, *, cwd, home)`
+- `iter_verification_items(...)`
+- `build_mounted_media_index(...)`
+- `emit_report(...)`
+
+This is not only about aesthetics.
+Smaller boundary-adjacent helpers make it easier to confirm that a capability is used only for the narrow purpose intended.
 
 ### Keep Boundary Policy Visible
 
