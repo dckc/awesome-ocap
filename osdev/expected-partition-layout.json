@@ -1,0 +1,22 @@
+[
+  {
+    "partlabel": "ESP",
+    "size": 1073741824,
+    "parttype": "c12a7328-f81f-11d2-ba4b-00a0c93ec93b"
+  },
+  {
+    "partlabel": "Guix",
+    "size": 107374182400,
+    "parttype": "0fc63daf-8483-4772-8e79-3d69d8477de4"
+  },
+  {
+    "partlabel": "Genode",
+    "size": 21474836480,
+    "parttype": "0fc63daf-8483-4772-8e79-3d69d8477de4"
+  },
+  {
+    "partlabel": "Shared",
+    "size": 214748364800,
+    "parttype": "0fc63daf-8483-4772-8e79-3d69d8477de4"
+  }
+]
