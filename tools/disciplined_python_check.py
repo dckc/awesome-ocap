@@ -22,7 +22,7 @@ import builtins
 from importlib import resources
 import sys
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePath
 from typing import Iterable, Sequence, TextIO
 
 
@@ -70,6 +70,7 @@ IMPORT_POLICIES = {
     "glob.glob": Policy("DPY004", "filesystem", "inject glob results instead of calling glob.glob()"),
     "glob.iglob": Policy("DPY004", "filesystem", "inject glob results instead of calling glob.iglob()"),
     "os.access": Policy("DPY004", "filesystem", "inject filesystem access instead of calling os.access()"),
+    "os.utime": Policy("DPY004", "filesystem", "inject filesystem access instead of calling os.utime()"),
     "os.chdir": Policy("DPY004", "filesystem", "inject current-directory access instead of calling os.chdir()"),
     "os.chmod": Policy("DPY004", "filesystem", "inject filesystem mutation instead of calling os.chmod()"),
     "os.chown": Policy("DPY004", "filesystem", "inject filesystem mutation instead of calling os.chown()"),
@@ -625,7 +626,8 @@ def format_examples_hint(findings: Iterable[Finding]) -> str:
     try:
         example_root = str(resources.files(anchor=EXAMPLE_ROOT))
     except (ImportError, ModuleNotFoundError):
-        example_root = EXAMPLE_ROOT
+        example_root = PurePath(__file__).parent.joinpath(
+            *EXAMPLE_ROOT.split('.'))
 
     lines = [
         f"See DisciplinedPython error/fix examples in {example_root}",
