@@ -33,7 +33,7 @@ In 15 minutes:
 
   - [Navigating the Attack Surface to achieve a *multiplicative* reduction in risk](https://www.youtube.com/watch?v=wW9-KuezPp8&t=664s)
 
-Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/) by Morningstar in 2017.
+Or for a detailed explanation: [What Are Capabilities?](https://web.archive.org/web/20260510115215/http://habitatchronicles.com/2017/05/what-are-capabilities/) by Morningstar in 2017.
 
 <a name="app-svc"></a>
 ## Applications and Services
@@ -439,7 +439,7 @@ Or for a detailed explanation: [What Are Capabilities?](http://habitatchronicles
       - [ARPC: GRPC-Like RPC Library That Supports File Descriptor Passing](https://github.com/NuxiNL/arpc)
       - [Flower: A Label-Based Network Backplane](https://github.com/NuxiNL/flower)
 
-  - 2017-05 [What Are Capabilities?](http://habitatchronicles.com/2017/05/what-are-capabilities/)  
+  - 2017-05 [What Are Capabilities?](https://web.archive.org/web/20260510115215/http://habitatchronicles.com/2017/05/what-are-capabilities/)  
     by Chip Morningstar ([Hacker News discussion Jan 7, 2018](https://news.ycombinator.com/item?id=16091975))
 
   - 2016-08 [Welcoming all Python enthusiasts: CPython 3.6 for CloudABI!](https://nuxi.nl/blog/2016/08/01/cloudabi-python.html)
