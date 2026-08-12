@@ -549,4 +549,4 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=dckc/awesome-ocap&type=Date)](https://star-history.com/#dckc/awesome-ocap&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=dckc/awesome-ocap&type=Date)](https://star-history.dera.page/#dckc/awesome-ocap&Date)
