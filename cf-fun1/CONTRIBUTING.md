@@ -16,6 +16,9 @@ small.
 cd cf-fun1
 npm install                # uses --legacy-peer-deps (npm arborist bug with vitest)
 npx vitest run             # app tests (in-memory storage engine)
+npm run dev:a              # worker A on http://localhost:8787
+npm run dev:b              # worker B (separate origin) on http://localhost:8788
+npm run dev:both           # both at once
 ```
 
 `package.json` is ESM (`"type": "module"`); config is `vitest.config.ts` and
@@ -35,6 +38,8 @@ npx vitest run             # app tests (in-memory storage engine)
   classes for the app; state comes from a `writeThru` factory passed into the
   constructor. A counter's `#state` can hold other capabilities by ref.
 - `public/` — static front end (no build step), talks to `/api` over Cap'n Web.
+- `wrangler-alt.jsonc` — alternate worker name for running a second instance on
+  another port (separate origin).
 - `test/counter.spec.js` — Vitest for the app layer against an in-memory stand-in
   storage engine.
 

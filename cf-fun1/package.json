@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "dev:a": "wrangler dev --port 8787 --persist-to .wrangler/state-a --inspector-port 9227",
+    "dev:b": "wrangler dev --config wrangler-alt.jsonc --port 8788 --persist-to .wrangler/state-b --inspector-port 9228",
+    "dev:both": "npm run dev:a & npm run dev:b & wait"
   },
   "keywords": [],
   "author": "",

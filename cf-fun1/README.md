@@ -9,12 +9,17 @@ No deploy steps here — this is a sandbox for poking at the platform.
 
 ```sh
 npm install
-npx wrangler dev --port 8787
+npm run dev:a        # worker A on http://localhost:8787
+npm run dev:b        # worker B on http://localhost:8788 (separate origin)
+npm run dev:both     # both at once
 ```
 
 Then open `http://localhost:8787`. Start with zero counters, click **make
 counter**, then `+` / `-`. Values survive page reloads (they live in Durable
 Object storage). On reload the page re-acquires existing counters.
+
+The `dev:a`/`dev:b` scripts give each worker its own `--persist-to` directory so
+they keep separate DO storage — they're distinct workers, not two ports on one.
 
 Tests:
 
