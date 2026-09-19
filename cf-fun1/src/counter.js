@@ -22,6 +22,11 @@ export class Counter extends DurableObject {
   }
 
   async increment() {
+    // STYLE: would rather see:
+    //   this.value += 1
+    // or perhaps
+    //   this.state.value += 1
+    // can we do a proxy? would a popular ORM make sense? or a work-alike? (drizzle?)
     this.ctx.storage.sql.exec(
       `INSERT INTO counters (id, value) VALUES (1, 1)
        ON CONFLICT(id) DO UPDATE SET value = value + 1`
