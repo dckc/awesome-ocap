@@ -7,7 +7,7 @@
     "capnweb": "./node_modules/capnweb/dist/index-workers.js"
   },
   "build": {
-    "command": "mkdir -p public/vendor && cp node_modules/capnweb/dist/index.js public/vendor/capnweb.js"
+    "command": "mkdir -p public/vendor && cp node_modules/capnweb/dist/index.js public/vendor/capnweb.js && node build-facet.mjs"
   },
   "assets": {
     "directory": "public"
@@ -15,15 +15,20 @@
   "durable_objects": {
     "bindings": [
       {
-        "name": "COUNTER_REGISTRY",
-        "class_name": "CounterRegistry"
+        "name": "FACET_SUPERVISOR",
+        "class_name": "FacetSupervisor"
       }
     ]
   },
   "migrations": [
     {
       "tag": "v3",
-      "new_sqlite_classes": ["CounterRegistry"]
+      "new_sqlite_classes": ["FacetSupervisor"]
+    }
+  ],
+  "worker_loaders": [
+    {
+      "binding": "LOADER"
     }
   ]
 }

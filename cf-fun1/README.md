@@ -39,3 +39,4 @@ npx vitest run
 - [**Durable Objects**](https://developers.cloudflare.com/durable-objects/) — by way of [Cap'n Web](https://github.com/cloudflare/capnweb)
   - [**SQLite storage in DOs**](https://developers.cloudflare.com/durable-objects/api/sqlite-storage-api/) — the `new_sqlite_classes` migration
   - [**Workers Vitest integration**](https://developers.cloudflare.com/workers/testing/vitest-integration/)
+- [**Durable Object facets**](https://developers.cloudflare.com/dynamic-workers/usage/durable-object-facets/) — confine untrusted code to a child DO with its own isolated storage.

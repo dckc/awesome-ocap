@@ -10,6 +10,12 @@ small.
 - Generated `cf-fun1/public/vendor/capnweb.js` is rebuilt by the `build`
   command in `wrangler.jsonc`; see `.gitignore` for why it stays ignored.
 
+## Remember: keep the README current
+
+When you explore a new Cloudflare feature (or change how something works), make
+sure `README.md` reflects it — e.g. the "Platform bits explored" list. It's easy
+to forget when the exploration is the point.
+
 ## Commands
 
 ```sh
@@ -86,7 +92,15 @@ Installed via <https://developers.cloudflare.com/agent-setup/prompt.md>:
 
 ## Running wrangler
 
-Wrangler needs the nvm node on PATH (`~/.nvm/versions/node/v22.22.0/bin`).
+**Do not run `wrangler dev` / start or stop the dev servers yourself.** The
+dev servers (`npm run dev:a` / `dev:b` / `dev:both`) are run and managed by the
+human developer, not by the agent. Make your code edits and then let the
+developer restart / reload `wrangler` and verify. This avoids port collisions
+with servers the developer already has running and keeps the agent out of
+their dev loop.
+
+When you do need wrangler, it requires the nvm node on PATH
+(`~/.nvm/versions/node/v22.22.0/bin`).
 `npx wrangler dev` may hit `EMFILE` when the machine's inotify instance quota
 (`/proc/sys/fs/inotify/max_user_instances`) is exhausted — see
 `../WIP/emfile-wrangler-dev-inotify.md`.
