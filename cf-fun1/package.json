@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "wrangler": "^4.135.0"
+  },
+  "dependencies": {
+    "capnweb": "^0.12.0"
   }
 }
