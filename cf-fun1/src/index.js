@@ -1,4 +1,4 @@
-import { Counter } from "./counter.js";
+import { Counter, CounterRegistry } from "./counter.js";
 
 export default {
   async fetch(request, env, ctx) {
@@ -8,9 +8,9 @@ export default {
       return new Response("Not found", { status: 404 });
     }
 
-    const stub = env.COUNTER.getByName("main");
+    const stub = env.REGISTRY.getByName("main");
     return stub.fetch(request);
   },
 };
 
-export { Counter };
+export { Counter, CounterRegistry };

@@ -17,13 +17,17 @@
       {
         "name": "COUNTER",
         "class_name": "Counter"
+      },
+      {
+        "name": "REGISTRY",
+        "class_name": "CounterRegistry"
       }
     ]
   },
   "migrations": [
     {
       "tag": "v1",
-      "new_sqlite_classes": ["Counter"]
+      "new_sqlite_classes": ["Counter", "CounterRegistry"]
     }
   ]
 }

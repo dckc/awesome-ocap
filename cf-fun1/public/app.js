@@ -1,25 +1,50 @@
 import { newWebSocketRpcSession } from "./vendor/capnweb.js";
 
-// STYLE: separate confined use of objects from ambient setup?
-const valueEl = document.getElementById("value");
-const incrEl = document.getElementById("incr");
-const decrEl = document.getElementById("decr");
+const makeBtn = document.getElementById("make");
+const listEl = document.getElementById("counters");
 
 const wsUrl = `${location.origin.replace(/^http/, "ws")}/api`;
 const api = newWebSocketRpcSession(wsUrl);
 
-// STYLE: try something preact-ish?
+function render(counter) {
+  const row = document.createElement("div");
+  row.className = "counter";
 
-async function refresh() {
-  valueEl.textContent = String(await api.getValue());
+  const label = document.createElement("span");
+  label.textContent = "#counter ";
+
+  const val = document.createElement("strong");
+  val.textContent = "–";
+
+  const incr = document.createElement("button");
+  incr.textContent = "+";
+  incr.addEventListener("click", async () => {
+    val.textContent = String(await counter.increment());
+  });
+
+  const decr = document.createElement("button");
+  decr.textContent = "-";
+  decr.addEventListener("click", async () => {
+    val.textContent = String(await counter.decrement());
+  });
+
+  counter.getValue().then((v) => (val.textContent = String(v)));
+  row.append(label, val, incr, decr);
+  return row;
 }
 
-incrEl.addEventListener("click", async () => {
-  valueEl.textContent = String(await api.increment());
+makeBtn.addEventListener("click", async () => {
+  const counter = await api.makeCounter();
+  listEl.append(render(counter));
 });
 
-decrEl.addEventListener("click", async () => {
-  valueEl.textContent = String(await api.decrement());
-});
+async function load() {
+  listEl.textContent = "";
+  const ids = await api.listCounterIds();
+  for (const id of ids) {
+    const counter = await api.getCounter(id);
+    if (counter) listEl.append(render(counter));
+  }
+}
 
-refresh();
+load();

@@ -15,18 +15,13 @@ export class Counter extends DurableObject {
   }
 
   async getValue() {
-    const row = this.ctx.storage.sql
+    const rows = this.ctx.storage.sql
       .exec("SELECT value FROM counters WHERE id = 1")
-      .one();
-    return row ? row.value : 0;
+      .toArray();
+    return rows[0] ? rows[0].value : 0;
   }
 
   async increment() {
-    // STYLE: would rather see:
-    //   this.value += 1
-    // or perhaps
-    //   this.state.value += 1
-    // can we do a proxy? would a popular ORM make sense? or a work-alike? (drizzle?)
     this.ctx.storage.sql.exec(
       `INSERT INTO counters (id, value) VALUES (1, 1)
        ON CONFLICT(id) DO UPDATE SET value = value + 1`
@@ -41,31 +36,88 @@ export class Counter extends DurableObject {
     );
     return this.getValue();
   }
+}
+
+export class CounterRegistry extends DurableObject {
+  constructor(ctx, env) {
+    super(ctx, env);
+    this.env = env;
+    ctx.blockConcurrencyWhile(() => {
+      ctx.storage.sql.exec(`
+        CREATE TABLE IF NOT EXISTS counters (
+          id INTEGER PRIMARY KEY AUTOINCREMENT
+        )
+      `);
+    });
+  }
+
+  async createCounter() {
+    const res = this.ctx.storage.sql.exec(
+      "INSERT INTO counters DEFAULT VALUES RETURNING id"
+    );
+    return res.one().id;
+  }
+
+  async listCounterIds() {
+    return this.ctx.storage.sql
+      .exec("SELECT id FROM counters ORDER BY id")
+      .toArray()
+      .map((r) => r.id);
+  }
+
+  async getCounterId(id) {
+    const row = this.ctx.storage.sql
+      .exec("SELECT id FROM counters WHERE id = ?", id)
+      .one();
+    return row ? row.id : null;
+  }
 
   async fetch(request) {
     const url = new URL(request.url);
     if (url.pathname !== "/api") {
       return new Response("Not found", { status: 404 });
     }
-    return newWorkersRpcResponse(request, new CounterApi(this));
+    return newWorkersRpcResponse(request, new RegistryApi(this, this.env));
   }
 }
 
-class CounterApi extends RpcTarget {
-  constructor(durableObject) {
+class RegistryApi extends RpcTarget {
+  constructor(registry, env) {
     super();
-    this.do = durableObject;
+    this.registry = registry;
+    this.env = env;
+  }
+
+  async makeCounter() {
+    const id = await this.registry.createCounter();
+    return new CounterProxy(this.env, id);
+  }
+
+  async listCounterIds() {
+    return this.registry.listCounterIds();
+  }
+
+  async getCounter(id) {
+    const exists = await this.registry.getCounterId(id);
+    return exists ? new CounterProxy(this.env, id) : null;
+  }
+}
+
+class CounterProxy extends RpcTarget {
+  constructor(env, id) {
+    super();
+    this.stub = env.COUNTER.getByName(String(id));
   }
 
   getValue() {
-    return this.do.getValue();
+    return this.stub.getValue();
   }
 
   increment() {
-    return this.do.increment();
+    return this.stub.increment();
   }
 
   decrement() {
-    return this.do.decrement();
+    return this.stub.decrement();
   }
 }
