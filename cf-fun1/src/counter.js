@@ -40,12 +40,17 @@ export class Counter extends RpcTarget {
   }
 }
 
-export class CounterRegistry extends RpcTarget {
+/**
+ * The session-root capability served by the CounterRegistry DO. Holds the
+ * counter list as capability refs in its #state; the DO owns wiring (factory
+ * registration, export name).
+ */
+export class RegistryApi extends RpcTarget {
   refKind = "registry";
   constructor(writeThru) {
     super();
     this.#writeThru = writeThru;
-    this.#state = writeThru(this, { counters: [] });
+    this.#state = this.#writeThru(this, { counters: [] });
   }
 
   #writeThru;

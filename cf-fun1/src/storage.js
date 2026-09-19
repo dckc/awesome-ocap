@@ -1,29 +1,19 @@
 import { DurableObject } from "cloudflare:workers";
-import { newWorkersRpcResponse } from "capnweb";
-import { makeWriteThru, RefTable, STATE_KEY } from "./writethru.js";
-import { Counter, CounterRegistry } from "./counter.js";
+import { makeWriteThru, RefTable } from "./writethru.js";
 
 /**
- * The single storage engine. Not an app class — it owns the SQLite schema, a
- * write-through proxy factory, and serves `/bootstrap` by constructing the
- * app root RpcTarget (CounterRegistry).
+ * The storage engine: a reusable base for app Durable Objects. It owns the
+ * SQLite schema, a write-through proxy factory (`writeThru`), and the RefTable
+ * (capability -> durable key). App DOs extend this and serve their own
+ * capability surface; they never reimplement storage.
  *
- * The storage layer owns the `RpcTarget -> key` mapping: `keyFor` assigns a
- * durable key to a fresh capability (allocating from a durable sequence) and
- * reuses an already-pinned key. The RefTable's allocator delegates here so a
- * capability nested inside durable state also gets a key.
+ * The storage layer owns the `RpcTarget -> key` mapping: it allocates a durable
+ * key for a fresh capability (from a durable sequence) and keeps the mapping in
+ * the RefTable's WeakMap, so no key is ever pinned on an app object.
  */
 export class Storage extends DurableObject {
   constructor(ctx, env) {
     super(ctx, env);
-    this.env = env;
-    this.ctx = ctx;
-    this.refTable = new RefTable();
-    this.writeThru = makeWriteThru({
-      getSql: () => this.ctx.storage.sql,
-      refTable: this.refTable,
-      keyFor: (obj) => this.keyFor(obj),
-    });
     ctx.blockConcurrencyWhile(() => {
       ctx.storage.sql.exec(`
         CREATE TABLE IF NOT EXISTS state (
@@ -32,13 +22,40 @@ export class Storage extends DurableObject {
         )
       `);
     });
-    this.refTable.addFactory("counter", (key) => new Counter(this.writeThru));
-    this.refTable.setAllocator((obj) => this.keyFor(obj));
+    this.#ctx = ctx;
+    this.#refTable = new RefTable({
+      alloc: (obj) => this.keyFor(obj),
+    });
+    this.#writeThru = makeWriteThru({
+      getSql: () => this.#ctx.storage.sql,
+      refTable: this.#refTable,
+      keyFor: (obj) => this.keyFor(obj),
+    });
+  }
+
+  #ctx;
+  #refTable;
+  #writeThru;
+
+  /** The write-through state factory, bound to this engine. */
+  get writeThru() {
+    return this.#writeThru;
+  }
+
+  /** Give a capability a stable durable name (delegates to the RefTable). */
+  exportAs(obj, key) {
+    this.#refTable.exportAs(obj, key);
+  }
+
+  /** Register a factory that resurrects a capability kind from its key. */
+  registerFactory(kind, makeInstance) {
+    this.#refTable.addFactory(kind, makeInstance);
   }
 
   keyFor(obj) {
-    const sql = this.ctx.storage.sql;
-    if (obj[STATE_KEY]) return obj[STATE_KEY];
+    const existing = this.#refTable.getKey(obj);
+    if (existing !== undefined) return existing;
+    const sql = this.#ctx.storage.sql;
     const rows = sql
       .exec("SELECT value FROM state WHERE key = ?", "seq:counter")
       .toArray();
@@ -49,15 +66,5 @@ export class Storage extends DurableObject {
       String(next)
     );
     return `counter:${next}`;
-  }
-
-  async fetch(request) {
-    const url = new URL(request.url);
-    if (url.pathname !== "/bootstrap") {
-      return new Response("Not found", { status: 404 });
-    }
-    const registry = new CounterRegistry(this.writeThru);
-    registry[STATE_KEY] = "registry:main";
-    return newWorkersRpcResponse(request, registry);
   }
 }

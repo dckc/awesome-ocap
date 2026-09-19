@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { Counter, CounterRegistry } from "../src/counter.js";
-import { makeWriteThru, RefTable, STATE_KEY } from "../src/writethru.js";
+import { Counter, RegistryApi } from "../src/counter.js";
+import { makeWriteThru, RefTable } from "../src/writethru.js";
 
 // In-memory stand-in for the storage engine's SQL, so the app layer can be
 // tested without workerd. writeThru persists to a plain Map keyed by `key`.
@@ -20,7 +20,6 @@ function makeInMemoryStore() {
       },
     },
     keyFor(obj) {
-      if (obj[STATE_KEY]) return obj[STATE_KEY];
       seq += 1;
       return `counter:${seq}`;
     },
@@ -29,17 +28,17 @@ function makeInMemoryStore() {
 }
 
 function setupApp(shared) {
-  const refTable = new RefTable();
   const store = shared || makeInMemoryStore();
+  const refTable = new RefTable({ alloc: (obj) => store.keyFor(obj) });
   const writeThru = makeWriteThru({
     getSql: () => store.sql,
     refTable,
     keyFor: (obj) => store.keyFor(obj),
   });
+  // Mirror the CounterRegistry DO: register the factory, then build the API.
   refTable.addFactory("counter", (key) => new Counter(writeThru));
-  refTable.setAllocator((obj) => store.keyFor(obj));
-  const registry = new CounterRegistry(writeThru);
-  registry[STATE_KEY] = "registry:main";
+  const registry = new RegistryApi(writeThru);
+  refTable.exportAs(registry, "registry:main");
   return { registry, refTable, writeThru, store };
 }
 
@@ -57,14 +56,15 @@ describe("counter app as pure RpcTargets over write-thru state", () => {
 
   it("registry holds counter capabilities and listCounters rehydrates them", async () => {
     const { registry } = setupApp();
+    const c0 = await registry.makeCounter();
     const c1 = await registry.makeCounter();
-    const c2 = await registry.makeCounter();
     await c1.increment();
-    const list = await registry.listCounters();
-    expect(list).toHaveLength(2);
-    expect(list[0]).toBeInstanceOf(Counter);
-    expect(await list[0].getValue()).toBe(1);
-    expect(await list[1].getValue()).toBe(0);
+    const counters = await registry.listCounters();
+    expect(counters).toHaveLength(2);
+    expect(counters[0]).toBeInstanceOf(Counter);
+    expect(counters[1]).toBeInstanceOf(Counter);
+    expect(await counters[0].getValue()).toBe(0);
+    expect(await counters[1].getValue()).toBe(1);
   });
 
   it("state persists across a new app instance (rehydrated from storage)", async () => {
@@ -76,9 +76,8 @@ describe("counter app as pure RpcTargets over write-thru state", () => {
     expect(await c.getValue()).toBe(2);
     // A fresh registry over the SAME storage: state survives.
     const second = setupApp(store);
-    const list = await second.registry.listCounters();
-    expect(list).toHaveLength(1);
-    expect(await list[0].getValue()).toBe(2);
+    const [c0] = await second.registry.listCounters();
+    expect(await c0.getValue()).toBe(2);
   });
 
   it("a counter's #state can hold a capability, resurrected by ref", async () => {

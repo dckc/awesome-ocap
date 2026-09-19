@@ -15,15 +15,15 @@
   "durable_objects": {
     "bindings": [
       {
-        "name": "STORAGE",
-        "class_name": "Storage"
+        "name": "COUNTER_REGISTRY",
+        "class_name": "CounterRegistry"
       }
     ]
   },
   "migrations": [
     {
-      "tag": "v2",
-      "new_sqlite_classes": ["Storage"]
+      "tag": "v3",
+      "new_sqlite_classes": ["CounterRegistry"]
     }
   ]
 }

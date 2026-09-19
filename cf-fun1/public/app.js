@@ -3,15 +3,15 @@ import { newWebSocketRpcSession } from "./vendor/capnweb.js";
 const makeBtn = document.getElementById("make");
 const listEl = document.getElementById("counters");
 
-const wsUrl = `${location.origin.replace(/^http/, "ws")}/api`;
+const wsUrl = `${location.origin.replace(/^http/, "ws")}/counterRegistry`;
 const api = newWebSocketRpcSession(wsUrl);
 
-function render(counter, id) {
+function render(counter) {
   const row = document.createElement("div");
   row.className = "counter";
 
   const label = document.createElement("span");
-  label.textContent = id ? `#counter ${id} ` : "#counter ";
+  label.textContent = "#counter ";
 
   const val = document.createElement("strong");
   val.textContent = "–";
@@ -35,16 +35,14 @@ function render(counter, id) {
 
 makeBtn.addEventListener("click", async () => {
   const counter = await api.makeCounter();
-  const ids = await api.listCounterIds();
-  listEl.append(render(counter, ids[ids.length - 1]));
+  listEl.append(render(counter));
 });
 
 async function load() {
   listEl.textContent = "";
-  const ids = await api.listCounterIds();
-  for (const id of ids) {
-    const counter = await api.getCounter(id);
-    if (counter) listEl.append(render(counter, id));
+  const counters = await api.listCounters();
+  for (const counter of counters) {
+    listEl.append(render(counter));
   }
 }
 

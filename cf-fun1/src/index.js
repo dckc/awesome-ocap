@@ -1,16 +1,16 @@
-import { Storage } from "./storage.js";
+import { CounterRegistry } from "./countersApp.js";
+
+const routes = { "/counterRegistry": "COUNTER_REGISTRY" };
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const space = routes[url.pathname];
+    if (!space) return new Response("Not found", { status: 404 });
 
-    if (url.pathname === "/api") {
-      const stub = env.STORAGE.getByName("main");
-      return stub.fetch(new Request("http://storage.internal/bootstrap", request));
-    }
-
-    return new Response("Not found", { status: 404 });
+    const stub = env[space].getByName("main");
+    return stub.fetch(request);
   },
 };
 
-export { Storage };
+export { CounterRegistry };

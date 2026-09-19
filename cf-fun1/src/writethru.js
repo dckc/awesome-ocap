@@ -1,39 +1,52 @@
 import { RpcTarget } from "capnweb";
 
-/** Symbol tagging an RpcTarget with its durable storage key. */
-export const STATE_KEY = Symbol("stateKey");
-
 /**
  * A table mapping capabilities (RpcTargets) to their durable storage key so they
  * can be persisted as data. Agoric-style: durable state references remotables
  * by key, resurrected through a per-kind factory on load.
  *
- * The allocator (`setAllocator`) assigns a durable key to a fresh RpcTarget the
- * first time it is encoded into durable state. The factory (`addFactory`)
- * resurrects a capability from a stored key.
+ * The `capability -> key` mapping lives in a WeakMap here — storage bookkeeping,
+ * never pinned on the app object. The allocator (`setAllocator`) assigns a
+ * durable key to a fresh RpcTarget the first time it is encoded. The factory
+ * (`addFactory`) resurrects a capability from a stored key.
  */
 export class RefTable {
   #factories = new Map(); // kind -> (key) => RpcTarget
   #live = new Map(); // `${kind}:${key}` -> RpcTarget
+  #keys = new WeakMap(); // capability -> durable key
   #alloc;
 
-  setAllocator(fn) {
-    this.#alloc = fn;
+  constructor({ alloc }) {
+    this.#alloc = alloc;
   }
 
   addFactory(kind, makeInstance) {
     this.#factories.set(kind, makeInstance);
   }
 
+  getKey(obj) {
+    return this.#keys.get(obj);
+  }
+
+  /** Give a capability a stable durable name; refs to it then serialize deterministically. */
+  exportAs(obj, key) {
+    this.#keys.set(obj, key);
+  }
+
+  ensureKey(obj) {
+    let key = this.#keys.get(obj);
+    if (key === undefined) {
+      key = this.#alloc(obj);
+      this.#keys.set(obj, key);
+    }
+    return key;
+  }
+
   encodeValue(value) {
     if (value instanceof RpcTarget) {
-      if (!value[STATE_KEY]) {
-        if (!this.#alloc) {
-          throw new Error(`no key allocator for fresh capability of kind ${value.refKind}`);
-        }
-        value[STATE_KEY] = this.#alloc(value);
-      }
-      return { __ref: { kind: value.refKind, key: value[STATE_KEY] } };
+      return {
+        __ref: { kind: value.refKind, key: this.ensureKey(value) },
+      };
     }
     if (Array.isArray(value)) {
       return value.map((x) => this.encodeValue(x));
@@ -57,7 +70,7 @@ export class RefTable {
           throw new Error(`no factory for capability kind ${kind}`);
         }
         live = makeInstance(key);
-        live[STATE_KEY] = key;
+        this.#keys.set(live, key);
         this.#live.set(liveKey, live);
       }
       return live;
@@ -79,16 +92,22 @@ export class RefTable {
  *
  * `writeThru(self, initial)` hydrates `self`'s #state from the row named by its
  * storage key and persists every mutation to that row. The app never passes a
- * key/id — the storage layer owns the `self -> key` mapping via `keyFor`.
- * Hydration is deferred until first access, so a rehydrated capability can pin
- * its key (via STATE_KEY) before any state is touched.
+ * key/id — the storage layer owns the `self -> key` mapping in the RefTable's
+ * WeakMap. Hydration is deferred until first access, so a rehydrated capability
+ * can have its key registered before any state is touched.
  */
 export function makeWriteThru({ getSql, refTable, keyFor }) {
   return function writeThru(self, initial) {
     const sql = getSql();
 
-    const ensureKey = () =>
-      self[STATE_KEY] ?? (self[STATE_KEY] = keyFor(self));
+    const ensureKey = () => {
+      let key = refTable.getKey(self);
+      if (key === undefined) {
+        key = keyFor(self);
+        refTable.exportAs(self, key);
+      }
+      return key;
+    };
 
     let state = null;
     const hydrate = () => {

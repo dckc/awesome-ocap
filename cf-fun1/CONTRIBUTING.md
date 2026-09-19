@@ -26,18 +26,21 @@ npm run dev:both           # both at once
 
 ## Where things live
 
-- `src/index.js` — Worker entrypoint; routes `/api` to the storage DO's
-  `/bootstrap`.
-- `src/storage.js` — the single `Storage` Durable Object. Pure storage engine:
-  owns the SQLite schema, builds the `writeThru` proxy factory and `RefTable`,
-  and serves `/bootstrap` by constructing the app root `RpcTarget`.
+- `src/index.js` — Worker entrypoint; maps routes to DO bindings
+  (`{ "/counterRegistry": "COUNTER_REGISTRY" }`), then `env[space].getByName("main")`.
+- `src/storage.js` — the storage engine: a reusable base class for app Durable
+  Objects. Owns the SQLite schema, the `writeThru` proxy factory, and the
+  `RefTable` (`RpcTarget -> key` mapping in a WeakMap). App DOs extend it.
+- `src/countersApp.js` — `CounterRegistry`, the app's Durable Object. Extends
+  `Storage` and serves the `RegistryApi` capability at `/counterRegistry`.
 - `src/writethru.js` — `makeWriteThru` (a `#state` write-through proxy: each
-  mutation persists to a row keyed by `key`) and `RefTable` (capabilities
-  stored by ref-id, resurrected on load).
-- `src/counter.js` — `CounterRegistry` and `Counter` as pure `RpcTarget`s. No DO
-  classes for the app; state comes from a `writeThru` factory passed into the
+  mutation persists to the object's row) and `RefTable` (capabilities
+  stored by durable key, resurrected on load).
+- `src/counter.js` — `Counter` and `RegistryApi` as pure `RpcTarget`s. No DO
+  classes here; state comes from a `writeThru` factory passed into the
   constructor. A counter's `#state` can hold other capabilities by ref.
-- `public/` — static front end (no build step), talks to `/api` over Cap'n Web.
+- `public/` — static front end (no build step), talks to `/bootstrap` over
+  Cap'n Web.
 - `wrangler-alt.jsonc` — alternate worker name for running a second instance on
   another port (separate origin).
 - `test/counter.spec.js` — Vitest for the app layer against an in-memory stand-in
@@ -45,19 +48,22 @@ npm run dev:both           # both at once
 
 ## The ocap idea here
 
-The WebSocket session root is a `CounterRegistry` capability. `makeCounter()`
-returns a counter capability; holding it *is* the authority to `getValue` /
-`increment` / `decrement` that counter.
+The session root is a `RegistryApi` capability served by the `CounterRegistry`
+DO. `makeCounter()` returns a counter capability; holding it *is* the authority
+to `getValue` / `increment` / `decrement` that counter.
 
-One `Storage` DO holds all state; the app classes are pure `RpcTarget`s. Each
-holds `#state = writeThru(initial, { key })` — a proxy that persists every
-mutation to the DO's SQLite row for `key`. Persistence is structural: any
-`RpcTarget` state is durable by construction, no `#persist()` discipline.
+The app's Durable Object (`CounterRegistry`, extending `Storage`) holds all
+state; the capability objects (`RegistryApi`, `Counter`) are pure `RpcTarget`s.
+Each holds `#state = writeThru(this, initial)` — a proxy that persists every
+mutation to the DO's SQLite row for this object. Persistence is structural: any
+`RpcTarget` state is durable by construction, no `#persist()` discipline. The
+app never passes a key/id — the storage layer owns the `this -> key` mapping.
 
-Capabilities that live *inside* `#state` are stored as ref-ids and resurrected
-on load via the `RefTable` — the Agoric-style durable-capability pattern. This
-matters because Cap'n Web's standalone `serialize()`/`deserialize()` cannot
-round-trip `RpcTarget`s; references only survive inside a live session.
+Capabilities that live *inside* `#state` are stored by durable key and resurrected
+on load via the `RefTable` (which keeps the `capability -> key` map in a
+WeakMap) — the Agoric-style durable-capability pattern. This matters because
+Cap'n Web's standalone `serialize()`/`deserialize()` cannot round-trip
+`RpcTarget`s; references only survive inside a live session.
 
 ## Cloudflare skills already installed
 
