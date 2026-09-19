@@ -1,0 +1,6 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cf-fun1",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-19"
+}
