@@ -39,6 +39,8 @@ npm run dev:both           # both at once
   `RefTable` (`RpcTarget -> key` mapping in a WeakMap). App DOs extend it.
 - `src/countersApp.js` — `CounterRegistry`, the app's Durable Object. Extends
   `Storage` and serves the `RegistryApi` capability at `/counterRegistry`.
+- `src/countersAppBundle.js` — generated multi-module map handed to the Worker
+  Loader (see `build-facet.js`). Gitignored; rebuilt by the `build` command.
 - `src/writethru.js` — `makeWriteThru` (a `#state` write-through proxy: each
   mutation persists to the object's row) and `RefTable` (capabilities
   stored by durable key, resurrected on load).
@@ -49,6 +51,14 @@ npm run dev:both           # both at once
   Cap'n Web.
 - `wrangler-alt.jsonc` — alternate worker name for running a second instance on
   another port (separate origin).
+- `no_bundle: true` is set in both `wrangler.jsonc` and `wrangler-alt.jsonc`, so
+  wrangler uploads the supervisor (`src/index.js`) as-is rather than bundling.
+  The facet is already a multi-module graph handed to the Worker Loader, so the
+  main worker follows the same no-bundle, runtime-resolved spirit.
+- `build-facet.js` — generates `src/countersAppBundle.js`: a multi-module map
+  for the Worker Loader (app files + capnweb as separate modules, relative
+  imports, `capnweb` specifier rewritten to `./capnweb.js`). capnweb stays an
+  npm dependency, read from `node_modules`, not vendored.
 - `test/counter.spec.js` — Vitest for the app layer against an in-memory stand-in
   storage engine.
 

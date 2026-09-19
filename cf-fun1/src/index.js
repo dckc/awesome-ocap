@@ -14,6 +14,10 @@ import { codeId, counterAppModule, mainModule } from "./countersAppBundle.js";
  */
 const counterLimits = {
   compatibilityDate: "2026-09-19",
+  // The facet ships as a multi-module graph (real relative imports between the
+  // app files and capnweb), so the runtime must use the URL-based module
+  // registry to resolve it. See build-facet.mjs.
+  compatibilityFlags: ["new_module_registry"],
   mainModule,
   modules: counterAppModule,
   // No network egress: the facet's global fetch()/connect() are blocked.

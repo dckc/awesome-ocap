@@ -2,12 +2,13 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "cf-fun1-alt",
   "main": "src/index.js",
+  "no_bundle": true,
   "compatibility_date": "2026-09-19",
   "alias": {
     "capnweb": "./node_modules/capnweb/dist/index-workers.js"
   },
   "build": {
-    "command": "mkdir -p public/vendor && cp node_modules/capnweb/dist/index.js public/vendor/capnweb.js && node build-facet.mjs"
+    "command": "mkdir -p public/vendor && cp node_modules/capnweb/dist/index.js public/vendor/capnweb.js && node build-facet.js"
   },
   "assets": {
     "directory": "public"
