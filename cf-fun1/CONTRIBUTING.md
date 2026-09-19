@@ -15,8 +15,7 @@ small.
 ```sh
 cd cf-fun1
 npm install                # uses --legacy-peer-deps (npm arborist bug with vitest)
-npx vitest run             # DO tests in workerd
-npx wrangler dev --port 8787
+npx vitest run             # app tests (in-memory storage engine)
 ```
 
 `package.json` is ESM (`"type": "module"`); config is `vitest.config.ts` and
@@ -24,18 +23,36 @@ npx wrangler dev --port 8787
 
 ## Where things live
 
-- `src/index.js` — Worker entrypoint; routes `/api` to the registry DO.
-- `src/counter.js` — `Counter` and `CounterRegistry` Durable Objects + the
-  Cap'n Web `RpcTarget` surface. The DOs expose plain data methods; only the
-  `RpcTarget` layer builds counter capabilities.
+- `src/index.js` — Worker entrypoint; routes `/api` to the storage DO's
+  `/bootstrap`.
+- `src/storage.js` — the single `Storage` Durable Object. Pure storage engine:
+  owns the SQLite schema, builds the `writeThru` proxy factory and `RefTable`,
+  and serves `/bootstrap` by constructing the app root `RpcTarget`.
+- `src/writethru.js` — `makeWriteThru` (a `#state` write-through proxy: each
+  mutation persists to a row keyed by `key`) and `RefTable` (capabilities
+  stored by ref-id, resurrected on load).
+- `src/counter.js` — `CounterRegistry` and `Counter` as pure `RpcTarget`s. No DO
+  classes for the app; state comes from a `writeThru` factory passed into the
+  constructor. A counter's `#state` can hold other capabilities by ref.
 - `public/` — static front end (no build step), talks to `/api` over Cap'n Web.
-- `test/counter.spec.js` — Vitest against real DO bindings.
+- `test/counter.spec.js` — Vitest for the app layer against an in-memory stand-in
+  storage engine.
 
 ## The ocap idea here
 
 The WebSocket session root is a `CounterRegistry` capability. `makeCounter()`
 returns a counter capability; holding it *is* the authority to `getValue` /
-`increment` / `decrement` that counter. Per-counter state lives in its own DO.
+`increment` / `decrement` that counter.
+
+One `Storage` DO holds all state; the app classes are pure `RpcTarget`s. Each
+holds `#state = writeThru(initial, { key })` — a proxy that persists every
+mutation to the DO's SQLite row for `key`. Persistence is structural: any
+`RpcTarget` state is durable by construction, no `#persist()` discipline.
+
+Capabilities that live *inside* `#state` are stored as ref-ids and resurrected
+on load via the `RefTable` — the Agoric-style durable-capability pattern. This
+matters because Cap'n Web's standalone `serialize()`/`deserialize()` cannot
+round-trip `RpcTarget`s; references only survive inside a live session.
 
 ## Cloudflare skills already installed
 

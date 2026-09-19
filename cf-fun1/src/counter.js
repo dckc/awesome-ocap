@@ -1,123 +1,63 @@
-import { DurableObject } from "cloudflare:workers";
-import { RpcTarget, newWorkersRpcResponse } from "capnweb";
+import { RpcTarget } from "capnweb";
 
-export class Counter extends DurableObject {
-  constructor(ctx, env) {
-    super(ctx, env);
-    ctx.blockConcurrencyWhile(() => {
-      ctx.storage.sql.exec(`
-        CREATE TABLE IF NOT EXISTS counters (
-          id INTEGER PRIMARY KEY,
-          value INTEGER NOT NULL
-        )
-      `);
-    });
-  }
+/**
+ * App RpcTargets hold `#state = writeThru(this, initial)`. The writeThru
+ * factory (from the storage engine) persists every mutation to this object's
+ * durable storage; the app never deals with keys or ids — the storage layer
+ * owns the `this -> key` mapping. The registry holds counter *capabilities* in
+ * its own state (persisted as refs), so holding one is the authority.
+ */
 
-  async getValue() {
-    const rows = this.ctx.storage.sql
-      .exec("SELECT value FROM counters WHERE id = 1")
-      .toArray();
-    return rows[0] ? rows[0].value : 0;
-  }
-
-  async increment() {
-    this.ctx.storage.sql.exec(
-      `INSERT INTO counters (id, value) VALUES (1, 1)
-       ON CONFLICT(id) DO UPDATE SET value = value + 1`
-    );
-    return this.getValue();
-  }
-
-  async decrement() {
-    this.ctx.storage.sql.exec(
-      `INSERT INTO counters (id, value) VALUES (1, -1)
-       ON CONFLICT(id) DO UPDATE SET value = value - 1`
-    );
-    return this.getValue();
-  }
-}
-
-export class CounterRegistry extends DurableObject {
-  constructor(ctx, env) {
-    super(ctx, env);
-    this.env = env;
-    ctx.blockConcurrencyWhile(() => {
-      ctx.storage.sql.exec(`
-        CREATE TABLE IF NOT EXISTS counters (
-          id INTEGER PRIMARY KEY AUTOINCREMENT
-        )
-      `);
-    });
-  }
-
-  async createCounter() {
-    const res = this.ctx.storage.sql.exec(
-      "INSERT INTO counters DEFAULT VALUES RETURNING id"
-    );
-    return res.one().id;
-  }
-
-  async listCounterIds() {
-    return this.ctx.storage.sql
-      .exec("SELECT id FROM counters ORDER BY id")
-      .toArray()
-      .map((r) => r.id);
-  }
-
-  async getCounterId(id) {
-    const row = this.ctx.storage.sql
-      .exec("SELECT id FROM counters WHERE id = ?", id)
-      .one();
-    return row ? row.id : null;
-  }
-
-  async fetch(request) {
-    const url = new URL(request.url);
-    if (url.pathname !== "/api") {
-      return new Response("Not found", { status: 404 });
-    }
-    return newWorkersRpcResponse(request, new RegistryApi(this, this.env));
-  }
-}
-
-class RegistryApi extends RpcTarget {
-  constructor(registry, env) {
+export class Counter extends RpcTarget {
+  refKind = "counter";
+  constructor(writeThru) {
     super();
-    this.registry = registry;
-    this.env = env;
+    this.#state = writeThru(this, { value: 0, friend: null });
   }
 
-  async makeCounter() {
-    const id = await this.registry.createCounter();
-    return new CounterProxy(this.env, id);
-  }
-
-  async listCounterIds() {
-    return this.registry.listCounterIds();
-  }
-
-  async getCounter(id) {
-    const exists = await this.registry.getCounterId(id);
-    return exists ? new CounterProxy(this.env, id) : null;
-  }
-}
-
-class CounterProxy extends RpcTarget {
-  constructor(env, id) {
-    super();
-    this.stub = env.COUNTER.getByName(String(id));
-  }
+  #state;
 
   getValue() {
-    return this.stub.getValue();
+    return this.#state.value;
   }
 
   increment() {
-    return this.stub.increment();
+    this.#state.value += 1;
+    return this.#state.value;
   }
 
   decrement() {
-    return this.stub.decrement();
+    this.#state.value -= 1;
+    return this.#state.value;
+  }
+
+  get friend() {
+    return this.#state.friend;
+  }
+
+  setFriend(cap) {
+    this.#state.friend = cap;
+  }
+}
+
+export class CounterRegistry extends RpcTarget {
+  refKind = "registry";
+  constructor(writeThru) {
+    super();
+    this.#writeThru = writeThru;
+    this.#state = writeThru(this, { counters: [] });
+  }
+
+  #writeThru;
+  #state;
+
+  async makeCounter() {
+    const counter = new Counter(this.#writeThru);
+    this.#state.counters = [...this.#state.counters, counter];
+    return counter;
+  }
+
+  async listCounters() {
+    return [...this.#state.counters];
   }
 }
