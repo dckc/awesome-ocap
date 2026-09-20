@@ -33,9 +33,18 @@ const baseLimits = {
  */
 export class Egress extends WorkerEntrypoint {
   async fetch(request) {
-    // Forward the ENTIRE request (method, headers, body) — the capnweb batch
-    // session's RPC messages ride in the POST body, so dropping it would send
-    // the owner an empty batch (400).
+    // Relay ONLY web-key deref requests to an owning worker: a `counterRegistry`
+    // path with a `secret`. The facet is confined (egress capped) — this is the
+    // single, allowlisted outbound it's permitted, so it can't reach arbitrary
+    // hosts or internal bindings.
+    const url = new URL(request.url);
+    if (
+      url.pathname !== "/counterRegistry" ||
+      !url.searchParams.has("secret") ||
+      url.protocol !== "http:" && url.protocol !== "https:"
+    ) {
+      return new Response("forbidden", { status: 403 });
+    }
     const res = await fetch(request);
     return new Response(res.body, { status: res.status });
   }
