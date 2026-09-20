@@ -8,11 +8,6 @@ const importBtn = document.getElementById("import");
 const wsUrl = `${location.origin.replace(/^http/, "ws")}/counterRegistry`;
 const api = newWebSocketRpcSession(wsUrl);
 
-// TEMP debug: echo client-side events to the wrangler terminal via POST ?log=.
-function logToTerminal(msg) {
-  fetch(`${location.origin}/counterRegistry?log=${encodeURIComponent(msg)}`, { method: "POST" });
-}
-
 // The web-key URL for a capability secret: origin + route + #secret. The secret
 // stays in the fragment so it is not sent to, or leaked via, the Referer header.
 function webkeyUrl(secret) {
@@ -45,7 +40,6 @@ function render(entry) {
   const copy = document.createElement("button");
   copy.textContent = "copy url";
   copy.addEventListener("click", async () => {
-    logToTerminal(`copy url for ${webkey}`);
     await navigator.clipboard.writeText(webkeyUrl(webkey));
   });
 
@@ -64,7 +58,6 @@ makeBtn.addEventListener("click", async () => {
 // a durable remote ref, so the import survives reload and proxies to the owner.
 importBtn.addEventListener("click", async () => {
   const raw = importField.value.trim();
-  logToTerminal(`import clicked, raw=${raw}`);
   if (!raw) return;
   const counter = await api.importCounter(raw);
   listEl.append(render({ counter, webkey: raw }));

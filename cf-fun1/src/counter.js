@@ -7,19 +7,6 @@ import { RpcTarget, newHttpBatchRpcSession } from "capnweb";
  * (persisted as refs), so holding one is the authority.
  */
 
-// TEMP debug: label each counter instance with a stable number so log lines
-// read like "counter 1 increment -> 3" and we can trace the same counter.
-const counterNo = new WeakMap();
-let nextCounterNo = 0;
-function counterLabel(counter) {
-  let n = counterNo.get(counter);
-  if (n === undefined) {
-    n = ++nextCounterNo;
-    counterNo.set(counter, n);
-  }
-  return `counter ${n}`;
-}
-
 export class Counter extends RpcTarget {
   refKind = "counter";
   constructor(writeThru) {
@@ -28,23 +15,18 @@ export class Counter extends RpcTarget {
   }
 
   #state;
-  logName; // set to the counter's webkey secret for cross-worker tracing
 
   getValue() {
-    const v = this.#state.value;
-    console.log(`[Counter] ${this.logName ?? counterLabel(this)} getValue -> ${v}`);
-    return v;
+    return this.#state.value;
   }
 
   increment() {
     this.#state.value += 1;
-    console.log(`[Counter] ${this.logName ?? counterLabel(this)} increment -> ${this.#state.value}`);
     return this.#state.value;
   }
 
   decrement() {
     this.#state.value -= 1;
-    console.log(`[Counter] ${this.logName ?? counterLabel(this)} decrement -> ${this.#state.value}`);
     return this.#state.value;
   }
 
@@ -95,19 +77,16 @@ export class RemoteCounter extends RpcTarget {
   }
 
   async getValue() {
-    console.log(`[RemoteCounter] getValue -> ${this.remoteRef}`);
     const s = this.#stubbed();
     return await s.getValue();
   }
 
   async increment() {
-    console.log(`[RemoteCounter] increment -> ${this.remoteRef}`);
     const s = this.#stubbed();
     return await s.increment();
   }
 
   async decrement() {
-    console.log(`[RemoteCounter] decrement -> ${this.remoteRef}`);
     const s = this.#stubbed();
     return await s.decrement();
   }
@@ -148,7 +127,6 @@ export class RegistryApi extends RpcTarget {
 
   async makeCounter() {
     const counter = new Counter(this.#writeThru);
-    counter.logName = this.#secretFor(counter); // TEMP debug: log by secret
     this.#state.counters = [...this.#state.counters, counter];
     return counter;
   }

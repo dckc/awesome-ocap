@@ -33,12 +33,10 @@ const baseLimits = {
  */
 export class Egress extends WorkerEntrypoint {
   async fetch(request) {
-    console.log(`[Egress] relaying ${request.method} ${request.url}`);
     // Forward the ENTIRE request (method, headers, body) — the capnweb batch
     // session's RPC messages ride in the POST body, so dropping it would send
     // the owner an empty batch (400).
     const res = await fetch(request);
-    console.log(`[Egress] -> ${res.status}`);
     return new Response(res.body, { status: res.status });
   }
 }
