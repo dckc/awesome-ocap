@@ -18,6 +18,12 @@ Then open `http://localhost:8787`. Start with zero counters, click **make
 counter**, then `+` / `-`. Values survive page reloads (they live in Durable
 Object storage). On reload the page re-acquires existing counters.
 
+To share a counter across workers: on worker A, click **copy url** on a
+counter, open `http://localhost:8788`, and paste that URL into the **import
+web-key** box. Worker B holds a durable *remote ref* to A's counter — the value
+and increments live on A, and B's `+`/`-` proxy to A over the supervisor relay.
+Both pages converge on the same value.
+
 The `dev:a`/`dev:b` scripts give each worker its own `--persist-to` directory so
 they keep separate DO storage — they're distinct workers, not two ports on one.
 
@@ -44,3 +50,5 @@ npx vitest run
   - [**SQLite storage in DOs**](https://developers.cloudflare.com/durable-objects/api/sqlite-storage-api/) — the `new_sqlite_classes` migration
   - [**Workers Vitest integration**](https://developers.cloudflare.com/workers/testing/vitest-integration/)
 - [**Durable Object facets**](https://developers.cloudflare.com/dynamic-workers/usage/durable-object-facets/) — confine untrusted code to a child DO with its own isolated storage.
+- [**Loopback bindings + `globalOutbound` redirect**](https://developers.cloudflare.com/dynamic-workers/usage/bindings/) — a facet can't fetch the network, but it can "call up to the supervisor": the supervisor hands the facet a `WorkerEntrypoint` loopback binding (`ctx.exports.Svc({})`) as its `globalOutbound`, so the facet's global `fetch()` lands back in the supervisor, which does the real outbound request and relays the response (body included). This is how a `RemoteCounter` reaches its owning worker.
+- **Two-tier capability references** — durable state references a capability either locally as `{"*": "<kind>:<secret>"}` (resurrected via the RefTable's factory) or remotely as `{"@": "<full web-key URL>"}` (deserialized into a `RemoteCounter` proxy stub). This lets a second worker hold a durable remote ref to a counter that survives reload; method calls proxy to the owner. Waterken-style, echoing the `{"@": url}` link convention.
