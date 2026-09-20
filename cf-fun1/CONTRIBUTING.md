@@ -16,6 +16,35 @@ When you explore a new Cloudflare feature (or change how something works), make
 sure `README.md` reflects it — e.g. the "Platform bits explored" list. It's easy
 to forget when the exploration is the point.
 
+## Comments: match the docs to the knowledge the code carries
+
+**Scope each comment to the thing it annotates.** A comment (docstring, block
+comment, or inline note) should describe only what the code's reader can see in
+the file itself — the responsibilities and invariants that live here. Do not
+document what some other thing (another layer, caller, or supervisor) does, or
+explain that "this is X's job" on something that does not do X. If the division
+of responsibility is real, state it in the file that actually owns it (e.g. the
+storage layer that holds the key mapping), not in a file that contradicts it.
+A comment belongs on the thing that owns the responsibility; if it reads like it
+is explaining work happening elsewhere, it is misplaced. Keep comments short and
+grounded in the code.
+
+**Don't leak chat context into code.** Do NOT transcribe design decisions,
+reasoning, or context from this conversation (e.g. "the app never deals with
+keys" does not belong on an app object that, from its own code, does deal with
+state). Write only what the code's reader needs, stated in terms of the code
+itself.
+
+## Tests and commit messages
+
+Test files are `.spec` files **for a reason**: each is a spec of the behavior
+being committed. When you commit, let the spec lead — a good commit message
+parallels the spec it ships. Prefer a headline that names the feature the tests
+specify (e.g. "each counter has a webkey"), then itemize the most important
+`describe`/`it` names (paraphrased where needed), grouped under their test
+files. If a change ships no tests, that's a signal to reconsider whether it's
+spec'd.
+
 ## Commands
 
 ```sh
@@ -53,8 +82,9 @@ npm run dev:both           # both at once
   another port (separate origin).
 - `no_bundle: true` is set in both `wrangler.jsonc` and `wrangler-alt.jsonc`, so
   wrangler uploads the supervisor (`src/index.js`) as-is rather than bundling.
-  The facet is already a multi-module graph handed to the Worker Loader, so the
-  main worker follows the same no-bundle, runtime-resolved spirit.
+  The generated `src/countersAppBundle.js` is attached as an additional ESModule
+  via a `rules` glob (`**/*countersAppBundle.js`) — without it, `no_bundle`
+  leaves that import unresolvable at runtime.
 - `build-facet.js` — generates `src/countersAppBundle.js`: a multi-module map
   for the Worker Loader (app files + capnweb as separate modules, relative
   imports, `capnweb` specifier rewritten to `./capnweb.js`). capnweb stays an

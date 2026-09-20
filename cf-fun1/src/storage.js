@@ -1,18 +1,43 @@
 import { DurableObject } from "cloudflare:workers";
 import { makeWriteThru, RefTable } from "./writethru.js";
 
+/** RFC 4648 base32 alphabet (lowercase, no padding). */
+const BASE32 = "abcdefghijklmnopqrstuvwxyz234567";
+
+/**
+ * Format an unguessable 64-bit webkey secret as 13 base32 chars. `s` is a
+ * Uint8Array of 8 bytes (already generated); this is pure bit-fiddling.
+ */
+export function formatSecret(s) {
+  let secret = "";
+  for (let i = 0; i < 13; i++) {
+    // Read 5 bits at a time across the 64-bit value.
+    const byteIndex = Math.floor((i * 5) / 8);
+    const shift = (i * 5) % 8;
+    let group = (s[byteIndex] >> shift) & 0x1f;
+    if (shift > 3) group |= (s[byteIndex + 1] ?? 0) << (8 - shift);
+    secret += BASE32[group & 0x1f];
+  }
+  return secret;
+}
+
 /**
  * The storage engine: a reusable base for app Durable Objects. It owns the
- * SQLite schema, a write-through proxy factory (`writeThru`), and the RefTable
- * (capability -> durable key). App DOs extend this and serve their own
- * capability surface; they never reimplement storage.
+ * SQLite schema, a write-through proxy factory (`writeThru`), the RefTable
+ * (capability -> durable key), and the webkey story.
  *
- * The storage layer owns the `RpcTarget -> key` mapping: it allocates a durable
- * key for a fresh capability (from a durable sequence) and keeps the mapping in
- * the RefTable's WeakMap, so no key is ever pinned on an app object.
+ * Each capability is given a durable key that IS an unguessable, kind-bearing
+ * webkey secret (`<kind>:<base32>`, e.g. `counter:k7enposi7adap`). The key is
+ * how the capability is persisted, referenced, and — via `decodeSecret` —
+ * resurrected across isolates/sessions. App DOs never see keys or webkeys;
+ * they extend this and serve their own capability surface.
  */
 export class Storage extends DurableObject {
-  constructor(ctx, env) {
+  constructor(
+    ctx,
+    env,
+    { getRandomValues = (...args) => globalThis.crypto.getRandomValues(...args) } = {}
+  ) {
     super(ctx, env);
     ctx.blockConcurrencyWhile(() => {
       ctx.storage.sql.exec(`
@@ -23,6 +48,7 @@ export class Storage extends DurableObject {
       `);
     });
     this.#ctx = ctx;
+    this.#getRandomValues = getRandomValues;
     this.#refTable = new RefTable({
       alloc: (obj) => this.keyFor(obj),
     });
@@ -36,6 +62,7 @@ export class Storage extends DurableObject {
   #ctx;
   #refTable;
   #writeThru;
+  #getRandomValues;
 
   /** The write-through state factory, bound to this engine. */
   get writeThru() {
@@ -52,19 +79,31 @@ export class Storage extends DurableObject {
     this.#refTable.addFactory(kind, makeInstance);
   }
 
+  /**
+   * Enliven a kind-bearing webkey secret into its live capability. The
+   * supervisor (running in a different isolate) cannot hold the capability
+   * object; it asks this DO — the one that owns the RefTable and factories —
+   * to resolve the secret. Returns the live RpcTarget (or undefined).
+   */
+  decodeSecret(secret) {
+    return this.#refTable.decodeSecret(secret);
+  }
+
+  /** The capability's durable key, which is its kind-bearing webkey secret. */
+  secretFor(obj) {
+    return this.#refTable.ensureKey(obj);
+  }
+
+  /**
+   * Allocate a durable key for a fresh capability: a kind-bearing, unguessable
+   * webkey secret. The kind is taken from the capability's `refKind`; the base32
+   * tail is 64 bits of randomness. The key doubles as the storage row key and
+   * the webkey's fragment secret.
+   */
   keyFor(obj) {
     const existing = this.#refTable.getKey(obj);
     if (existing !== undefined) return existing;
-    const sql = this.#ctx.storage.sql;
-    const rows = sql
-      .exec("SELECT value FROM state WHERE key = ?", "seq:counter")
-      .toArray();
-    const next = rows[0] ? Number(rows[0].value) + 1 : 1;
-    sql.exec(
-      "INSERT OR REPLACE INTO state (key, value) VALUES (?, ?)",
-      "seq:counter",
-      String(next)
-    );
-    return `counter:${next}`;
+    const kind = obj.refKind ?? "cap";
+    return `${kind}:${formatSecret(this.#getRandomValues(new Uint8Array(8)))}`;
   }
 }

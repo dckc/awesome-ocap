@@ -42,11 +42,18 @@ export class RefTable {
     return key;
   }
 
+  /** Split a `<kind>:<key>` secret into its kind and key parts. */
+  parseSecret(secret) {
+    const colon = secret.indexOf(":");
+    if (colon < 1) return undefined;
+    return { kind: secret.slice(0, colon), key: secret };
+  }
+
   encodeValue(value) {
     if (value instanceof RpcTarget) {
-      return {
-        __ref: { kind: value.refKind, key: this.ensureKey(value) },
-      };
+      // Waterken-style capability reference: the `@` names the capability by
+      // its webkey secret (`<kind>:<key>`); the kind is embedded as its prefix.
+      return { "@": this.ensureKey(value) };
     }
     if (Array.isArray(value)) {
       return value.map((x) => this.encodeValue(x));
@@ -60,9 +67,12 @@ export class RefTable {
   }
 
   decodeValue(value) {
-    if (value && value.__ref) {
-      const { kind, key } = value.__ref;
-      const liveKey = `${kind}:${key}`;
+    if (value && typeof value === "object" && typeof value["@"] === "string") {
+      const secret = value["@"];
+      const parsed = this.parseSecret(secret);
+      if (parsed === undefined) throw new Error(`malformed reference: ${secret}`);
+      const { kind, key } = parsed;
+      const liveKey = secret;
       let live = this.#live.get(liveKey);
       if (!live) {
         const makeInstance = this.#factories.get(kind);
@@ -84,6 +94,27 @@ export class RefTable {
       return out;
     }
     return value;
+  }
+
+  /**
+   * Enliven a kind-bearing webkey secret into its live capability.
+   *
+   * A secret has the form `<kind>:<key>` (e.g. `counter:<base32>`); the kind
+   * names the factory that resurrects it, the key is the durable storage key.
+   * This is what gives the supervisor a session-independent identity for a
+   * capability that capn-web's session-scoped export ids cannot express.
+   *
+   * @returns {RpcTarget|undefined} the live capability, or undefined if the
+   *   secret does not name a known kind or key.
+   */
+  decodeSecret(secret) {
+    if (this.parseSecret(secret) === undefined) return undefined;
+    try {
+      return this.decodeValue({ "@": secret });
+    } catch (err) {
+      // Unknown kind or key: not a secret we can enliven.
+      return undefined;
+    }
   }
 }
 

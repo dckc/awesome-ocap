@@ -7,6 +7,12 @@
   "alias": {
     "capnweb": "./node_modules/capnweb/dist/index-workers.js"
   },
+  "rules": [
+    {
+      "type": "ESModule",
+      "globs": ["**/*countersAppBundle.js"]
+    }
+  ],
   "build": {
     "command": "mkdir -p public/vendor && cp node_modules/capnweb/dist/index.js public/vendor/capnweb.js && node build-facet.js"
   },

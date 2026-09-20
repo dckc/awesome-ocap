@@ -3,9 +3,8 @@ import { RpcTarget } from "capnweb";
 /**
  * App RpcTargets hold `#state = writeThru(this, initial)`. The writeThru
  * factory (from the storage engine) persists every mutation to this object's
- * durable storage; the app never deals with keys or ids — the storage layer
- * owns the `this -> key` mapping. The registry holds counter *capabilities* in
- * its own state (persisted as refs), so holding one is the authority.
+ * durable storage. The registry holds counter *capabilities* in its own state
+ * (persisted as refs), so holding one is the authority.
  */
 
 export class Counter extends RpcTarget {
@@ -47,13 +46,20 @@ export class Counter extends RpcTarget {
  */
 export class RegistryApi extends RpcTarget {
   refKind = "registry";
-  constructor(writeThru) {
+  /**
+   * @param {object} writeThru    storage-layer write-through state factory
+   * @param {(cap: object) => string} secretFor  a capability's webkey secret;
+   *   bound to the storage engine by the DO that builds this API.
+   */
+  constructor(writeThru, secretFor) {
     super();
     this.#writeThru = writeThru;
+    this.#secretFor = secretFor;
     this.#state = this.#writeThru(this, { counters: [] });
   }
 
   #writeThru;
+  #secretFor;
   #state;
 
   async makeCounter() {
@@ -62,7 +68,11 @@ export class RegistryApi extends RpcTarget {
     return counter;
   }
 
+  /** Each counter paired with its webkey secret, as plain data. */
   async listCounters() {
-    return [...this.#state.counters];
+    return this.#state.counters.map((counter) => ({
+      counter,
+      webkey: this.#secretFor(counter),
+    }));
   }
 }
