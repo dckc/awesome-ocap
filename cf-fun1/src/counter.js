@@ -1,4 +1,4 @@
-import { RpcTarget } from "capnweb";
+import { RpcTarget, newHttpBatchRpcSession } from "capnweb";
 
 /**
  * App RpcTargets hold `#state = writeThru(this, initial)`. The writeThru
@@ -6,6 +6,19 @@ import { RpcTarget } from "capnweb";
  * durable storage. The registry holds counter *capabilities* in its own state
  * (persisted as refs), so holding one is the authority.
  */
+
+// TEMP debug: label each counter instance with a stable number so log lines
+// read like "counter 1 increment -> 3" and we can trace the same counter.
+const counterNo = new WeakMap();
+let nextCounterNo = 0;
+function counterLabel(counter) {
+  let n = counterNo.get(counter);
+  if (n === undefined) {
+    n = ++nextCounterNo;
+    counterNo.set(counter, n);
+  }
+  return `counter ${n}`;
+}
 
 export class Counter extends RpcTarget {
   refKind = "counter";
@@ -15,18 +28,23 @@ export class Counter extends RpcTarget {
   }
 
   #state;
+  logName; // set to the counter's webkey secret for cross-worker tracing
 
   getValue() {
-    return this.#state.value;
+    const v = this.#state.value;
+    console.log(`[Counter] ${this.logName ?? counterLabel(this)} getValue -> ${v}`);
+    return v;
   }
 
   increment() {
     this.#state.value += 1;
+    console.log(`[Counter] ${this.logName ?? counterLabel(this)} increment -> ${this.#state.value}`);
     return this.#state.value;
   }
 
   decrement() {
     this.#state.value -= 1;
+    console.log(`[Counter] ${this.logName ?? counterLabel(this)} decrement -> ${this.#state.value}`);
     return this.#state.value;
   }
 
@@ -36,6 +54,70 @@ export class Counter extends RpcTarget {
 
   setFriend(cap) {
     this.#state.friend = cap;
+  }
+}
+
+/**
+ * A remote counter: a stub whose state lives on another worker. The facet can't
+ * fetch the network directly; its capnweb batch RPC session's `fetch` is routed
+ * to the supervisor (via `globalOutbound`), which performs the real outbound
+ * fetch to the owning worker and returns the response. So `increment`/etc open
+ * a session to the remote web-key URL and delegate to the stub they get back.
+ * The web-key URL is the durable identity; it serializes as a remote `{"@"}` ref.
+ */
+export class RemoteCounter extends RpcTarget {
+  refKind = "counter";
+  /**
+   * @param {string} remoteRef  full web-key URL of the remote counter
+   */
+  constructor(remoteRef) {
+    super();
+    this.remoteRef = remoteRef; // encoded as {"@": remoteRef}
+  }
+
+  #sessionUrl() {
+    // The web-key URL carries the secret in the fragment, which is never sent
+    // over the wire. Move it into the query so the owning worker's deref
+    // endpoint (?secret=) can read it.
+    const u = new URL(this.remoteRef);
+    const secret = u.hash.slice(1);
+    u.hash = "";
+    u.searchParams.set("secret", secret);
+    return u.href;
+  }
+
+  // capnweb's batch transport is single-shot: one round-trip then the session
+  // ends. Open a fresh session per call so every method does its own POST to
+  // the owner (routed via the supervisor's egress relay). Returns the remote
+  // main stub; its methods return RpcPromises that resolve on await.
+  #stubbed() {
+    return newHttpBatchRpcSession(this.#sessionUrl());
+  }
+
+  async getValue() {
+    console.log(`[RemoteCounter] getValue -> ${this.remoteRef}`);
+    const s = this.#stubbed();
+    return await s.getValue();
+  }
+
+  async increment() {
+    console.log(`[RemoteCounter] increment -> ${this.remoteRef}`);
+    const s = this.#stubbed();
+    return await s.increment();
+  }
+
+  async decrement() {
+    console.log(`[RemoteCounter] decrement -> ${this.remoteRef}`);
+    const s = this.#stubbed();
+    return await s.decrement();
+  }
+
+  get friend() {
+    throw new Error("friend not supported on remote counter");
+  }
+
+  setFriend() {
+    throw new Error("friend not supported on remote counter");
   }
 }
 
@@ -51,28 +133,42 @@ export class RegistryApi extends RpcTarget {
    * @param {(cap: object) => string} secretFor  a capability's webkey secret;
    *   bound to the storage engine by the DO that builds this API.
    */
-  constructor(writeThru, secretFor) {
+  constructor(writeThru, secretFor, remoteFactory) {
     super();
     this.#writeThru = writeThru;
     this.#secretFor = secretFor;
+    this.#remoteFactory = remoteFactory;
     this.#state = this.#writeThru(this, { counters: [] });
   }
 
   #writeThru;
   #secretFor;
+  #remoteFactory;
   #state;
 
   async makeCounter() {
     const counter = new Counter(this.#writeThru);
+    counter.logName = this.#secretFor(counter); // TEMP debug: log by secret
     this.#state.counters = [...this.#state.counters, counter];
     return counter;
   }
 
-  /** Each counter paired with its webkey secret, as plain data. */
+  /**
+   * Import a capability from a web-key URL hosted on another worker. The
+   * registry holds a RemoteCounter (a durable remote `{"@"}` ref) so the
+   * import survives reload; method calls proxy to the owner via the supervisor.
+   */
+  async importCounter(remoteRef) {
+    const counter = this.#remoteFactory(remoteRef);
+    this.#state.counters = [...this.#state.counters, counter];
+    return counter;
+  }
+
+  /** Each counter paired with its webkey (local secret or remote URL). */
   async listCounters() {
     return this.#state.counters.map((counter) => ({
       counter,
-      webkey: this.#secretFor(counter),
+      webkey: counter.remoteRef || this.#secretFor(counter),
     }));
   }
 }

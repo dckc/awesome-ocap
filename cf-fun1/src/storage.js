@@ -79,6 +79,11 @@ export class Storage extends DurableObject {
     this.#refTable.addFactory(kind, makeInstance);
   }
 
+  /** Register a factory that makes a remote proxy stub for a web-key URL. */
+  registerRemoteFactory(kind, makeStub) {
+    this.#refTable.addRemoteFactory(kind, makeStub);
+  }
+
   /**
    * Enliven a kind-bearing webkey secret into its live capability. The
    * supervisor (running in a different isolate) cannot hold the capability

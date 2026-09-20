@@ -12,6 +12,8 @@ import { RpcTarget } from "capnweb";
  */
 export class RefTable {
   #factories = new Map(); // kind -> (key) => RpcTarget
+  #remoteFactories = new Map(); // kind -> (remoteRef) => RpcTarget proxy stub
+  #remotes = new Map(); // remoteRef -> live proxy stub
   #live = new Map(); // `${kind}:${key}` -> RpcTarget
   #keys = new WeakMap(); // capability -> durable key
   #alloc;
@@ -49,11 +51,20 @@ export class RefTable {
     return { kind: secret.slice(0, colon), key: secret };
   }
 
+  /**
+   * Encode a state value for persistence. Capability references are encoded
+   * with a marker:
+   *   - `{"@": "<full web-key URL>"}` — a remote reference to a capability
+   *     hosted on another worker. Deserializing yields a remote proxy stub.
+   *   - `{"*": "<kind>:<secret>"}` — a local reference, resolved through the
+   *     RefTable's per-kind factory on load.
+   * Distinguishes local vs remote by whether the capability declares a remote
+   * web-key URL (`remoteRef`); only that case is remote.
+   */
   encodeValue(value) {
     if (value instanceof RpcTarget) {
-      // Waterken-style capability reference: the `@` names the capability by
-      // its webkey secret (`<kind>:<key>`); the kind is embedded as its prefix.
-      return { "@": this.ensureKey(value) };
+      if (typeof value.remoteRef === "string") return { "@": value.remoteRef };
+      return { "*": this.ensureKey(value) };
     }
     if (Array.isArray(value)) {
       return value.map((x) => this.encodeValue(x));
@@ -67,23 +78,30 @@ export class RefTable {
   }
 
   decodeValue(value) {
-    if (value && typeof value === "object" && typeof value["@"] === "string") {
-      const secret = value["@"];
-      const parsed = this.parseSecret(secret);
-      if (parsed === undefined) throw new Error(`malformed reference: ${secret}`);
-      const { kind, key } = parsed;
-      const liveKey = secret;
-      let live = this.#live.get(liveKey);
-      if (!live) {
-        const makeInstance = this.#factories.get(kind);
-        if (!makeInstance) {
-          throw new Error(`no factory for capability kind ${kind}`);
-        }
-        live = makeInstance(key);
-        this.#keys.set(live, key);
-        this.#live.set(liveKey, live);
+    if (value && typeof value === "object") {
+      // Remote reference: a full web-key URL, deserializes to a proxy stub.
+      if (typeof value["@"] === "string") {
+        return this.#remoteDecode(value["@"]);
       }
-      return live;
+      // Local reference: a kind-bearing secret, resurrected via a factory.
+      if (typeof value["*"] === "string") {
+        const secret = value["*"];
+        const parsed = this.parseSecret(secret);
+        if (parsed === undefined) throw new Error(`malformed reference: ${secret}`);
+        const { kind, key } = parsed;
+        const liveKey = secret;
+        let live = this.#live.get(liveKey);
+        if (!live) {
+          const makeInstance = this.#factories.get(kind);
+          if (!makeInstance) {
+            throw new Error(`no factory for capability kind ${kind}`);
+          }
+          live = makeInstance(key);
+          this.#keys.set(live, key);
+          this.#live.set(liveKey, live);
+        }
+        return live;
+      }
     }
     if (Array.isArray(value)) {
       return value.map((x) => this.decodeValue(x));
@@ -94,6 +112,31 @@ export class RefTable {
       return out;
     }
     return value;
+  }
+
+  #remoteDecode(remoteRef) {
+    const stub = this.#remotes.get(remoteRef);
+    if (stub) return stub;
+    const makeStub = this.#remoteFactories.get(this.#remoteKindOf(remoteRef));
+    if (!makeStub) return null; // no remote proxy available
+    const created = makeStub(remoteRef);
+    this.#remotes.set(remoteRef, created);
+    return created;
+  }
+
+  /** The capability kind a remote web-key URL points at (from its secret). */
+  #remoteKindOf(remoteRef) {
+    const hash = remoteRef.indexOf("#");
+    const secret = hash >= 0 ? remoteRef.slice(hash + 1) : remoteRef;
+    const colon = secret.indexOf(":");
+    return colon > 0 ? secret.slice(0, colon) : "cap";
+  }
+
+  /** Register a factory that makes a remote proxy stub for a web-key URL. */
+  addRemoteFactory(kind, makeStub) {
+    this.#remoteFactories = this.#remoteFactories || new Map();
+    this.#remoteFactories.set(kind, makeStub);
+    this.#remotes = this.#remotes || new Map();
   }
 
   /**
@@ -110,7 +153,7 @@ export class RefTable {
   decodeSecret(secret) {
     if (this.parseSecret(secret) === undefined) return undefined;
     try {
-      return this.decodeValue({ "@": secret });
+      return this.decodeValue({ "*": secret });
     } catch (err) {
       // Unknown kind or key: not a secret we can enliven.
       return undefined;

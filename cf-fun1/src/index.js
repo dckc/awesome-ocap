@@ -1,4 +1,4 @@
-import { DurableObject } from "cloudflare:workers";
+import { DurableObject, WorkerEntrypoint } from "cloudflare:workers";
 import { codeId, counterAppModule, mainModule } from "./countersAppBundle.js";
 
 /**
@@ -12,7 +12,7 @@ import { codeId, counterAppModule, mainModule } from "./countersAppBundle.js";
  * only backstop against in-heap blowups; `facets.delete()` is the only
  * reclamation.
  */
-const counterLimits = {
+const baseLimits = {
   compatibilityDate: "2026-09-19",
   // The facet ships as a multi-module graph (real relative imports between the
   // app files and capnweb), so the runtime must use the URL-based module
@@ -20,17 +20,34 @@ const counterLimits = {
   compatibilityFlags: ["new_module_registry"],
   mainModule,
   modules: counterAppModule,
-  // No network egress: the facet's global fetch()/connect() are blocked.
-  globalOutbound: null,
   limits: { cpuMs: 10, subRequests: 5 },
 };
 
-/** Route table: request path -> { facet name, exported class name, loader options }. */
+/**
+ * The supervisor's egress relay, handed to the facet as its `globalOutbound`.
+ * The facet can't fetch the network itself, so when a RemoteCounter inside the
+ * facet makes an HTTP request (its capnweb batch session's `fetch`), it lands
+ * here; the supervisor performs the real outbound fetch to the owning worker
+ * and relays the response back. The facet thus "calls up to the supervisor" and
+ * gets a live capnweb stub back, without direct network access.
+ */
+export class Egress extends WorkerEntrypoint {
+  async fetch(request) {
+    console.log(`[Egress] relaying ${request.method} ${request.url}`);
+    // Forward the ENTIRE request (method, headers, body) — the capnweb batch
+    // session's RPC messages ride in the POST body, so dropping it would send
+    // the owner an empty batch (400).
+    const res = await fetch(request);
+    console.log(`[Egress] -> ${res.status}`);
+    return new Response(res.body, { status: res.status });
+  }
+}
+
+/** Route table: request path -> { facet name, exported class name }. */
 const routes = {
   "/counterRegistry": {
     facet: "counterApp",
     class: "CounterRegistry",
-    options: counterLimits,
   },
 };
 
@@ -46,11 +63,21 @@ export class FacetSupervisor extends DurableObject {
     if (!route) return new Response("Not found", { status: 404 });
 
     const facet = this.ctx.facets.get(route.facet, async () => {
-      const worker = this.env.LOADER.get(codeId, () => route.options);
+      const worker = this.env.LOADER.get(codeId, () => this.#options());
       const facetClass = worker.getDurableObjectClass(route.class);
       return { class: facetClass };
     });
     return facet.fetch(request);
+  }
+
+  // Build the facet's loader options per-instance so its global outbound can
+  // be redirected to THIS supervisor (needs `this.ctx.exports`, which is
+  // per-instance). The facet's own `fetch()` calls land here.
+  #options() {
+    return {
+      ...baseLimits,
+      globalOutbound: this.ctx.exports.Egress({}),
+    };
   }
 }
 

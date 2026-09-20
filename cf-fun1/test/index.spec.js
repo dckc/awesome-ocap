@@ -66,4 +66,20 @@ describe("index.js fetch routing", () => {
     );
     expect(await counter2.increment()).toBe(2);
   });
+
+  it("importCounter holds a durable remote ref that survives a fresh session", async () => {
+    const registry = await openSession("https://worker.test/counterRegistry");
+    const remoteUrl = "https://other.worker.example/counterRegistry#counter:xyz123";
+    const imported = await registry.importCounter(remoteUrl);
+    // The registry now holds a RemoteCounter; listCounters surfaces its URL.
+    const entries = await registry.listCounters();
+    const last = entries.at(-1);
+    expect(last.webkey).toBe(remoteUrl);
+
+    // A fresh session (reload) re-acquires the same remote ref from storage.
+    const registry2 = await openSession("https://worker.test/counterRegistry");
+    const entries2 = await registry2.listCounters();
+    const last2 = entries2.at(-1);
+    expect(last2.webkey).toBe(remoteUrl);
+  });
 });

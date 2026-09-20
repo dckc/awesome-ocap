@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { Counter, RegistryApi } from "../src/counter.js";
+import { Counter, RegistryApi, RemoteCounter } from "../src/counter.js";
 import { makeWriteThru, RefTable } from "../src/writethru.js";
 import { formatSecret } from "../src/storage.js";
 
@@ -62,8 +62,10 @@ function setupApp(shared) {
   });
   // Mirror the CounterRegistry DO: register the factory, then build the API.
   refTable.addFactory("counter", (key) => new Counter(writeThru));
+  refTable.addRemoteFactory("counter", (remoteRef) => new RemoteCounter(remoteRef));
   const secretFor = (obj) => refTable.ensureKey(obj);
-  const registry = new RegistryApi(writeThru, secretFor);
+  const remoteFactory = (remoteRef) => new RemoteCounter(remoteRef);
+  const registry = new RegistryApi(writeThru, secretFor, remoteFactory);
   refTable.exportAs(registry, "registry:main");
   // Storage only hands out the secret; building the web-key URL (origin +
   // route) is the supervisor's job, as the Storage DO would expose it.
@@ -123,14 +125,14 @@ describe("counter app as pure RpcTargets over write-thru state", () => {
     expect(wa).not.toBe(wb);
   });
 
-  it("a counter's stored ref is a Waterken-style {\\\"@\\\": secret}", async () => {
+  it("a counter's stored ref is a local Waterken-style {\\\"*\\\": secret}", async () => {
     const { store, registry, webkeyFor } = setupApp();
     const counter = await registry.makeCounter();
     await counter.increment(); // touch the counter's own row too
     const secret = new URL(webkeyFor(counter)).hash.slice(1);
-    // The counter is referenced from the registry's row as a Waterken ref.
+    // The counter is referenced from the registry's row as a local ref.
     const registryRow = store.rows.get("registry:main");
-    expect(registryRow).toContain(`"@":"${secret}"`);
+    expect(registryRow).toContain(`"*":"${secret}"`);
   });
 
   it("decodeSecret enlivens a counter's secret into its capability", async () => {
@@ -149,6 +151,37 @@ describe("counter app as pure RpcTargets over write-thru state", () => {
     // An unknown kind/secret yields undefined, not an error.
     expect(refTable.decodeSecret("nope:doesnotexist")).toBeUndefined();
     expect(refTable.decodeSecret("no-colon")).toBeUndefined();
+  });
+
+  it("a remote ref {\"@\": url} deserializes to a proxy stub via the remote factory", async () => {
+    const store = makeInMemoryStore();
+    const refTable = new RefTable({ alloc: (o) => store.keyFor(o) });
+    const writeThru = makeWriteThru({ getSql: () => store.sql, refTable, keyFor: (o) => store.keyFor(o) });
+    // A remote factory turns a web-key URL into a proxy stub.
+    const remoteUrl = "https://other.example/counterRegistry#counter:abc123xyz4";
+    refTable.addRemoteFactory("counter", (url) => ({ remoteRef: url, kind: "proxy" }));
+    // Persist a state value holding the remote ref.
+    const decoded = refTable.decodeValue({ counters: [{ "@": remoteUrl }] });
+    expect(decoded.counters[0].remoteRef).toBe(remoteUrl);
+    expect(decoded.counters[0].kind).toBe("proxy");
+  });
+
+  it("importCounter holds a remote ref that persists across app instances", async () => {
+    const store = makeInMemoryStore();
+    const remoteUrl = "https://other.example/counterRegistry#counter:zzz";
+    const first = setupApp(store);
+    const imported = await first.registry.importCounter(remoteUrl);
+    expect(imported).toBeInstanceOf(RemoteCounter);
+    // listCounters returns the remote URL as the webkey.
+    const entries = await first.registry.listCounters();
+    expect(entries[0].webkey).toBe(remoteUrl);
+    // A fresh registry over the SAME storage: the remote ref survives.
+    const second = setupApp(store);
+    const entries2 = await second.registry.listCounters();
+    expect(entries2[0].webkey).toBe(remoteUrl);
+    expect(entries2[0].counter).toBeInstanceOf(RemoteCounter);
+    // The stored registry row uses the remote {"@": url} shape, not local {"*"}.
+    expect(store.rows.get("registry:main")).toContain(`"@":"${remoteUrl}"`);
   });
 
   it("state persists across a new app instance (rehydrated from storage)", async () => {
