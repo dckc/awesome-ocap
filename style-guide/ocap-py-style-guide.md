@@ -1,437 +1,419 @@
-# OCap Python Style Guide
+# DisciplinedPython Style Guide
 
 This guide is for Python programmers who want code that supports powerful patterns of cooperation without vulnerability.
 
-If code is good, we will want to reuse it, and that usually means we will want to test it. Code that reaches out to the world directly is harder to test, so this guide recommends injecting I/O explicitly, including filesystem, network, clock, environment, subprocess, and console access.
+If code is good, we will want to reuse it, and that usually means we will want to test it. Dependency injection makes code easier to test, reuse, and safely compose: pass in the filesystem, clock, network client, database connection, subprocess runner, or output stream instead of having helpers fetch those dependencies for themselves. DisciplinedPython sharpens that practice into the principle of least authority (POLA): give every part of the program the least authority it needs, and make authority-bearing dependencies explicit and reviewable.
 
-## Separate Definition from Execution
+## Script Recipe
 
-Move logic into `main(...)` or `run(...)` and keep the script entrypoint thin.
-The script entrypoint is where ambient authority from the Python runtime becomes available.
+In brief:
+
+1. Define `main(...)` with args for only the access that the script needs: `argv`, `cwd`, etc.
+2. Define `_script_io()` under the `__main__` guard. Import standard authorities there, then call `main(...)` with named arguments.
+3. In `main(...)`, narrow broad authorities into objects or callables.
+4. Give each function or class after that the least authority it needs.
+5. Keep pure data transformation separate from I/O.
+6. Run `tools/disciplined_python_check.py path/to/script.py`.
+7. When in doubt, imitate `tests/fixtures/disciplined_python/fixed/script_entry.py`, then the fixed example for the checker code you are seeing.
+
+## Checker Workflow
+
+When asked to write a disciplined Python script, write the script and run:
+
+```sh
+tools/disciplined_python_check.py path/to/script.py
+```
+
+Treat every finding as a bug until you have a specific reason not to. The checker prints relevant examples from `tests/fixtures/disciplined_python/`. The `errors/` file shows the pattern to avoid; the same-named `fixed/` file shows the preferred shape.
+
+The checker is intentionally syntactic. Passing it is not proof of POLA, but failing it identifies concrete work to do.
+
+## Script Boundary
+
+Importable code should define functions and data. Runtime authority belongs in a function defined under the `__main__` guard, conventionally named `_script_io()`.
+
+```py
+def main(argv, cwd, stdout):
+    result_path = cwd / argv[1]
+    print(result_path.read_text(encoding="utf-8"), file=stdout)
+
+
+if __name__ == "__main__":
+    def _script_io():
+        from pathlib import Path
+        from sys import argv, stdout
+
+        return main(
+            argv=list(argv),
+            cwd=Path.cwd(),
+            stdout=stdout,
+        )
+
+    raise SystemExit(_script_io())
+```
+
+`_script_io()` imports and snapshots standard ambient authorities. `main(...)` parses designations such as command-line strings and narrows broad authorities into objects or callables.
+
+`_script_io()` should be simple and formulaic. It must not fail before calling `main`, so it must not do any I/O.
+
+Ambient authority is allowed only inside functions defined under `if __name__ == "__main__":`. A bare call such as this is not the idiom:
+
+```py
+if __name__ == "__main__":
+    main(open, sqlite3.connect, print)
+```
+
+Use a named boundary function so the authority-bearing part of the script is easy to find and review.
+
+## Standard Authority Names
+
+Prefer conventional names for standard authorities:
+
+- `argv` for a defensive copy of command-line arguments
+- `cwd` for `Path.cwd()`
+- `home` for `Path.home()` when truly needed
+- `stdout` when stdout is part of the program's API contract
+- `urlopen` for `urllib.request.urlopen`
+- `connect` for `sqlite3.connect`
+- `run` for `subprocess.run`
+- `now`, `today`, or `random_*` for clock and randomness callables
+
+`_script_io()` should pass standard authorities rather than invent bespoke wrappers. If a narrower custom object is useful, construct it in `main(...)` or a boundary-adjacent helper so the attenuation is visible.
+
+## Output And Logging
+
+Use injected `stdout` only when stdout is part of the program's observable API: command output, reports, generated data, or machine-readable results.
+
+Use `logging` directly for status, progress, debug, and diagnostic messages. The discipline treats logging as an allowed operational side effect.
+
+Bad:
+
+```py
+def sync_items(count):
+    print(f"syncing {count} items")
+```
+
+Good:
+
+```py
+import logging
+
+
+def sync_items(count):
+    logging.info("syncing %s items", count)
+```
+
+Configure logging in `_script_io()` if the script needs a particular logging destination or level.
+
+## Filesystem Authority
+
+Ambient filesystem authority is forbidden outside the `_script_io()` boundary. The checker flags calls to `open(...)`, construction of `Path(...)` from data, and ambient `Path.cwd()` / `Path.home()` lookups in helper logic. Receive a rooted path capability such as `cwd` or `home`, and derive specific paths from that root.
+
+Bad:
+
+```py
+from pathlib import Path
+
+
+def load_config(path_name):
+    return Path(path_name).read_text(encoding="utf-8")
+```
+
+Good:
+
+```py
+def load_config(path):
+    return path.read_text(encoding="utf-8")
+```
+
+For a CLI:
+
+```py
+def main(argv, cwd):
+    config_path = cwd / argv[1]
+    return load_config(config_path)
+```
+
+If a path string must be constrained to stay under `cwd`, enforce that separately. `cwd / user_input` does not by itself reject absolute paths or `..` traversal.
+
+## Platform-Dependent Path Semantics
+
+`os.path.join(...)` and related `os.path` helpers use the host platform's path flavor. A test written on Linux can behave differently on Windows.
+
+For deterministic lexical path manipulation, use an explicit flavor:
+
+```py
+from pathlib import PurePosixPath
+
+
+def metadata_path(out_dir):
+    return PurePosixPath(out_dir) / "rules.metadata.json"
+```
+
+For real filesystem access, use an injected real path capability such as `cwd`, because the platform filesystem is part of that authority.
+
+## Environment And Configuration
+
+Ambient environment access is forbidden outside the `_script_io()` boundary. The checker flags `os.environ`, `os.getenv(...)`, and related environment APIs in helper code. Module globals must not be initialized from ambient state.
 
 Bad:
 
 ```py
 import os
 
-file_name = os.environ["INPUT_FILE"]
-with open(file_name) as fp:
-    print(len(fp.readlines()))
+API_URL = os.environ.get("API_URL", "http://127.0.0.1:23119")
 ```
 
 Good:
 
 ```py
-import os
-
-
-def main():
-    file_name = os.environ["INPUT_FILE"]
-    with open(file_name) as fp:
-        print(len(fp.readlines()))
-
-
-if __name__ == "__main__":
-    main()
+def load_config(environ):
+    return {
+        "api_url": environ.get("API_URL", "http://127.0.0.1:23119"),
+    }
 ```
 
-This is only the first step.
-It avoids work at import time, but it does not yet make authority flow explicit.
-The next section addresses that.
+If the script boundary passes `environ`, pass a defensive copy unless the program intentionally observes later environment mutations.
 
-## Pass I/O In Explicitly
+## Network Authority
 
-Do not let deep helper functions reach out to the environment or other I/O directly. Pass in the specific inputs they need.
+The Python standard library does not provide a `Path`-like URL capability. `urllib.parse` gives URL data; `urlopen` or an opener object is the authority.
+
+Passing `url` and `urlopen` together deep into the program separates designation from authority. Prefer to attenuate broad network authority near `main(...)`.
+
+One useful idiom is a small rooted object:
+
+```py
+from urllib.parse import urljoin
+
+
+class WebPath:
+    def __init__(self, base_url, urlopen):
+        self.base_url = base_url
+        self.__urlopen = urlopen
+
+    def join(self, relative_url):
+        return WebPath(urljoin(self.base_url, relative_url), self.__urlopen)
+
+    def __truediv__(self, relative_url):
+        return self.join(relative_url)
+
+    def open(self):
+        return self.__urlopen(self.base_url)
+
+
+def main(argv, urlopen):
+    root = WebPath(argv[1], urlopen)
+    with (root / "status").open() as response:
+        return response.status
+```
+
+A rooted network object must not expose the broad opener as a public field. If `wp.urlopen` is public, any holder of `wp` can recover broad network authority.
+
+## Database Authority
+
+Database connection creation is authority. Ambient `sqlite3.connect(...)` is forbidden outside the `_script_io()` boundary and is flagged by the checker.
 
 Bad:
 
 ```py
-import os
+import sqlite3
 
 
-def api_url():
-    return os.environ.get("API_URL", "http://127.0.0.1:23119")
+def count_items(db_name):
+    with sqlite3.connect(db_name) as connection:
+        return connection.execute("select count(*) from items").fetchone()[0]
 ```
 
 Good:
 
 ```py
-def main(file_name, read_text, stdout):
-    lines = read_text(file_name).splitlines()
-    print(len(lines), file=stdout)
-
-
-if __name__ == "__main__":
-    import os
-    import sys
-
-    def read_text(path):
-        with open(path) as fp:
-            return fp.read()
-
-    main(
-        file_name=os.environ["INPUT_FILE"],
-        read_text=read_text,
-        stdout=sys.stdout,
-    )
+def count_items(connection):
+    return connection.execute("select count(*) from items").fetchone()[0]
 ```
 
-This version makes the filesystem and console dependencies explicit.
+For a script, `_script_io()` may pass standard `connect` to `main(...)`; `main(...)` should promptly derive the database path from a rooted path capability and attenuate to a connection or a narrow database operation.
 
-FIXME: both examples in this section are still toy-like. Replace them with a realistic CLI or filesystem example when available.
+## Subprocess Authority
 
-## Prefer Small Capability Parameters
+`subprocess.run`, `Popen`, `os.system`, and similar APIs are process-execution authority. Ambient process execution is forbidden outside the `_script_io()` boundary and is flagged by the checker.
 
-Pass only the authority a function needs, not a grab bag of unrelated globals.
+Bad:
+
+```py
+import subprocess
+
+
+def convert(src, dst):
+    subprocess.run(["ocrmypdf", src, dst], check=True)
+```
+
+Good:
+
+```py
+def convert(src, dst, run_ocr):
+    run_ocr(src, dst)
+```
+
+Prefer narrow runners such as `run_ocr` or `run_known_command` over passing `run` plus arbitrary command data into deep helpers.
+
+## Clock And Randomness
+
+Clock and randomness are authority because they make behavior depend on outside state.
+
+Bad:
+
+```py
+from datetime import datetime
+
+
+def stamp_record(record):
+    return {**record, "created_at": datetime.now().isoformat()}
+```
+
+Good:
+
+```py
+def stamp_record(record, now):
+    return {**record, "created_at": now().isoformat()}
+```
+
+The same applies to `random`, `secrets`, `uuid.uuid4`, and `os.urandom`.
+
+## Keep Pure Logic Pure
+
+The least authority needed by parsing, filtering, formatting, validation, and data transformation routines is zero authority. Keep these functions pure: separate data transformation from I/O.
+
+Bad:
+
+```py
+from datetime import datetime
+
+
+def recent(entries):
+    cutoff = datetime.now().timestamp() - 3600
+    return [entry for entry in entries if entry.modified_at >= cutoff]
+```
+
+Good:
+
+```py
+def recent(entries, cutoff):
+    return [entry for entry in entries if entry.modified_at >= cutoff]
+```
+
+Pure code is easier to test, reuse, and review.
+
+## Keep Designation And Authority Together
+
+A common POLA failure is passing broad authority together with plain data and letting a callee combine them.
+
+Bad:
+
+```py
+def load_rules(file_opener, xlsx_path):
+    with file_opener(xlsx_path) as handle:
+        ...
+```
+
+Better:
+
+```py
+def load_rules(workbook):
+    ...
+```
+
+or:
+
+```py
+def load_rules(read_workbook):
+    workbook = read_workbook()
+    ...
+```
+
+The same smell appears as:
+
+- `urlopen(url)`
+- `connect(db_path)`
+- `run(command)`
+- `open(path)`
+
+`_script_io()` may pass broad standard authorities to `main(...)` so the boundary stays simple and avoids bespoke constructions. `main(...)` should parse designations and promptly attenuate. Deeper helpers should receive narrow capabilities or already-opened / already-loaded objects.
+
+## Narrow Function Signatures
+
+After `main(...)` has attenuated broad authorities, keep narrowing at each function boundary. A function signature is an authority contract: it should grant only what makes the callee useful.
 
 Bad:
 
 ```py
 def sync_everything(config):
-    with open(config["path"]) as fp:
-        data = fp.read()
-    now = config["clock"]()
-    config["logger"].info("synced at %s", now)
+    data = config["path"].read_text()
+    config["logger"].info("synced")
 ```
 
 Good:
 
 ```py
-def sync_file(path, open_text, now, log):
-    with open_text(path) as fp:
-        data = fp.read()
-    log.info("synced at %s", now())
+def sync_file(path):
+    data = path.read_text()
+    logging.info("synced")
 ```
 
-In small scripts, the first boundary function may still take a slightly broader bundle such as
-`argv`, `cwd`, `home`, and `stdout`. That is acceptable when it is clearly the script boundary and
-the function promptly breaks that authority down for narrower helpers.
+Better still, if parsing is the helper's real job:
 
-The reviewability risk is that a large `main(...)` makes it hard to see which of those authorities
-are actually used where. If `main(...)` grows large enough that a reviewer must inspect every line
-to verify authority use, it is time to refactor.
+```py
+def parse_sync_data(data):
+    ...
+```
 
-## Keep Pure Logic Pure
+If a signature forces a reviewer to inspect every line to see what power is used, split the function or narrow the parameter.
 
-Parsing, filtering, formatting, and data transformation should not perform I/O.
+## Module Globals
+
+Module globals should be static data or pure definitions. Module globals must not be derived from environment, current directory, home directory, clock, randomness, platform, process state, or other ambient authority.
 
 Bad:
 
 ```py
-from datetime import datetime, timedelta
-
-
-def recent_pdfs(scan_dir):
-    cutoff = datetime.now() - timedelta(hours=1)
-    return [
-        path for path in scan_dir.iterdir()
-        if path.suffix == ".pdf" and path.stat().st_mtime >= cutoff.timestamp()
-    ]
-```
-
-Good:
-
-```py
-def is_recent_pdf(name, modified_at, cutoff):
-    return name.endswith(".pdf") and modified_at >= cutoff
-
-
-def recent_pdfs(entries, cutoff):
-    return [entry for entry in entries if is_recent_pdf(entry.name, entry.modified_at, cutoff)]
-```
-
-## Replace Module Globals with Configuration Data
-
-Avoid module-level configuration derived from environment, home directory, or current process state.
-
-Bad:
-
-```py
-import os
 from pathlib import Path
 
-API_URL = os.environ.get("API_URL", "http://127.0.0.1:23119")
 SCAN_DIR = Path.home() / "Documents" / "scan-from-mobile"
 ```
 
 Good:
 
 ```py
-from dataclasses import dataclass
-
-
-@dataclass(frozen=True)
-class Config:
-    api_url: str
-    scan_dir: str
-
-
-def load_config(environ, home):
-    return Config(
-        api_url=environ.get("API_URL", "http://127.0.0.1:23119"),
-        scan_dir=str(home / "Documents" / "scan-from-mobile"),
-    )
+def scan_dir(home):
+    return home / "Documents" / "scan-from-mobile"
 ```
 
-When argument defaults depend on capabilities such as `home` or `cwd`, it can still be appropriate
-to resolve those defaults in `parse_args(argv, *, cwd, home)` rather than in `script_entry()`.
-That keeps path-rooting policy close to the CLI interface. The key point is that `parse_args(...)`
-must receive the relevant capabilities explicitly rather than reaching for them ambiently.
+Policy defaults such as `"Documents"` or `"rules.ndjson"` are data. Keep them visible and separate from authority-bearing objects.
 
-## Inject Time, Network, and Subprocess Power
+## Suppressions
 
-Clock, HTTP, and subprocess access are capabilities. Treat them that way.
-
-Bad:
+The checker supports narrow line suppressions:
 
 ```py
-from datetime import datetime
-import subprocess
-import urllib.request
-
-
-def refresh(url, src, dst):
-    stamp = datetime.now().isoformat()
-    urllib.request.urlopen(url)
-    subprocess.run(["ocrmypdf", src, dst], check=True)
-    return stamp
+legacy_call()  # dpy: ignore[DPY004]
 ```
 
-Good:
-
-```py
-def refresh(url, src, dst, now, http_get, run_ocr):
-    stamp = now().isoformat()
-    http_get(url)
-    run_ocr(src, dst)
-    return stamp
-```
-
-## Prefer a Tiny Authority-Bearing Shell
-
-Library code should expose a reusable callable such as `run(...)`. The `__main__` block should just wire real authorities.
-
-Good:
-
-```py
-def run(config, now, http, ocr, reporter):
-    ...
-
-
-if __name__ == "__main__":
-    import os
-    import sys
-    from datetime import datetime
-
-    run(
-        config=load_config(os.environ, home_dir()),
-        now=datetime.now,
-        http=urllib_http_client(),
-        ocr=ocrmypdf_runner(),
-        reporter=console_reporter(sys.stdout, sys.stderr),
-    )
-```
-
-For CLI scripts, a useful convention is to name the boundary function `script_entry()`.
-Import ambient modules such as `sys`, `pathlib.Path`, `os`, `subprocess`, or network clients
-inside `script_entry()` and pass the resulting capabilities inward.
-
-For example:
-
-```py
-from pathlib import Path as Path_T
-
-
-def main(argv, *, cwd: Path_T, home: Path_T, stdout):
-    ...
-
-
-if __name__ == "__main__":
-    def script_entry():
-        from pathlib import Path
-        from sys import argv as sys_argv
-        from sys import stdout
-
-        cwd = Path(".")
-        home = Path.home()
-        return main(sys_argv[1:], cwd=cwd, home=home, stdout=stdout)
-
-    raise SystemExit(script_entry())
-```
-
-FIXME: "tiny shell" is directionally right, but "tiny" should not become dogma. A script boundary can be slightly larger when that makes authority flow clearer. The real goal is reviewable authority decomposition, not golfing the entrypoint.
-
-## What This Refactor Taught
-
-A useful way to refactor toward OCap discipline is to play "hunt the red squiggly."
-If removing an ambient import such as `os`, `sys`, `urllib.request`, or `subprocess`
-breaks a helper, the resulting error points at hidden authority that should probably
-be passed in explicitly.
-
-A few concrete lessons:
-
-- Acquire authority only at the outer script boundary, such as `if __name__ == "__main__":`.
-- Pass authority inward explicitly through arguments.
-- Keep helpers honest about the least authority they need.
-- Keep data separate from authority-bearing objects.
-- Do not smuggle broad authority inside a narrowed object.
-
-FIXME: "hunt the red squiggly" is memorable, but also a bit cute. It should not be the main explanation. The stronger statement is that removing ambient imports is a practical audit technique for finding hidden authority.
-
-### Least Authority First
-
-When refactoring a helper, ask what authority it actually needs, not which module names it currently uses.
-
-For example, a helper like `ensure_ocr_pdf(...)` may appear to need `sys`, `subprocess`, and broad filesystem access.
-But the least authority may be closer to:
-
-- read access to the source path
-- write access to the destination directory
-- an `ocrmypdf` runner capability
-- a diagnostic output stream
-
-That is a better guide than mechanically passing whole modules around.
-
-### Data Is Not Authority
-
-One recurring bug pattern is turning plain data into authority in the middle of the program.
-Examples include:
-
-- path string to `Path(...)` or `open(...)`
-- URL string to `urlopen(...)`
-- command name such as `"ocrmypdf"` to `subprocess.run(...)`
-
-That kind of step should happen only at a deliberate boundary.
-A useful analogy is that turning `"abc"` into `open("abc")` is a little like casting an integer to a pointer.
-The string is data. The opened file is authority.
-
-The same issue arises with `Path(...)`.
-Using `Path` in a type annotation is fine.
-Using `Path(...)` as an expression turns path data into a filesystem authority-bearing object.
-That step belongs at a deliberate boundary such as `script_entry()` or another clearly marked script I/O function.
-
-For command-line parsing, this means:
-
-- bad: `argparse` returns `Path(...)` values by reaching for ambient `Path` or ambient `cwd`
-- better: `parse_args(argv, *, cwd, home)` receives rooted capabilities and returns `Path` values derived from them
-- also acceptable: `parse_args(...)` returns strings and a later boundary function turns them into rooted `Path` values
-
-The important part is not which of those two acceptable patterns you choose.
-The important part is that the data-to-authority step is reviewable and capability-rooted.
-
-### Rooted Capability Objects
-
-Sometimes the right move is to introduce a rooted capability object that behaves a bit like `Path`.
-For network access, a rooted URL endpoint can be narrower than passing a general HTTP client.
-
-But a rooted object must not expose the broader authority it was built from.
-If a `UrlEndpoint` stores a public `urlopen` field, then any holder of the endpoint can recover broad network authority.
-That violates POLA even if the object also supports nice rooted operations such as `endpoint / "api" / "users"`.
-
-A better pattern is:
-
-- inject the broad opener at the boundary
-- store it privately inside the rooted object
-- expose only rooted operations such as `/` and `open()`
-
-FIXME: this section may overfit custom wrapper objects. In many Python scripts, a plain rooted `Path` derived from an injected root capability is sufficient, and a bespoke wrapper would add noise rather than clarity.
-
-## Keep Boundary Functions Reviewable
-
-An OCap script can still become hard to audit if the boundary function grows into a long mixed
-orchestration block.
-
-Warning signs:
-
-- `main(...)` both parses arguments and walks the filesystem and performs verification and formats output
-- a reviewer cannot tell at a glance where `cwd`, `home`, or other capabilities are consumed
-- one comprehension mixes path derivation, file reads, parsing, and object construction
-
-Prefer to split such code into helpers that make authority use obvious:
-
-- `parse_args(argv, *, cwd, home)`
-- `iter_verification_items(...)`
-- `build_mounted_media_index(...)`
-- `emit_report(...)`
-
-This is not only about aesthetics.
-Smaller boundary-adjacent helpers make it easier to confirm that a capability is used only for the narrow purpose intended.
-
-### Keep Boundary Policy Visible
-
-Defaults such as API roots, desktop directory names, and project-specific subdirectory names are policy.
-They should be visible near the top of the file as data, rather than hidden in the guts of `main(...)`.
-But policy defaults are still different from authority and should not be confused with capability objects.
-
-## Boundary Convention
-
-A useful convention is to separate the script-only authority boundary from the importable program logic.
-
-Use a tiny helper inside:
-
-```py
-if __name__ == "__main__":
-    def _script_io():
-        ...
-    _script_io()
-```
-
-The point of `_script_io()` is to wire authority, not to hide arbitrary program logic.
-
-A practical convention:
-
-- pass existing APIs across the `_script_io()` to `main(...)` boundary rather than wrapping everything immediately
-- for example, pass `datetime.now`, `uuid4`, `subprocess.run`, or `urlopen`
-- then narrow those capabilities inside `main(...)` as needed
-- prefer not to do avoidable observations in `_script_io()` itself
-- for example, pass `datetime.now` rather than calling `datetime.now()` there
-
-One pragmatic exception is that `home` and `cwd` can be treated as platform-provided context for `main(...)`.
-That is, it is reasonable for `_script_io()` to pass `Path.home()` and `Path.cwd()` into `main(...)`.
-
-Rule for allowed ambient scope:
-
-- ambient authority is allowed only in functions defined under `if __name__ == "__main__":`
-- and only when those functions are not called from outside that guarded block
-
-This keeps the ambient boundary explicit and prevents helper functions elsewhere in the module from quietly becoming script-only escape hatches.
+Use suppressions sparingly. A suppression should mean "this line is an accepted boundary or checker limitation," not "I did not want to refactor this." Prefer fixing the code to suppressing the finding.
 
 ## Review Checklist
 
-When reviewing Python for OCap discipline, look for:
+The checker is expected to catch known stdlib APIs such as:
 
-- `os.environ` used outside startup wiring
-- `Path.home()` or cwd lookups outside startup wiring
-- `datetime.now()` inside selection or transformation logic
-- `urllib`, `requests`, or similar network calls in helpers that could accept an injected client
-- `subprocess.run()` hidden in business logic
-- `print()` or `sys.stderr.write()` scattered through library code
-- module globals initialized from ambient state
+- ambient APIs: `open`, `Path(...)`, `Path.cwd`, `os.environ`, `urlopen`, `sqlite3.connect`, `subprocess.run`, `datetime.now`, `random.random`, whether in module global initialization or inside functions / methods
+- bare `print(...)` used for status instead of `logging`
+- `os.path.join` or other platform-dependent path helpers
 
-## Worked Example Candidates
+Human review is still needed for:
 
-Scripts like `tools/zotero_link_recent.py` are useful examples because they often combine:
+- broad authority passed deep into helpers
+- plain strings later combined with broad authority
+- custom capability objects that expose their underlying broad authority
+- functions whose signatures grant more authority than their body needs
+- suppressions that hide real design problems rather than accepted boundaries or checker limitations
 
-- environment-driven configuration
-- filesystem traversal
-- wall-clock time
-- HTTP calls
-- subprocess execution
-- console reporting
-
-These are good refactoring targets because the behavior is small while the authority surface is easy to inspect.
-
-## TODO
-
-- show the testing benefit directly in the `env(...)` example
-- use a defensive copy of `environ` at the boundary
-- show similar treatment for `sys`
-- show similar treatment for `uuid`
-- show similar treatment for `urllib.request`
-- show similar treatment for `Path`
-- add a section on pathnames as data becoming filesystem authority, including when `Path(...)`, `open(...)`, or related APIs are appropriate boundaries
-- add a section on URLs as data becoming network authority, including when request construction should be confined to the boundary
-- add a section on command names as data becoming process-execution authority, including helpers like `ensure_ocr_pdf()` that should receive an `ocrmypdf` capability instead of calling `subprocess.run(...)` directly
-- explain why turning a piece of data such as `"ocrmypdf"` into authority with `subprocess.run(...)` is a bad pattern, analogous to turning `"abc"` into `open("abc")` or casting an integer to a pointer
-- add a POLA note for rooted network/path-like capability objects: do not expose the underlying opener or other broad authority as a public field, because any holder of the narrowed object could recover access to the wider authority
-- add a note on the slogan "do not prohibit what you cannot enforce": if a path is meant to represent downward-only traversal or read-only access, that should be enforced by the type or wrapper rather than assumed by convention
+Then run the checker again.
