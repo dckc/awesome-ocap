@@ -31,6 +31,11 @@ const SWISSNUM = /^[a-z][a-z0-9-]*:[a-z2-7]{13}$/;
  */
 const HINT = /^\/[a-z0-9\-._~/]*$/i;
 
+/** Whether a value is a well-formed swissnum (a local capability secret). */
+export function isSwissnum(value) {
+  return typeof value === "string" && SWISSNUM.test(value);
+}
+
 export const STURDYREF_TAG = "ocapn:sturdyref";
 export const OP_DELIVER_TAG = "ocapn:op:deliver";
 
@@ -69,7 +74,7 @@ export function parseSturdyref(value) {
       `not a sturdyref: unknown tag ${JSON.stringify(tag)}`
     );
   }
-  if (typeof swissnum !== "string" || !SWISSNUM.test(swissnum)) {
+  if (!isSwissnum(swissnum)) {
     throw new TypeError("not a sturdyref: malformed swissnum");
   }
   if (

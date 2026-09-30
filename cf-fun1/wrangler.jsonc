@@ -10,7 +10,7 @@
   "rules": [
     {
       "type": "ESModule",
-      "globs": ["**/*countersAppBundle.js"]
+      "globs": ["**/*countersAppBundle.js", "**/egressPolicy.js"]
     }
   ],
   "build": {

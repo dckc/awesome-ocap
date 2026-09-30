@@ -14,6 +14,7 @@ import {
   srToUrl,
   makeOpDeliver,
   parseOpDeliver,
+  isSwissnum,
 } from "../src/ocapn.js";
 
 const TEST_ORIGIN = "https://worker.example";
@@ -109,6 +110,14 @@ describe("the sturdyref codec", () => {
     expect(() => parseSturdyref(makeSturdyref("no-kind-separator", ["/counterRegistry"]))).toThrow();
     expect(() => parseSturdyref(makeSturdyref("counter:UPPERCASE123", ["/counterRegistry"]))).toThrow();
     expect(() => parseSturdyref(makeSturdyref(123, ["/counterRegistry"]))).toThrow();
+  });
+
+  it("isSwissnum picks out local secrets from web-key values", () => {
+    expect(isSwissnum("counter:aaaaaaaaaaaca")).toBe(true);
+    expect(isSwissnum("registry:aaaaaaaaaaaca")).toBe(true);
+    expect(isSwissnum("https://other.worker.example/counterRegistry#counter:xyz")).toBe(false);
+    expect(isSwissnum("counter:short")).toBe(false);
+    expect(isSwissnum(123)).toBe(false);
   });
 
   it("rejects hints that are not route paths", () => {

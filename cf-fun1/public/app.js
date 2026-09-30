@@ -1,5 +1,5 @@
 import { newWebSocketRpcSession } from "./vendor/capnweb.js";
-import { srToUrl } from "./vendor/ocapn.js";
+import { srToUrl, isSwissnum } from "./vendor/ocapn.js";
 
 const makeBtn = document.getElementById("make");
 const listEl = document.getElementById("counters");
@@ -35,11 +35,16 @@ function render(entry) {
   const copy = document.createElement("button");
   copy.textContent = "copy url";
   copy.addEventListener("click", async () => {
-    // Make and serialize a sturdyref: the registry mints
-    // ["ocapn:sturdyref", swissnum, hints] as data, and the URL is derived
-    // from it — the swissnum rides in the fragment.
-    const sturdyref = await api.sturdyrefFor(webkey);
-    await navigator.clipboard.writeText(srToUrl(location.origin, sturdyref));
+    if (isSwissnum(webkey)) {
+      // Local capability: make and serialize a sturdyref — the registry mints
+      // ["ocapn:sturdyref", swissnum, hints] as data, and the URL is derived
+      // from it with the swissnum in the fragment.
+      const sturdyref = await api.sturdyrefFor(webkey);
+      await navigator.clipboard.writeText(srToUrl(location.origin, sturdyref));
+    } else {
+      // Remote ref: its webkey is already a dereferenceable web-key URL.
+      await navigator.clipboard.writeText(webkey);
+    }
   });
 
   counter.getValue().then((v) => (val.textContent = String(v)));
