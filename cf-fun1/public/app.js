@@ -1,4 +1,5 @@
 import { newWebSocketRpcSession } from "./vendor/capnweb.js";
+import { srToUrl } from "./vendor/ocapn.js";
 
 const makeBtn = document.getElementById("make");
 const listEl = document.getElementById("counters");
@@ -7,12 +8,6 @@ const importBtn = document.getElementById("import");
 
 const wsUrl = `${location.origin.replace(/^http/, "ws")}/counterRegistry`;
 const api = newWebSocketRpcSession(wsUrl);
-
-// The web-key URL for a capability secret: origin + route + #secret. The secret
-// stays in the fragment so it is not sent to, or leaked via, the Referer header.
-function webkeyUrl(secret) {
-  return `${location.origin}/counterRegistry#${secret}`;
-}
 
 function render(entry) {
   const { counter, webkey } = entry;
@@ -40,7 +35,11 @@ function render(entry) {
   const copy = document.createElement("button");
   copy.textContent = "copy url";
   copy.addEventListener("click", async () => {
-    await navigator.clipboard.writeText(webkeyUrl(webkey));
+    // Make and serialize a sturdyref: the registry mints
+    // ["ocapn:sturdyref", swissnum, hints] as data, and the URL is derived
+    // from it — the swissnum rides in the fragment.
+    const sturdyref = await api.sturdyrefFor(webkey);
+    await navigator.clipboard.writeText(srToUrl(location.origin, sturdyref));
   });
 
   counter.getValue().then((v) => (val.textContent = String(v)));

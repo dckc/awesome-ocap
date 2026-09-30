@@ -31,7 +31,7 @@ const src = join(here, "src");
 // The app's own files, keyed by the module name the Worker Loader will resolve
 // them under. Relative imports between them (`./storage.js`, `./counter.js`,
 // `./writethru.js`) already match these keys, so only `capnweb` needs a rewrite.
-const appFiles = ["counter.js", "writethru.js", "storage.js", "countersApp.js"];
+const appFiles = ["counter.js", "ocapn.js", "writethru.js", "storage.js", "countersApp.js"];
 
 const capnwebDist = join(here, "node_modules/capnweb/dist/index-workers.js");
 

@@ -14,7 +14,12 @@
     }
   ],
   "build": {
-    "command": "mkdir -p public/vendor && cp node_modules/capnweb/dist/index.js public/vendor/capnweb.js && node build-facet.js"
+    "command": "mkdir -p public/vendor && cp node_modules/capnweb/dist/index.js public/vendor/capnweb.js && cp src/ocapn.js public/vendor/ocapn.js && node build-facet.js"
+  },
+  "vars": {
+    // Hosts the facet's egress relay may reach (the two dev workers, so
+    // cross-worker web-key derefs relay to the owning worker only).
+    "EGRESS_HOSTS": "localhost:8787,localhost:8788"
   },
   "assets": {
     "directory": "public"

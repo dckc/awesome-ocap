@@ -88,10 +88,34 @@ export class Storage extends DurableObject {
    * Enliven a kind-bearing webkey secret into its live capability. The
    * supervisor (running in a different isolate) cannot hold the capability
    * object; it asks this DO — the one that owns the RefTable and factories —
-   * to resolve the secret. Returns the live RpcTarget (or undefined).
+   * to resolve the secret. Returns the live RpcTarget, or undefined if the
+   * secret is revoked or does not name a known kind or key.
    */
   decodeSecret(secret) {
+    if (this.#isRevoked(secret)) return undefined;
     return this.#refTable.decodeSecret(secret);
+  }
+
+  /**
+   * Mark a webkey secret revoked: `decodeSecret` refuses it from then on.
+   * Revocation rows live in the `state` table under a `revoked!`-prefixed
+   * key, which no capability key can collide with (those are `<kind>:<b32>`).
+   * Returns true if the secret was well-formed to revoke.
+   */
+  revokeSecret(secret) {
+    if (this.#refTable.parseSecret(secret) === undefined) return false;
+    this.#ctx.storage.sql.exec(
+      "INSERT OR REPLACE INTO state (key, value) VALUES (?, '')",
+      `revoked!${secret}`
+    );
+    return true;
+  }
+
+  #isRevoked(secret) {
+    const rows = this.#ctx.storage.sql
+      .exec("SELECT key FROM state WHERE key = ?", `revoked!${secret}`)
+      .toArray();
+    return rows.length > 0;
   }
 
   /** The capability's durable key, which is its kind-bearing webkey secret. */

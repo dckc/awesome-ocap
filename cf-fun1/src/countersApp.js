@@ -22,8 +22,11 @@ export class CounterRegistry extends Storage {
     // itself, so RemoteCounter's capnweb session fetch is routed to the
     // supervisor (via globalOutbound), which relays the call to the owner.
     const remoteFactory = (remoteRef) => new RemoteCounter(remoteRef);
-    this.registerRemoteFactory("counter", remoteFactory);
-    this.#api = new RegistryApi(this.writeThru, (cap) => this.secretFor(cap), remoteFactory);
+    this.#api = new RegistryApi(this.writeThru, (cap) => this.secretFor(cap), remoteFactory, {
+      decodeFor: (secret) => this.decodeSecret(secret),
+      revokeFor: (secret) => this.revokeSecret(secret),
+      route: "/counterRegistry",
+    });
     this.exportAs(this.#api, "registry:main");
   }
 

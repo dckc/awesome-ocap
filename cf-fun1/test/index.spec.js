@@ -1,6 +1,7 @@
 import { env, exports } from "cloudflare:workers";
 import { describe, it, expect } from "vitest";
 import { newWebSocketRpcSession } from "capnweb";
+import { makeOpDeliver, parseSturdyref } from "../src/ocapn.js";
 
 async function openSession(url) {
   const res = await exports.default.fetch(
@@ -81,5 +82,97 @@ describe("index.js fetch routing", () => {
     const entries2 = await registry2.listCounters();
     const last2 = entries2.at(-1);
     expect(last2.webkey).toBe(remoteUrl);
+  });
+});
+
+describe("sturdyrefs over a real session (ocapn:sturdyref as data)", () => {
+  it("mints a tagged array that crosses the session untouched", async () => {
+    const registry = await openSession("https://worker.test/counterRegistry");
+    await registry.makeCounter();
+    const webkey = (await registry.listCounters()).at(-1).webkey;
+
+    const sr = await registry.sturdyrefFor(webkey);
+    // The tagged array arrives as plain data — string-first array, not a stub,
+    // not interpreted, not tunneled as bytes.
+    expect(Array.isArray(sr)).toBe(true);
+    expect(sr[0]).toBe("ocapn:sturdyref");
+    const { swissnum, hints } = parseSturdyref(sr);
+    expect(swissnum).toBe(webkey);
+    expect(hints).toEqual(["/counterRegistry"]);
+  });
+
+  it("a fresh session resolves the sturdyref and pipelines on the stub", async () => {
+    const registry = await openSession("https://worker.test/counterRegistry");
+    const made = await registry.makeCounter();
+    await made.increment();
+    const webkey = (await registry.listCounters()).at(-1).webkey;
+    const sr = await registry.sturdyrefFor(webkey);
+
+    // Fresh WebSocket session: capnweb's session tables are empty, so the
+    // only identity carried across is the sturdyref (data in the client).
+    const fresh = await openSession("https://worker.test/counterRegistry");
+    const counter = await fresh.resolveSturdyref(sr);
+    expect(await counter.getValue()).toBe(1);
+
+    // Pipelined calls on the resolved stub: both go out before either is
+    // awaited, arriving as dependent expressions in the session.
+    const a = counter.increment();
+    const b = counter.decrement();
+    expect(await a).toBe(2);
+    expect(await b).toBe(1);
+  });
+
+  it("revocation makes both the tagged-array and ?secret= paths refuse", async () => {
+    const registry = await openSession("https://worker.test/counterRegistry");
+    await registry.makeCounter();
+    const webkey = (await registry.listCounters()).at(-1).webkey;
+    const sr = await registry.sturdyrefFor(webkey);
+    expect(await registry.revokeSturdyref(sr)).toBe(true);
+
+    // The op-level path: a fresh session's resolution rejects.
+    const fresh = await openSession("https://worker.test/counterRegistry");
+    await expect(fresh.resolveSturdyref(sr)).rejects.toThrow(/no such capability/);
+
+    // The URL deref path (?secret=) also refuses the revoked webkey.
+    const res = await exports.default.fetch(
+      new Request(`https://worker.test/counterRegistry?secret=${webkey}`, {
+        headers: { Upgrade: "websocket" },
+      })
+    );
+    expect(res.status).toBe(404);
+  });
+
+  it("delivers op:deliver over the session", async () => {
+    const registry = await openSession("https://worker.test/counterRegistry");
+    await registry.makeCounter();
+    const webkey = (await registry.listCounters()).at(-1).webkey;
+    const sr = await registry.sturdyrefFor(webkey);
+
+    expect(await registry.deliver(makeOpDeliver(sr, "increment", []))).toBe(1);
+    expect(await registry.deliver(makeOpDeliver(sr, "getValue", []))).toBe(1);
+  });
+
+  it("rejects forged and non-sturdyref values at the wire boundary", async () => {
+    const registry = await openSession("https://worker.test/counterRegistry");
+    await expect(
+      registry.resolveSturdyref(["ocapn:bogus", "counter:aaaaaaaaaaaca", []])
+    ).rejects.toThrow(/not a sturdyref/);
+    await expect(
+      registry.resolveSturdyref(new Request("https://worker.test/"))
+    ).rejects.toThrow(/not a sturdyref/);
+    await expect(
+      registry.deliver(["ocapn:op:deliver", "counter:aaaaaaaaaaaca", "increment", []])
+    ).rejects.toThrow(/not a sturdyref/);
+  });
+
+  it("refuses delivers of methods the kind does not serve", async () => {
+    const registry = await openSession("https://worker.test/counterRegistry");
+    await registry.makeCounter();
+    const webkey = (await registry.listCounters()).at(-1).webkey;
+    const sr = await registry.sturdyrefFor(webkey);
+
+    await expect(
+      registry.deliver(makeOpDeliver(sr, "constructor", []))
+    ).rejects.toThrow(/not allowed/);
   });
 });

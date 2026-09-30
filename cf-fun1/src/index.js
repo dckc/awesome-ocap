@@ -1,5 +1,6 @@
 import { DurableObject, WorkerEntrypoint } from "cloudflare:workers";
 import { codeId, counterAppModule, mainModule } from "./countersAppBundle.js";
+import { isWebkeyDeref } from "./egressPolicy.js";
 
 /**
  * Fixed configuration for the Dynamic Worker that runs the counter-app facet.
@@ -33,16 +34,16 @@ const baseLimits = {
  */
 export class Egress extends WorkerEntrypoint {
   async fetch(request) {
-    // Relay ONLY web-key deref requests to an owning worker: a `counterRegistry`
-    // path with a `secret`. The facet is confined (egress capped) — this is the
-    // single, allowlisted outbound it's permitted, so it can't reach arbitrary
-    // hosts or internal bindings.
-    const url = new URL(request.url);
-    if (
-      url.pathname !== "/counterRegistry" ||
-      !url.searchParams.has("secret") ||
-      url.protocol !== "http:" && url.protocol !== "https:"
-    ) {
+    // Relay ONLY web-key derefs to an allowlisted owning worker: a
+    // `counterRegistry` path with a `secret`, on a host in EGRESS_HOSTS.
+    // The facet is confined (egress capped) — this is the single, allowlisted
+    // outbound it's permitted, so it can't reach arbitrary hosts, internal
+    // bindings, or exfiltrate data shaped like a deref to a host we don't own.
+    const allowedHosts = (this.env?.EGRESS_HOSTS ?? "")
+      .split(",")
+      .map((h) => h.trim())
+      .filter(Boolean);
+    if (!isWebkeyDeref(request.url, allowedHosts)) {
       return new Response("forbidden", { status: 403 });
     }
     const res = await fetch(request);

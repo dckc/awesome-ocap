@@ -76,6 +76,10 @@ npm run dev:both           # both at once
 - `src/counter.js` — `Counter` and `RegistryApi` as pure `RpcTarget`s. No DO
   classes here; state comes from a `writeThru` factory passed into the
   constructor. A counter's `#state` can hold other capabilities by ref.
+- `src/ocapn.js` — the OCapN tagged-array codec: sturdyrefs and `op:deliver`
+  ops as plain data values. Strict parsers are the trust boundary.
+- `src/egressPolicy.js` — the facet's egress relay predicate (pure): a
+  relayable request is a web-key deref to an `EGRESS_HOSTS`-allowlisted host.
 - `public/` — static front end (no build step), talks to `/bootstrap` over
   Cap'n Web.
 - `wrangler-alt.jsonc` — alternate worker name for running a second instance on
@@ -91,6 +95,9 @@ npm run dev:both           # both at once
   npm dependency, read from `node_modules`, not vendored.
 - `test/counter.spec.js` — Vitest for the app layer against an in-memory stand-in
   storage engine.
+- `test/ocapn.spec.js` — Vitest for the tagged-array codec, the registry's
+  sturdyref surface (app layer + real capnweb sessions over MessagePort), and
+  the egress policy predicate.
 
 ## The ocap idea here
 

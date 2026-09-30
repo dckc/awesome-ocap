@@ -1,4 +1,18 @@
 import { RpcTarget, newHttpBatchRpcSession } from "capnweb";
+import {
+  makeSturdyref,
+  parseSturdyref,
+  parseOpDeliver,
+} from "./ocapn.js";
+
+/**
+ * Methods an `op:deliver` may dispatch per capability kind. The registry
+ * checks the resolved target's kind here; kinds without an entry are not
+ * deliverable-to at all.
+ */
+const KIND_METHODS = {
+  counter: ["getValue", "increment", "decrement"],
+};
 
 /**
  * App RpcTargets hold `#state = writeThru(this, initial)`. The writeThru
@@ -111,18 +125,30 @@ export class RegistryApi extends RpcTarget {
    * @param {object} writeThru    storage-layer write-through state factory
    * @param {(cap: object) => string} secretFor  a capability's webkey secret;
    *   bound to the storage engine by the DO that builds this API.
+   * @param {(remoteRef: string) => object} remoteFactory  makes a remote proxy
+   *   stub for a web-key URL.
+   * @param {object} [bindings]  optional storage-engine bindings for the
+   *   sturdyref surface: `decodeFor(secret)` enlivens or returns undefined,
+   *   `revokeFor(secret)` marks revoked, `route` is the path this registry is
+   *   served at (used as a sturdyref's locator hint).
    */
-  constructor(writeThru, secretFor, remoteFactory) {
+  constructor(writeThru, secretFor, remoteFactory, bindings = {}) {
     super();
     this.#writeThru = writeThru;
     this.#secretFor = secretFor;
     this.#remoteFactory = remoteFactory;
+    this.#decodeFor = bindings.decodeFor;
+    this.#revokeFor = bindings.revokeFor;
+    this.#route = bindings.route ?? "/counterRegistry";
     this.#state = this.#writeThru(this, { counters: [] });
   }
 
   #writeThru;
   #secretFor;
   #remoteFactory;
+  #decodeFor;
+  #revokeFor;
+  #route;
   #state;
 
   async makeCounter() {
@@ -148,5 +174,69 @@ export class RegistryApi extends RpcTarget {
       counter,
       webkey: counter.remoteRef || this.#secretFor(counter),
     }));
+  }
+
+  /**
+   * Mint a sturdyref for a persisted capability, as data: the swissnum is the
+   * capability's webkey secret, the hint is the route this registry serves it
+   * at. A webkey (not a live capability) names the target so the mint is
+   * wire-safe: over a session the capability would arrive as a stub, whose
+   * identity the storage layer cannot see.
+   */
+  async sturdyrefFor(webkey) {
+    if (typeof webkey !== "string") {
+      throw new TypeError("sturdyrefFor: webkey (string) required");
+    }
+    if (!this.#decodeFor) {
+      throw new Error("sturdyrefFor: no decode binding");
+    }
+    if (this.#decodeFor(webkey) === undefined) {
+      throw new Error(`sturdyrefFor: no such capability: ${webkey}`);
+    }
+    return makeSturdyref(webkey, [this.#route]);
+  }
+
+  /**
+   * Enliven a sturdyref (a tagged array, as data) into the live capability.
+   * Rejects when the swissnum is malformed, revoked, or unknown.
+   */
+  async resolveSturdyref(sturdyref) {
+    const { swissnum } = parseSturdyref(sturdyref);
+    const cap = this.#decodeFor(swissnum);
+    if (cap === undefined) {
+      throw new Error(`no such capability: ${swissnum}`);
+    }
+    return cap;
+  }
+
+  /** Revoke a sturdyref's swissnum; resolutions of it fail thereafter. */
+  async revokeSturdyref(sturdyref) {
+    const { swissnum } = parseSturdyref(sturdyref);
+    if (!this.#revokeFor) {
+      throw new Error("revokeSturdyref: no revoke binding");
+    }
+    return this.#revokeFor(swissnum);
+  }
+
+  /**
+   * Execute an `op:deliver`: resolve the target sturdyref, dispatch `method`
+   * with `args`. The method must be one the target's kind serves —
+   * `KIND_METHODS` is the allowlist, checked where the resolved kind is
+   * known. Anything else the op carries was already rejected by
+   * `parseOpDeliver`'s shape checks.
+   */
+  async deliver(op) {
+    const { target, method, args } = parseOpDeliver(op);
+    const cap = this.#decodeFor(target.swissnum);
+    if (cap === undefined) {
+      throw new Error(`no such capability: ${target.swissnum}`);
+    }
+    const allowed = KIND_METHODS[cap.refKind];
+    if (!allowed || !allowed.includes(method)) {
+      throw new TypeError(
+        `deliver: method ${JSON.stringify(method)} not allowed on ${cap.refKind}`
+      );
+    }
+    return await cap[method](...args);
   }
 }
