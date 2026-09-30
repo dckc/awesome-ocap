@@ -166,6 +166,16 @@ describe("counter app as pure RpcTargets over write-thru state", () => {
     expect(decoded.counters[0].kind).toBe("proxy");
   });
 
+  it("a remote ref with no registered remote factory throws instead of yielding null", () => {
+    const refTable = new RefTable({ alloc: () => "cap:aaaaaaaaaaaca" });
+    const remoteUrl = "https://other.example/counterRegistry#cap:aaaaaaaaaaaca";
+    // Throwing keeps the stored {"@": url} intact; a null here would be
+    // persisted over it on the next mutation, destroying the ref.
+    expect(() => refTable.decodeValue({ counters: [{ "@": remoteUrl }] })).toThrow(
+      /no remote factory for capability kind cap/
+    );
+  });
+
   it("importCounter holds a remote ref that persists across app instances", async () => {
     const store = makeInMemoryStore();
     const remoteUrl = "https://other.example/counterRegistry#counter:zzz";

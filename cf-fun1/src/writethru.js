@@ -117,8 +117,11 @@ export class RefTable {
   #remoteDecode(remoteRef) {
     const stub = this.#remotes.get(remoteRef);
     if (stub) return stub;
-    const makeStub = this.#remoteFactories.get(this.#remoteKindOf(remoteRef));
-    if (!makeStub) return null; // no remote proxy available
+    const kind = this.#remoteKindOf(remoteRef);
+    const makeStub = this.#remoteFactories.get(kind);
+    if (!makeStub) {
+      throw new Error(`no remote factory for capability kind ${kind}: ${remoteRef}`);
+    }
     const created = makeStub(remoteRef);
     this.#remotes.set(remoteRef, created);
     return created;
@@ -134,9 +137,7 @@ export class RefTable {
 
   /** Register a factory that makes a remote proxy stub for a web-key URL. */
   addRemoteFactory(kind, makeStub) {
-    this.#remoteFactories = this.#remoteFactories || new Map();
     this.#remoteFactories.set(kind, makeStub);
-    this.#remotes = this.#remotes || new Map();
   }
 
   /**

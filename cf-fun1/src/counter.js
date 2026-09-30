@@ -21,6 +21,19 @@ const KIND_METHODS = {
  * (persisted as refs), so holding one is the authority.
  */
 
+// TEMP debug: label each counter instance with a stable number so log lines
+// read like "counter 1 increment -> 3" and we can trace the same counter.
+const counterNo = new WeakMap();
+let nextCounterNo = 0;
+function counterLabel(counter) {
+  let n = counterNo.get(counter);
+  if (n === undefined) {
+    n = ++nextCounterNo;
+    counterNo.set(counter, n);
+  }
+  return `counter ${n}`;
+}
+
 export class Counter extends RpcTarget {
   refKind = "counter";
   constructor(writeThru) {
@@ -29,18 +42,23 @@ export class Counter extends RpcTarget {
   }
 
   #state;
+  logName; // set to the counter's webkey secret for cross-worker tracing
 
   getValue() {
-    return this.#state.value;
+    const v = this.#state.value;
+    console.log(`[Counter] ${this.logName ?? counterLabel(this)} getValue -> ${v}`);
+    return v;
   }
 
   increment() {
     this.#state.value += 1;
+    console.log(`[Counter] ${this.logName ?? counterLabel(this)} increment -> ${this.#state.value}`);
     return this.#state.value;
   }
 
   decrement() {
     this.#state.value -= 1;
+    console.log(`[Counter] ${this.logName ?? counterLabel(this)} decrement -> ${this.#state.value}`);
     return this.#state.value;
   }
 
@@ -91,16 +109,19 @@ export class RemoteCounter extends RpcTarget {
   }
 
   async getValue() {
+    console.log(`[RemoteCounter] getValue -> ${this.remoteRef}`);
     const s = this.#stubbed();
     return await s.getValue();
   }
 
   async increment() {
+    console.log(`[RemoteCounter] increment -> ${this.remoteRef}`);
     const s = this.#stubbed();
     return await s.increment();
   }
 
   async decrement() {
+    console.log(`[RemoteCounter] decrement -> ${this.remoteRef}`);
     const s = this.#stubbed();
     return await s.decrement();
   }
@@ -153,6 +174,7 @@ export class RegistryApi extends RpcTarget {
 
   async makeCounter() {
     const counter = new Counter(this.#writeThru);
+    counter.logName = this.#secretFor(counter); // TEMP debug: log by secret
     this.#state.counters = [...this.#state.counters, counter];
     return counter;
   }
@@ -184,6 +206,7 @@ export class RegistryApi extends RpcTarget {
    * identity the storage layer cannot see.
    */
   async sturdyrefFor(webkey) {
+    console.log(`[Registry] sturdyrefFor ${webkey}`);
     if (typeof webkey !== "string") {
       throw new TypeError("sturdyrefFor: webkey (string) required");
     }
@@ -193,7 +216,9 @@ export class RegistryApi extends RpcTarget {
     if (this.#decodeFor(webkey) === undefined) {
       throw new Error(`sturdyrefFor: no such capability: ${webkey}`);
     }
-    return makeSturdyref(webkey, [this.#route]);
+    const sr = makeSturdyref(webkey, [this.#route]);
+    console.log(`[Registry] sturdyrefFor -> ${JSON.stringify(sr)}`);
+    return sr;
   }
 
   /**
@@ -201,16 +226,19 @@ export class RegistryApi extends RpcTarget {
    * Rejects when the swissnum is malformed, revoked, or unknown.
    */
   async resolveSturdyref(sturdyref) {
+    console.log(`[Registry] resolveSturdyref ${JSON.stringify(sturdyref)}`);
     const { swissnum } = parseSturdyref(sturdyref);
     const cap = this.#decodeFor(swissnum);
     if (cap === undefined) {
       throw new Error(`no such capability: ${swissnum}`);
     }
+    console.log(`[Registry] resolveSturdyref ${swissnum} -> ${cap.logName ?? cap.constructor?.name}`);
     return cap;
   }
 
   /** Revoke a sturdyref's swissnum; resolutions of it fail thereafter. */
   async revokeSturdyref(sturdyref) {
+    console.log(`[Registry] revokeSturdyref ${JSON.stringify(sturdyref)}`);
     const { swissnum } = parseSturdyref(sturdyref);
     if (!this.#revokeFor) {
       throw new Error("revokeSturdyref: no revoke binding");
@@ -226,6 +254,7 @@ export class RegistryApi extends RpcTarget {
    * `parseOpDeliver`'s shape checks.
    */
   async deliver(op) {
+    console.log(`[Registry] deliver ${JSON.stringify(op)}`);
     const { target, method, args } = parseOpDeliver(op);
     const cap = this.#decodeFor(target.swissnum);
     if (cap === undefined) {
@@ -237,6 +266,8 @@ export class RegistryApi extends RpcTarget {
         `deliver: method ${JSON.stringify(method)} not allowed on ${cap.refKind}`
       );
     }
-    return await cap[method](...args);
+    const result = await cap[method](...args);
+    console.log(`[Registry] deliver ${method} -> ${JSON.stringify(result)}`);
+    return result;
   }
 }

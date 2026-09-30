@@ -9,6 +9,11 @@ const importBtn = document.getElementById("import");
 const wsUrl = `${location.origin.replace(/^http/, "ws")}/counterRegistry`;
 const api = newWebSocketRpcSession(wsUrl);
 
+// TEMP debug: echo client-side events to the wrangler terminal via POST ?log=.
+function logToTerminal(msg) {
+  fetch(`${location.origin}/counterRegistry?log=${encodeURIComponent(msg)}`, { method: "POST" });
+}
+
 function render(entry) {
   const { counter, webkey } = entry;
   const row = document.createElement("div");
@@ -35,11 +40,13 @@ function render(entry) {
   const copy = document.createElement("button");
   copy.textContent = "copy url";
   copy.addEventListener("click", async () => {
+    logToTerminal(`copy url for ${webkey} (local=${isSwissnum(webkey)})`);
     if (isSwissnum(webkey)) {
       // Local capability: make and serialize a sturdyref — the registry mints
       // ["ocapn:sturdyref", swissnum, hints] as data, and the URL is derived
       // from it with the swissnum in the fragment.
       const sturdyref = await api.sturdyrefFor(webkey);
+      logToTerminal(`minted sturdyref ${JSON.stringify(sturdyref)}`);
       await navigator.clipboard.writeText(srToUrl(location.origin, sturdyref));
     } else {
       // Remote ref: its webkey is already a dereferenceable web-key URL.
@@ -62,6 +69,7 @@ makeBtn.addEventListener("click", async () => {
 // a durable remote ref, so the import survives reload and proxies to the owner.
 importBtn.addEventListener("click", async () => {
   const raw = importField.value.trim();
+  logToTerminal(`import clicked, raw=${raw}`);
   if (!raw) return;
   const counter = await api.importCounter(raw);
   listEl.append(render({ counter, webkey: raw }));

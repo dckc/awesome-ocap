@@ -34,6 +34,7 @@ const baseLimits = {
  */
 export class Egress extends WorkerEntrypoint {
   async fetch(request) {
+    console.log(`[Egress] relaying ${request.method} ${request.url}`);
     // Relay ONLY web-key derefs to an allowlisted owning worker: a
     // `counterRegistry` path with a `secret`, on a host in EGRESS_HOSTS.
     // The facet is confined (egress capped) — this is the single, allowlisted
@@ -44,9 +45,13 @@ export class Egress extends WorkerEntrypoint {
       .map((h) => h.trim())
       .filter(Boolean);
     if (!isWebkeyDeref(request.url, allowedHosts)) {
+      console.log(
+        `[Egress] REFUSED ${request.url} (allowed hosts: ${allowedHosts.join(",") || "none"})`
+      );
       return new Response("forbidden", { status: 403 });
     }
     const res = await fetch(request);
+    console.log(`[Egress] -> ${res.status}`);
     return new Response(res.body, { status: res.status });
   }
 }
