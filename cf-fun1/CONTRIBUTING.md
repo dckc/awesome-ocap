@@ -62,43 +62,13 @@ npm run db:reset           # wipe both dev workers' persisted state (stop dev se
 
 ## Where things live
 
-- `src/index.js` — Worker entrypoint; maps routes to DO bindings
-  (`{ "/counterRegistry": "COUNTER_REGISTRY" }`), then `env[space].getByName("main")`.
-- `src/storage.js` — the storage engine: a reusable base class for app Durable
-  Objects. Owns the SQLite schema, the `writeThru` proxy factory, and the
-  `RefTable` (`RpcTarget -> key` mapping in a WeakMap). App DOs extend it.
-- `src/countersApp.js` — `CounterRegistry`, the app's Durable Object. Extends
-  `Storage` and serves the `RegistryApi` capability at `/counterRegistry`.
-- `src/countersAppBundle.js` — generated multi-module map handed to the Worker
-  Loader (see `build-facet.js`). Gitignored; rebuilt by the `build` command.
-- `src/writethru.js` — `makeWriteThru` (a `#state` write-through proxy: each
-  mutation persists to the object's row) and `RefTable` (capabilities
-  stored by durable key, resurrected on load).
-- `src/counter.js` — `Counter` and `RegistryApi` as pure `RpcTarget`s. No DO
-  classes here; state comes from a `writeThru` factory passed into the
-  constructor. A counter's `#state` can hold other capabilities by ref.
-- `src/ocapn.js` — the OCapN tagged-array codec: sturdyrefs and `op:deliver`
-  ops as plain data values. Strict parsers are the trust boundary.
-- `src/egressPolicy.js` — the facet's egress relay predicate (pure): a
-  relayable request is a web-key deref to an `EGRESS_HOSTS`-allowlisted host.
-- `public/` — static front end (no build step), talks to `/bootstrap` over
-  Cap'n Web.
-- `wrangler-alt.jsonc` — alternate worker name for running a second instance on
-  another port (separate origin).
-- `no_bundle: true` is set in both `wrangler.jsonc` and `wrangler-alt.jsonc`, so
-  wrangler uploads the supervisor (`src/index.js`) as-is rather than bundling.
-  The generated `src/countersAppBundle.js` is attached as an additional ESModule
-  via a `rules` glob (`**/*countersAppBundle.js`) — without it, `no_bundle`
-  leaves that import unresolvable at runtime.
-- `build-facet.js` — generates `src/countersAppBundle.js`: a multi-module map
-  for the Worker Loader (app files + capnweb as separate modules, relative
-  imports, `capnweb` specifier rewritten to `./capnweb.js`). capnweb stays an
-  npm dependency, read from `node_modules`, not vendored.
-- `test/counter.spec.js` — Vitest for the app layer against an in-memory stand-in
-  storage engine.
-- `test/ocapn.spec.js` — Vitest for the tagged-array codec, the registry's
-  sturdyref surface (app layer + real capnweb sessions over MessagePort), and
-  the egress policy predicate.
+- `src/` — each source file opens with a `@file` comment saying what it is
+  (the generated `countersAppBundle.js` excepted). Start with `index.js` (the
+  supervisor Worker) and `countersApp.js` (the app Durable Object).
+- `test/` — Vitest specs (`npx vitest run`); `.spec` files, each a spec of the
+  behavior its commit ships.
+- `public/` — static front end, no build step; `vendor/` is copied in by the
+  build command. Talks to `/counterRegistry` over a Cap'n Web WebSocket.
 
 ## The ocap idea here
 
