@@ -1,3 +1,8 @@
+/**
+ * @file The app's Durable Object: `CounterRegistry` extends `Storage`, wires
+ * the counter and remote factories, and serves the `RegistryApi` capability
+ * at `/counterRegistry`.
+ */
 import { newWorkersRpcResponse } from "capnweb";
 import { Storage } from "./storage.js";
 import { Counter, RegistryApi, RemoteCounter } from "./counter.js";
