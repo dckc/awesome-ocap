@@ -7,6 +7,10 @@
   "alias": {
     "capnweb": "./node_modules/capnweb/dist/index-workers.js"
   },
+  // With no_bundle, the supervisor (src/index.js) is uploaded as-is, so the
+  // generated src/countersAppBundle.js must be attached as an additional
+  // ESModule via this rules glob — without it, that import is unresolvable
+  // at runtime. (wrangler-alt.jsonc mirrors this config for worker B.)
   "rules": [
     {
       "type": "ESModule",
