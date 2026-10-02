@@ -145,6 +145,8 @@ describe("counter app as pure RpcTargets over write-thru state", () => {
     expect(secret.startsWith("counter:")).toBe(true);
     const revived = refTable.decodeSecret(secret);
     expect(revived).toBeInstanceOf(Counter);
+    // The live instance, not a factory duplicate: one instance per key.
+    expect(revived).toBe(counter);
     expect(await revived.getValue()).toBe(2);
     // Same instance: decodeSecret is idempotent within the live RefTable.
     expect(refTable.decodeSecret(secret)).toBe(revived);
@@ -192,6 +194,20 @@ describe("counter app as pure RpcTargets over write-thru state", () => {
     expect(entries2[0].counter).toBeInstanceOf(RemoteCounter);
     // The stored registry row uses the remote {"@": url} shape, not local {"*"}.
     expect(store.rows.get("registry:main")).toContain(`"@":"${remoteUrl}"`);
+  });
+
+  it("a web-key deref reaches the registry's own live counter (no second instance)", async () => {
+    const { registry, refTable, webkeyFor } = setupApp();
+    const counter = await registry.makeCounter();
+    await counter.increment();
+    const secret = new URL(webkeyFor(counter)).hash.slice(1);
+    // The remote-relay path: a deref enlivens by secret and mutates; the
+    // registry's view must see it, not a diverging in-memory copy.
+    const revived = refTable.decodeSecret(secret);
+    expect(revived).toBe(counter);
+    await revived.increment();
+    const [entry] = await registry.listCounters();
+    expect(await entry.counter.getValue()).toBe(2);
   });
 
   it("state persists across a new app instance (rehydrated from storage)", async () => {

@@ -14,7 +14,7 @@ export class RefTable {
   #factories = new Map(); // kind -> (key) => RpcTarget
   #remoteFactories = new Map(); // kind -> (remoteRef) => RpcTarget proxy stub
   #remotes = new Map(); // remoteRef -> live proxy stub
-  #live = new Map(); // `${kind}:${key}` -> RpcTarget
+  #live = new Map(); // secret -> RpcTarget; one live instance per durable key
   #keys = new WeakMap(); // capability -> durable key
   #alloc;
 
@@ -33,6 +33,7 @@ export class RefTable {
   /** Give a capability a stable durable name; refs to it then serialize deterministically. */
   exportAs(obj, key) {
     this.#keys.set(obj, key);
+    this.#live.set(key, obj);
   }
 
   ensureKey(obj) {
@@ -40,6 +41,7 @@ export class RefTable {
     if (key === undefined) {
       key = this.#alloc(obj);
       this.#keys.set(obj, key);
+      this.#live.set(key, obj);
     }
     return key;
   }
