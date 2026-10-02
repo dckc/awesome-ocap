@@ -21,7 +21,7 @@
  * Worker Loader needs module source as strings (it compiles them into a fresh,
  * isolated facet), so today we have to emit them here.
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -80,9 +80,18 @@ ${Object.entries(modules)
 };
 `;
 
-writeFileSync(join(src, "countersAppBundle.js"), out);
+// The bundle lives inside wrangler's build watch dir, so an unconditional
+// write re-triggers the build on every run — an endless rebuild loop. Write
+// only when the generated output actually differs.
+const outPath = join(src, "countersAppBundle.js");
+const prev = existsSync(outPath) ? readFileSync(outPath, "utf8") : null;
+if (prev !== out) {
+  writeFileSync(outPath, out);
+}
 console.log(
-  `wrote src/countersAppBundle.js (${modules["countersApp.js"].length}+${modules["storage.js"].length}+${modules["writethru.js"].length}+${modules["counter.js"].length}+${modules["capnweb.js"].length} bytes across ${Object.keys(modules).length} modules)`
+  prev === out
+    ? "src/countersAppBundle.js unchanged; no write"
+    : `wrote src/countersAppBundle.js (${modules["countersApp.js"].length}+${modules["storage.js"].length}+${modules["writethru.js"].length}+${modules["counter.js"].length}+${modules["capnweb.js"].length} bytes across ${Object.keys(modules).length} modules)`
 );
 
 // A stable, compact hash of the module map (FNV-1a), so the codeId changes when
