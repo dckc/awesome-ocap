@@ -1,3 +1,8 @@
+/**
+ * @file The storage engine: `Storage`, a reusable base class for app Durable
+ * Objects — owns the SQLite schema, webkey secret allocation, and the
+ * factory-registration surface that app DOs extend.
+ */
 import { DurableObject } from "cloudflare:workers";
 import { makeWriteThru, RefTable } from "./writethru.js";
 
