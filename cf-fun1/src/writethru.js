@@ -1,3 +1,8 @@
+/**
+ * @file The persistence core `Storage` is built from: `RefTable` (capability
+ * <-> durable key, one live instance per key) and `makeWriteThru` (the
+ * `#state` proxy whose every mutation persists to the object's row).
+ */
 import { RpcTarget } from "capnweb";
 
 /**
