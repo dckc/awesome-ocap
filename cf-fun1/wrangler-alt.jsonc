@@ -1,0 +1,46 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cf-fun1-alt",
+  "main": "src/index.js",
+  "no_bundle": true,
+  "compatibility_date": "2026-09-19",
+  "alias": {
+    "capnweb": "./node_modules/capnweb/dist/index-workers.js"
+  },
+  "rules": [
+    {
+      "type": "ESModule",
+      "globs": ["**/*countersAppBundle.js", "**/egressPolicy.js"]
+    }
+  ],
+  "build": {
+    "command": "mkdir -p public/vendor && cp node_modules/capnweb/dist/index.js public/vendor/capnweb.js && cp src/ocapn.js public/vendor/ocapn.js && node build-facet.js"
+  },
+  "vars": {
+    // Hosts the facet's egress relay may reach (the two dev workers, so
+    // cross-worker web-key derefs relay to the owning worker only).
+    "EGRESS_HOSTS": "localhost:8787,localhost:8788"
+  },
+  "assets": {
+    "directory": "public"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "FACET_SUPERVISOR",
+        "class_name": "FacetSupervisor"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v3",
+      "new_sqlite_classes": ["FacetSupervisor"]
+    }
+  ],
+  "worker_loaders": [
+    {
+      "binding": "LOADER"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+/**
+ * @file The app's Durable Object: `CounterRegistry` extends `Storage`, wires
+ * the counter and remote factories, and serves the `RegistryApi` capability
+ * at `/counterRegistry`.
+ */
+import { newWorkersRpcResponse } from "capnweb";
+import { Storage } from "./storage.js";
+import { Counter, RegistryApi, RemoteCounter } from "./counter.js";
+
+/**
+ * The app's Durable Object. The named durable host for the counter app: it
+ * extends the storage engine (SQLite + writeThru + refTable), owns the app
+ * wiring (registers the counter capability factory, names the registry
+ * capability), and serves a RegistryApi capability. Routing to this DO is
+ * `index.js`'s job — here it just hands out the capability.
+ */
+export class CounterRegistry extends Storage {
+  constructor(ctx, env) {
+    super(ctx, env);
+    // Storage's constructor set writeThru/refTable. Wire the app: register the
+    // counter factory (needed to resurrect stored counter refs) and build the
+    // capability surface. It's in-memory, so recreated after any eviction.
+    this.registerFactory("counter", (key) => {
+      const c = new Counter(this.writeThru);
+      c.logName = key; // TEMP debug: label by the cross-worker-stable secret
+      return c;
+    });
+    // Remote counters proxy to their owner. The facet can't fetch the network
+    // itself, so RemoteCounter's capnweb session fetch is routed to the
+    // supervisor (via globalOutbound), which relays the call to the owner.
+    // Registered with the storage layer so stored remote refs ({"@": url})
+    // resurrect as RemoteCounters on load.
+    const remoteFactory = (remoteRef) => new RemoteCounter(remoteRef);
+    this.registerRemoteFactory("counter", remoteFactory);
+    this.#api = new RegistryApi(this.writeThru, (cap) => this.secretFor(cap), remoteFactory, {
+      decodeFor: (secret) => this.decodeSecret(secret),
+      revokeFor: (secret) => this.revokeSecret(secret),
+      route: "/counterRegistry",
+    });
+    this.exportAs(this.#api, "registry:main");
+  }
+
+  #api;
+
+  async fetch(request) {
+    const url = new URL(request.url);
+    // TEMP debug: echo client-side events to the wrangler terminal.
+    const logMsg = url.searchParams.get("log");
+    if (logMsg !== null) {
+      console.log(`[app.js] ${logMsg}`);
+      return new Response("ok", { status: 200 });
+    }
+    console.log("[CounterRegistry.fetch]", request.method, url.pathname, "query:", url.search);
+    // A `?secret=` dereference: enliven the referenced capability and serve an
+    // RPC session rooted at it (the cross-session identity capnweb lacks).
+    const secret = url.searchParams.get("secret");
+    if (secret !== null) {
+      const cap = this.decodeSecret(secret);
+      console.log("[CounterRegistry.fetch] deref:", secret, "->", cap ? cap.constructor?.name : "NOT FOUND");
+      if (!cap) return new Response("no such capability", { status: 404 });
+      return newWorkersRpcResponse(request, cap);
+    }
+    return newWorkersRpcResponse(request, this.#api);
+  }
+}
