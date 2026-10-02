@@ -1,3 +1,8 @@
+/**
+ * @file The supervisor Worker: `FacetSupervisor` routes requests into a
+ * Dynamic Worker facet (the counter app), and `Egress` relays the facet's
+ * single permitted outbound — web-key derefs to an owning worker.
+ */
 import { DurableObject, WorkerEntrypoint } from "cloudflare:workers";
 import { codeId, counterAppModule, mainModule } from "./countersAppBundle.js";
 import { isWebkeyDeref } from "./egressPolicy.js";
