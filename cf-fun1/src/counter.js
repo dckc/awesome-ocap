@@ -1,3 +1,8 @@
+/**
+ * @file The capability surface as pure `RpcTarget`s — `Counter`,
+ * `RemoteCounter`, `RegistryApi` — with no Durable Object classes: state
+ * arrives through a `writeThru` factory the DO supplies.
+ */
 import { RpcTarget, newHttpBatchRpcSession } from "capnweb";
 import {
   makeSturdyref,
