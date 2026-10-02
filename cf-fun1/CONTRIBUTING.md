@@ -54,6 +54,7 @@ npx vitest run             # app tests (in-memory storage engine)
 npm run dev:a              # worker A on http://localhost:8787
 npm run dev:b              # worker B (separate origin) on http://localhost:8788
 npm run dev:both           # both at once
+npm run db:reset           # wipe both dev workers' persisted state (stop dev servers first)
 ```
 
 `package.json` is ESM (`"type": "module"`); config is `vitest.config.ts` and

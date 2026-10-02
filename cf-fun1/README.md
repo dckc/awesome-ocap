@@ -45,6 +45,7 @@ npm install
 npm run dev:a        # worker A on http://localhost:8787
 npm run dev:b        # worker B on http://localhost:8788 (separate origin)
 npm run dev:both     # both at once
+npm run db:reset     # wipe both workers' persisted state (stop dev servers first)
 ```
 
 Then open `http://localhost:8787`. Start with zero counters, click **make
@@ -64,6 +65,8 @@ permitted outbound is a web-key deref to a host we own, on the
 
 The `dev:a`/`dev:b` scripts give each worker its own `--persist-to` directory so
 they keep separate DO storage — they're distinct workers, not two ports on one.
+`npm run db:reset` deletes both directories; it refuses while the dev servers
+are running (they hold the files open).
 
 Tests:
 
