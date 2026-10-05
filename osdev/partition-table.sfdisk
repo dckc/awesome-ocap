@@ -1,0 +1,13 @@
+label: gpt
+
+# partition 1: EFI System Partition, 1GiB
+,1G,U,name="ESP"
+
+# partition 2: Guix System, 100GiB
+,100G,L,name="Guix"
+
+# partition 3: Genode System, 20GiB
+,20G,L,name="Genode"
+
+# partition 4: Shared Data, 200GiB
+,200G,L,name="Shared"
