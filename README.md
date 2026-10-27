@@ -461,7 +461,7 @@ _The ACL model is unable to make correct access decisions for interactions invol
 
  - 2002-06 [DarpaBrowser: Final Report](http://www.combex.com/papers/darpa-report/html/index.html) by Marc Stiegler and Mark Miller  
  _The broad goal of this research was to assess whether capability-based security [Levy84] could achieve security goals that are unachievable with current traditional security technologies such as access control lists and firewalls. The specific goal of this research was to create an HTML browser that could use capability confinement on a collection of plug-replaceable, possibly malicious, rendering engines. In confining the renderer, the browser would ensure that a malicious renderer could do no harm either to the browser or to the underlying system._
- 
+
 <a name="lit"></a>
 ### Peer-reviewed Articles
 
@@ -541,6 +541,9 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
     > written in a simple security formalism independent of cryptography, but
     > automatically implemented as a cryptographic protocol coordinating five
     > mutually suspicious parties
+
+ - 1984 [Capability-Based Computer Systems](https://homes.cs.washington.edu/~levy/capabook/) Henry M. Levy
+   _focuses on computer programs and their capabilities. The text first elaborates capability- and object-based system concepts, including capability-based systems, object-based approach, and summary. The book then describes early descriptor architectures and explains the Burroughs B5000, Rice University Computer, and Basic Language Machine. The text also focuses on early capability architectures. Dennis and Van Horn's Supervisor; CAL-TSS System; MIT PDP-1 Timesharing System; and Chicago Magic Number Machine are discussed._
 
 [237]: https://www.ponylang.io/media/papers/opsla237-clebsch.pdf
 [40673]: http://research.google.com/pubs/pub40673.html
