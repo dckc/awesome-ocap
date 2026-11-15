@@ -556,3 +556,4 @@ _See also [Usable Security and Capabilities](https://www.zotero.org/connolly/ite
 ## Star History
 
 [![Star History Chart](https://star-history.dera.page/svg?repos=dckc/awesome-ocap&type=Date)](https://star-history.dera.page/#dckc/awesome-ocap&Date)
+- [CleanSlate](https://github.com/devshield-tech/botox-android) - Remotely wipe your Android device if it is lost or stolen.
