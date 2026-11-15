@@ -371,6 +371,9 @@ Or for a detailed explanation: [What Are Capabilities?](https://web.archive.org/
 <a name="talk"></a>
 ## Presentations, Talks, Slides, and Videos
 
+  - 2026-04: [Containing AI Agents: The Endo Familiar Demo](https://dcfoundation.io/containing-ai-agents-the-endo-familiar-demo/) "Kris Kowal demos a prototype agent host on Endo / HardenedJS: the agent starts with only an instruction primer and gains authority only by being handed references, such as a single directory mount it can attenuate to read-only"
+    - [endojs/endo](https://github.com/endojs/endo)
+
   - 2025-06: [Sandbox Your Program Using FreeBSD's Capsicum](https://www.bsdcan.org/2025/talks/capsicum.pdf) "Jake Freeland presents a practical BSDCan tutorial on applying Capsicum to real programs, covering capability mode, pre-opened resources, compartmentalization, and `libcasper` patterns such as `cap_net`"
     - [BSDCan timetable entry](https://www.bsdcan.org/2025/timetable/timetable-Sandbox-Your-Program.html)
     - [Indico contribution page](https://indico.bsdcan.org/event/5/contributions/118/)
