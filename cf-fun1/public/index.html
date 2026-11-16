@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>cf-fun1 counters</title>
+    <style>
+      .counter { margin-bottom: 0.5rem; }
+      .counter button { margin-left: 0.25rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Cap'n Web counters</h1>
+    <p>State lives in per-counter Durable Objects; the front end talks to them over Cap'n Web.</p>
+    <button id="make">make counter</button>
+    <div id="counters"></div>
+    <label>import web-key <input id="importUrl" placeholder="https://.../counterRegistry#counter:..." /></label>
+    <button id="import">import</button>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

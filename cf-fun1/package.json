@@ -1,0 +1,25 @@
+{
+  "name": "cf-fun1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "dev:a": "wrangler dev --port 8787 --persist-to .wrangler/state-a --inspector-port 9227",
+    "dev:b": "wrangler dev --config wrangler-alt.jsonc --port 8788 --persist-to .wrangler/state-b --inspector-port 9228",
+    "dev:both": "npm run dev:a & npm run dev:b & wait",
+    "db:reset": "sh scripts/db-reset.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.1.13",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.135.0"
+  },
+  "dependencies": {
+    "capnweb": "^0.12.0"
+  }
+}
